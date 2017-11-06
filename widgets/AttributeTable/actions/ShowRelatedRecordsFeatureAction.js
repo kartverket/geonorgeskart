@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define("dojo/_base/declare dojo/_base/lang dojo/_base/array jimu/BaseFeatureAction jimu/WidgetManager jimu/LayerInfos/LayerInfos".split(" "),function(c,f,g,h,k,e){return c(h,{map:null,iconClass:"icon-show-related-record",isFeatureSupported:function(d,a){var b=e.getInstanceSync();return 0!==d.features.length&&a&&b&&a&&a.relationships&&0<a.relationships.length?(b=b.getLayerInfoById(a.id))?b.getRelatedTableInfoArray().then(function(a){return 0<a.length?!0:!1}):!1:!1},onExecute:function(d,a){var b=e.getInstanceSync().getLayerInfoById(a.id),
+c=g.map(d.features,f.hitch(this,function(b){return b.attributes[a.objectIdField]}));k.getInstance().triggerWidgetOpen(this.widgetId).then(function(a){a.showRelatedRecordsFromPopup(b,c)})}})});

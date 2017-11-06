@@ -1,0 +1,4 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/Filter/setting/nls/strings":{addTaskTip:"L\u00e4gg till ett eller flera filter i widgeten och st\u00e4ll in parametrar f\u00f6r vart och ett.",enableMapFilter:"Ta bort det f\u00f6rinst\u00e4llda lagerfiltret fr\u00e5n kartan.",newFilter:"Nytt filter",filterExpression:"Filteruttryck",layerDefaultSymbolTip:"Anv\u00e4nd standardsymbolen f\u00f6r lagret",uploadImage:"\u00d6verf\u00f6r en bild",selectLayerTip:"V\u00e4lj ett lager.",setTitleTip:"Ange en titel.",_localized:{}}});

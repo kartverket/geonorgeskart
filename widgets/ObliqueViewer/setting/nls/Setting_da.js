@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"dojox/form/nls/CheckedMultiSelect":{invalidMessage:"Du skal v\u00e6lge mindst \u00e9t element.",multiSelectLabelText:"{num} element(er) valgt",_localized:{}},"widgets/ObliqueViewer/setting/nls/strings":{layerSelect:"V\u00e6lg laget",elevationFieldSelect:"H\u00f8jdefelt",azimuthFieldSelect:"Azimuth-felt",showThumbnailText:"Vis miniaturer p\u00e5 rasterliste",rasterInfoFieldsSelect:"V\u00e6lg listeoplysningsfelter",fieldLimitText:"Der kan maksimalt v\u00e6lges 3 felter.",autoSyncText:"Synkronis\u00e9r hovedkort",
+errorSectionMeasage:'Der er ingen billedtjenestelag i det valgte kort. V\u00e6lg et kort med et billedtjenestelag, der indeholder "sk\u00e6ve" billeder.',_localized:{}}});

@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/Measurement/setting/nls/strings":{defaultAreaUnit:"Unidade de \u00c1rea padr\u00e3o",defaultLengthUnit:"Unidade de Comprimento Padr\u00e3o",acres:"Acres",sqMiles:"Milhas Quadradas",sqKilometers:"Quil\u00f4metros Quadrados",hectares:"Hectares",sqYards:"Jardas Quadradas",sqFeet:"P\u00e9s Quadrados",sqFeetUS:"P\u00e9s Quadrados (EUA)",sqMeters:"Metros Quadrados",miles:"Milhas",kilometers:"Quil\u00f3metros",feet:"P\u00e9s",feetUS:"P\u00e9s (EUA)",meters:"Metros",yards:"Jardas",nauticalMiles:"Milhas N\u00e1uticas",
+showArea:"\u00c1rea",showDistance:"Dist\u00e2ncia",showLocation:"Localiza\u00e7\u00e3o",showtools:"Exibir ferramentas de medi\u00e7\u00e3o:",allHidedTips:"Tem de ser selecionada pelo menos uma ferramenta.",_localized:{}}});

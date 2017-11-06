@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"dojox/form/nls/CheckedMultiSelect":{invalidMessage:"\u00c8 necessario selezionare almeno un elemento.",multiSelectLabelText:"{num} elementi selezionati",_localized:{}},"widgets/ObliqueViewer/setting/nls/strings":{layerSelect:"Seleziona layer",elevationFieldSelect:"Campo Elevazione",azimuthFieldSelect:"Campo Azimut",showThumbnailText:"Mostra anteprime nell'elenco Raster",rasterInfoFieldsSelect:"Seleziona campi Informazioni elenco",fieldLimitText:"\u00c8 possibile selezionare un massimo di 3 campi.",
+autoSyncText:"Sincronizza mappa principale",errorSectionMeasage:"Nessun image service layer presente nella mappa selezionata. Selezionare una mappa con un image service layer contenente immagini oblique.",_localized:{}}});

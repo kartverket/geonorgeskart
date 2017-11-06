@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"dojox/form/nls/CheckedMultiSelect":{invalidMessage:"At least one item must be selected.",multiSelectLabelText:"{num} item(s) selected",_localized:{}},"widgets/ObliqueViewer/setting/nls/strings":{layerSelect:"Izv\u0113l\u0113ties sl\u0101ni",elevationFieldSelect:"Augstuma lauks",azimuthFieldSelect:"Azimuta lauks",showThumbnailText:"Rastra sarakst\u0101 r\u0101d\u012bt s\u012bkt\u0113lus",rasterInfoFieldsSelect:"Izv\u0113l\u0113ties saraksta inform\u0101cijas laukus",fieldLimitText:"Var atlas\u012bt ne vair\u0101k par 3\u00a0laukiem.",
+autoSyncText:"Sinhroniz\u0113t galveno karti",errorSectionMeasage:"Izv\u0113l\u0113taj\u0101 kart\u0113 nav pieejams neviens att\u0113lu pakalpojuma sl\u0101nis. Izv\u0113lieties karti ar att\u0113lu pakalpojuma sl\u0101ni, kur\u0101 ietilpst netie\u0161ais att\u0113ls.",_localized:{}}});

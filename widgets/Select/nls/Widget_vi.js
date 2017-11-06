@@ -1,0 +1,4 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/Select/nls/strings":{_widgetLabel:"Ch\u1ecdn",showActions:"Hi\u1ec7n t\u00e1c v\u1ee5 tr\u00ean (c\u00e1c) \u0111\u1ed1i t\u01b0\u1ee3ng \u0111\u01b0\u1ee3c ch\u1ecdn",toggleSelectability:"Nh\u1ea5p \u0111\u1ec3 chuy\u1ec3n \u0111\u1ed5i kh\u1ea3 n\u0103ng ch\u1ecdn",showSelectedFeatures:"Nh\u1ea5p \u0111\u1ec3 hi\u1ec7n c\u00e1c \u0111\u1ed1i t\u01b0\u1ee3ng \u0111\u01b0\u1ee3c ch\u1ecdn",actionsTitle:"T\u00e1c v\u1ee5 L\u1ef1a ch\u1ecdn",_localized:{}}});

@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/Filter/setting/nls/strings":{addTaskTip:"Prid\u0117ti vien\u0105 arba daugiau filtr\u0173 \u012f valdikl\u012f ir konfig\u016bruoti kiekvieno i\u0161 j\u0173 parametrus.",enableMapFilter:"Pa\u0161alinti i\u0161 anksto nustatyt\u0105 sluoksnio filtr\u0105 i\u0161 \u017eem\u0117lapio.",newFilter:"Naujas filtras",filterExpression:"Filtravimo i\u0161rai\u0161ka",layerDefaultSymbolTip:"Naudoti sluoksnio numatyt\u0105j\u012f simbol\u012f",uploadImage:"\u012ekelti atvaizd\u0105",selectLayerTip:"Pasirinkite sluoksn\u012f.",
+setTitleTip:"Nurodykite pavadinim\u0105.",_localized:{}}});

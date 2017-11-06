@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/Geoprocessing/setting/nls/strings":{taskUrl:"Task URL",serviceURLPlaceholder:"Please input Geoprocessing task URL",layerOrder:"Layer order",defaultValue:"Default Value",inputFeatureBy:"Input Feature by",renderer:"Renderer",displayType:"Display type",helpUrl:"Help URL",useResultMapService:"Use the drawing options of result map service",drawOnMap:"Interactively drawing on the map",selectLayer:"Selecting a layer from the map",shareResults:"Add result as operational layer",setTask:"Set",
+setTaskTitle:"Set GP Task",enablePopup:"Enable popup",unSupportGeometryType:"Can not set renderer because of unknown geometry type.",useUrlForGPInput:"URL",useUploadForGPInput:"Upload file",selectFileToUpload:"Select file...",rasterFormat:"Raster data format",noFileSelected:"No file selected!",uploadSuccess:"Uploaded file successfully!",showLayerContent:"Show layer content",urlPlaceholder:"feature set URL",useShapefile:"Use shapefile in local file system",allowToExport:"Allow to export results",useDynamicSchema:"Output may have different schema, use dynamic schema instead of predefined.",
+_localized:{}}});

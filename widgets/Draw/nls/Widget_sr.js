@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/Draw/nls/strings":{_widgetLabel:"Nacrtaj",selectDrawMode:"Izaberi re\u017eim crtanja",clear:"Izbri\u0161i",point:"Ta\u010dka",line:"Linija",polyline:"Polilinija",freehandPolyline:"Polilinija slobodnom rukom",triangle:"Trougao",extent:"Pravougaonik",circle:"Krug",ellipse:"Elipsa",polygon:"Poligon",freehandPolygon:"Poligon slobodnom rukom",text:"Tekst",style:"Stil",alpha:"Prozirnost",width:"\u0160irina",size:"Veli\u010dina",color:"Boja",markerColor:"Boja ozna\u010diva\u010da",outlineColor:"Boja konture",
+lineColor:"Boja linije",fillColor:"Boja ispuna",showMeasurements:"Prika\u017ei mere",areaUnits:"Jedinice povr\u0161ine",distanceUnits:"Jedinice rastojanja",kilometers:"Kilometri",miles:"Milje",meters:"Metri",feet:"Stope",yards:"Jardi",squareKilometers:"Kvadratni kilometri",squareMiles:"Kvadratne milje",acres:"Ari",hectares:"Hektari",squareMeters:"Kvadratni metri",squareFeet:"Kvadratne stope",squareYards:"Kvadratne jarde",undo:"Opozovi radnju",redo:"Ponovi radnju",results:"Rezultati",points:"Ta\u010dke",
+lines:"Linije",areas:"Povr\u0161ine",_localized:{}}});

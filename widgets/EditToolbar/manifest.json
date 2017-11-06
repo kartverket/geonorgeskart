@@ -1,0 +1,17 @@
+{
+  "name": "EditToolbar",
+  "platform": "HTML",
+  "version": "2.2",
+  "wabVersion": "2.2",
+  "author": "Henrik Gulliksen Schüller",
+  "description": "For editing of drawings",
+  "license": "http://www.apache.org/licenses/LICENSE-2.0",
+  "properties": {
+	"inPanel": false,
+    "hasConfig": false,
+    "hasStyle": false,
+    "hasLocale": false,
+    "hasUIFile": false,
+    "hasSettingPage": false
+  }
+}

@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/AddData/setting/nls/strings":{numPerPage:"\u0427\u0438\u0441\u043b\u043e \u044d\u043b\u0435\u043c\u0435\u043d\u0442\u043e\u0432 \u043d\u0430 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0443",scopeOptions:{labelPlaceholder:"\u0414\u043e\u043f\u043e\u043b\u043d\u0438\u0442\u0435\u043b\u044c\u043d\u0430\u044f \u043d\u0430\u0434\u043f\u0438\u0441\u044c",MyContent:"\u0420\u0430\u0437\u0440\u0435\u0448\u0438\u0442\u044c \u041c\u043e\u0438 \u0440\u0435\u0441\u0443\u0440\u0441\u044b",MyOrganization:"\u0420\u0430\u0437\u0440\u0435\u0448\u0438\u0442\u044c \u041c\u043e\u044f \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430\u0446\u0438\u0438",
+ArcGISOnline:"\u0420\u0430\u0437\u0440\u0435\u0448\u0438\u0442\u044c ArcGIS Online",FromUrl:"\u0420\u0430\u0437\u0440\u0435\u0448\u0438\u0442\u044c \u0432\u0432\u043e\u0434 URL"},_localized:{}}});

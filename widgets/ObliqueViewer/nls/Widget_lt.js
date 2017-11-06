@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/ObliqueViewer/nls/strings":{_widgetLabel:"Aerofotonuotrauk\u0173 per\u017ei\u016bros programa",locateButtonLabel:"Nor\u0117dami per\u017ei\u016br\u0117ti aerofotonuotraukas, pasirinkite ta\u0161k\u0105 pagrindiame \u017eem\u0117lapyje.",clearButtonLabel:"I\u0161valyti visus grafinius elementus",zoomButtonLabel:"Padidinti aerofotonuotrauk\u0173 apr\u0117pt\u012f",syncButtonLabel:"Sinchronizuoti \u017eem\u0117lap\u012f",rasterListLabel:"Per\u017ei\u016br\u0117ti esamas aerofotonuotraukas",
+measureWidgetLabel:"Matuoti auk\u0161t\u012f",intialScaleLabel:"Pasirinkti aerofotonuotrauk\u0173 pradin\u012f mastel\u012f",smallBuildingLabel:"Miesto teritorija: ma\u017eas pastatas",buildingLabel:"Miesto teritorija: pastatas",azimuthChangeNotification:"Pasirinktoje kryptyje n\u0117ra duomen\u0173.",_localized:{}}});

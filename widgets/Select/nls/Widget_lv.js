@@ -1,0 +1,4 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/Select/nls/strings":{_widgetLabel:"Izv\u0113l\u0113ties",showActions:"R\u0101d\u012bt darb\u012bbas izv\u0113l\u0113taj\u0101(-os) element\u0101(-os)",toggleSelectability:"Noklik\u0161\u0137in\u0101t, lai p\u0101rsl\u0113gtu izv\u0113les iesp\u0113jas",showSelectedFeatures:"Noklik\u0161\u0137in\u0101t, lai r\u0101d\u012btu izv\u0113l\u0113tos elementus",actionsTitle:"Izv\u0113les darb\u012bbas",_localized:{}}});

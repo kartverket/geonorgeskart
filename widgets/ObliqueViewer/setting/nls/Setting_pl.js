@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"dojox/form/nls/CheckedMultiSelect":{invalidMessage:"Nale\u017cy wybra\u0107 co najmniej jeden element.",multiSelectLabelText:"Wybrano element\u00f3w: {num}",_localized:{}},"widgets/ObliqueViewer/setting/nls/strings":{layerSelect:"Wybierz warstw\u0119",elevationFieldSelect:"Pole wysoko\u015bci",azimuthFieldSelect:"Pole azymutu",showThumbnailText:"Poka\u017c miniatury na li\u015bcie rastr\u00f3w",rasterInfoFieldsSelect:"Wybierz pola wy\u015bwietlaj\u0105ce informacje",fieldLimitText:"Mo\u017cna wybra\u0107 maksymalnie 3 pola.",
+autoSyncText:"Synchronizuj map\u0119 g\u0142\u00f3wn\u0105",errorSectionMeasage:"Na wybranej mapie nie ma warstw us\u0142ug obrazowania. Wybierz map\u0119 z warstw\u0105 us\u0142ugi obrazowania zawieraj\u0105c\u0105 zobrazowanie w rzucie uko\u015bnym.",_localized:{}}});

@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define(["dojo/_base/array"],function(d){return{checkMixedContent:function(a){"string"===typeof window.location.href&&0===window.location.href.indexOf("https://")&&"string"===typeof a&&0===a.indexOf("http://")&&(a="https:"+a.substring("5"));return a},escapeForLucene:function(a){return a.replace(RegExp('(\\+|\\-|\\\x26|\\!|\\(|\\)|\\{|\\}|\\[|\\]|\\^|\\"|\\~|\\*|\\?|\\:|\\\\)',"g"),"\\$1")},findLayersAdded:function(a,c){var e=[],f=[],g=[],h={itemIds:f,layers:g};if(!a)return h;var k="string"===typeof c&&
+0<c.length;d.forEach(a.layerIds,function(a){e.push(a)});d.forEach(a.graphicsLayerIds,function(a){e.push(a)});d.forEach(e,function(b){if((b=a.getLayer(b))&&("string"===typeof b.xtnItemId&&0<b.xtnItemId.length)&&(!k||b.xtnItemId===c))g.push(b),-1===f.indexOf(b.xtnItemId)&&f.push(b.xtnItemId)});return h},setNodeText:function(a,c){a.innerHTML="";c&&a.appendChild(document.createTextNode(c))}}});

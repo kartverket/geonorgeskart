@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"dojox/form/nls/CheckedMultiSelect":{invalidMessage:"\u5fc5\u9808\u9078\u53d6\u81f3\u5c11\u4e00\u500b\u9805\u76ee\u3002",multiSelectLabelText:"\u5df2\u9078\u53d6 {num} \u500b\u9805\u76ee",_localized:{}},"widgets/ObliqueViewer/setting/nls/strings":{layerSelect:"\u9078\u64c7\u5716\u5c64",elevationFieldSelect:"\u9ad8\u7a0b\u6b04\u4f4d",azimuthFieldSelect:"\u65b9\u4f4d\u6b04\u4f4d",showThumbnailText:"\u986f\u793a\u9ede\u9663\u6e05\u55ae\u4e2d\u7684\u7e2e\u5716",rasterInfoFieldsSelect:"\u9078\u64c7\u6e05\u55ae\u8cc7\u8a0a\u6b04\u4f4d",
+fieldLimitText:"\u6700\u591a\u53ef\u9078\u64c7 3 \u500b\u6b04\u4f4d\u3002",autoSyncText:"\u540c\u6b65\u4e3b\u8981\u5730\u5716",errorSectionMeasage:"\u6240\u9078\u5730\u5716\u4e2d\u672a\u51fa\u73fe\u5716\u7247\u670d\u52d9\u5716\u5c64\u3002\u8acb\u9078\u64c7\u5305\u542b\u659c\u89d2\u5f71\u50cf\u7684\u5716\u7247\u670d\u52d9\u5716\u5c64\u6240\u5728\u7684\u5730\u5716\u3002",_localized:{}}});

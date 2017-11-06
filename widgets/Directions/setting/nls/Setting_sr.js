@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/Directions/setting/nls/strings":{routeUrl:"URL adresa usmeravanja",locatorUrl:"URL adresa geokodera",geocoderOptions:"Opcije geokodera",autoComplete:"Automatsko popunjavanje",maximumSuggestions:"Maksimalno predloga",minCharacters:"Minimalno karaktera",searchDelay:"Odlaganje pretrage",placeholder:"\u010cuvar mesta",routeOptions:"Opcije usmeravanja",directionsLanguage:"Jezik uputstava",directionsLengthUnits:"Jedinice du\u017eine u uputstvima za navigaciju",directionsOutputType:"Tip izlaznih rezultata uputstva za navigaciju",
+impedanceAttribute:"Atributi otpora",kilometers:"Kilometri",miles:"Milje",meters:"Metri",feet:"Stope",yards:"Jardi",nauticalMiles:"Nauti\u010dke milje",parametersTip:"Pravilno postavite parametre!",complete:"Zavr\u0161i",completeNoEvents:"Zavr\u0161i bez doga\u0111aja",instructionsOnly:"Samo instrukcije",standard:"Standardna verzija",summaryOnly:"Samo rezime",travelModesUrl:"URL adresa re\u017eima putovanja",searchPlaceholder:"Prona\u0111i adresu ili mesto",trafficLayerUrl:"URL adresa sloja saobra\u0107aja",
+_localized:{}}});

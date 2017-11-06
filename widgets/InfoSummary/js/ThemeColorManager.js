@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define(["dojo/_base/declare","dojo/_base/lang","dojo/dom-style","dojo/_base/array","dojo/_base/Color"],function(c,d,e,f,g){return c(null,{_theme:null,_styleName:"",_styleColor:null,_options:null,constructor:function(a){this._theme=a.theme;this._styleName=a.stylename;this.getStyleColor(this._styleName);this._options=a;this.ph=a.ph;this.w=a.w},setStyle:function(a){this._styleName=a;this.getStyleColor(this._styleName)},getStyleColor:function(){setTimeout(d.hitch(this,function(){var a=this.w.getComputedStyle(this.ph,
+null).getPropertyValue("background-color");this._styleColor=g.fromRgb(a).toHex()}),500)},updateUI:function(a){a&&f.forEach(this._options.updateNodes,function(b){e.set(b.node,b.styleProp,a)})}})});

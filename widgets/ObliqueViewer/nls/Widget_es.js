@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/ObliqueViewer/nls/strings":{_widgetLabel:"Visor oblicuo",locateButtonLabel:"Seleccione un punto en el mapa principal para ver las im\u00e1genes oblicuas.",clearButtonLabel:"Borrar todos los gr\u00e1ficos",zoomButtonLabel:"Zoom a la extensi\u00f3n de imagen oblicua",syncButtonLabel:"Sincronizar mapa de nadir",rasterListLabel:"Ver im\u00e1genes oblicuas disponibles",measureWidgetLabel:"Medir altura",intialScaleLabel:"Seleccione la escala inicial para las im\u00e1genes oblicuas",smallBuildingLabel:"\u00c1rea urbana: edificio peque\u00f1o",
+buildingLabel:"\u00c1rea urbana: edificio",azimuthChangeNotification:"No hay datos en la direcci\u00f3n seleccionada.",_localized:{}}});

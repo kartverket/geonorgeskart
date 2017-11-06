@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/LayerList/setting/nls/strings":{showLegend:"Afi\u015fare legend\u0103",controlPopupMenuTitle:"Alege\u0163i ce ac\u0163iuni sunt afi\u015fate \u00een meniul contextual al stratului tematic.",zoomto:"Transfocare la",transparency:"Transparen\u0163\u0103",controlPopup:"Activare/dezactivare pop-up",moveUpAndDown:"Mutare \u00een sus/Mutare \u00een jos",attributeTable:"Deschidere tabel de atribute",url:"Descriere / Afi\u015fare detalii element / Desc\u0103rcare",layerSelectorTitle:"Alege\u0163i ce straturi tematice vor fi afi\u015fate \u00een list\u0103.",
+_localized:{}}});

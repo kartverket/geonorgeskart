@@ -1,0 +1,4 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
+//>>built
+define({"widgets/Select/setting/nls/strings":{setSelectionColor:"\u9078\u629e\u8272\u306e\u8a2d\u5b9a",selectionMode:"\u9078\u629e\u8a2d\u5b9a\u30e2\u30fc\u30c9",partiallyWithin:"\u90e8\u5206\u7684\u306b\u542b\u307e\u308c\u308b",whollyWithin:"\u5b8c\u5168\u306b\u542b\u307e\u308c\u308b",allowExport:"\u9078\u629e\u30d5\u30a3\u30fc\u30c1\u30e3\u306e\u30a8\u30af\u30b9\u30dd\u30fc\u30c8\u3092\u8a31\u53ef",_localized:{}}});
