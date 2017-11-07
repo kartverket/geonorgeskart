@@ -9,7 +9,7 @@
 			"mainBackgroundColor": "#d07d0e"
 		}
 	},
-	"portalUrl": "http://geodata.maps.arcgis.com",
+	"portalUrl": "https://kartverket.maps.arcgis.com",
 	"appId": "",
 	"authorizedCrossOriginDomains": [],
 	"title": "Geonorgeskart",
@@ -1628,7 +1628,7 @@
 			"right": 0,
 			"bottom": 0
 		},
-		"itemId": "7e5c52b4eb664796bf1622576474bb77 ",
+		"itemId": "aac3e2d52b24403f9ca2ab1bedb99c6f",
 		"mapOptions": {
 			"extent": {
 				"xmin": -157155.61725842836,
@@ -1641,7 +1641,7 @@
 			}
 		},
 		"id": "map",
-		"portalUrl": "http://geodata.maps.arcgis.com"
+		"portalUrl": "https://kartverket.maps.arcgis.com"
 	},
 	"widgetPool": {
 		"panel": {
