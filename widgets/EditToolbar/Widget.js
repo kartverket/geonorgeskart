@@ -6,7 +6,7 @@ define(["dojo/_base/declare", "jimu/BaseWidget", "esri/toolbars/edit", "esri/con
 
         startup: function() {
             this.inherited(arguments);
-            this.mapIdNode.innerHTML = 'map id' + this.map.id;
+            //this.mapIdNode.innerHTML = 'map id' + this.map.id;
             map = this.map;
         }
     });

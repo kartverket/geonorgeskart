@@ -9,7 +9,7 @@
 			"mainBackgroundColor": "#d07d0e"
 		}
 	},
-	"portalUrl": "https://kartverket.maps.arcgis.com",
+	"portalUrl": "http://kartverket.maps.arcgis.com",
 	"appId": "",
 	"authorizedCrossOriginDomains": [],
 	"title": "Geonorgeskart",
