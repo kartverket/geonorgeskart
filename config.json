@@ -128,6 +128,17 @@
         "openAtStart": false
       },
       {
+        "name": "UrlLayerController",
+        "version": "2.6",
+        "closeable": false,
+        "openAtStart": true,
+        "uri": "widgets/UrlLayerController/Widget",
+        "id": "widgets_UrlLayerController_Widget_80",
+        "position": {
+          "relativeTo": "map"
+        }
+      },
+      {
         "uri": "widgets/OverviewMap/Widget",
         "position": {
           "right": 0,
