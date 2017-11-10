@@ -1,5 +1,5 @@
 {
-  "numPerPage":30,
+  "numPerPage": 30,
   "scopeOptions": {
     "MyContent": {
       "allow": true,
@@ -9,13 +9,21 @@
       "allow": true,
       "label": null
     },
+    "Curated": {
+      "allow": true,
+      "label": null,
+      "filter": null
+    },
     "ArcGISOnline": {
       "allow": true,
       "label": null
-    },
-    "FromUrl": {
-      "allow": true,
-      "label": null
     }
+  },
+  "addFromUrl": {
+    "allow": true
+  },
+  "addFromFile": {
+    "allow": true,
+    "maxRecordCount": 1000
   }
 }

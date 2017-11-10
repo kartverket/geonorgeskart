@@ -1,5 +1,0 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-define({"widgets/LayerList/nls/strings":{_widgetLabel:"Lista de capas",titleBasemap:"Mapas base",titleLayers:"Capas operativas",labelLayer:"Nombre de capa",itemZoomTo:"Acercar a",itemTransparency:"Transparencia",itemTransparent:"Transparente",itemOpaque:"Opaco",itemMoveUp:"Mover hacia arriba",itemMoveDown:"Mover hacia abajo",itemDesc:"Descripci\u00f3n",itemDownload:"Descargar",itemToAttributeTable:"Abrir tabla de atributos",itemShowItemDetails:"Mostrar detalles del elemento",empty:"vac\u00edo",removePopup:"Deshabilitar ventana emergente",
-enablePopup:"Habilitar elemento emergente",turnAllLayersOff:"Desactivar todas las capas",turnAllLayersOn:"Activar todas las capas",expandAllLayers:"Expandir todas las capas",collapseAlllayers:"Contraer todas las capas",turnAllLabelsOff:"Desactivar todas las etiquetas",turnAllLabelsOn:"Activar todas las etiquetas",showLabels:"Mostrar etiquetas",hideLables:"Ocultar etiquetas",_localized:{}}});

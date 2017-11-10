@@ -1,6 +1,135 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-define(["dojo/_base/lang","dojo/_base/array","jimu/utils"],function(g,f,h){_ignoreCaseToGetFieldObject=function(a,c){var b=null;a&&a.fields&&f.some(a.fields,function(a){if(a.name.toLowerCase()===c.toLowerCase())return b=a,!0});return b};_ignoreCaseToGetOrUpdateAttrByFieldKey=function(a,c,b){var d=null;if(a&&a.attributes)for(var e in a.attributes)if(a.attributes.hasOwnProperty(e)&&"function"!==typeof a.attributes[e]&&e.toLowerCase()===c.toLowerCase()){d=b?a.attributes[e]=b:a.attributes[e];break}return d};
-return{getFieldInfosFromWebmap:function(a,c){var b=null,d=c.getLayerInfoByTopLayerId(a);d&&(d=d.getPopupInfo())&&d.fieldInfos&&(b=g.clone(d.fieldInfos));b&&f.forEach(b,function(a){a.format&&(a.format.dateFormat&&a.format.dateFormat.toLowerCase()&&0<=a.format.dateFormat.toLowerCase().indexOf("time"))&&(a.format.time=!0)});return b},getLocaleDateTime:function(a){return h.localizeDate(new Date(a),{fullYear:!0,formatLength:"medium"})},getAttrByFieldKey:function(a,c){return _ignoreCaseToGetOrUpdateAttrByFieldKey(a,
-c)},setAttrByFieldKey:function(a,c,b){return _ignoreCaseToGetOrUpdateAttrByFieldKey(a,c,b)},ignoreCaseToGetFieldKey:function(a,c){var b=null,d=_ignoreCaseToGetFieldObject(a,c);d&&(b=d.name);return b},ignoreCaseToGetFieldObject:function(a,c){return _ignoreCaseToGetFieldObject(a,c)}}});
+/*
+// Copyright © 2014 - 2017 Esri. All rights reserved.
+
+TRADE SECRETS: ESRI PROPRIETARY AND CONFIDENTIAL
+Unpublished material - all rights reserved under the
+Copyright Laws of the United States and applicable international
+laws, treaties, and conventions.
+
+For additional information, contact:
+Attn: Contracts and Legal Department
+Environmental Systems Research Institute, Inc.
+380 New York Street
+Redlands, California, 92373
+USA
+
+email: contracts@esri.com
+*/
+
+define([
+  'dojo/_base/lang',
+  'dojo/_base/array',
+  'jimu/utils'
+], function(lang, array, jimuUtils) {
+
+  var mo = {};
+
+  mo.getFieldInfosFromWebmap = function(layerId, jimuLayerInfos) {
+    // summary:
+    //   get fieldInfos from web map.
+    // description:
+    //   return null if fieldInfos has not been configured.
+    var fieldInfos = null;
+    var jimuLayerInfo = jimuLayerInfos.getLayerInfoByTopLayerId(layerId);
+    if(jimuLayerInfo) {
+      var popupInfo = jimuLayerInfo.getPopupInfo();
+      if(popupInfo && popupInfo.fieldInfos) {
+        fieldInfos = lang.clone(popupInfo.fieldInfos);
+      }
+    }
+
+    if(fieldInfos) {
+      array.forEach(fieldInfos, function(fieldInfo) {
+        if(fieldInfo.format &&
+          fieldInfo.format.dateFormat &&
+          fieldInfo.format.dateFormat.toLowerCase() &&
+          fieldInfo.format.dateFormat.toLowerCase().indexOf('time') >= 0
+          ) {
+          fieldInfo.format.time = true;
+        }
+      });
+    }
+
+    return fieldInfos;
+  };
+
+  mo.getLocaleDateTime = function(dateString) {
+    var dateObj = new Date(dateString);
+    return jimuUtils.localizeDate(dateObj, {
+      fullYear: true,
+      //selector: 'date',
+      formatLength: 'medium'
+    });
+  };
+
+  mo.getAttrByFieldKey = function(feature, fieldKey) {
+    return _ignoreCaseToGetOrUpdateAttrByFieldKey(feature, fieldKey);
+  };
+
+  mo.setAttrByFieldKey = function(feature, fieldKey, fieldValue) {
+    return _ignoreCaseToGetOrUpdateAttrByFieldKey(feature, fieldKey, fieldValue);
+  };
+
+  mo.ignoreCaseToGetFieldKey = function(layerObject, fieldKey) {
+    var result = null;
+    var fieldObject = _ignoreCaseToGetFieldObject(layerObject, fieldKey);
+    if(fieldObject) {
+      result = fieldObject.name;
+    }
+    return result;
+  };
+
+  mo.ignoreCaseToGetFieldObject = function(layerObject, fieldKey) {
+    return _ignoreCaseToGetFieldObject(layerObject, fieldKey);
+  };
+
+  function _ignoreCaseToGetFieldObject(layerObject, fieldKey) {
+    var result = null;
+    /*
+    for (child in feature.attributes) {
+      if(feature.attributes.hasOwnProperty(child) &&
+         (typeof feature.attributes[child] !== 'function')) {
+        if(child.toLowerCase() === fieldKey.toLowerCase()) {
+          result = child;
+          break;
+        }
+      }
+    }
+    */
+    if(layerObject && layerObject.fields) {
+      array.some(layerObject.fields, function(field) {
+        if(field.name.toLowerCase() === fieldKey.toLowerCase()) {
+          result = field;
+          return true;
+        }
+      });
+    }
+    return result;
+  }
+
+  function _ignoreCaseToGetOrUpdateAttrByFieldKey(feature, fieldKey, fieldValue) {
+    var result = null;
+    if(feature && feature.attributes) {
+      for (var child in feature.attributes) {
+        if(feature.attributes.hasOwnProperty(child) &&
+           (typeof feature.attributes[child] !== 'function')) {
+          if(child.toLowerCase() === fieldKey.toLowerCase()) {
+            if(fieldValue) {
+              // set attr
+              feature.attributes[child] = fieldValue;
+              result = fieldValue;
+              break;
+            } else {
+              // get attr
+              result = feature.attributes[child];
+              break;
+            }
+          }
+        }
+      }
+    }
+    return result;
+  }
+
+  return mo;
+});

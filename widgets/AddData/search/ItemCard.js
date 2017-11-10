@@ -1,9 +1,164 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-require({cache:{"url:widgets/AddData/search/templates/ItemCard.html":'\x3cdiv class\x3d"item-card"\x3e\r\n  \x3cdiv class\x3d"item-card-inner"\x3e\r\n    \x3cdiv class\x3d"thumbnail" data-dojo-attach-point\x3d"thumbnailNode"\x3e\x3c/div\x3e\r\n    \x3ch3 class\x3d"title" data-dojo-attach-point\x3d"titleNode"\x3e\x3c/h3\x3e\r\n    \x3cdiv class\x3d"info" data-dojo-attach-point\x3d"typeByOwnerNode"\x3e\x3c/div\x3e\r\n    \x3cdiv class\x3d"info" data-dojo-attach-point\x3d"dateNode"\x3e\x3c/div\x3e\r\n    \x3cdiv class\x3d"action-bar"\x3e\r\n      \x3cspan class\x3d"message" data-dojo-attach-point\x3d"messageNode"\x3e\x3c/span\x3e\r\n      \x3ca href\x3d"javascript:void(0)"\r\n        data-dojo-attach-point\x3d"addButton"\r\n        data-dojo-attach-event\x3d"onClick: addClicked"\r\n        \x3e${i18n.search.item.actions.add}\r\n      \x3c/a\x3e\r\n      \x3ca href\x3d"javascript:void(0)"\r\n        data-dojo-attach-point\x3d"detailsButton"\r\n        data-dojo-attach-event\x3d"onClick: detailsClicked"\r\n        \x3e${i18n.search.item.actions.details}\r\n      \x3c/a\x3e\r\n    \x3c/div\x3e\r\n  \x3c/div\x3e\r\n\x3c/div\x3e\r\n'}});
-define("dojo/_base/declare dojo/_base/array dojo/date/locale dojo/dom-class dijit/_WidgetBase dijit/_TemplatedMixin dijit/_WidgetsInTemplateMixin dojo/text!./templates/ItemCard.html dojo/i18n!../nls/strings ./util ./LayerLoader".split(" "),function(g,k,l,f,m,n,p,q,b,c,r){return g([m,n,p],{i18n:b,templateString:q,canRemove:!1,item:null,resultsPane:null,_dfd:null,postCreate:function(){this.inherited(arguments)},startup:function(){this._started||(this.inherited(arguments),this.render())},addClicked:function(){var a=
-this,d=this.addButton;if(!f.contains(d,"disabled"))if(f.add(d,"disabled"),this.canRemove){var h=this.resultsPane.getMap();c.setNodeText(a.messageNode,b.search.item.messages.removing);var g=c.findLayersAdded(h,this.item.id).layers;k.forEach(g,function(a){h.removeLayer(a)});this.canRemove=!1;c.setNodeText(a.messageNode,"");c.setNodeText(this.addButton,b.search.item.actions.add);f.remove(d,"disabled")}else c.setNodeText(a.messageNode,b.search.item.messages.adding),(new r).addItem(this.item,this.resultsPane.getMap()).then(function(e){e?
-(a.canRemove=!0,c.setNodeText(a.messageNode,""),c.setNodeText(a.addButton,b.search.item.actions.remove)):c.setNodeText(a.messageNode,b.search.item.messages.addFailed);f.remove(d,"disabled")}).otherwise(function(e){console.warn("Add layer failed.");console.warn(e);c.setNodeText(a.messageNode,b.search.item.messages.addFailed);f.remove(d,"disabled");e&&("string"===typeof e.message&&0<e.message.length)&&console.log("")})},detailsClicked:function(){var a=this.item,a=c.checkMixedContent(a.portalUrl)+"/home/item.html?id\x3d"+
-encodeURIComponent(a.id);window.open(a)},formatDate:function(a){"number"===typeof a&&(a=new Date(a));return l.format(a,{selector:"date",datePattern:b.search.item.dateFormat})},render:function(){c.setNodeText(this.titleNode,this.item.title);this._renderThumbnail();this._renderTypeOwnerDate();this.canRemove&&c.setNodeText(this.addButton,b.search.item.actions.remove)},_renderThumbnail:function(){var a=this.thumbnailNode,d=this.item.thumbnailUrl;a.innerHTML="";var d=c.checkMixedContent(d),b=document.createElement("IMG");
-b.src=d||"widgets/AddData/images/placeholder_120x80.png";a.appendChild(b)},_renderTypeOwnerDate:function(){var a,d=this.item;a=b.search.item.types[d.type];if("undefined"===typeof a||null===a)a=d.type;a=b.search.item.typeByOwnerPattern.replace("{type}",a);a=a.replace("{owner}",d.owner);c.setNodeText(this.typeByOwnerNode,a)}})});
+///////////////////////////////////////////////////////////////////////////
+// Copyright © 2016 Esri. All Rights Reserved.
+//
+// Licensed under the Apache License Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////
+define(["dojo/_base/declare",
+    "dojo/_base/array",
+    "dojo/date/locale",
+    "dojo/dom-class",
+    "dijit/_WidgetBase",
+    "dijit/_TemplatedMixin",
+    "dijit/_WidgetsInTemplateMixin",
+    "dojo/text!./templates/ItemCard.html",
+    "dojo/i18n!../nls/strings",
+    "./util",
+    "./LayerLoader"
+  ],
+  function(declare, array, locale, domClass, _WidgetBase, _TemplatedMixin,
+    _WidgetsInTemplateMixin, template, i18n, util, LayerLoader) {
+
+    return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
+
+      i18n: i18n,
+      templateString: template,
+
+      canRemove: false,
+      item: null,
+      resultsPane: null,
+
+      _dfd: null,
+
+      postCreate: function() {
+        this.inherited(arguments);
+      },
+
+      startup: function() {
+        if (this._started) {
+          return;
+        }
+        this.inherited(arguments);
+        this.render();
+      },
+
+      addClicked: function() {
+        var self = this,
+          btn = this.addButton;
+        if (domClass.contains(btn, "disabled")) {
+          return;
+        }
+        domClass.add(btn, "disabled");
+
+        if (this.canRemove) {
+          var map = this.resultsPane.getMap();
+          util.setNodeText(self.messageNode, i18n.search.item.messages.removing);
+          var lyrs = util.findLayersAdded(map, this.item.id).layers;
+          array.forEach(lyrs, function(lyr) {
+            //console.warn("removingLayer",lyr);
+            map.removeLayer(lyr);
+          });
+          this.canRemove = false;
+          util.setNodeText(self.messageNode, "");
+          util.setNodeText(this.addButton, i18n.search.item.actions.add);
+          domClass.remove(btn, "disabled");
+
+        } else {
+          util.setNodeText(self.messageNode, i18n.search.item.messages.adding);
+          var loader = new LayerLoader();
+          loader.addItem(this.item, this.resultsPane.getMap()).then(function(result) {
+            //console.warn("addClicked.result",result);
+            if (result) {
+              self.canRemove = true;
+              util.setNodeText(self.messageNode, "");
+              util.setNodeText(self.addButton, i18n.search.item.actions.remove);
+              domClass.remove(btn, "disabled");
+            } else {
+              util.setNodeText(self.messageNode, i18n.search.item.messages.addFailed);
+              domClass.remove(btn, "disabled");
+            }
+          }).otherwise(function(error) {
+            console.warn("Add layer failed.");
+            console.warn(error);
+            util.setNodeText(self.messageNode, i18n.search.item.messages.addFailed);
+            domClass.remove(btn, "disabled");
+            if (error && typeof error.message === "string" && error.message.length > 0) {
+              // TODO show this message
+              //console.warn("msg",error.message);
+              //util.setNodeText(self.messageNode,error.message);
+              console.log('');
+            }
+          });
+        }
+      },
+
+      detailsClicked: function() {
+        var item = this.item;
+        var baseUrl = util.checkMixedContent(item.portalUrl);
+        var url = baseUrl + "/home/item.html?id=" + encodeURIComponent(item.id);
+        window.open(url);
+      },
+
+      formatDate: function(date) {
+        if (typeof(date) === "number") {
+          date = new Date(date);
+        }
+        var fmt = i18n.search.item.dateFormat;
+        return locale.format(date, {
+          selector: "date",
+          datePattern: fmt
+        });
+      },
+
+      render: function() {
+        // TODO escape text or not?
+        util.setNodeText(this.titleNode, this.item.title);
+        util.setNodeTitle(this.titleNode, this.item.title);
+        this._renderThumbnail();
+        this._renderTypeOwnerDate();
+        if (this.canRemove) {
+          util.setNodeText(this.addButton, i18n.search.item.actions.remove);
+        }
+      },
+
+      _renderThumbnail: function() {
+        var nd = this.thumbnailNode,
+          thumbnailUrl = this.item.thumbnailUrl;
+        nd.innerHTML = "";
+        thumbnailUrl = util.checkMixedContent(thumbnailUrl);
+        var thumbnail = document.createElement("IMG");
+        thumbnail.src = thumbnailUrl || "widgets/AddData/images/placeholder_120x80.png";
+        nd.appendChild(thumbnail);
+      },
+
+      _renderTypeOwnerDate: function() {
+        var s, item = this.item;
+
+        var sType = i18n.search.item.types[item.type];
+        if (typeof sType === "undefined" || sType === null) {
+          sType = item.type;
+        }
+        var typeByOwnerPattern = i18n.search.item.typeByOwnerPattern;
+        s = typeByOwnerPattern.replace("{type}", sType);
+        s = s.replace("{owner}", item.owner);
+        util.setNodeText(this.typeByOwnerNode, s);
+
+        /*
+        var sDate = this.formatDate(item.modified);
+        s = i18n.search.item.datePattern.replace("{date}",sDate);
+        util.setNodeText(this.dateNode,s);
+        */
+      }
+
+    });
+
+  });

@@ -1,4 +1,0 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-define({"widgets/Select/nls/strings":{_widgetLabel:"Pa\u017eym\u0117ti",showActions:"Rodyti su pasirinktu elementu (-ais) atliktus veiksmus",toggleSelectability:"Spustel\u0117kite nor\u0117dami perjungti galimyb\u0119 \u017eym\u0117ti",showSelectedFeatures:"Spustel\u0117kite, jei norite, kad b\u016bt\u0173 rodomi pasirinkti elementai",actionsTitle:"\u017dym\u0117jimo veiksmai",_localized:{}}});

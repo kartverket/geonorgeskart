@@ -1,6 +1,64 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-require({cache:{"url:widgets/AddData/search/templates/BBoxOption.html":'\x3cdiv class\x3d"search-bbox-option"\x3e\r\n  \x3cdiv data-dojo-attach-point\x3d"bboxSection" class\x3d"switch-toggle-group"\x3e\r\n    \x3clabel class\x3d"checkbox-inline"\x3e\r\n      \x3cinput id\x3d"${id}_bboxId" \r\n\t      data-dojo-type\x3d"dijit/form/CheckBox"\r\n\t      data-dojo-attach-point\x3d"bboxToggle"\r\n\t      data-dojo-attach-event\x3d"onClick: bboxClicked"\r\n\t      data-dojo-props\x3d"class: \'switch-toggle\'"/\x3e\r\n      ${i18n.search.bboxOption.bbox}\r\n    \x3c/label\x3e\r\n  \x3c/div\x3e\r\n\x3c/div\x3e'}});
-define(["dojo/_base/declare","./SearchComponent","dojo/text!./templates/BBoxOption.html","dojo/i18n!../nls/strings","dijit/form/CheckBox"],function(c,d,e,f){return c([d],{i18n:f,templateString:e,postCreate:function(){this.inherited(arguments);this.bboxToggle.set("checked",!0)},bboxClicked:function(){this.search()},_getBBox:function(){var a;if(a=this.getMap())if(a=a.geographicExtent)return a.xmin+","+a.ymin+","+a.xmax+","+a.ymax;return null},appendQueryParams:function(a){if(this.bboxToggle.get("checked")){var b=
-this._getBBox();null!==b&&(a.canSortByRelevance=!0,a.bbox=b)}}})});
+///////////////////////////////////////////////////////////////////////////
+// Copyright © 2016 Esri. All Rights Reserved.
+//
+// Licensed under the Apache License Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////
+define(["dojo/_base/declare",
+    "./SearchComponent",
+    "dojo/text!./templates/BBoxOption.html",
+    "dojo/i18n!../nls/strings",
+    "dijit/form/CheckBox"
+  ],
+  function(declare, SearchComponent, template, i18n) {
+
+    return declare([SearchComponent], {
+
+      i18n: i18n,
+      templateString: template,
+
+      postCreate: function() {
+        this.inherited(arguments);
+        this.bboxToggle.set("checked", true);
+      },
+
+      bboxClicked: function() {
+        this.search();
+      },
+
+      _getBBox: function() {
+        var ext, map = this.getMap();
+        if (map) {
+          ext = map.geographicExtent;
+          if (ext) {
+            return ext.xmin + "," + ext.ymin + "," + ext.xmax + "," + ext.ymax;
+          }
+        }
+        return null;
+      },
+
+      /* SearchComponent API ============================================= */
+
+      appendQueryParams: function(params) {
+        if (this.bboxToggle.get("checked")) {
+          var bbox = this._getBBox();
+          if (bbox !== null) {
+            // TODO is bbox just a filter, are results spatially ranked?
+            params.canSortByRelevance = true;
+            params.bbox = bbox;
+          }
+        }
+      }
+
+    });
+
+  });

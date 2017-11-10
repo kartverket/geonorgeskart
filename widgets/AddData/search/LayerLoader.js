@@ -1,26 +1,1012 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-define("dojo/_base/declare dojo/_base/lang dojo/_base/array dojo/promise/all dojo/Deferred dojo/json dojo/i18n!../nls/strings ./util esri/lang esri/request esri/arcgis/utils esri/layers/ArcGISDynamicMapServiceLayer esri/layers/ArcGISImageServiceLayer esri/layers/ArcGISTiledMapServiceLayer esri/layers/FeatureLayer esri/layers/ImageServiceParameters esri/layers/KMLLayer esri/layers/MosaicRule esri/layers/RasterFunction esri/layers/VectorTileLayer esri/layers/WMSLayer esri/dijit/PopupTemplate esri/InfoTemplate esri/renderers/jsonUtils jimu/utils".split(" "),
-function(t,u,k,v,h,p,q,w,f,m,x,y,z,A,r,B,C,D,E,F,G,s,H,I,J){return t(null,{item:null,itemUrl:null,map:null,serviceUrl:null,constructor:function(a){u.mixin(this,a)},addItem:function(a,b){var c=new h;this.map=b;this.item=a;this.itemUrl=this._checkMixedContent(a.itemUrl);this.serviceUrl=this._checkMixedContent(a.url);if("Feature Service"===a.type)return this._addFeatureService();if("Image Service"===a.type)return this._addImageService();if("KML"===a.type)return this._addKML();if("Map Service"===a.type)return this._addMapService();
-if("Vector Tile Service"===a.type)return this._addVectorTileService();if("WMS"===a.type)return this._addWMS();console.warn("Unsupported item type: ",a.type);c.resolve(null);return c},_addFeatureService:function(){var a=this,b=new h,c=this.serviceUrl,e=this.item,d={},l=null,n=[],g=[];a._readItemJsonData().then(function(b){(d=b||{})&&(d.layers&&0<d.layers.length)&&k.forEach(d.layers,function(a){"undefined"!==typeof a.id&&null!==a.id&&(null===l&&(l=[]),l.push(a.id))});return a._readRestInfo(c)}).then(function(b){b&&
-"string"===typeof b.type&&"Feature Layer"===b.type?(b=new r(c,{id:a._generateLayerId(),outFields:["*"]}),n.push(a._waitForLayer(b))):b&&(b.layers&&0<b.layers.length)&&k.forEach(b.layers,function(b){var d=!0;null!==l&&0<l.length&&(d=k.some(l,function(a){return a===b.id}));d&&(d=new r(c+"/"+b.id,{id:a._generateLayerId(),outFields:["*"]}),n.push(a._waitForLayer(d)))});return v(n)}).then(function(a){k.forEach(a,function(a){g.push(a)});g.reverse();return g}).then(function(){k.forEach(g,function(b){var c=
-a._processFeatureLayer(b,e,d);b.arcgisProps={title:c.title};b._titleForLegend=c.title;f.isDefined(b.title)||(b.title=c.title);a._addLayer(b)})}).then(function(){b.resolve(g)}).otherwise(function(a){b.reject(a)});return b},_addImageService:function(){var a=this,b=new h;a._readItemJsonData().then(function(b){return a._newImageServiceLayer(b||{})}).then(function(c){a._addLayer(c);b.resolve(c)}).otherwise(function(a){b.reject(a)});return b},_addKML:function(){var a=this,b=new h;a._newKMLLayer().then(function(c){c&&
-(c.title=a.item.title);a._addLayer(c);b.resolve(c)}).otherwise(function(a){b.reject(a)});return b},_addMapService:function(){var a=this,b=new h;a._readItemJsonData().then(function(b){return a._newMapServiceLayer(b||{})}).then(function(c){a._addLayer(c);b.resolve(c)}).otherwise(function(a){b.reject(a)});return b},_addVectorTileService:function(){var a=this,b=new h;a._newVectorTileLayer().then(function(c){a._addLayer(c);b.resolve(c)}).otherwise(function(a){b.reject(a)});return b},_addWMS:function(){var a=
-this,b=new h;a._readItemJsonData().then(function(b){return a._newWMSLayer(b||{})}).then(function(c){c&&(c.title=a.item.title);a._addLayer(c);b.resolve(c)}).otherwise(function(a){b.reject(a)});return b},_addLayer:function(a){var b=this.item;a&&(a.xtnItemId=b.id,!a.arcgisProps&&b&&(a.arcgisProps={title:b.title},a._titleForLegend=b.title),f.isDefined(a.title)||(a.title=b.title),this.map.addLayer(a))},_checkMixedContent:function(a){return w.checkMixedContent(a)},_checkUrl:function(a){return x._checkUrl(a)},
-_checkVectorTileUrl:function(a,b){var c=new h;if(-1!==a.indexOf(".json",a.length-5))return b.styleUrl=a,c.resolve(a),c;var e={url:null,content:{},handleAs:"json",callbackParamName:"callback"};this.itemUrl?(e.url=this.itemUrl+"/resources/styles/root.json",m(e,{}).then(function(){b.styleUrl=e.url;c.resolve(e.url)}).otherwise(function(){e.url=a+"/resources/styles/root.json";m(e,{}).then(function(){b.styleUrl=e.url;c.resolve(e.url)}).otherwise(function(){b.url=a;c.resolve(a)})})):(e.url=a+"/resources/styles/root.json",
-m(e,{}).then(function(){b.styleUrl=e.url;c.resolve(e.url)}).otherwise(function(){b.url=a;c.resolve(a)}));return c},_generateLayerId:function(){return this._generateLayerIds(1)[0]},_generateLayerIds:function(a){var b,c=[];for(b=0;b<a;b++)c.push(this._generateRandomId());return c},_generateRandomId:function(){var a=null,a="function"===typeof Date.now?Date.now():(new Date).getTime(),b=(""+Math.random()).replace("0.","r");return(a+""+b).replace(/-/g,"")},_makeFeatureLayerTitle:function(a,b,c){var e,d,
-l;try{if(b&&c&&b===c||b&&c&&(e=c.indexOf(b),0===e&&(d=c.substring(e+b.length+1),13<=d.length&&(l=/^\d+$/,l.test(d)))))return b}catch(f){}return a.replace("{serviceName}",b).replace("{layerName}",c)},_newImageServiceLayer:function(a){var b=new h,c=this._generateLayerId(),e=this.serviceUrl,d={mapLayerId:c,bandIds:null,format:null,compressionQuality:null,opacity:1,visibility:!0};f.isDefined(a.visibility)&&!1===a.visibility&&(d.visibility=!1);f.isDefined(a.opacity)&&(d.opacity=a.opacity);f.isDefined(a.minScale)&&
-!f.isDefined(d.minScale)&&(d.minScale=a.minScale);f.isDefined(a.maxScale)&&!f.isDefined(d.maxScale)&&(d.maxScale=a.maxScale);f.isDefined(a.refreshInterval)&&!f.isDefined(d.refreshInterval)&&(d.refreshInterval=a.refreshInterval);a.popupInfo&&(!d.popupInfo&&!d.disablePopup)&&(d.popupInfo=a.popupInfo);a.renderingRule&&!d.renderingRule&&(d.renderingRule=a.renderingRule,a.renderingRule.functionName&&(d.renderingRule.rasterFunction=a.renderingRule.functionName));a.bandIds&&!d.bandIds&&(d.bandIds=a.bandIds);
-a.mosaicRule&&!d.mosaicRule&&(d.mosaicRule=a.mosaicRule);a.format&&!d.format&&(d.format=a.format);f.isDefined(a.compressionQuality)&&!f.isDefined(d.compressionQuality)&&(d.compressionQuality=a.compressionQuality);if(a.layerDefinition&&a.layerDefinition.definitionExpression&&(!f.isDefined(d.layerDefinition)||!f.isDefined(d.layerDefinition.definitionExpression)))d.layerDefinition=d.layerDefinition||{},d.layerDefinition.definitionExpression=a.layerDefinition.definitionExpression;a=new B;null!==d.bandIds&&
-(a.bandIds=d.bandIds);null!==d.format&&(a.format=d.format,null!==d.compressionQuality&&(a.compressionQuality=d.compressionQuality));d.renderingRule&&d.renderingRule.rasterFunction&&(c=new E(d.renderingRule),a.renderingRule=c);d.mosaicRule&&(c=new D(d.mosaicRule),a.mosaicRule=c);f.isDefined(d.noData)&&(a.noData=d.noData);f.isDefined(d.noDataInterpretation)&&(a.noDataInterpretation=d.noDataInterpretation);f.isDefined(d.interpolation)&&(a.interpolation=d.interpolation);a={imageServiceParameters:a,opacity:d.opacity,
-visible:d.visibility};f.isDefined(d.mapLayerId)&&(a.id=d.mapLayerId);f.isDefined(d.minScale)&&(a.minScale=d.minScale);f.isDefined(d.maxScale)&&(a.maxScale=d.maxScale);f.isDefined(d.refreshInterval)&&(a.refreshInterval=d.refreshInterval);f.isDefined(d.resourceInfo)&&(a.resourceInfo=d.resourceInfo);e=new z(this._checkUrl(e),a);this._waitForLayer(e).then(function(a){d.layerDefinition&&d.layerDefinition.definitionExpression&&a.setDefinitionExpression(d.layerDefinition.definitionExpression,!0);b.resolve(a)},
-function(a){b.reject(a)});return b},_newInfoTemplate:function(a,b){if(a)try{return new s({description:a.description,title:a.title,showAttachments:a.showAttachments,fieldInfos:a.fieldInfos,mediaInfos:a.mediaInfos})}catch(c){console.error(c)}var e=new H;f.isDefined(b)&&e.setTitle(b);return e},_newKMLLayer:function(){var a={id:this._generateLayerId()},a=new C(this.serviceUrl,a);return this._waitForLayer(a)},_newMapServiceLayer:function(a){var b=this,c=new h,e=this.serviceUrl,d=this._generateLayerId();
-m({url:e,content:{f:"json"},handleAs:"json",callbackParamName:"callback"},{}).then(function(f){var n=null,n={id:d},n=f.tileInfo?new A(e,n):new y(e,n);b._waitForLayer(n).then(function(d){var e=null;k.forEach(d.layerInfos,function(d){var c=null;a&&k.some(a.layers,function(a){if(d.id===a.id)return c=a,!0});var f=null;c&&c.popupInfo&&(f=c.popupInfo);f&&(null===e&&(e={}),e[d.id]={infoTemplate:b._newInfoTemplate(f,d.name)})});null===d.infoTemplates&&e&&(d.infoTemplates=e);c.resolve(d)},function(a){c.reject(a)})},
-function(a){c.reject(a)});return c},_newPopupInfo:function(a,b){if(a&&a.fields){var c={title:a.name,fieldInfos:[],description:null,showAttachments:!0,mediaInfos:[]};"string"===typeof b&&0<b.length&&(c.title=b);k.forEach(a.fields,function(a){var b=J.getDefaultPortalFieldInfo(a);b.visible=!0;b.isEditable=a.editable;c.fieldInfos.push(b)});return c}return null},_newVectorTileLayer:function(){var a=this,b=new h,c={},e=this.serviceUrl,d=this._generateLayerId();"string"===typeof e&&0<e.length?this._checkVectorTileUrl(e,
-c).then(function(c){"string"===typeof c&&0<c.length?(c=a._checkMixedContent(c),c=new F(c,{id:d,opacity:1,visible:!0}),a._waitForLayer(c).then(function(a){b.resolve(a)},function(a){b.reject(a)})):b.resolve(null)},function(a){b.reject(a)}):b.resolve(null);return b},_newWMSLayer:function(){var a={id:this._generateLayerId()},a=new G(this.serviceUrl,a),b=this,a=this._waitForLayer(a);a.then(function(a){b._setWMSVisibleLayers(a)});return a},_processFeatureLayer:function(a,b,c){var e=this,d=q.search.featureLayerTitlePattern,
-l=null;c&&c.layers&&0<c.layers.length?k.some(c.layers,function(c){var g,h,k,m=!1;if(c.id===a.layerId){c.popupInfo&&(g=c.popupInfo,g=p.parse(p.stringify(g)),g=new s(g),a.setInfoTemplate(g),m=!0);f.isDefined(c.showLabels)&&a.setShowLabels(c.showLabels);f.isDefined(c.refreshInterval)&&a.setRefreshInterval(c.refreshInterval);f.isDefined(c.showLegend)&&console.log("");f.isDefined(c.timeAnimation)&&!1===c.timeAnimation&&console.log("");if(g=c.layerDefinition)g.definitionExpression&&a.setDefinitionExpression(g.definitionExpression),
-g.displayField&&a.displayField(g.displayField),g.drawingInfo&&(g.drawingInfo.renderer&&(h=p.parse(p.stringify(g.drawingInfo.renderer)),k=I.fromJson(h),h.type&&"classBreaks"===h.type&&(k.isMaxInclusive=!0),a.setRenderer(k)),f.isDefined(g.drawingInfo.transparency)&&a.setOpacity(1-g.drawingInfo.transparency/100)),f.isDefined(g.minScale)&&a.setMinScale(g.minScale),f.isDefined(g.maxScale)&&a.setMaxScale(g.maxScale),f.isDefined(g.defaultVisibility)&&!1===g.defaultVisibility&&a.setVisibility(!1);m||e._setFeatureLayerInfoTemplate(a,
-c.popupInfo);l={url:a.url,id:a.id,itemId:b.id,title:e._makeFeatureLayerTitle(d,b.title,a.name)};return!0}}):(l={url:a.url,id:a.id,itemId:b.id,title:e._makeFeatureLayerTitle(d,b.title,a.name)},e._setFeatureLayerInfoTemplate(a,null,l.title));return l},_readItemJsonData:function(){return m({url:this.itemUrl+"/data",content:{f:"json"},handleAs:"json"},{})},_readRestInfo:function(a){return m({url:a,content:{f:"json"},handleAs:"json",callbackParamName:"callback"},{})},_setFeatureLayerInfoTemplate:function(a,
-b,c){b||(b=this._newPopupInfo(a,c));b=this._newInfoTemplate(b,c);a.setInfoTemplate(b)},_setWMSVisibleLayers:function(a){var b=[];a&&(k.some(a.layerInfos,function(a){if("string"===typeof a.name&&0<a.name.length)if(10>b.length)b.push(a.name);else return!0}),10>=b.length&&a.setVisibleLayers(b))},_waitForLayer:function(a){var b=new h,c=[];if(a.loaded)return b.resolve(a),b;if(a.loadError)return b.reject(a.loadError),b;var e=function(){k.forEach(c,function(a){a.remove()})};c.push(a.on("load",function(a){e();
-b.resolve(a.layer)}));c.push(a.on("error",function(a){e();a=a.error;try{a.message&&-1!==a.message.indexOf("Unable to complete")?(console.warn("layerAccessError",a),b.reject(Error(q.search.layerInaccessible))):b.reject(a)}catch(c){b.reject(a)}}));return b}})});
+define(["dojo/_base/declare",
+    "dojo/_base/lang",
+    "dojo/_base/array",
+    "dojo/promise/all",
+    "dojo/Deferred",
+    "dojo/json",
+    "dojo/i18n!../nls/strings",
+    "./util",
+    "esri/lang",
+    "esri/request",
+    "esri/arcgis/utils",
+    "esri/layers/ArcGISDynamicMapServiceLayer",
+    "esri/layers/ArcGISImageServiceLayer",
+    "esri/layers/ArcGISTiledMapServiceLayer",
+    "esri/layers/DynamicLayerInfo",
+    "esri/layers/FeatureLayer",
+    "esri/layers/ImageParameters",
+    "esri/layers/ImageServiceParameters",
+    "esri/layers/KMLLayer",
+    "esri/layers/LayerDrawingOptions",
+    "esri/layers/MosaicRule",
+    "esri/layers/RasterFunction",
+    "esri/layers/VectorTileLayer",
+    'esri/layers/WMSLayer',
+    "esri/dijit/PopupTemplate",
+    "esri/InfoTemplate",
+    "esri/renderers/jsonUtils",
+    "jimu/utils"
+  ],
+  function(declare, lang, array, all, Deferred, djJson, i18n, util, esriLang, esriRequest, agsUtils,
+    ArcGISDynamicMapServiceLayer, ArcGISImageServiceLayer, ArcGISTiledMapServiceLayer,
+    DynamicLayerInfo, FeatureLayer, ImageParameters, ImageServiceParameters, KMLLayer,
+    LayerDrawingOptions, MosaicRule, RasterFunction, VectorTileLayer, WMSLayer, PopupTemplate,
+    InfoTemplate, jsonRendererUtils, jimuUtils) {
+
+    return declare(null, {
+
+      item: null,
+      itemUrl: null,
+      map: null,
+      serviceUrl: null,
+
+      constructor: function(args) {
+        lang.mixin(this, args);
+      },
+
+      addItem: function(item, map) {
+        // TODO layer position, titles, timeouts, feedback
+        //console.warn("addItem",item);
+        var dfd = new Deferred();
+        this.map = map;
+        this.item = item;
+        this.itemUrl = this._checkMixedContent(item.itemUrl);
+        this.serviceUrl = this._checkMixedContent(item.url);
+
+        if (item.type === "Feature Service") {
+          return this._addFeatureService();
+        } else if (item.type === "Image Service") {
+          return this._addImageService();
+        } else if (item.type === "KML") {
+          return this._addKML();
+        } else if (item.type === "Map Service") {
+          return this._addMapService();
+        } else if (item.type === "Vector Tile Service") {
+          return this._addVectorTileService();
+        } else if (item.type === "WMS") {
+          return this._addWMS();
+        } else {
+          // TODO reject
+          console.warn("Unsupported item type: ", item.type);
+          dfd.resolve(null);
+        }
+        return dfd;
+      },
+
+      _addFeatureService: function() {
+        var self = this,
+          dfd = new Deferred();
+        var serviceUrl = this.serviceUrl;
+        var item = this.item,
+          itemData = {};
+        var layerIds = null,
+          layerDfds = [],
+          featureLayers = [];
+
+        self._readItemJsonData().then(function(result) {
+          //console.warn("_addFeatureService.jsonData",result);
+          itemData = result || {};
+          if (itemData && itemData.layers && (itemData.layers.length > 0)) {
+            array.forEach(itemData.layers, function(l) {
+              if ((typeof(l.id) !== "undefined") && (l.id !== null)) {
+                if (layerIds === null) {
+                  layerIds = [];
+                }
+                layerIds.push(l.id);
+              }
+            });
+          }
+          return self._readRestInfo(serviceUrl);
+
+        }).then(function(result) {
+          //console.warn("_addFeatureService.serviceInfo",result);
+          if (result && typeof result.type === "string" && result.type === "Feature Layer") {
+            // a single layer registered from a service /FeatureServer/1 or /MapServer/2
+            var layer = new FeatureLayer(serviceUrl, {
+              id: self._generateLayerId(),
+              outFields: ["*"]
+            });
+            layerDfds.push(self._waitForLayer(layer));
+          } else if (result && result.layers && result.layers.length > 0) {
+            array.forEach(result.layers, function(lyr) {
+              var bAdd = true;
+              if (layerIds !== null && layerIds.length > 0) {
+                bAdd = array.some(layerIds, function(lid) {
+                  return (lid === lyr.id);
+                });
+              }
+              if (bAdd) {
+                var layer = new FeatureLayer(serviceUrl + "/" + lyr.id, {
+                  id: self._generateLayerId(),
+                  outFields: ["*"]
+                });
+                layerDfds.push(self._waitForLayer(layer));
+              }
+            });
+          }
+          return all(layerDfds);
+
+        }).then(function(results) {
+          //console.warn("_addFeatureService.layerDfds",results);
+          array.forEach(results, function(result) {
+            featureLayers.push(result);
+          });
+          featureLayers.reverse();
+          return featureLayers;
+
+        }).then(function() {
+          array.forEach(featureLayers, function(layer) {
+            var opLayer = self._processFeatureLayer(layer, item, itemData);
+            layer.arcgisProps = {
+              title: opLayer.title
+            };
+            layer._titleForLegend = opLayer.title;
+            if (!esriLang.isDefined(layer.title)) {
+              layer.title = opLayer.title;
+            }
+            self._addLayer(layer);
+          });
+        }).then(function() {
+          dfd.resolve(featureLayers);
+        }).otherwise(function(error) {
+          dfd.reject(error);
+        });
+        return dfd;
+      },
+
+      _addImageService: function() {
+        var self = this,
+          dfd = new Deferred();
+        self._readItemJsonData().then(function(result) {
+          var itemData = result || {};
+          return self._newImageServiceLayer(itemData);
+        }).then(function(layer) {
+          self._addLayer(layer);
+          dfd.resolve(layer);
+        }).otherwise(function(error) {
+          dfd.reject(error);
+        });
+        return dfd;
+      },
+
+      _addKML: function() {
+        var self = this,
+          dfd = new Deferred();
+        self._newKMLLayer().then(function(layer) {
+          if (layer) {
+            layer.title = self.item.title;
+          }
+          self._addLayer(layer);
+          dfd.resolve(layer);
+        }).otherwise(function(error) {
+          dfd.reject(error);
+        });
+        return dfd;
+      },
+
+      _addMapService: function() {
+        var self = this,
+          dfd = new Deferred();
+        self._readItemJsonData().then(function(result) {
+          var itemData = result || {};
+          return self._newMapServiceLayer(itemData);
+        }).then(function(layer) {
+          self._addLayer(layer);
+          dfd.resolve(layer);
+        }).otherwise(function(error) {
+          dfd.reject(error);
+        });
+        return dfd;
+      },
+
+      _addVectorTileService: function() {
+        var self = this,
+          dfd = new Deferred();
+        self._newVectorTileLayer().then(function(layer) {
+          self._addLayer(layer);
+          dfd.resolve(layer);
+        }).otherwise(function(error) {
+          dfd.reject(error);
+        });
+        return dfd;
+      },
+
+      _addWMS: function() {
+        var self = this,
+          dfd = new Deferred();
+        self._readItemJsonData().then(function(result) {
+          var itemData = result || {};
+          return self._newWMSLayer(itemData);
+        }).then(function(layer) {
+          if (layer) {
+            layer.title = self.item.title;
+          }
+          self._addLayer(layer);
+          dfd.resolve(layer);
+        }).otherwise(function(error) {
+          dfd.reject(error);
+        });
+        return dfd;
+      },
+
+      _addLayer: function(layer) {
+        //console.warn("_addLayer",layer);
+        //console.warn("map",this.map);
+        var item = this.item;
+        if (layer) {
+          layer.xtnItemId = item.id;
+          layer.xtnAddData = true;
+          if (!layer.arcgisProps && item) {
+            layer.arcgisProps = {
+              title: item.title
+            };
+            layer._titleForLegend = item.title;
+          }
+          if (!esriLang.isDefined(layer.title)) {
+            layer.title = item.title;
+          }
+
+          layer._wabProperties =  {
+            itemLayerInfo: {
+              itemId: item.id,
+              itemUrl: this.itemUrl,
+              portalUrl: item.portalUrl
+            }
+          };
+
+          this.map.addLayer(layer);
+        }
+      },
+
+      _checkMixedContent: function(uri) {
+        return util.checkMixedContent(uri);
+      },
+
+      _checkUrl: function(url) {
+        return agsUtils._checkUrl(url);
+      },
+
+      /*
+      _checkVectorTileUrl: function(url,operationalLayer) {
+        var dfd = new Deferred();
+        var endsWith = function(sv,sfx) {
+          return (sv.indexOf(sfx,(sv.length - sfx.length)) !== -1);
+        };
+        if (endsWith(url,".json")) {
+          operationalLayer.styleUrl = url;
+          dfd.resolve(url);
+        } else {
+          var u = this.itemUrl+"/resources/styles/root.json";
+          var content = {}, options = {};
+          esriRequest({url:u,content:content,handleAs:"json",callbackParamName:"callback"},options).then(
+            function(){
+              operationalLayer.styleUrl = u;
+              dfd.resolve(u);
+            },
+            function(){
+              u = url+"/resources/styles/root.json";
+              esriRequest({url:u,content:content,handleAs:"json",callbackParamName:"callback"},options).then(
+                function(){
+                  operationalLayer.styleUrl = u;
+                  dfd.resolve(u);
+                },
+                function(){
+                  operationalLayer.url = url;
+                  dfd.resolve(url);
+                }
+              );
+            }
+          );
+        }
+        return dfd;
+      },
+      */
+
+      _checkVectorTileUrl: function(url, operationalLayer) {
+        var dfd = new Deferred();
+        var endsWith = function(sv, sfx) {
+          return (sv.indexOf(sfx, (sv.length - sfx.length)) !== -1);
+        };
+        if (endsWith(url, ".json")) {
+          operationalLayer.styleUrl = url;
+          dfd.resolve(url);
+          return dfd;
+        }
+        var params = {
+          url: null,
+          content: {},
+          handleAs: "json",
+          callbackParamName: "callback"
+        };
+        if (this.itemUrl) {
+          params.url = this.itemUrl + "/resources/styles/root.json";
+          esriRequest(params, {}).then(function() {
+            operationalLayer.styleUrl = params.url;
+            dfd.resolve(params.url);
+          }).otherwise(function() {
+            params.url = url + "/resources/styles/root.json";
+            esriRequest(params, {}).then(function() {
+              operationalLayer.styleUrl = params.url;
+              dfd.resolve(params.url);
+            }).otherwise(function() {
+              operationalLayer.url = url;
+              dfd.resolve(url);
+            });
+          });
+        } else {
+          params.url = url + "/resources/styles/root.json";
+          esriRequest(params, {}).then(function() {
+            operationalLayer.styleUrl = params.url;
+            dfd.resolve(params.url);
+          }).otherwise(function() {
+            operationalLayer.url = url;
+            dfd.resolve(url);
+          });
+        }
+        return dfd;
+      },
+
+      _generateLayerId: function() {
+        return this._generateLayerIds(1)[0];
+      },
+
+      _generateLayerIds: function(count) {
+        var i, ids = [];
+        for (i = 0; i < count; i++) {
+          ids.push(this._generateRandomId());
+        }
+        return ids;
+      },
+
+      _generateRandomId: function() {
+        var t = null;
+        if (typeof Date.now === "function") {
+          t = Date.now();
+        } else {
+          t = (new Date()).getTime();
+        }
+        var r = ("" + Math.random()).replace("0.", "r");
+        return (t + "" + r).replace(/-/g, "");
+      },
+
+      _makeFeatureLayerTitle: function(pattern, serviceName, layerName) {
+        var n, s, regexp;
+        try {
+          if (serviceName && layerName && (serviceName === layerName)) {
+            return serviceName;
+          } else if (serviceName && layerName) {
+            // try to remove a timestamp suffix
+            n = layerName.indexOf(serviceName);
+            if (n === 0) {
+              s = layerName.substring(n + serviceName.length + 1);
+              if (s.length >= 13) {
+                regexp = /^\d+$/;
+                if (regexp.test(s)) {
+                  return serviceName;
+                }
+              }
+            }
+          }
+        } catch (ex) {}
+        return pattern.replace("{serviceName}", serviceName).replace("{layerName}", layerName);
+      },
+
+      _newImageServiceLayer: function(itemData) {
+        //console.warn("_newImageServiceLayer.itemData",itemData);
+        var dfd = new Deferred();
+        var mapLayerId = this._generateLayerId();
+        var layerUrl = this.serviceUrl;
+        var layerObject = {
+          mapLayerId: mapLayerId,
+          bandIds: null,
+          format: null,
+          compressionQuality: null,
+          opacity: 1.0,
+          visibility: true
+        };
+
+        if (esriLang.isDefined(itemData.visibility) && itemData.visibility === false) {
+          layerObject.visibility = false; // TODO?
+        }
+        if (esriLang.isDefined(itemData.opacity)) {
+          layerObject.opacity = itemData.opacity;
+        }
+        if (esriLang.isDefined(itemData.minScale) && !esriLang.isDefined(layerObject.minScale)) {
+          layerObject.minScale = itemData.minScale;
+        }
+        if (esriLang.isDefined(itemData.maxScale) && !esriLang.isDefined(layerObject.maxScale)) {
+          layerObject.maxScale = itemData.maxScale;
+        }
+        if (esriLang.isDefined(itemData.refreshInterval) &&
+          !esriLang.isDefined(layerObject.refreshInterval)) {
+          layerObject.refreshInterval = itemData.refreshInterval;
+        }
+        if (itemData.popupInfo && !layerObject.popupInfo && !layerObject.disablePopup) {
+          layerObject.popupInfo = itemData.popupInfo;
+        }
+        if (itemData.renderingRule && !layerObject.renderingRule) {
+          layerObject.renderingRule = itemData.renderingRule;
+          if (itemData.renderingRule.functionName) {
+            layerObject.renderingRule.rasterFunction = itemData.renderingRule.functionName;
+          }
+        }
+        if (itemData.bandIds && !layerObject.bandIds) {
+          layerObject.bandIds = itemData.bandIds;
+        }
+        if (itemData.mosaicRule && !layerObject.mosaicRule) {
+          layerObject.mosaicRule = itemData.mosaicRule;
+        }
+        if (itemData.format && !layerObject.format) {
+          layerObject.format = itemData.format;
+        }
+        if (esriLang.isDefined(itemData.compressionQuality) &&
+          !esriLang.isDefined(layerObject.compressionQuality)) {
+          layerObject.compressionQuality = itemData.compressionQuality;
+        }
+        if (itemData.layerDefinition && itemData.layerDefinition.definitionExpression &&
+          (!esriLang.isDefined(layerObject.layerDefinition) ||
+            !esriLang.isDefined(layerObject.layerDefinition.definitionExpression))) {
+          layerObject.layerDefinition = layerObject.layerDefinition || {};
+          layerObject.layerDefinition.definitionExpression =
+            itemData.layerDefinition.definitionExpression;
+        }
+
+        var imageServiceParameters = new ImageServiceParameters();
+        //imageServiceParameters.bandIds = layerObject.bandIds;
+        if (layerObject.bandIds !== null) {
+          imageServiceParameters.bandIds = layerObject.bandIds;
+        }
+        if (layerObject.format !== null) {
+          imageServiceParameters.format = layerObject.format;
+          if (layerObject.compressionQuality !== null) {
+            imageServiceParameters.compressionQuality = layerObject.compressionQuality;
+          }
+        }
+        if (layerObject.renderingRule && layerObject.renderingRule.rasterFunction) {
+          var rasterFunction = new RasterFunction(layerObject.renderingRule);
+          imageServiceParameters.renderingRule = rasterFunction;
+        }
+        if (layerObject.mosaicRule) {
+          var mosaicRule = new MosaicRule(layerObject.mosaicRule);
+          imageServiceParameters.mosaicRule = mosaicRule;
+        }
+        if (esriLang.isDefined(layerObject.noData)) {
+          imageServiceParameters.noData = layerObject.noData;
+        }
+        if (esriLang.isDefined(layerObject.noDataInterpretation)) {
+          imageServiceParameters.noDataInterpretation = layerObject.noDataInterpretation;
+        }
+        if (esriLang.isDefined(layerObject.interpolation)) {
+          imageServiceParameters.interpolation = layerObject.interpolation;
+        }
+
+        var props = {
+          imageServiceParameters: imageServiceParameters,
+          opacity: layerObject.opacity,
+          visible: layerObject.visibility
+        };
+        if (esriLang.isDefined(layerObject.mapLayerId)) {
+          props.id = layerObject.mapLayerId;
+        }
+        if (esriLang.isDefined(layerObject.minScale)) {
+          props.minScale = layerObject.minScale;
+        }
+        if (esriLang.isDefined(layerObject.maxScale)) {
+          props.maxScale = layerObject.maxScale;
+        }
+        if (esriLang.isDefined(layerObject.refreshInterval)) {
+          props.refreshInterval = layerObject.refreshInterval;
+        }
+        if (esriLang.isDefined(layerObject.resourceInfo)) {
+          props.resourceInfo = layerObject.resourceInfo;
+        }
+
+        var finish = function(layer) {
+          //console.warn("finish",layer);
+          if (layerObject.layerDefinition && layerObject.layerDefinition.definitionExpression) {
+            layer.setDefinitionExpression(layerObject.layerDefinition.definitionExpression, true);
+          }
+          // TODO setInfoTemplate
+          //if (!options.ignorePopups && layerObject.popupInfo) {
+          //  layer.setInfoTemplate(new clazz(layerObject.popupInfo));
+          //}
+          /*
+          rasterUtil.populateLayerWROInfo(layer,true).then(
+            function(){dfd.resolve(layer);},
+            function(error2){dfd.reject(error2);}
+          );
+          */
+          dfd.resolve(layer);
+        };
+
+        var lyr = new ArcGISImageServiceLayer(this._checkUrl(layerUrl), props);
+        this._waitForLayer(lyr).then(
+          function(layer) {
+            finish(layer);
+          },
+          function(error) {
+            dfd.reject(error);
+          }
+        );
+
+        return dfd;
+      },
+
+      _newInfoTemplate: function(popupInfo, title) {
+        if (popupInfo) {
+          try {
+            var popupTemplate = new PopupTemplate({
+              description: popupInfo.description,
+              title: popupInfo.title,
+              showAttachments: popupInfo.showAttachments,
+              fieldInfos: popupInfo.fieldInfos,
+              mediaInfos: popupInfo.mediaInfos
+            });
+            return popupTemplate;
+          } catch (ex) {
+            console.error(ex);
+          }
+        }
+        var infoTemplate = new InfoTemplate();
+        if (esriLang.isDefined(title)) {
+          infoTemplate.setTitle(title);
+        }
+        return infoTemplate;
+      },
+
+      _newKMLLayer: function() {
+        var options = {
+          id: this._generateLayerId()
+        };
+        var lyr = new KMLLayer(this.serviceUrl, options);
+        return this._waitForLayer(lyr);
+      },
+
+      _newMapServiceLayer: function(itemData) {
+        var self = this,
+          dfd = new Deferred();
+        var checkVisibleLayers = false;
+        var serviceUrl = this.serviceUrl;
+        var mapLayerId = this._generateLayerId();
+        var content = {
+          f: "json"
+        };
+        esriRequest({
+          url: serviceUrl,
+          content: content,
+          handleAs: "json",
+          callbackParamName: "callback"
+        }, {}).then(
+          function(response) {
+            var lyr = null;
+            var options = {
+              id: mapLayerId
+            };
+            if (response.tileInfo) {
+              lyr = new ArcGISTiledMapServiceLayer(serviceUrl, options);
+            } else {
+              if (response && response.supportedImageFormatTypes &&
+                  response.supportedImageFormatTypes.indexOf("PNG32") !== -1) {
+                options.imageParameters = new ImageParameters();
+                options.imageParameters.format = "png32";
+              }
+              lyr = new ArcGISDynamicMapServiceLayer(serviceUrl, options);
+
+              //console.warn("itemData",itemData);
+              //console.warn("response",response);
+              if (itemData && itemData.layers && itemData.layers.length > 0) {
+                var expressions = [];
+                var dynamicLayerInfo;
+                var dynamicLayerInfos = [];
+                var drawingOptions;
+                var drawingOptionsArray = [];
+                var source;
+                array.forEach(itemData.layers, function(layerInfo){
+                  if (layerInfo.layerDefinition && layerInfo.layerDefinition.definitionExpression) {
+                    expressions[layerInfo.id] = layerInfo.layerDefinition.definitionExpression;
+                  }
+                  if (layerInfo.layerDefinition && layerInfo.layerDefinition.source) {
+                    dynamicLayerInfo = null;
+                    source = layerInfo.layerDefinition.source;
+                    if (source.type === "mapLayer") {
+                      var metaLayerInfos = array.filter(response.layers, function(rlyr) {
+                        return rlyr.id === source.mapLayerId;
+                      });
+                      if (metaLayerInfos.length) {
+                        dynamicLayerInfo = lang.mixin(metaLayerInfos[0], layerInfo);
+                      }
+                    }
+                    else {
+                      dynamicLayerInfo = lang.mixin({}, layerInfo);
+                    }
+                    if (dynamicLayerInfo) {
+                      dynamicLayerInfo.source = source;
+                      delete dynamicLayerInfo.popupInfo;
+                      dynamicLayerInfo = new DynamicLayerInfo(dynamicLayerInfo);
+                      if (itemData.visibleLayers) {
+                        var vis = ((typeof itemData.visibleLayers) === "string") ?
+                          itemData.visibleLayers.split(",") : itemData.visibleLayers;
+                        if (array.indexOf(vis, layerInfo.id) > -1) {
+                          dynamicLayerInfo.defaultVisibility = true;
+                        } else {
+                          dynamicLayerInfo.defaultVisibility = false;
+                        }
+                      }
+                      dynamicLayerInfos.push(dynamicLayerInfo);
+                    }
+                  }
+                  if (layerInfo.layerDefinition && layerInfo.layerDefinition.source &&
+                      layerInfo.layerDefinition.drawingInfo) {
+                    drawingOptions = new LayerDrawingOptions(layerInfo.layerDefinition.drawingInfo);
+                    drawingOptionsArray[layerInfo.id] = drawingOptions;
+                  }
+                });
+
+                if (expressions.length > 0) {
+                  lyr.setLayerDefinitions(expressions);
+                }
+                if (dynamicLayerInfos.length > 0) {
+                  lyr.setDynamicLayerInfos(dynamicLayerInfos, true);
+                  if (drawingOptionsArray.length > 0) {
+                    lyr.setLayerDrawingOptions(drawingOptionsArray, true);
+                  }
+                } else {
+                  checkVisibleLayers = true;
+                }
+              }
+
+            }
+            self._waitForLayer(lyr).then(
+              function(layer) {
+                //console.warn("MapServiceLayer",layer);
+                var templates = null;
+                array.forEach(layer.layerInfos, function(layerInfo) {
+                  //console.warn("MapServiceLayer.layerInfo",layerInfo);
+                  var cfgLyr = null;
+                  if (itemData) {
+                    array.some(itemData.layers, function(l) {
+                      if (layerInfo.id === l.id) {
+                        cfgLyr = l;
+                        return true;
+                      }
+                    });
+                  }
+                  var popupInfo = null;
+                  if (cfgLyr && cfgLyr.popupInfo) {
+                    popupInfo = cfgLyr.popupInfo;
+                  }
+                  if (popupInfo) {
+                    if (templates === null) {
+                      templates = {};
+                    }
+                    templates[layerInfo.id] = {
+                      infoTemplate: self._newInfoTemplate(popupInfo, layerInfo.name)
+                    };
+                  }
+                });
+                if (layer.infoTemplates === null) {
+                  if (templates) {
+                    layer.infoTemplates = templates;
+                  }
+                }
+                /*
+                if (checkVisibleLayers) {
+                  var visibleLayers = itemData.visibleLayers;
+                  if (!itemData.visibleLayers) {
+                    var subIds = "";
+                    array.forEach(layer.layerInfos, function(layerInfo){
+                      if (layerInfo.defaultVisibility) {
+                        subIds += (subIds.length > 0 ? "," : "") + layerInfo.id;
+                      }
+                    });
+                    visibleLayers = subIds;
+                  }
+                  visibleLayers = self._getVisibleFeatureLayers(layer.layerInfos,visibleLayers);
+                  layer.setVisibleLayers(visibleLayers);
+                }
+                */
+                dfd.resolve(layer);
+              },
+              function(error2) {
+                dfd.reject(error2);
+              }
+            );
+          },
+          function(error) {
+            dfd.reject(error);
+          }
+        );
+        return dfd;
+      },
+
+      _getVisibleFeatureLayers: function(layerInfos, visibleLayers) {
+        // don't list the group layers
+        if (!layerInfos || !visibleLayers || visibleLayers.length === 0) {
+          return [];
+        }
+        var tocLayers = "," + visibleLayers + ",";
+        var realVisibleLayers = [];
+        var k, dontUseLayerIds = ",";
+        for (k = 0; k < layerInfos.length; k++) {
+          if (layerInfos[k].subLayerIds !== null) {
+            if (tocLayers.indexOf("," + layerInfos[k].id + ",") === -1 ||
+              dontUseLayerIds.indexOf("," + layerInfos[k].id + ",") > -1) {
+              dontUseLayerIds += layerInfos[k].subLayerIds.toString() + ",";
+            }
+          } else if (tocLayers.indexOf("," + layerInfos[k].id + ",") > -1 &&
+            dontUseLayerIds.indexOf("," + layerInfos[k].id + ",") === -1) {
+            realVisibleLayers.push(layerInfos[k].id);
+          }
+        }
+        return realVisibleLayers;
+      },
+
+      _newPopupInfo: function(object,title) {
+        if (object && object.fields) {
+          var popupInfo = {
+            title: object.name,
+            fieldInfos:[],
+            description: null,
+            showAttachments: true,
+            mediaInfos: []
+          };
+          if (typeof title === "string" && title.length > 0) {
+            popupInfo.title = title;
+          }
+          array.forEach(object.fields, function(field){
+            var fieldInfo = jimuUtils.getDefaultPortalFieldInfo(field);
+            fieldInfo.visible = true;
+            fieldInfo.isEditable = field.editable;
+            popupInfo.fieldInfos.push(fieldInfo);
+          });
+          return popupInfo;
+        }
+        return null;
+      },
+
+      _newVectorTileLayer: function() {
+        var self = this,
+          dfd = new Deferred(),
+          opLayer = {};
+        var serviceUrl = this.serviceUrl;
+        var mapLayerId = this._generateLayerId();
+        if ((typeof serviceUrl === "string") && (serviceUrl.length > 0)) {
+          this._checkVectorTileUrl(serviceUrl, opLayer).then(
+            function(url) {
+              if ((typeof url === "string") && (url.length > 0)) {
+                url = self._checkMixedContent(url);
+                var props = {
+                  id: mapLayerId,
+                  opacity: 1,
+                  visible: true
+                };
+                //console.warn("url",url,props);
+                var lyr = new VectorTileLayer(url, props);
+                //console.warn("lyr",lyr);
+                self._waitForLayer(lyr).then(
+                  function(layer) {
+                    dfd.resolve(layer);
+                  },
+                  function(error2) {
+                    dfd.reject(error2);
+                  }
+                );
+              } else {
+                dfd.resolve(null);
+              }
+            },
+            function(error) {
+              dfd.reject(error);
+            }
+          );
+        } else {
+          dfd.resolve(null);
+        }
+        return dfd;
+      },
+
+      _newWMSLayer: function() {
+        var options = {
+          id: this._generateLayerId()
+        };
+        var lyr = new WMSLayer(this.serviceUrl, options);
+        var self = this,
+          dfd = this._waitForLayer(lyr);
+        dfd.then(function(layer) {
+          self._setWMSVisibleLayers(layer);
+        });
+        return dfd;
+      },
+
+      _processFeatureLayer: function(featureLayer, item, itemData) {
+        var self = this,
+          dlPattern = i18n.search.featureLayerTitlePattern;
+        var opLayer = null;
+        if (itemData && itemData.layers && (itemData.layers.length > 0)) {
+          array.some(itemData.layers, function(info) {
+            var layerDefinition, jsonRenderer, renderer, isCustomTemplate = false;
+            var popInfo, jsonPopInfo, infoTemplate;
+            if (info.id === featureLayer.layerId) {
+              //console.warn("layerInfo",info);
+              if (info.popupInfo) {
+                popInfo = info.popupInfo;
+                jsonPopInfo = djJson.parse(djJson.stringify(popInfo));
+                infoTemplate = new PopupTemplate(jsonPopInfo);
+                featureLayer.setInfoTemplate(infoTemplate);
+                isCustomTemplate = true;
+              }
+              if (esriLang.isDefined(info.showLabels)) {
+                featureLayer.setShowLabels(info.showLabels);
+              }
+              if (esriLang.isDefined(info.refreshInterval)) {
+                featureLayer.setRefreshInterval(info.refreshInterval);
+              }
+              if (esriLang.isDefined(info.showLegend)) {
+                // TODO?
+                console.log('');
+              }
+              if (esriLang.isDefined(info.timeAnimation)) {
+                if (info.timeAnimation === false) {
+                  // TODO?
+                  console.log("");
+                }
+              }
+              layerDefinition = info.layerDefinition;
+              if (layerDefinition) {
+                if (layerDefinition.definitionExpression) {
+                  featureLayer.setDefinitionExpression(layerDefinition.definitionExpression);
+                }
+                if (layerDefinition.displayField) {
+                  featureLayer.displayField(layerDefinition.displayField);
+                }
+                if (layerDefinition.drawingInfo) {
+                  if (layerDefinition.drawingInfo.renderer) {
+                    jsonRenderer = djJson.parse(
+                      djJson.stringify(layerDefinition.drawingInfo.renderer)
+                    );
+                    renderer = jsonRendererUtils.fromJson(jsonRenderer);
+                    if (jsonRenderer.type && (jsonRenderer.type === "classBreaks")) {
+                      renderer.isMaxInclusive = true;
+                    }
+                    featureLayer.setRenderer(renderer);
+                  }
+                  if (esriLang.isDefined(layerDefinition.drawingInfo.transparency)) {
+                    // TODO validate before setting?
+                    featureLayer.setOpacity(1 - (layerDefinition.drawingInfo.transparency / 100));
+                  }
+                }
+                if (esriLang.isDefined(layerDefinition.minScale)) {
+                  featureLayer.setMinScale(layerDefinition.minScale);
+                }
+                if (esriLang.isDefined(layerDefinition.maxScale)) {
+                  featureLayer.setMaxScale(layerDefinition.maxScale);
+                }
+                if (esriLang.isDefined(layerDefinition.defaultVisibility)) {
+                  if (layerDefinition.defaultVisibility === false) {
+                    featureLayer.setVisibility(false); // TODO?
+                  }
+                }
+              }
+              if (!isCustomTemplate) {
+                self._setFeatureLayerInfoTemplate(featureLayer, info.popupInfo);
+              }
+              opLayer = {
+                url: featureLayer.url,
+                id: featureLayer.id,
+                itemId: item.id,
+                title: self._makeFeatureLayerTitle(dlPattern, item.title, featureLayer.name)
+              };
+              return true;
+            }
+          });
+          return opLayer;
+
+        } else {
+          opLayer = {
+            url: featureLayer.url,
+            id: featureLayer.id,
+            itemId: item.id,
+            title: self._makeFeatureLayerTitle(dlPattern, item.title, featureLayer.name)
+          };
+          self._setFeatureLayerInfoTemplate(featureLayer, null, opLayer.title);
+          return opLayer;
+        }
+      },
+
+      _readItemJsonData: function() {
+        var u = this.itemUrl + "/data";
+        var content = {
+            f: "json"
+          },
+          options = {};
+        return esriRequest({
+          url: u,
+          content: content,
+          handleAs: "json"
+        }, options);
+      },
+
+      _readRestInfo: function(url) {
+        return esriRequest({
+          url: url,
+          content: {
+            f: "json"
+          },
+          handleAs: "json",
+          callbackParamName: "callback"
+        }, {});
+      },
+
+      _setFeatureLayerInfoTemplate: function(featureLayer, popupInfo, title) {
+        if (!popupInfo) {
+          popupInfo = this._newPopupInfo(featureLayer,title);
+        }
+        var template = this._newInfoTemplate(popupInfo, title);
+        featureLayer.setInfoTemplate(template);
+      },
+
+      _setWMSVisibleLayers: function(layer) {
+        var maxLayers = 10,
+          lyrNames = [];
+        if (layer) {
+          array.some(layer.layerInfos, function(lyrInfo) {
+            //console.warn("lyrInfo",lyrInfo);
+            if (typeof lyrInfo.name === "string" && lyrInfo.name.length > 0) {
+              if (lyrNames.length < maxLayers) {
+                lyrNames.push(lyrInfo.name);
+              } else {
+                return true;
+              }
+            }
+          });
+          //console.warn("lyrNames",lyrNames);
+          if (lyrNames.length <= maxLayers) {
+            layer.setVisibleLayers(lyrNames);
+          }
+        }
+      },
+
+      _waitForLayer: function(layer) {
+        var dfd = new Deferred(),
+          handles = [];
+        if (layer.loaded) {
+          dfd.resolve(layer);
+          return dfd;
+        }
+        if (layer.loadError) {
+          dfd.reject(layer.loadError);
+          return dfd;
+        }
+        var clearHandles = function() {
+          array.forEach(handles, function(h) {
+            h.remove();
+          });
+        };
+        //console.warn("_waitForLayer");
+        handles.push(layer.on("load", function(layerLoaded) {
+          //console.warn("_waitForLayer.load",layerLoaded);
+          clearHandles();
+          dfd.resolve(layerLoaded.layer);
+        }));
+        handles.push(layer.on("error", function(layerError) {
+          //console.warn("_waitForLayer.error",layerError);
+          clearHandles();
+          var error = layerError.error;
+          try {
+            if (error.message && (error.message.indexOf("Unable to complete") !== -1)) {
+              console.warn("layerAccessError", error);
+              dfd.reject(new Error(i18n.search.layerInaccessible));
+            } else {
+              dfd.reject(error);
+            }
+          } catch (ex) {
+            //console.warn("layerAccessError",ex);
+            dfd.reject(error);
+          }
+        }));
+        return dfd;
+      }
+
+    });
+
+  });

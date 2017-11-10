@@ -1,14 +1,413 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-define("dojo/_base/lang dojo/_base/array jimu/LayerInfos/LayerInfos dojo/Deferred dojo/promise/all exports dojo/store/Observable dojo/store/Cache dojo/store/Memory esri/lang ./table/FeatureLayerQueryStore jimu/utils".split(" "),function(e,h,r,n,q,c,v,w,s,t,x,m){function y(a,b){if(!a||!a.length)return b||[];if(!b||!b.length)return a;for(var c=[],d=0,k=a.length;d<k;d++)for(var f=a[d],l=0,e=b.length;l<e;l++)if(b[l].name===f.name){c.push(f);break}return c}c.readLayerInfosObj=function(a){return r.getInstance(a,
-a.itemInfo)};c.readLayerInfosFromMap=function(a,b,c){var d=new n;r.getInstance(a,a.itemInfo).then(e.hitch(this,function(a){var f=[];b?a.traversalLayerInfosOfWebmap(function(a){f.push(a)}):a.traversal(function(a){f.push(a)});if(c){var e=[],g=a.getMapNotesLayerInfoArray();h.forEach(g,function(a){e.push(a.id);a.traversal(function(a){e.push(a.id)})});f=h.filter(f,function(a){return-1===e.indexOf(a.id)})}a=a.getTableInfoArray();f=f.concat(a);d.resolve(f)}),e.hitch(this,function(a){console.error(a);d.reject(a)}));
-return d.promise};c.generateColumnsFromFields=function(a,b,p,d,k,f){function l(b){if(a&&t.isDefined(a.fieldInfos))for(var d=0,c=a.fieldInfos.length;d<c;d++){var f=a.fieldInfos[d];if(f.fieldName===b)return f.format}return null}var g={selectionHandle:{label:"",className:"selection-handle-column",hidden:!1,unhidable:!0,filed:"selection-handle-column",sortable:!1,_cache:{sortable:!1,statistics:!1}}};h.forEach(b,e.hitch(c,function(a,b,m){b="field"+b;var u=!!a.domain,n="esriFieldTypeDate"===a.type,q=p&&
-a.name===p,r="esriFieldTypeDouble"===a.type||"esriFieldTypeSingle"===a.type||"esriFieldTypeInteger"===a.type||"esriFieldTypeSmallInteger"===a.type,s="esriFieldTypeString"===a.type;g[b]={label:a.alias||a.name,className:b,hidden:1===m.length?!1:!a.show&&t.isDefined(a.show),unhidable:1===m.length?!1:!a.show&&t.isDefined(a.show)&&a._pk,field:a.name,sortable:!1,_cache:{sortable:!!k,statistics:f&&!u&&r}};s?g[b].formatter=e.hitch(c,c.urlFormatter):n?g[b].formatter=e.hitch(c,c.dateFormatter,l(a.name)):r&&
-(g[b].formatter=e.hitch(c,c.numberFormatter,l(a.name)));u?g[b].get=e.hitch(c,function(a,b){return this.getCodeValue(a.domain,b[a.name])},a):q?g[b].get=e.hitch(c,function(a,b,d){return this.getTypeName(d[a.name],b)},a,d):!u&&(!n&&!q)&&(g[b].get=e.hitch(c,function(a,b,d,f){var p=null;b&&d&&0<d.length&&(d=(d=h.filter(d,e.hitch(c,function(a){return a.name===f[b]})))&&d[0]||null)&&(d.domains&&d.domains[a.name]&&d.domains[a.name].codedValues)&&(p=this.getCodeValue(d.domains[a.name],f[a.name]));return(a=
-null!==p?p:f[a.name])||isFinite(a)?a:""},a,p,d))}));return g};c.getTypeName=function(a,b){return m.fieldFormatter.getTypeName(a,b)};c.getCodeValue=function(a,b){return m.fieldFormatter.getCodedValue(a,b)};c.urlFormatter=function(a){return m.fieldFormatter.getFormattedUrl(a)};c.dateFormatter=function(a,b){return m.fieldFormatter.getFormattedDate(b,a)};c.numberFormatter=function(a,b){return m.fieldFormatter.getFormattedNumber(b,a)};c.readLayerObjectsFromMap=function(a,b,c){var d=new n,k=[];this.readLayerInfosFromMap(a,
-b,c).then(e.hitch(this,function(a){h.forEach(a,e.hitch(this,function(a){k.push(a.getLayerObject())}));q(k).then(e.hitch(this,function(a){d.resolve(a)}),e.hitch(this,function(a){d.reject(a);console.error(a)}))}),e.hitch(this,function(a){d.reject(a)}));return d.promise};c.readSupportTableInfoFromLayerInfos=function(a){var b=new n,c=[];h.forEach(a,e.hitch(this,function(a){c.push(a.getSupportTableInfo())}));q(c).then(e.hitch(this,function(d){d=e.clone(d);h.forEach(d,function(b,d){b.id=a[d].id});b.resolve(d)}),
-function(a){b.reject(a)});return b.promise};c.readConfigLayerInfosFromMap=function(a,b,c){var d=new n,k=[];this.readLayerInfosFromMap(a,b,c).then(e.hitch(this,function(a){var b=[];h.forEach(a,function(a){k.push(a.getSupportTableInfo())});q(k).then(e.hitch(this,function(c){h.forEach(c,e.hitch(this,function(d,c){d.isSupportedLayer&&(a[c].name=a[c].title,b.push(a[c]))}));d.resolve(b)}),e.hitch(this,function(a){d.reject(a)}))}),e.hitch(this,function(a){d.reject(a)}));return d.promise};c.getConfigInfosFromLayerInfos=
-function(a){return h.map(a,function(a){return c.getConfigInfoFromLayerInfo(a)})};c.getConfigInfoFromLayerInfo=function(a){var b={};b.name=a.name||a.title;b.id=a.id;b.show=a.isShowInMap();b.layer={url:a.getUrl()};var c=a.getPopupInfo();c&&!c.description&&(b.layer.fields=h.map(c.fieldInfos,function(a){return{name:a.fieldName,alias:a.label,show:a.visible,format:a.format}}),a=e.getObject("layerObject.fields",!1,a),b.layer.fields=y(b.layer.fields,a),h.some(b.layer.fields,function(a){return a.show})||(b.layer.fields[0].show=
-!0));return b};c.generateCacheStore=function(a,b,c,d,e){a=new x({layer:a,objectIds:a._objectIds||null,totalCount:b,batchCount:c,where:d||"1\x3d1",spatialFilter:e});b=new s;return new w(a,b,{})};c.generateMemoryStore=function(a,b){return new v(new s({data:a||[],idProperty:b}))};c.merge=function(a,b,c,d){for(var e=h.map(b,function(a){return a[c]}),f=0,l=a.length;f<l;f++){var g=e.indexOf(a[f][c]);-1<g&&d(a[f],b[g])}};c.syncOrderWith=function(a,b,c){function d(a,b){return h.map(a,function(a){return a[b]})}
-if(!e.isArray(b)||!c)return a;for(var k=d(a,c),f=[],l=0,g=b.length;l<g;l++){var m=k.indexOf(b[l][c]);-1<m&&(f=f.concat(a.splice(m,1)),k=d(a,c))}return f.concat(a)}});
+///////////////////////////////////////////////////////////////////////////
+// Copyright © 2014 - 2017 Esri. All Rights Reserved.
+//
+// Licensed under the Apache License Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////
+
+define(['dojo/_base/lang',
+  'dojo/_base/array',
+  'jimu/LayerInfos/LayerInfos',
+  'dojo/Deferred',
+  'dojo/promise/all',
+  'exports',
+  "dojo/store/Observable",
+  "dojo/store/Cache",
+  "dojo/store/Memory",
+  "esri/lang",
+  './table/FeatureLayerQueryStore',
+  'jimu/utils'
+], function(
+  lang, array, LayerInfos, Deferred, all,
+  exports, Observable, Cache, Memory, esriLang,
+  FeatureLayerQueryStore, utils
+) {
+  exports.readLayerInfosObj = function(map) {
+    return LayerInfos.getInstance(map, map.itemInfo);
+  };
+
+  /*
+  original: boolean; if true only get layerinfos from data of webmap;
+  excludeMapNotes: boolean; if true exclude map notes.
+
+  resovlue layerinfos array
+   */
+  exports.readLayerInfosFromMap = function(map, original, excludeMapNotes) {
+    var def = new Deferred();
+    LayerInfos.getInstance(map, map.itemInfo).then(lang.hitch(this, function(layerInfosObj) {
+      var layerInfos = [];
+      if (original) {
+        layerInfosObj.traversalLayerInfosOfWebmap(function(layerInfo) {
+          layerInfos.push(layerInfo);
+        });
+      } else {
+        layerInfosObj.traversal(function(layerInfo) {
+          layerInfos.push(layerInfo);
+        });
+      }
+
+
+      if (excludeMapNotes) {
+        var mapNoteIds = [];
+        var mnLayerInfos = layerInfosObj.getMapNotesLayerInfoArray();
+        array.forEach(mnLayerInfos, function(mnLayerInfo) {
+          mapNoteIds.push(mnLayerInfo.id);
+          mnLayerInfo.traversal(function(mnLayerInfo) {
+            mapNoteIds.push(mnLayerInfo.id);
+          });
+        });
+        layerInfos = array.filter(layerInfos, function(layerInfo) {
+          return mapNoteIds.indexOf(layerInfo.id) === -1;
+        });
+      }
+
+      var tableInfos = layerInfosObj.getTableInfoArray();
+      layerInfos = layerInfos.concat(tableInfos);
+
+      def.resolve(layerInfos);
+    }), lang.hitch(this, function(err) {
+      console.error(err);
+      def.reject(err);
+    }));
+
+    return def.promise;
+  };
+
+  //return {selectionHandle,field0,field1,...}
+  //used to create dgrid
+  //
+  //pInfos: PopupInfo
+  exports.generateColumnsFromFields = function(pInfos, fields, typeIdField, types,
+    supportsOrder, supportsStatistics) {
+    function getFormatInfo(fieldName) {
+      if (pInfos && esriLang.isDefined(pInfos.fieldInfos)) {
+        for (var i = 0, len = pInfos.fieldInfos.length; i < len; i++) {
+          var f = pInfos.fieldInfos[i];
+          if (f.fieldName === fieldName) {
+            return f.format;
+          }
+        }
+      }
+
+      return null;
+    }
+    var columns = {};
+    columns.selectionHandle = {
+      label: "",
+      className: "selection-handle-column",
+      hidden: false,
+      unhidable: true, // if true the field never display in toogle column menu
+      filed: "selection-handle-column",
+      sortable: false, // prevent default behavior of dgrid
+      _cache: { // control the menu item when click the column of dgrid
+        sortable: false,
+        statistics: false
+      }
+
+      // get: function(){}, get value for cell
+      // formatter: function(){}, format value of cell
+    };
+    array.forEach(fields, lang.hitch(exports, function(_field, i, fields) {
+      var techFieldName = "field" + i;
+      var isDomain = !!_field.domain;
+      var isDate = _field.type === "esriFieldTypeDate";
+      var isTypeIdField = typeIdField && (_field.name === typeIdField);
+      var isNumber = _field.type === "esriFieldTypeDouble" ||
+        _field.type === "esriFieldTypeSingle" ||
+        _field.type === "esriFieldTypeInteger" ||
+        _field.type === "esriFieldTypeSmallInteger";
+      var isString = _field.type === "esriFieldTypeString";
+
+      columns[techFieldName] = {
+        label: _field.alias || _field.name,
+        className: techFieldName,
+        hidden: fields.length === 1 ? false : !_field.show && esriLang.isDefined(_field.show),
+        unhidable: fields.length === 1 ? false :
+          !_field.show && esriLang.isDefined(_field.show) && _field._pk,
+        field: _field.name,
+        sortable: false,
+        _cache: {
+          sortable: !!supportsOrder,
+          statistics: supportsStatistics && !isDomain && isNumber
+        }
+      };
+
+
+      if (isString) {
+        columns[techFieldName].formatter = lang.hitch(exports, exports.urlFormatter);
+      } else if (isDate) {
+        columns[techFieldName].formatter = lang.hitch(
+          exports, exports.dateFormatter, getFormatInfo(_field.name));
+      } else if (isNumber) {
+        columns[techFieldName].formatter = lang.hitch(
+          exports, exports.numberFormatter, getFormatInfo(_field.name));
+      }
+
+      // obj is feature.attributes in the store.
+      if (isDomain) {
+        // coded value
+        columns[techFieldName].get = lang.hitch(exports, function(field, obj) {
+          return this.getCodeValue(field.domain, obj[field.name]);
+        }, _field);
+      } else if(isTypeIdField) {
+        columns[techFieldName].get = lang.hitch(exports, function(field, types, obj) {
+          return this.getTypeName(obj[field.name], types);
+        }, _field, types);
+      } else if (!isDomain && !isDate && !isTypeIdField) {
+        // Not A Date, Domain or Type Field
+        // Still need to check for subclass value
+        columns[techFieldName].get = lang.hitch(exports,
+          function(field, typeIdField, types, obj) {
+            var codeValue = null;
+            if (typeIdField && types && types.length > 0) {
+              var typeChecks = array.filter(types, lang.hitch(exports, function(item) {
+                // value of typeIdFild has been changed above
+                return item.id === obj[typeIdField];
+              }));
+              var typeCheck = (typeChecks && typeChecks[0]) || null;
+
+              if (typeCheck && typeCheck.domains &&
+                typeCheck.domains[field.name] && typeCheck.domains[field.name].codedValues) {
+                codeValue = this.getCodeValue(
+                  typeCheck.domains[field.name],
+                  obj[field.name]
+                );
+              }
+            }
+            var _value = codeValue !== null ? codeValue : obj[field.name];
+            return _value || isFinite(_value) ? _value : "";
+          }, _field, typeIdField, types);
+      }
+    }));
+
+    return columns;
+  };
+
+  exports.getTypeName = function(value, types) {
+    return utils.fieldFormatter.getTypeName(value, types);
+  };
+
+  exports.getCodeValue = function(domain, v) {
+    return utils.fieldFormatter.getCodedValue(domain, v);
+  };
+
+  exports.urlFormatter = function(str) {
+    return utils.fieldFormatter.getFormattedUrl(str);
+  };
+
+  exports.dateFormatter = function(format, dateNumber) {
+    return utils.fieldFormatter.getFormattedDate(dateNumber, format);
+  };
+
+  exports.numberFormatter = function(format, num) {
+    return utils.fieldFormatter.getFormattedNumber(num, format);
+  };
+
+  exports.readLayerObjectsFromMap = function(map, original, excludeMapNotes) {
+    var def = new Deferred(),
+      defs = [];
+    this.readLayerInfosFromMap(map, original, excludeMapNotes)
+    .then(lang.hitch(this, function(layerInfos) {
+      array.forEach(layerInfos, lang.hitch(this, function(layerInfo) {
+        defs.push(layerInfo.getLayerObject());
+      }));
+
+      all(defs).then(lang.hitch(this, function(layerObjects) {
+        def.resolve(layerObjects);
+      }), lang.hitch(this, function(err) {
+        def.reject(err);
+        console.error(err);
+      }));
+    }), lang.hitch(this, function(err) {
+      def.reject(err);
+    }));
+
+    return def.promise;
+  };
+
+  // resolve [{
+  //      isSupportedLayer: true/false,
+  //      isSupportQuery: true/false,
+  //      layerType: layerType.
+  //    }]
+  exports.readSupportTableInfoFromLayerInfos = function(layerInfos) {
+    var def = new Deferred();
+    var defs = [];
+    array.forEach(layerInfos, lang.hitch(this, function(layerInfo) {
+      defs.push(layerInfo.getSupportTableInfo());
+    }));
+
+    all(defs).then(lang.hitch(this, function(tableInfos) {
+      var _tInfos = lang.clone(tableInfos);
+      array.forEach(_tInfos, function(tInfo, idx) {
+        tInfo.id = layerInfos[idx].id;
+      });
+      def.resolve(_tInfos);
+    }), function(err) {
+      def.reject(err);
+    });
+
+    return def.promise;
+  };
+
+  // get layerInfos array which isSupportedLayer is true;
+  exports.readConfigLayerInfosFromMap = function(map, original, excludeMapNotes) {
+    var def = new Deferred(),
+      defs = [];
+    this.readLayerInfosFromMap(map, original, excludeMapNotes)
+    .then(lang.hitch(this, function(layerInfos) {
+      var ret = [];
+      array.forEach(layerInfos, function(layerInfo) {
+        defs.push(layerInfo.getSupportTableInfo());
+      });
+
+      all(defs).then(lang.hitch(this, function(tableInfos) {
+        array.forEach(tableInfos, lang.hitch(this, function(tableInfo, i) {
+          if (tableInfo.isSupportedLayer) {
+            layerInfos[i].name = layerInfos[i].title;
+            ret.push(layerInfos[i]);
+          }
+        }));
+
+        def.resolve(ret);
+      }), lang.hitch(this, function(err) {
+        def.reject(err);
+      }));
+    }), lang.hitch(this, function(err) {
+      def.reject(err);
+    }));
+
+    return def.promise;
+  };
+
+  exports.getConfigInfosFromLayerInfos = function(layerInfos) {
+    return array.map(layerInfos, function(layerInfo) {
+      return exports.getConfigInfoFromLayerInfo(layerInfo);
+    });
+  };
+  // if config is null, use this method to get default content.
+  exports.getConfigInfoFromLayerInfo = function(layerInfo) {
+    var json = {};
+    json.name = layerInfo.name || layerInfo.title;
+    json.id = layerInfo.id;
+    json.show = layerInfo.isShowInMap();
+    json.layer = {
+      url: layerInfo.getUrl()
+    };
+
+    var popupInfo = layerInfo.getPopupInfo();
+    if (popupInfo && !popupInfo.description) {
+      json.layer.fields = array.map(popupInfo.fieldInfos, function(fieldInfo) {
+        return {
+          name: fieldInfo.fieldName,
+          alias: fieldInfo.label,
+          show: fieldInfo.visible,
+          format: fieldInfo.format
+        };
+      });
+
+      // remove fields not exist in layerObject.fields
+      var layerFields = lang.getObject('layerObject.fields', false, layerInfo);
+      json.layer.fields = clipValidFields(json.layer.fields, layerFields);
+
+      var hasVisibleFields = array.some(json.layer.fields, function(f) {
+        return f.show;
+      });
+      if (!hasVisibleFields) {
+        //If layer schema changes, the fields info in webmap may not match with the layer field info
+        //and the fields array may be empty.
+        if(json.layer.fields && json.layer.fields.length > 0){
+          json.layer.fields[0].show = true;
+        }else{
+          console.warn('We do not get fields info.');
+        }
+      }
+    }
+
+    return json;
+  };
+
+  exports.generateCacheStore = function(_layer, recordCounts, batchCount, whereClause, extent) {
+    var qtStore = new FeatureLayerQueryStore({
+      layer: _layer,
+      objectIds: _layer._objectIds || null,
+      totalCount: recordCounts,
+      batchCount: batchCount,
+      where: whereClause || "1=1",
+      spatialFilter: extent
+    });
+
+    var mStore = new Memory();
+    return (new Cache(qtStore, mStore, {}));
+  };
+
+  exports.generateMemoryStore = function(data, idProperty) {
+    return (new Observable(new Memory({
+      "data": data || [],
+      "idProperty": idProperty
+    })));
+  };
+
+  exports.merge = function(dest, source, key, cb){
+    var sourceIds = array.map(source, function(item) {
+      return item[key];
+    });
+    for (var i = 0, len = dest.length; i < len; i++) {
+      var idx = sourceIds.indexOf(dest[i][key]);
+      if (idx > -1) {
+        cb(dest[i], source[idx]);
+      }
+    }
+  };
+
+  exports.syncOrderWith = function(dest, ref, key) {
+    if (!lang.isArray(ref) || !key) {
+      return dest;
+    }
+    function getKeys(dest, k) {
+      return array.map(dest, function(item) {
+        return item[k];
+      });
+    }
+    var destKeys = getKeys(dest, key);
+    var order = [];
+    for (var i = 0, len = ref.length; i < len; i++) {
+      var idx = destKeys.indexOf(ref[i][key]);
+      if (idx > -1) {
+        order = order.concat(dest.splice(idx, 1));
+        destKeys = getKeys(dest, key);
+      }
+    }
+    return order.concat(dest);
+  };
+
+  function clipValidFields(sFields, rFields) {
+    if (!(sFields && sFields.length)) {
+      return rFields || [];
+    }
+    if (!(rFields && rFields.length)) {
+      return sFields;
+    }
+    var validFields = [];
+    for (var i = 0, len = sFields.length; i < len; i++) {
+      var sf = sFields[i];
+      for (var j = 0, len2 = rFields.length; j < len2; j++) {
+        var rf = rFields[j];
+        if (rf.name === sf.name) {
+          validFields.push(sf);
+          break;
+        }
+      }
+    }
+    return validFields;
+  }
+});

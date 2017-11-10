@@ -1,85 +1,661 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-require({cache:{"esri/dijit/TimeSlider":function(){define("dojo/_base/declare dojo/_base/lang dojo/_base/connect dojo/_base/kernel dojo/has dojo/dom-class dojo/dom-construct dojo/dom-style dojo/dom-geometry dijit/_Widget dijit/_Templated dijit/form/HorizontalSlider dijit/form/HorizontalRule dijit/form/HorizontalRuleLabels dojox/timing/_base dojox/form/RangeSlider dojo/text!dojox/form/resources/HorizontalRangeSlider.html ../kernel ../lang ../TimeExtent ./_EventedWidget dojo/text!./templates/TimeSlider.html dojo/i18n!../nls/jsapi".split(" "),
-function(k,f,g,l,r,t,s,p,q,h,w,m,n,v,u,x,z,y,e,d,a,c,b){return k([a,h,w],{declaredClass:"esri.dijit.TimeSlider",widgetsInTemplate:!0,templateString:c,intermediateChanges:!1,_slideDuration:1E3,_defaultCount:10,_eventMap:{"time-extent-change":!0,play:!0,pause:!0,next:!0,previous:!0},constructor:function(a,c){f.mixin(this,b.widgets.timeSlider);this._iconClass="tsButton tsPlayButton";this.loop=this.playing=!1;this.thumbCount=1;this.thumbMovingRate=1E3;this._createTimeInstants=!1;this._options=f.mixin({excludeDataAtTrailingThumb:!1,
-excludeDataAtLeadingThumb:!1},a.options||{})},postCreate:function(){this.inherited(arguments)},startup:function(){this.inherited(arguments);this._timer=new u.Timer;this._timer.setInterval(this.thumbMovingRate);this._timer.onTick=f.hitch(this,"_bumpSlider",1);this._createSlider()},destroy:function(){this._timer.stop();this.timeStops=this._timer=null;this._slider.destroy();this._slider=null;this._hTicks&&(this._hTicks.destroyRecursive(),this._hTicks=null);this._hLabels&&(this._hLabels.destroyRecursive(),
-this._hLabels=null);this.inherited(arguments)},onTimeExtentChange:function(){},onPlay:function(){},onPause:function(){},onNext:function(){},onPrevious:function(){},_onHorizontalChange:function(){var a=this._sliderToTimeExtent();this.onTimeExtentChange(a)},_onPlay:function(){this.playing=!this.playing;this._updateUI();this.playing?(this._timer.start(),this.onPlay(this._sliderToTimeExtent())):(this._timer.stop(),this.onPause(this._sliderToTimeExtent()));var a=this._getSliderValue();this._offset=f.isArray(a)?
-a[1]-a[0]:0},_onNext:function(){this.playing||(this._bumpSlider(1),this.onNext(this._sliderToTimeExtent()))},_onPrev:function(){this.playing||(this._bumpSlider(-1),this.onPrevious(this._sliderToTimeExtent()))},createTimeStopsByCount:function(a,b){if(!a||!a.startTime||!a.endTime)console.log(this.NLS_invalidTimeExtent);else{b=b||this._defaultCount;var c=Math.ceil((a.endTime-a.startTime)/(b-1));this.createTimeStopsByTimeInterval(a,c,"esriTimeUnitsMilliseconds")}},createTimeStopsByTimeInterval:function(a,
-b,c,e){if(!a||!a.startTime||!a.endTime)console.log(this.NLS_invalidTimeExtent);else{this.fullTimeExtent=new d(a.startTime,a.endTime);e&&!0===e.resetStartTime&&this._resetStartTime(this.fullTimeExtent,c);this._timeIntervalUnits=c;e=this.fullTimeExtent.startTime;for(var f=[];e<=a.endTime;)f.push(e),e=a._getOffsettedDate(e,b,c);0<f.length&&f[f.length-1]<a.endTime&&f.push(e);this.setTimeStops(f)}},getCurrentTimeExtent:function(){return this._sliderToTimeExtent()},setTimeStops:function(a){this.timeStops=
-a||[];this._numTicks=this._numStops=this.timeStops.length;!1===e.isDefined(this.fullTimeExtent)&&(this.fullTimeExtent=new d(a[0],a[a.length-1]))},setLoop:function(a){this.loop=a},setThumbCount:function(a){this.thumbCount=a;this.singleThumbAsTimeInstant(this._createTimeInstants);this._slider&&this._createSlider()},setThumbIndexes:function(a){this.thumbIndexes=f.clone(a)||[0,1];this._initializeThumbs()},setThumbMovingRate:function(a){this.thumbMovingRate=a;this._timer&&this._timer.setInterval(this.thumbMovingRate)},
-setLabels:function(a){this.labels=a;this._slider&&this._createSlider()},setTickCount:function(a){this._numTicks=a;this._slider&&this._createSlider()},singleThumbAsTimeInstant:function(a){this._createTimeInstants=a&&1===this.thumbCount},next:function(){this._onNext()},pause:function(){this.playing=!1;this._updateUI();this._timer.stop()},play:function(){!0!==this.playing&&(this.playing=!1,this._onPlay())},previous:function(){this._onPrev()},_setIntermediateChangesAttr:function(a){this.intermediateChanges=
-!!a;this._slider&&this._slider.set("intermediateChanges",!!a)},_updateUI:function(){t.remove(this.playPauseBtn.iconNode,this._iconClass);this._iconClass=this.playing?"tsButton tsPauseButton":"tsButton tsPlayButton";t.add(this.playPauseBtn.iconNode,this._iconClass);this.previousBtn.set("disabled",this.playing);this.nextBtn.set("disabled",this.playing)},_createSlider:function(){this._slider&&(this._slider.destroy(),this._slider=null);for(var a=this.domNode;a.parentNode&&!a.dir;)a=a.parentNode;a={onChange:f.hitch(this,
-"_onHorizontalChange"),showButtons:!1,discreteValues:this._numStops,slideDuration:this._slideDuration,"class":"ts",dir:"ltr",intermediateChanges:this.intermediateChanges};this._ts=s.create("div",{},l.query(".tsTmp",this.domNode)[0],"first");this._timeSliderTicks=s.create("div",{},this._ts,"first");this._timeSliderLabels=s.create("div",{},this._ts);2===this.thumbCount?this._createRangeSlider(a):this._createSingleSlider(a);this.thumbIndexes=this.thumbIndexes||[0,1];this._createHorizRule();this._createLabels();
-!0===this._createTimeInstants&&l.query(".dijitSliderProgressBarH, .dijitSliderLeftBumper, .dijitSliderRightBumper",this._ts).forEach(function(a){p.set(a,{background:"none"})});this._initializeThumbs();g.disconnect(this._onChangeConnect);this._onChangeConnect=g.connect(this._slider,"onChange",f.hitch(this,"_updateThumbIndexes"))},_createRangeSlider:function(a){this._isRangeSlider=!0;this._slider=new (k([m,x],{templateString:z}))(a,this._ts)},_createSingleSlider:function(a){this._isRangeSlider=!1;this._slider=
-new m(a,this._ts)},_createHorizRule:function(){this._hTicks&&(this._hTicks.destroyRecursive(),this._hTicks=null);2>this._numTicks||(this._hTicks=new n({container:"topDecoration",ruleStyle:"","class":"tsTicks",count:this._numTicks},this._timeSliderTicks))},_createLabels:function(){this._hLabels&&(this._hLabels.destroyRecursive(),this._hLabels=null);this.labels&&0<this.labels.length&&(this._hLabels=new v({labels:this.labels,labelStyle:"","class":"tsLabels"},this._timeSliderLabels))},_initializeThumbs:function(){if(this._slider){this._offset=
-this._toSliderValue(this.thumbIndexes[1])||0;var a=this._toSliderValue(this.thumbIndexes[0]),a=a>this._slider.maximum||a<this._slider.minimum?this._slider.minimum:a;if(!0===this._isRangeSlider){var b=this._toSliderValue(this.thumbIndexes[1]),b=b>this._slider.maximum||b<this._slider.minimum?this._slider.maximum:b;this._setSliderValue([a,b<a?a:b])}else this._setSliderValue(a);this._onHorizontalChange()}},_bumpSlider:function(a){var b=this._getSliderValue(),c=b,d=c,e=a;f.isArray(b)&&(d=b[0],c=b[1],e=
-[{change:a,useMaxValue:!0},{change:a,useMaxValue:!1}]);1E-10>Math.abs(d-this._slider.minimum)&&0>a||1E-10>Math.abs(c-this._slider.maximum)&&0<a?this._timer.isRunning&&(this.loop?(this._timer.stop(),this._setSliderValue(this._getSliderMinValue()),a=this._sliderToTimeExtent(),this.onTimeExtentChange(a),this._timer.start(),this.playing=!0):this.pause()):this._slider._bumpValue(e)},_updateThumbIndexes:function(){var a=this._getSliderValue();f.isArray(a)?(this.thumbIndexes[0]=this._toSliderIndex(a[0]),
-this.thumbIndexes[1]=this._toSliderIndex(a[1])):this.thumbIndexes[0]=this._toSliderIndex(a)},_sliderToTimeExtent:function(){if(this.timeStops&&0!==this.timeStops.length){var a=new d,b=this._getSliderValue(),c,e;f.isArray(b)?(b[0]>b[1]?(e=b[0],c=b[1]):(c=b[0],e=b[1]),a.startTime=new Date(this.timeStops[this._toSliderIndex(c)]),a.endTime=new Date(this.timeStops[this._toSliderIndex(e)]),this._adjustTimeExtent(a)):(a.startTime=!0===this._createTimeInstants?new Date(this.timeStops[this._toSliderIndex(b)]):
-new Date(this.fullTimeExtent.startTime),a.endTime=!0===this._createTimeInstants?a.startTime:new Date(this.timeStops[this._toSliderIndex(b)]));return a}},_adjustTimeExtent:function(a){if(!(!1===this._options.excludeDataAtTrailingThumb&&!1===this._options.excludeDataAtLeadingThumb)&&a.startTime.getTime()!==a.endTime.getTime()){if(this._options.excludeDataAtTrailingThumb){var b=a.startTime;b.setUTCSeconds(b.getUTCSeconds()+1)}this._options.excludeDataAtLeadingThumb&&(a=a.endTime,a.setUTCSeconds(a.getUTCSeconds()-
-1))}},_resetStartTime:function(a,b){switch(b){case "esriTimeUnitsSeconds":a.startTime.setUTCMilliseconds(0);break;case "esriTimeUnitsMinutes":a.startTime.setUTCSeconds(0,0,0);break;case "esriTimeUnitsHours":a.startTime.setUTCMinutes(0,0,0);break;case "esriTimeUnitsDays":a.startTime.setUTCHours(0,0,0,0);break;case "esriTimeUnitsWeeks":a.startTime.setUTCDate(a.startTime.getUTCDate()-a.startTime.getUTCDay());break;case "esriTimeUnitsMonths":a.startTime.setUTCDate(1);a.startTime.setUTCHours(0,0,0,0);
-break;case "esriTimeUnitsDecades":a.startTime.setUTCFullYear(a.startTime.getUTCFullYear()-a.startTime.getUTCFullYear()%10);break;case "esriTimeUnitsCenturies":a.startTime.setUTCFullYear(a.startTime.getUTCFullYear()-a.startTime.getUTCFullYear()%100)}},_getSliderMinValue:function(){return this._isRangeSlider?[this._slider.minimum,this._slider.minimum+this._offset]:this._slider.minimum},_toSliderIndex:function(a){a=Math.floor((a-this._slider.minimum)*this._numStops/(this._slider.maximum-this._slider.minimum));
-0>a&&(a=0);a>=this._numStops&&(a=this._numStops-1);return a},_toSliderValue:function(a){return a*(this._slider.maximum-this._slider.minimum)/(this._numStops-1)+this._slider.minimum},_getSliderValue:function(){return this._slider.get("value")},_setSliderValue:function(a){this._slider._setValueAttr(a,!1,!1)}})})},"dojox/timing/_base":function(){define(["dojo/_base/kernel","dojo/_base/lang"],function(k){k.experimental("dojox.timing");k.getObject("timing",!0,dojox);dojox.timing.Timer=function(f){this.timer=
-null;this.isRunning=!1;this.interval=f;this.onStop=this.onStart=null};k.extend(dojox.timing.Timer,{onTick:function(){},setInterval:function(f){this.isRunning&&window.clearInterval(this.timer);this.interval=f;this.isRunning&&(this.timer=window.setInterval(k.hitch(this,"onTick"),this.interval))},start:function(){if("function"==typeof this.onStart)this.onStart();this.isRunning=!0;this.timer=window.setInterval(k.hitch(this,"onTick"),this.interval)},stop:function(){if("function"==typeof this.onStop)this.onStop();
-this.isRunning=!1;window.clearInterval(this.timer)}});return dojox.timing})},"dojox/form/RangeSlider":function(){define(["dojo/_base/kernel","./_RangeSliderMixin","./HorizontalRangeSlider","./VerticalRangeSlider"],function(k,f){k.deprecated("Call require() for HorizontalRangeSlider / VerticalRangeSlider, explicitly rather than 'dojox.form.RangeSlider' itself","","2.0");return f})},"dojox/form/_RangeSliderMixin":function(){define("dojo/_base/declare dojo/_base/lang dojo/_base/array dojo/_base/fx dojo/_base/event dojo/_base/sniff dojo/dom-style dojo/dom-geometry dojo/keys dijit dojo/dnd/Mover dojo/dnd/Moveable dijit/form/_FormValueWidget dijit/focus dojo/fx dojox/fx".split(" "),
-function(k,f,g,l,r,t,s,p,q,h,w,m,n,v,u){var x=function(e,d){return e-d};h=k("dojox.form._RangeSliderMixin",null,{_setTabIndexAttr:["sliderHandle","sliderHandleMax"],value:[0,100],postMixInProperties:function(){this.inherited(arguments);this.value=g.map(this.value,function(e){return parseInt(e,10)})},postCreate:function(){this.inherited(arguments);this.value.sort(x);var e=this,d=k(z,{constructor:function(){this.widget=e}});this._movableMax=new m(this.sliderHandleMax,{mover:d});this.sliderHandle.setAttribute("aria-valuemin",
-this.minimum);this.sliderHandle.setAttribute("aria-valuemax",this.maximum);this.sliderHandleMax.setAttribute("aria-valuemin",this.minimum);this.sliderHandleMax.setAttribute("aria-valuemax",this.maximum);d=k(y,{constructor:function(){this.widget=e}});this._movableBar=new m(this.progressBar,{mover:d});this.focusNode.removeAttribute("aria-valuemin");this.focusNode.removeAttribute("aria-valuemax");this.focusNode.removeAttribute("aria-valuenow")},destroy:function(){this.inherited(arguments);this._movableMax.destroy();
-this._movableBar.destroy()},_onKeyPress:function(e){if(!this.disabled&&!this.readOnly&&!e.altKey&&!e.ctrlKey){var d=e.target===this.sliderHandleMax,a=e.target===this.progressBar,c=f.delegate(q,this.isLeftToRight()?{PREV_ARROW:q.LEFT_ARROW,NEXT_ARROW:q.RIGHT_ARROW}:{PREV_ARROW:q.RIGHT_ARROW,NEXT_ARROW:q.LEFT_ARROW}),b=0,g=!1;switch(e.keyCode){case c.HOME:this._setValueAttr(this.minimum,!0,d);r.stop(e);return;case c.END:this._setValueAttr(this.maximum,!0,d);r.stop(e);return;case c.PREV_ARROW:case c.DOWN_ARROW:g=
-!0;case c.NEXT_ARROW:case c.UP_ARROW:b=1;break;case c.PAGE_DOWN:g=!0;case c.PAGE_UP:b=this.pageIncrement;break;default:this.inherited(arguments);return}g&&(b=-b);b&&(a?this._bumpValue([{change:b,useMaxValue:!1},{change:b,useMaxValue:!0}]):this._bumpValue(b,d),r.stop(e))}},_onHandleClickMax:function(e){!this.disabled&&!this.readOnly&&(t("ie")||v.focus(this.sliderHandleMax),r.stop(e))},_onClkIncBumper:function(){this._setValueAttr(!1===this._descending?this.minimum:this.maximum,!0,!0)},_bumpValue:function(e,
-d){var a=f.isArray(e)?[this._getBumpValue(e[0].change,e[0].useMaxValue),this._getBumpValue(e[1].change,e[1].useMaxValue)]:this._getBumpValue(e,d);this._setValueAttr(a,!0,d)},_getBumpValue:function(e,d){var a=d?1:0,c=s.getComputedStyle(this.sliderBarContainer),b=p.getContentBox(this.sliderBarContainer,c),c=this.discreteValues,a=this.value[a];if(1>=c||Infinity==c)c=b[this._pixelCount];c--;a=this.maximum>this.minimum?(a-this.minimum)*c/(this.maximum-this.minimum)+e:0;0>a&&(a=0);a>c&&(a=c);return a*(this.maximum-
-this.minimum)/c+this.minimum},_onBarClick:function(e){!this.disabled&&!this.readOnly&&(t("ie")||v.focus(this.progressBar),r.stop(e))},_onRemainingBarClick:function(e){if(!this.disabled&&!this.readOnly){t("ie")||v.focus(this.progressBar);var d=p.position(this.sliderBarContainer,!0),a=p.position(this.progressBar,!0),c=e[this._mousePixelCoord],b=a[this._startingPixelCoord],a=b+a[this._pixelCount],b=this._isReversed()?c<=b:c>=a,c=this._isReversed()?d[this._pixelCount]-c+d[this._startingPixelCoord]:c-
-d[this._startingPixelCoord];this._setPixelValue(c,d[this._pixelCount],!0,b);r.stop(e)}},_setPixelValue:function(e,d,a,c){!this.disabled&&!this.readOnly&&(e=this._getValueByPixelValue(e,d),this._setValueAttr(e,a,c))},_getValueByPixelValue:function(e,d){var a=this.discreteValues;if(1>=a||Infinity==a)a=d;a--;var c=Math.round((0>e?0:d<e?d:e)/(d/a));return(this.maximum-this.minimum)*c/a+this.minimum},_setValueAttr:function(e,d,a){var c=f.clone(this.value);f.isArray(e)?c=e:c[a?1:0]=e;this._lastValueReported=
-"";this.valueNode.value=e=c;c.sort(x);this.sliderHandle.setAttribute("aria-valuenow",c[0]);this.sliderHandleMax.setAttribute("aria-valuenow",c[1]);n.prototype._setValueAttr.apply(this,arguments);this._printSliderBar(d,a)},_printSliderBar:function(e,d){var a=this.maximum>this.minimum?(this.value[0]-this.minimum)/(this.maximum-this.minimum):0,c=this.maximum>this.minimum?(this.value[1]-this.minimum)/(this.maximum-this.minimum):0,b=a;a>c&&(a=c,c=b);var f=this._isReversed()?100*(1-a):100*a,g=this._isReversed()?
-100*(1-c):100*c,h=this._isReversed()?100*(1-c):100*a;if(e&&0<this.slideDuration&&this.progressBar.style[this._progressPixelSize]){if(parseFloat(this.progressBar.style[this._handleOffsetCoord]),b=this.slideDuration/10,0!==b){0>b&&(b=0-b);var k={},m={},n={};k[this._handleOffsetCoord]={start:this.sliderHandle.parentNode.style[this._handleOffsetCoord],end:f,units:"%"};m[this._handleOffsetCoord]={start:this.sliderHandleMax.parentNode.style[this._handleOffsetCoord],end:g,units:"%"};n[this._handleOffsetCoord]=
-{start:this.progressBar.style[this._handleOffsetCoord],end:h,units:"%"};n[this._progressPixelSize]={start:this.progressBar.style[this._progressPixelSize],end:100*(c-a),units:"%"};a=l.animateProperty({node:this.sliderHandle.parentNode,duration:b,properties:k});c=l.animateProperty({node:this.sliderHandleMax.parentNode,duration:b,properties:m});b=l.animateProperty({node:this.progressBar,duration:b,properties:n});u.combine([a,c,b]).play()}}else this.sliderHandle.parentNode.style[this._handleOffsetCoord]=
-f+"%",this.sliderHandleMax.parentNode.style[this._handleOffsetCoord]=g+"%",this.progressBar.style[this._handleOffsetCoord]=h+"%",this.progressBar.style[this._progressPixelSize]=100*(c-a)+"%"}});var z=k("dijit.form._SliderMoverMax",w,{onMouseMove:function(e){var d=this.widget,a=d._abspos;a||(a=d._abspos=p.position(d.sliderBarContainer,!0),d._setPixelValue_=f.hitch(d,"_setPixelValue"),d._isReversed_=d._isReversed());e=e[d._mousePixelCoord]-a[d._startingPixelCoord];d._setPixelValue_(d._isReversed_?a[d._pixelCount]-
-e:e,a[d._pixelCount],!1,!0)},destroy:function(e){w.prototype.destroy.apply(this,arguments);var d=this.widget;d._abspos=null;d._setValueAttr(d.value,!0)}}),y=k("dijit.form._SliderBarMover",w,{onMouseMove:function(e){var d=this.widget;if(!d.disabled&&!d.readOnly){var a=d._abspos,c=d._bar,b=d._mouseOffset;a||(a=d._abspos=p.position(d.sliderBarContainer,!0),d._setPixelValue_=f.hitch(d,"_setPixelValue"),d._getValueByPixelValue_=f.hitch(d,"_getValueByPixelValue"),d._isReversed_=d._isReversed());c||(c=d._bar=
-p.position(d.progressBar,!0));b||(b=d._mouseOffset=e[d._mousePixelCoord]-c[d._startingPixelCoord]);e=e[d._mousePixelCoord]-a[d._startingPixelCoord]-b;pixelValues=[e,e+c[d._pixelCount]];pixelValues.sort(x);0>=pixelValues[0]&&(pixelValues[0]=0,pixelValues[1]=c[d._pixelCount]);pixelValues[1]>=a[d._pixelCount]&&(pixelValues[1]=a[d._pixelCount],pixelValues[0]=a[d._pixelCount]-c[d._pixelCount]);a=[d._getValueByPixelValue(d._isReversed_?a[d._pixelCount]-pixelValues[0]:pixelValues[0],a[d._pixelCount]),d._getValueByPixelValue(d._isReversed_?
-a[d._pixelCount]-pixelValues[1]:pixelValues[1],a[d._pixelCount])];d._setValueAttr(a,!1,!1)}},destroy:function(){w.prototype.destroy.apply(this,arguments);var e=this.widget;e._abspos=null;e._bar=null;e._mouseOffset=null;e._setValueAttr(e.value,!0)}});return h})},"dojox/fx":function(){define(["./fx/_base"],function(k){return k})},"dojox/fx/_base":function(){define("dojo/_base/array dojo/_base/lang dojo/_base/fx dojo/fx dojo/dom dojo/dom-style dojo/dom-geometry dojo/_base/connect dojo/_base/html".split(" "),
-function(k,f,g,l,r,t,s,p,q){k=f.getObject("dojox.fx",!0);f.mixin(k,{anim:g.anim,animateProperty:g.animateProperty,fadeTo:g._fade,fadeIn:g.fadeIn,fadeOut:g.fadeOut,combine:l.combine,chain:l.chain,slideTo:l.slideTo,wipeIn:l.wipeIn,wipeOut:l.wipeOut});k.sizeTo=function(h){var k=h.node=r.byId(h.node),m=h.method||"chain";h.duration||(h.duration=500);"chain"==m&&(h.duration=Math.floor(h.duration/2));var n,v,u,p,q,s=null,e=function(d){return function(){var a=t.getComputedStyle(d),c=a.position,b=a.width,
-e=a.height;n="absolute"==c?d.offsetTop:parseInt(a.top)||0;u="absolute"==c?d.offsetLeft:parseInt(a.left)||0;q="auto"==b?0:parseInt(b);s="auto"==e?0:parseInt(e);p=u-Math.floor((h.width-q)/2);v=n-Math.floor((h.height-s)/2);"absolute"!=c&&"relative"!=c&&(a=t.coords(d,!0),n=a.y,u=a.x,d.style.position="absolute",d.style.top=n+"px",d.style.left=u+"px")}}(k),k=g.animateProperty(f.mixin({properties:{height:function(){e();return{end:h.height||0,start:s}},top:function(){return{start:n,end:v}}}},h)),m=g.animateProperty(f.mixin({properties:{width:function(){return{start:q,
-end:h.width||0}},left:function(){return{start:u,end:p}}}},h));return l["combine"==h.method?"combine":"chain"]([k,m])};k.slideBy=function(h){var k,m,n=function(f){return function(){var g=t.getComputedStyle(f),h=g.position;k="absolute"==h?f.offsetTop:parseInt(g.top)||0;m="absolute"==h?f.offsetLeft:parseInt(g.left)||0;"absolute"!=h&&"relative"!=h&&(g=s.coords(f,!0),k=g.y,m=g.x,f.style.position="absolute",f.style.top=k+"px",f.style.left=m+"px")}}(h.node=r.byId(h.node));n();h=g.animateProperty(f.mixin({properties:{top:k+
-(h.top||0),left:m+(h.left||0)}},h));p.connect(h,"beforeBegin",h,n);return h};k.crossFade=function(h){var k=h.nodes[0]=r.byId(h.nodes[0]),m=q.style(k,"opacity"),n=h.nodes[1]=r.byId(h.nodes[1]);q.style(n,"opacity");return l.combine([g[0==m?"fadeIn":"fadeOut"](f.mixin({node:k},h)),g[0==m?"fadeOut":"fadeIn"](f.mixin({node:n},h))])};k.highlight=function(h){var k=h.node=r.byId(h.node);h.duration=h.duration||400;var m=h.color||"#ffff99",n=q.style(k,"backgroundColor");"rgba(0, 0, 0, 0)"==n&&(n="transparent");
-h=g.animateProperty(f.mixin({properties:{backgroundColor:{start:m,end:n}}},h));"transparent"==n&&p.connect(h,"onEnd",h,function(){k.style.backgroundColor=n});return h};k.wipeTo=function(h){h.node=r.byId(h.node);var k=h.node,m=k.style,n=h.width?"width":"height",l={};l[n]={start:function(){m.overflow="hidden";if("hidden"==m.visibility||"none"==m.display)return m[n]="1px",m.display="",m.visibility="",1;var f=q.style(k,n);return Math.max(f,1)},end:h[n]};return g.animateProperty(f.mixin({properties:l},
-h))};return k})},"dojox/form/HorizontalRangeSlider":function(){define(["dojo/_base/declare","dojox/form/_RangeSliderMixin","dojo/text!./resources/HorizontalRangeSlider.html","dijit/form/HorizontalSlider"],function(k,f,g,l){return k("dojox.form.HorizontalRangeSlider",[l,f],{templateString:g})})},"dojox/form/VerticalRangeSlider":function(){define(["dojo/_base/declare","dojox/form/_RangeSliderMixin","dojo/text!./resources/VerticalRangeSlider.html","dijit/form/VerticalSlider"],function(k,f,g,l){return k("dojox.form.VerticalRangeSlider",
-[l,f],{templateString:g})})},"dijit/form/VerticalSlider":function(){define(["dojo/_base/declare","./HorizontalSlider","dojo/text!./templates/VerticalSlider.html"],function(k,f,g){return k("dijit.form.VerticalSlider",f,{templateString:g,_mousePixelCoord:"pageY",_pixelCount:"h",_startingPixelCoord:"y",_handleOffsetCoord:"top",_progressPixelSize:"height",_descending:!0,_isReversed:function(){return this._descending}})})},"widgets/TimeSlider/_build-generate_module":function(){define(["dojo/text!./Widget.html",
-"dojo/text!./css/style.css","dojo/i18n!./nls/strings"],function(){})},"url:dojox/form/resources/HorizontalRangeSlider.html":'\x3ctable class\x3d"dijit dijitReset dijitSlider dijitSliderH dojoxRangeSlider" cellspacing\x3d"0" cellpadding\x3d"0" border\x3d"0" rules\x3d"none" dojoAttachEvent\x3d"onkeypress:_onKeyPress,onkeyup:_onKeyUp" role\x3d"presentation"\r\n\t\x3e\x3ctr class\x3d"dijitReset"\r\n\t\t\x3e\x3ctd class\x3d"dijitReset" colspan\x3d"2"\x3e\x3c/td\r\n\t\t\x3e\x3ctd dojoAttachPoint\x3d"topDecoration" class\x3d"dijitReset dijitSliderDecoration dijitSliderDecorationT dijitSliderDecorationH"\x3e\x3c/td\r\n\t\t\x3e\x3ctd class\x3d"dijitReset" colspan\x3d"2"\x3e\x3c/td\r\n\t\x3e\x3c/tr\r\n\t\x3e\x3ctr class\x3d"dijitReset"\r\n\t\t\x3e\x3ctd class\x3d"dijitReset dijitSliderButtonContainer dijitSliderButtonContainerH"\r\n\t\t\t\x3e\x3cdiv class\x3d"dijitSliderDecrementIconH" tabIndex\x3d"-1" style\x3d"display:none" dojoAttachPoint\x3d"decrementButton"\x3e\x3cspan class\x3d"dijitSliderButtonInner"\x3e-\x3c/span\x3e\x3c/div\r\n\t\t\x3e\x3c/td\r\n\t\t\x3e\x3ctd class\x3d"dijitReset"\r\n\t\t\t\x3e\x3cdiv class\x3d"dijitSliderBar dijitSliderBumper dijitSliderBumperH dijitSliderLeftBumper" dojoAttachEvent\x3d"onmousedown:_onClkDecBumper"\x3e\x3c/div\r\n\t\t\x3e\x3c/td\r\n\t\t\x3e\x3ctd class\x3d"dijitReset"\r\n\t\t\t\x3e\x3cinput dojoAttachPoint\x3d"valueNode" type\x3d"hidden" ${!nameAttrSetting}\r\n\t\t\t/\x3e\x3cdiv role\x3d"presentation" class\x3d"dojoxRangeSliderBarContainer" dojoAttachPoint\x3d"sliderBarContainer"\r\n\t\t\t\t\x3e\x3cdiv class\x3d"dijitSliderMoveable dijitSliderMoveableH"\r\n\t\t\t\t\t\x3e\x3cdiv class\x3d"dijitSliderImageHandle dijitSliderImageHandleH" dojoAttachPoint\x3d"sliderHandle,focusNode" tabIndex\x3d"${tabIndex}" dojoAttachEvent\x3d"onmousedown:_onHandleClick" role\x3d"slider"\x3e\x3c/div\r\n\t\t\t\t\x3e\x3c/div\r\n\t\t\t\t\x3e\x3cdiv role\x3d"presentation" dojoAttachPoint\x3d"progressBar" class\x3d"dijitSliderBar dijitSliderBarH dijitSliderProgressBar dijitSliderProgressBarH" dojoAttachEvent\x3d"onmousedown:_onBarClick"\x3e\x3c/div\r\n\t\t\t\t\x3e\x3cdiv class\x3d"dijitSliderMoveable dijitSliderMoveableH"\r\n\t\t\t\t\t\x3e\x3cdiv class\x3d"dijitSliderImageHandle dijitSliderImageHandleH" dojoAttachPoint\x3d"sliderHandleMax" tabIndex\x3d"${tabIndex}" dojoAttachEvent\x3d"onmousedown:_onHandleClickMax" role\x3d"slider"\x3e\x3c/div\r\n\t\t\t\t\x3e\x3c/div\r\n\t\t\t\t\x3e\x3cdiv role\x3d"presentation" dojoAttachPoint\x3d"remainingBar" class\x3d"dijitSliderBar dijitSliderBarH dijitSliderRemainingBar dijitSliderRemainingBarH" dojoAttachEvent\x3d"onmousedown:_onRemainingBarClick"\x3e\x3c/div\r\n\t\t\t\x3e\x3c/div\r\n\t\t\x3e\x3c/td\r\n\t\t\x3e\x3ctd class\x3d"dijitReset"\r\n\t\t\t\x3e\x3cdiv class\x3d"dijitSliderBar dijitSliderBumper dijitSliderBumperH dijitSliderRightBumper" dojoAttachEvent\x3d"onmousedown:_onClkIncBumper"\x3e\x3c/div\r\n\t\t\x3e\x3c/td\r\n\t\t\x3e\x3ctd class\x3d"dijitReset dijitSliderButtonContainer dijitSliderButtonContainerH"\r\n\t\t\t\x3e\x3cdiv class\x3d"dijitSliderIncrementIconH" tabIndex\x3d"-1" style\x3d"display:none" dojoAttachPoint\x3d"incrementButton"\x3e\x3cspan class\x3d"dijitSliderButtonInner"\x3e+\x3c/span\x3e\x3c/div\r\n\t\t\x3e\x3c/td\r\n\t\x3e\x3c/tr\r\n\t\x3e\x3ctr class\x3d"dijitReset"\r\n\t\t\x3e\x3ctd class\x3d"dijitReset" colspan\x3d"2"\x3e\x3c/td\r\n\t\t\x3e\x3ctd dojoAttachPoint\x3d"containerNode,bottomDecoration" class\x3d"dijitReset dijitSliderDecoration dijitSliderDecorationB dijitSliderDecorationH"\x3e\x3c/td\r\n\t\t\x3e\x3ctd class\x3d"dijitReset" colspan\x3d"2"\x3e\x3c/td\r\n\t\x3e\x3c/tr\r\n\x3e\x3c/table\x3e\r\n',
-"url:dojox/form/resources/VerticalRangeSlider.html":'\x3ctable class\x3d"dijitReset dijitSlider dijitSliderV dojoxRangeSlider" cellspacing\x3d"0" cellpadding\x3d"0" border\x3d"0" rules\x3d"none"\r\n\trole\x3d"presentation"\r\n\t\x3e\x3ctr class\x3d"dijitReset"\r\n\t\t\x3e\x3ctd class\x3d"dijitReset"\x3e\x3c/td\r\n\t\t\x3e\x3ctd class\x3d"dijitReset dijitSliderButtonContainer dijitSliderButtonContainerV"\r\n\t\t\t\x3e\x3cdiv class\x3d"dijitSliderIncrementIconV" tabIndex\x3d"-1" style\x3d"display:none" dojoAttachPoint\x3d"decrementButton" dojoAttachEvent\x3d"onclick: increment"\x3e\x3cspan class\x3d"dijitSliderButtonInner"\x3e+\x3c/span\x3e\x3c/div\r\n\t\t\x3e\x3c/td\r\n\t\t\x3e\x3ctd class\x3d"dijitReset"\x3e\x3c/td\r\n\t\x3e\x3c/tr\r\n\t\x3e\x3ctr class\x3d"dijitReset"\r\n\t\t\x3e\x3ctd class\x3d"dijitReset"\x3e\x3c/td\r\n\t\t\x3e\x3ctd class\x3d"dijitReset"\r\n\t\t\t\x3e\x3ccenter\x3e\x3cdiv class\x3d"dijitSliderBar dijitSliderBumper dijitSliderBumperV dijitSliderTopBumper" dojoAttachEvent\x3d"onclick:_onClkIncBumper"\x3e\x3c/div\x3e\x3c/center\r\n\t\t\x3e\x3c/td\r\n\t\t\x3e\x3ctd class\x3d"dijitReset"\x3e\x3c/td\r\n\t\x3e\x3c/tr\r\n\t\x3e\x3ctr class\x3d"dijitReset"\r\n\t\t\x3e\x3ctd dojoAttachPoint\x3d"leftDecoration" class\x3d"dijitReset dijitSliderDecoration dijitSliderDecorationL dijitSliderDecorationV" style\x3d"text-align:center;height:100%;"\x3e\x3c/td\r\n\t\t\x3e\x3ctd class\x3d"dijitReset" style\x3d"height:100%;"\r\n\t\t\t\x3e\x3cinput dojoAttachPoint\x3d"valueNode" type\x3d"hidden" ${!nameAttrSetting}\r\n\t\t\t/\x3e\x3ccenter role\x3d"presentation" style\x3d"position:relative;height:100%;" dojoAttachPoint\x3d"sliderBarContainer"\r\n\t\t\t\t\x3e\x3cdiv role\x3d"presentation" dojoAttachPoint\x3d"remainingBar" class\x3d"dijitSliderBar dijitSliderBarV dijitSliderRemainingBar dijitSliderRemainingBarV" dojoAttachEvent\x3d"onmousedown:_onRemainingBarClick"\r\n\t\t\t\t\t\x3e\x3cdiv class\x3d"dijitSliderMoveable dijitSliderMoveableV" style\x3d"vertical-align:top;" role\x3d"slider"\r\n\t\t\t\t\t\t\x3e\x3cdiv class\x3d"dijitSliderImageHandle dijitSliderImageHandleV" dojoAttachPoint\x3d"sliderHandle,focusNode" tabIndex\x3d"${tabIndex}" dojoAttachEvent\x3d"onkeypress:_onKeyPress,onmousedown:_onHandleClick"\x3e\x3c/div\r\n\t\t\t\t\t\x3e\x3c/div\r\n\t\t\t\t\t\x3e\x3cdiv role\x3d"presentation" dojoAttachPoint\x3d"progressBar" class\x3d"dijitSliderBar dijitSliderBarV dijitSliderProgressBar dijitSliderProgressBarV" dojoAttachEvent\x3d"onkeypress:_onKeyPress,onmousedown:_onBarClick"\r\n\t\t\t\t\t\x3e\x3c/div\r\n\t\t\t\t\t\x3e\x3cdiv class\x3d"dijitSliderMoveable dijitSliderMoveableV" style\x3d"vertical-align:top;" role\x3d"slider"\r\n\t\t\t\t\t\t\x3e\x3cdiv class\x3d"dijitSliderImageHandle dijitSliderImageHandleV" dojoAttachPoint\x3d"sliderHandleMax" tabIndex\x3d"${tabIndex}" dojoAttachEvent\x3d"onkeypress:_onKeyPress,onmousedown:_onHandleClickMax"\x3e\x3c/div\r\n\t\t\t\t\t\x3e\x3c/div\r\n\t\t\t\t\x3e\x3c/div\r\n\t\t\t\x3e\x3c/center\r\n\t\t\x3e\x3c/td\r\n\t\t\x3e\x3ctd dojoAttachPoint\x3d"containerNode,rightDecoration" class\x3d"dijitReset dijitSliderDecoration dijitSliderDecorationR dijitSliderDecorationV" style\x3d"text-align:center;height:100%;"\x3e\x3c/td\r\n\t\x3e\x3c/tr\r\n\t\x3e\x3ctr class\x3d"dijitReset"\r\n\t\t\x3e\x3ctd class\x3d"dijitReset"\x3e\x3c/td\r\n\t\t\x3e\x3ctd class\x3d"dijitReset"\r\n\t\t\t\x3e\x3ccenter\x3e\x3cdiv class\x3d"dijitSliderBar dijitSliderBumper dijitSliderBumperV dijitSliderBottomBumper" dojoAttachEvent\x3d"onclick:_onClkDecBumper"\x3e\x3c/div\x3e\x3c/center\r\n\t\t\x3e\x3c/td\r\n\t\t\x3e\x3ctd class\x3d"dijitReset"\x3e\x3c/td\r\n\t\x3e\x3c/tr\r\n\t\x3e\x3ctr class\x3d"dijitReset"\r\n\t\t\x3e\x3ctd class\x3d"dijitReset"\x3e\x3c/td\r\n\t\t\x3e\x3ctd class\x3d"dijitReset dijitSliderButtonContainer dijitSliderButtonContainerV"\r\n\t\t\t\x3e\x3cdiv class\x3d"dijitSliderDecrementIconV" tabIndex\x3d"-1" style\x3d"display:none" dojoAttachPoint\x3d"incrementButton" dojoAttachEvent\x3d"onclick: decrement"\x3e\x3cspan class\x3d"dijitSliderButtonInner"\x3e-\x3c/span\x3e\x3c/div\r\n\t\t\x3e\x3c/td\r\n\t\t\x3e\x3ctd class\x3d"dijitReset"\x3e\x3c/td\r\n\t\x3e\x3c/tr\r\n\x3e\x3c/table\x3e\r\n',
-"url:dijit/form/templates/VerticalSlider.html":'\x3ctable class\x3d"dijit dijitReset dijitSlider dijitSliderV" cellspacing\x3d"0" cellpadding\x3d"0" border\x3d"0" rules\x3d"none" data-dojo-attach-event\x3d"onkeydown:_onKeyDown,onkeyup:_onKeyUp"\r\n\trole\x3d"presentation"\r\n\t\x3e\x3ctr class\x3d"dijitReset"\r\n\t\t\x3e\x3ctd class\x3d"dijitReset"\x3e\x3c/td\r\n\t\t\x3e\x3ctd class\x3d"dijitReset dijitSliderButtonContainer dijitSliderButtonContainerV"\r\n\t\t\t\x3e\x3cdiv class\x3d"dijitSliderIncrementIconV" style\x3d"display:none" data-dojo-attach-point\x3d"decrementButton"\x3e\x3cspan class\x3d"dijitSliderButtonInner"\x3e+\x3c/span\x3e\x3c/div\r\n\t\t\x3e\x3c/td\r\n\t\t\x3e\x3ctd class\x3d"dijitReset"\x3e\x3c/td\r\n\t\x3e\x3c/tr\r\n\t\x3e\x3ctr class\x3d"dijitReset"\r\n\t\t\x3e\x3ctd class\x3d"dijitReset"\x3e\x3c/td\r\n\t\t\x3e\x3ctd class\x3d"dijitReset"\r\n\t\t\t\x3e\x3ccenter\x3e\x3cdiv class\x3d"dijitSliderBar dijitSliderBumper dijitSliderBumperV dijitSliderTopBumper" data-dojo-attach-event\x3d"press:_onClkIncBumper"\x3e\x3c/div\x3e\x3c/center\r\n\t\t\x3e\x3c/td\r\n\t\t\x3e\x3ctd class\x3d"dijitReset"\x3e\x3c/td\r\n\t\x3e\x3c/tr\r\n\t\x3e\x3ctr class\x3d"dijitReset"\r\n\t\t\x3e\x3ctd data-dojo-attach-point\x3d"leftDecoration" class\x3d"dijitReset dijitSliderDecoration dijitSliderDecorationL dijitSliderDecorationV"\x3e\x3c/td\r\n\t\t\x3e\x3ctd class\x3d"dijitReset dijitSliderDecorationC" style\x3d"height:100%;"\r\n\t\t\t\x3e\x3cinput data-dojo-attach-point\x3d"valueNode" type\x3d"hidden" ${!nameAttrSetting}\r\n\t\t\t/\x3e\x3ccenter class\x3d"dijitReset dijitSliderBarContainerV" role\x3d"presentation" data-dojo-attach-point\x3d"sliderBarContainer"\r\n\t\t\t\t\x3e\x3cdiv role\x3d"presentation" data-dojo-attach-point\x3d"remainingBar" class\x3d"dijitSliderBar dijitSliderBarV dijitSliderRemainingBar dijitSliderRemainingBarV" data-dojo-attach-event\x3d"press:_onBarClick"\x3e\x3c!--#5629--\x3e\x3c/div\r\n\t\t\t\t\x3e\x3cdiv role\x3d"presentation" data-dojo-attach-point\x3d"progressBar" class\x3d"dijitSliderBar dijitSliderBarV dijitSliderProgressBar dijitSliderProgressBarV" data-dojo-attach-event\x3d"press:_onBarClick"\r\n\t\t\t\t\t\x3e\x3cdiv class\x3d"dijitSliderMoveable dijitSliderMoveableV" style\x3d"vertical-align:top;"\r\n\t\t\t\t\t\t\x3e\x3cdiv data-dojo-attach-point\x3d"sliderHandle,focusNode" class\x3d"dijitSliderImageHandle dijitSliderImageHandleV" data-dojo-attach-event\x3d"press:_onHandleClick" role\x3d"slider"\x3e\x3c/div\r\n\t\t\t\t\t\x3e\x3c/div\r\n\t\t\t\t\x3e\x3c/div\r\n\t\t\t\x3e\x3c/center\r\n\t\t\x3e\x3c/td\r\n\t\t\x3e\x3ctd data-dojo-attach-point\x3d"containerNode,rightDecoration" class\x3d"dijitReset dijitSliderDecoration dijitSliderDecorationR dijitSliderDecorationV"\x3e\x3c/td\r\n\t\x3e\x3c/tr\r\n\t\x3e\x3ctr class\x3d"dijitReset"\r\n\t\t\x3e\x3ctd class\x3d"dijitReset"\x3e\x3c/td\r\n\t\t\x3e\x3ctd class\x3d"dijitReset"\r\n\t\t\t\x3e\x3ccenter\x3e\x3cdiv class\x3d"dijitSliderBar dijitSliderBumper dijitSliderBumperV dijitSliderBottomBumper" data-dojo-attach-event\x3d"press:_onClkDecBumper"\x3e\x3c/div\x3e\x3c/center\r\n\t\t\x3e\x3c/td\r\n\t\t\x3e\x3ctd class\x3d"dijitReset"\x3e\x3c/td\r\n\t\x3e\x3c/tr\r\n\t\x3e\x3ctr class\x3d"dijitReset"\r\n\t\t\x3e\x3ctd class\x3d"dijitReset"\x3e\x3c/td\r\n\t\t\x3e\x3ctd class\x3d"dijitReset dijitSliderButtonContainer dijitSliderButtonContainerV"\r\n\t\t\t\x3e\x3cdiv class\x3d"dijitSliderDecrementIconV" style\x3d"display:none" data-dojo-attach-point\x3d"incrementButton"\x3e\x3cspan class\x3d"dijitSliderButtonInner"\x3e-\x3c/span\x3e\x3c/div\r\n\t\t\x3e\x3c/td\r\n\t\t\x3e\x3ctd class\x3d"dijitReset"\x3e\x3c/td\r\n\t\x3e\x3c/tr\r\n\x3e\x3c/table\x3e\r\n',
-"url:esri/dijit/templates/TimeSlider.html":'   \x3cdiv class\x3d"esriTimeSlider"\x3e\r\n   \x3ctable width\x3d"100%" cellspacing\x3d"0" cellpadding\x3d"0" border\x3d"0"\x3e\r\n   \x3ctr\x3e\r\n   \x3ctd align\x3d"right" valign\x3d"middle"\x3e\x3cbutton dojoType\x3d"dijit.form.Button" showLabel\x3d"false" iconClass\x3d"tsButton tsPlayButton" dojoAttachEvent\x3d"onClick:_onPlay" dojoAttachPoint\x3d"playPauseBtn" type\x3d"button"\x3e${NLS_play}\x3c/button\x3e\x3c/td\x3e\r\n   \x3ctd align\x3d"center" valign\x3d"middle" width\x3d"80%" class\x3d"tsTmp"\x3e\x3c/td\x3e\r\n   \x3ctd align\x3d"left" valign\x3d"middle" width\x3d"30"\x3e\x3cbutton dojoType\x3d"dijit.form.Button" showLabel\x3d"false" iconClass\x3d"tsButton tsPrevButton" dojoAttachEvent\x3d"onClick:_onPrev" dojoAttachPoint\x3d"previousBtn" type\x3d"button"\x3e${NLS_previous}\x3c/button\x3e\x3c/td\x3e\r\n   \x3ctd align\x3d"left" valign\x3d"middle"\x3e\x3cbutton dojoType\x3d"dijit.form.Button" showLabel\x3d"false" iconClass\x3d"tsButton tsNextButton" dojoAttachEvent\x3d"onClick:_onNext" dojoAttachPoint\x3d"nextBtn" type\x3d"button"\x3e${NLS_next}\x3c/button\x3e\x3c/td\x3e\r\n   \x3c/tr\x3e    \r\n   \x3c/table\x3e\r\n   \x3c/div\x3e',
-"url:widgets/TimeSlider/Widget.html":'\x3cdiv class\x3d"jimu-widget-timeslider"\x3e\r\n\t\x3cdiv class\x3d"no-time-content" data-dojo-attach-point\x3d"noTimeContentNode"\x3e${nls.disableTips}\x3c/div\x3e\r\n\t\x3cdiv class\x3d"time-content" data-dojo-attach-point\x3d"timeContentNode"\x3e\r\n\t\t\x3cdiv class\x3d"time-extent jimu-ellipsis" data-dojo-attach-point\x3d"timeExtentLabelNode"\x3e${nls.timeExtent}\x3c/div\x3e\r\n\t\t\x3cdiv class\x3d"layer-labels jimu-ellipsis" data-dojo-attach-point\x3d"layerLabelsNode"\x3e${nls.layers}\x3c/div\x3e\r\n\t\t\x3cdiv class\x3d"slider-content" data-dojo-attach-point\x3d"sliderContent"\x3e\r\n\t\t\t\x3cdiv data-dojo-attach-point\x3d"sliderNode"\x3e\x3c/div\x3e\r\n\t\t\t\x3cdiv class\x3d"speed-container jimu-float-trailing jimu-trailing-margin1" data-dojo-attach-point\x3d"speedContainerNode" data-dojo-attach-event\x3d"mouseenter:_onMouseEnterSpeedContainer,mouseleave:_onMouseLeaveSpeedContainer"\x3e\r\n\t\t\t\t\x3cdiv class\x3d"speed-label" data-dojo-attach-point\x3d"speedLabelNode" data-dojo-attach-event\x3d"click:_onSpeedLabelClick"\x3e1X\x3c/div\x3e\r\n\t\t\t\t\x3cdiv class\x3d"speed-menu" data-dojo-attach-point\x3d"speedMenu" data-dojo-attach-event\x3d"click:_onSelectSpeedItem"\x3e\r\n\t\t\t\t\t\x3cdiv class\x3d"speed-menu-item item-label jimu-ellipsis" title\x3d"${nls.speedLabel}"\x3e${nls.speedLabel}\x3c/div\x3e\r\n\t\t\t\t\t\x3cdiv class\x3d"speed-menu-item" speed\x3d"0.25"\x3e0.25X\x3c/div\x3e\r\n\t\t\t\t\t\x3cdiv class\x3d"speed-menu-item" speed\x3d"0.5"\x3e0.5X\x3c/div\x3e\r\n\t\t\t\t\t\x3cdiv class\x3d"speed-menu-item" speed\x3d"1"\x3e1X\x3c/div\x3e\r\n\t\t\t\t\t\x3cdiv class\x3d"speed-menu-item" speed\x3d"1.5"\x3e1.5X\x3c/div\x3e\r\n\t\t\t\t\t\x3cdiv class\x3d"speed-menu-item" speed\x3d"2"\x3e2X\x3c/div\x3e\r\n\t\t\t\t\x3c/div\x3e\r\n\t\t\t\x3c/div\x3e\r\n\t\t\x3c/div\x3e\r\n\t\x3c/div\x3e\r\n\x3c/div\x3e',
-"url:widgets/TimeSlider/css/style.css":".jimu-widget-timeslider{bottom: 55px; left: 7px; position: absolute; width: 652px !important;}.jimu-widget-timeslider .esriTimeSlider{z-index: 99;}.jimu-widget-timeslider .no-time-content,.jimu-widget-timeslider .time-content{position: relative; display: none; background: #8e8e8e; background: rgba(0,0,0,0.4); z-index: 0;}.jimu-widget-timeslider .no-time-content{height: 30px; padding: 0px 10px; line-height: 30px; font-size: 14px; color: #fff;}.jimu-widget-timeslider .time-content{height: 100px; padding-top: 20px; opacity: 0;}.jimu-widget-timeslider .time-extent{margin-bottom: 5px; font-size: 14px; color: #fff; text-align: center;}.jimu-widget-timeslider .layer-labels{font-size: 12px; color: #fff; text-align: center; margin-bottom: 8px;}.jimu-widget-timeslider .slider-content{position: relative; max-width: 657px; margin: auto;}.jimu-widget-timeslider .slider-content .esriTimeSlider{width: 600px;}.jimu-widget-timeslider .speed-container{position: relative; height: 28px; width: 40px; cursor: pointer;}.jimu-widget-timeslider .speed-menu{display: none; width: 105px; background: #759dc0; color: white; position: absolute; bottom: 27px; text-align: left; border-radius: 4px;}.jimu-rtl .jimu-widget-timeslider .speed-menu{text-align: right;}.jimu-widget-timeslider .speed-menu-item{width: 100%; display: inline-block; height: 20px; line-height: 20px; padding-left: 10px;}.jimu-rtl .jimu-widget-timeslider .speed-menu-item{padding-left: 0; padding-right: 10px;}.jimu-widget-timeslider .item-label {border-bottom: 1px solid #c9e0f6;}.jimu-widget-timeslider .speed-menu-item:hover{background: #485566;}.jimu-widget-timeslider .speed-label{width: 40px; height: 25px; color: white; text-align: center; background: #759dc0; line-height: 25px; position: absolute; bottom: 0; border-radius: 4px;}.mobile-time-slider{left: 5px !important; right: 5px !important; width: auto !important;}.jimu-widget-timeslider .mobile .slider-content{width: 100% !important;}",
-"*now":function(k){k(['dojo/i18n!*preload*widgets/TimeSlider/nls/Widget*["ar","cs","da","de","en","el","es","et","fi","fr","he","hr","it","ja","ko","lt","lv","nb","nl","pl","pt-br","pt-pt","ro","ru","sr","sv","th","tr","zh-cn","vi","zh-hk","zh-tw","ROOT"]'])}}});
-define("dojo/_base/declare dojo/_base/lang dojo/_base/html dojo/_base/array dojo/_base/config dojo/_base/fx dojo/on dojo/sniff dojo/Deferred dojo/when dojo/promise/all dojo/date/locale dojo/i18n jimu/LayerInfos/LayerInfos jimu/BaseWidget esri/lang esri/request esri/TimeExtent esri/dijit/TimeSlider".split(" "),function(k,f,g,l,r,t,s,p,q,h,w,m,n,v,u,x,z,y,e){var d={ar:{datePattern:"dd MMMM, yyyy",yearPattern:"yyyy",hourTimePattern:"h a",minuteTimePattern:"h:mm a",secondTimePattern:"h:mm:ss a",millisecondTimePattern:"h:mm:ss:SSS a"},
-cs:{datePattern:"MMMM d, yyyy",yearPattern:"yyyy",hourTimePattern:"H",minuteTimePattern:"h:mm",secondTimePattern:"H:mm:ss",millisecondTimePattern:"H:mm:ss:SSS"},da:{datePattern:"d. MMMM yyyy",yearPattern:"yyyy",hourTimePattern:"H",minuteTimePattern:"H:mm",secondTimePattern:"H:mm:ss",millisecondTimePattern:"H:mm:ss:SSS"},de:{datePattern:"d. MMMM yyyy",yearPattern:"yyyy",hourTimePattern:"H",minuteTimePattern:"H:mm",secondTimePattern:"H:mm:ss",millisecondTimePattern:"H:mm:ss:SSS"},el:{datePattern:"d MMMM yyyy",
-yearPattern:"yyyy",hourTimePattern:"h",minuteTimePattern:"hh:mm",secondTimePattern:"hh:mm:ss",millisecondTimePattern:"hh:mm:ss:SSS"},es:{datePattern:"d' de 'MMMM' de 'yyyy",yearPattern:"yyyy",hourTimePattern:"H",minuteTimePattern:"H:mm",secondTimePattern:"H:mm:ss",millisecondTimePattern:"H:mm:ss:SSS"},et:{datePattern:"d. MMMM yyyy",yearPattern:"yyyy",hourTimePattern:"H",minuteTimePattern:"H:mm",secondTimePattern:"H:mm:ss",millisecondTimePattern:"H:mm:ss:SSS"},fi:{datePattern:"d. MMMM yyyy",yearPattern:"yyyy",
-hourTimePattern:"t",minuteTimePattern:"t:mm a",secondTimePattern:"t:mm:ss",millisecondTimePattern:"h:mm:ss:SSS"},fr:{datePattern:"d MMMM yyyy",yearPattern:"yyyy",hourTimePattern:"HH",minuteTimePattern:"HH:mm",secondTimePattern:"HH:mm:ss",millisecondTimePattern:"HH:mm:ss:SSS"},he:{datePattern:"d, MMMM ,yyyy",yearPattern:"yyyy",hourTimePattern:"h a",minuteTimePattern:"h:mm a",secondTimePattern:"h:mm:ss a",millisecondTimePattern:"h:mm:ss:SSS a"},it:{datePattern:"d MMMM yyyy",yearPattern:"yyyy",hourTimePattern:"H",
-minuteTimePattern:"H.mm",secondTimePattern:"H.mm.ss",millisecondTimePattern:"H.mm.ss.SSS"},ja:{datePattern:"yyyy'\u5e74'M'\u6708'd'\u65e5'",yearPattern:"yyyy'\u5e74'",hourTimePattern:"h a",minuteTimePattern:"h:mm a",secondTimePattern:"h:mm:ss a",millisecondTimePattern:"h:mm:ss:SSS a"},ko:{datePattern:"yyyy\ub144 M\uc6d4 d\uc77c",yearPattern:"yyyy\ub144",hourTimePattern:"a h\uc2dc",minuteTimePattern:"a h:mm",secondTimePattern:"a h:mm:ss",millisecondTimePattern:"a h:mm:ss:SSS"},lt:{datePattern:"yyyy MMMM dd",
-yearPattern:"yyyy",hourTimePattern:"H a",minuteTimePattern:"HH:mm",secondTimePattern:"HH:mm:ss",millisecondTimePattern:"HH:mm:ss:SSS"},lv:{datePattern:"dd.MM.yyyy",yearPattern:"yyyy",hourTimePattern:"H a",minuteTimePattern:"HH:mm",secondTimePattern:"HH:mm:ss",millisecondTimePattern:"HH:mm:ss:SSS"},nb:{datePattern:"d. MMMM yyyy",yearPattern:"yyyy",hourTimePattern:"H",minuteTimePattern:"H.mm",secondTimePattern:"H.mm.ss",millisecondTimePattern:"H.mm.ss.SSS"},nl:{datePattern:"d. MMMM yyyy",yearPattern:"yyyy",
-hourTimePattern:"H",minuteTimePattern:"H:mm",secondTimePattern:"H:mm:ss",millisecondTimePattern:"H:mm:ss:SSS"},pl:{datePattern:"dd-mm-yyyy",yearPattern:"yyyy",hourTimePattern:"hh",minuteTimePattern:"hh:mm",secondTimePattern:"hh:mm:ss",millisecondTimePattern:"hh:mm:ss:SSS"},"pt-br":{datePattern:"d' de 'MMMM' de 'yyyy",yearPattern:"yyyy",hourTimePattern:"H",minuteTimePattern:"h:mm a",secondTimePattern:"H:mm:ss",millisecondTimePattern:"H:mm:ss:SSS"},"pt-pt":{datePattern:"d' de 'MMMM' de 'yyyy",yearPattern:"yyyy",
-hourTimePattern:"H",minuteTimePattern:"H:mm",secondTimePattern:"H:mm:ss",millisecondTimePattern:"H:mm:ss:SSS"},ro:{datePattern:"d. MMMM yyyy",yearPattern:"yyyy",hourTimePattern:"H",minuteTimePattern:"H:mm",secondTimePattern:"H:mm:ss",millisecondTimePattern:"H:mm:ss:SSS"},ru:{datePattern:"MMMM d, yyyy",yearPattern:"yyyy",hourTimePattern:"H",minuteTimePattern:"h:mm",secondTimePattern:"h:mm:ss",millisecondTimePattern:"h:mm:ss:SSS"},sv:{datePattern:"MMMM d, yyyy",yearPattern:"yyyy",hourTimePattern:"h a",
-minuteTimePattern:"h:mm a",secondTimePattern:"h:mm:ss a",millisecondTimePattern:"h:mm:ss:SSS a"},th:{datePattern:"d MMMM,yyyy",yearPattern:"yyyy",hourTimePattern:"H a",minuteTimePattern:"h:mm a",secondTimePattern:"h:mm:ss a",millisecondTimePattern:"h:mm:ss:SSS a"},tr:{datePattern:"d MMMM yyyy",yearPattern:"yyyy",hourTimePattern:"h a",minuteTimePattern:"h:mm a",secondTimePattern:"h:mm:ss a",millisecondTimePattern:"h:mm:ss:SSS a"},vi:{datePattern:"d MMMM, yyyy",yearPattern:"yyyy",hourTimePattern:"h a",
-minuteTimePattern:"h:mm a",secondTimePattern:"h:mm:ss a",millisecondTimePattern:"h:mm:ss:SSS a"},"zh-cn":{datePattern:"yyyy'\u5e74'M'\u6708'd'\u65e5'",yearPattern:"yyyy'\u5e74'",hourTimePattern:"H",minuteTimePattern:"H:mm",secondTimePattern:"H:mm:ss",millisecondTimePattern:"H:mm:ss:SSS"},"zh-hk":{datePattern:"\u5e74\u6708\u65e5",yearPattern:"yyyy",hourTimePattern:"h a",minuteTimePattern:"h:mm a",secondTimePattern:"h:mm:ss a",millisecondTimePattern:"h:mm:ss:SSS a"},"zh-tw":{datePattern:"\u5e74\u6708\u65e5",
-yearPattern:"yyyy",hourTimePattern:"h a",minuteTimePattern:"h:mm a",secondTimePattern:"h:mm:ss a",millisecondTimePattern:"h:mm:ss:SSS a"},en:{datePattern:"MMMM d, yyyy",yearPattern:"yyyy",hourTimePattern:"h a",minuteTimePattern:"h:mm a",secondTimePattern:"h:mm:ss a",millisecondTimePattern:"h:mm:ss:SSS a"}};return k([u],{baseClass:"jimu-widget-timeslider",clasName:"esri.widgets.TimeSlider",_showed:!1,_timeHandles:null,layerInfosObj:null,_layerInfosDef:null,_timeSliderPropsDef:null,postCreate:function(){this.inherited(arguments);
-this._timeHandles=[];this._initLayerInfosObj().then(f.hitch(this,function(){this.processTimeDisableLayer()}))},startup:function(){this.inherited(arguments);this.own(s(this.map,"resize",f.hitch(this,this._onMapResize)))},_initLayerInfosObj:function(){this._layerInfosDef||(this._layerInfosDef=new q,this.own(this._layerInfosDef),v.getInstance(this.map,this.map.itemInfo).then(f.hitch(this,function(a){this.domNode&&(this.layerInfosObj=a,this.own(s(a,"layerInfosIsShowInMapChanged",f.hitch(this,this._onLayerInfosIsShowInMapChanged))),
-this.own(a.on("layerInfosChanged",f.hitch(this,this._onLayerInfosChanged))),this._layerInfosDef.resolve(this.layerInfosObj))})));return this._layerInfosDef},_isTimeTemporalLayer:function(a,c){var b=a&&a.timeInfo&&a.useMapTime,d=this.layerInfosObj.getLayerInfoById(a.id),d=d&&d.originOperLayer&&!1!==d.originOperLayer.timeAnimation;if(b&&d&&(c?a.visible:1))if("esri.layers.KMLLayer"===a.declaredClass){if(b=a.getLayers(),l.some(b,function(a){return a.timeInfo&&a.timeInfo.timeExtent?!0:!1}))return!0}else if(a.timeInfo&&
-a.timeInfo.timeExtent)return!0;return!1},_hasLiveData:function(a){return a&&a.useMapTime&&a.timeInfo&&a.timeInfo.hasLiveData},_processTimeUpdate:function(a){var c=null,c=!0,c=(c=this.layerInfosObj.getLayerInfoById(a.id))&&c.originOperLayer&&!1!==c.originOperLayer.timeAnimation;!c&&"setUseMapTime"in a&&a.setUseMapTime(!1)},processTimeDisableLayer:function(){var a=0,c,b,a=0;for(c=this.map.layerIds.length;a<c;a++)b=this.map.layerIds[a],b=this.map.getLayer(b),this._processTimeUpdate(b);a=0;for(c=this.map.graphicsLayerIds.length;a<
-c;a++)b=this.map.graphicsLayerIds[a],b=this.map.getLayer(b),this._processTimeUpdate(b)},hasVisibleTemporalLayer:function(){var a=0,c,b,a=0;for(c=this.map.layerIds.length;a<c;a++)if(b=this.map.layerIds[a],b=this.map.getLayer(b),this._isTimeTemporalLayer(b,!0))return!0;a=0;for(c=this.map.graphicsLayerIds.length;a<c;a++)if(b=this.map.graphicsLayerIds[a],b=this.map.getLayer(b),this._isTimeTemporalLayer(b,!0))return!0;return!1},needUpdateFullTime:function(){var a=0,c,b,a=0;for(c=this.map.layerIds.length;a<
-c;a++)if(b=this.map.layerIds[a],b=this.map.getLayer(b),this._hasLiveData(b))return!0;a=0;for(c=this.map.graphicsLayerIds.length;a<c;a++)if(b=this.map.graphicsLayerIds[a],b=this.map.getLayer(b),this._hasLiveData(b))return!0;return!1},_onLayerInfosIsShowInMapChanged:function(a){l.some(a,f.hitch(this,function(a){for(var b=null;!b;)b=this.map.getLayer(a.id),a=a.parentLayerInfo;return this._isTimeTemporalLayer(b)}))&&this._onTimeTemportalLayerChanged()},_onLayerInfosChanged:function(a,c,b){"added"===c?
-(a=this.map.getLayer(b.id),this._isTimeTemporalLayer(a,!0)&&this._onTimeTemportalLayerChanged()):"removed"===c&&this._onTimeTemportalLayerChanged()},_onTimeTemportalLayerChanged:function(){"closed"!==this.state&&(this.hasVisibleTemporalLayer()?this.timeSlider?this.updateLayerLabel():this.showTimeSlider():this.timeSlider&&this.closeTimeSlider())},onOpen:function(){this._initLayerInfosObj().then(f.hitch(this,function(){this.hasVisibleTemporalLayer()?this._showed||this.showTimeSlider():(g.setStyle(this.noTimeContentNode,
-"display","block"),g.setStyle(this.timeContentNode,"display","none"),this._showed=!0)}))},onClose:function(){this._initLayerInfosObj().then(f.hitch(this,function(){this.hasVisibleTemporalLayer()?this._showed&&this.closeTimeSlider():(g.setStyle(this.noTimeContentNode,"display","none"),this._showed=!1)}))},_isRunInMobile:function(){return window.appInfo.isRunInMobile},showTimeSlider:function(){g.setStyle(this.noTimeContentNode,"display","none");this.createTimeSlider().then(f.hitch(this,function(){g.setStyle(this.timeContentNode,
-"display","block");g.addClass(this.domNode,"show-time-slider");this._adaptResponsive();p("ie")&&9>p("ie")?this._showed=!0:t.animateProperty({node:this.timeContentNode,properties:{opacity:{start:0,end:1}},onEnd:f.hitch(this,function(){this._showed=!0;this._setMenuPosition()}),duration:500}).play()}))},closeTimeSlider:function(){g.setStyle(this.domNode,"display","block");p("ie")&&9>p("ie")?this._onCloseTimeSliderEnd():t.animateProperty({node:this.timeContentNode,properties:{opacity:{start:1,end:0}},
-onEnd:f.hitch(this,this._onCloseTimeSliderEnd),duration:500}).play()},_onCloseTimeSliderEnd:function(){this._destroyed||(this.removeTimeSlider(),this._showed=!1,g.setStyle(this.timeContentNode,"display","none"),g.removeClass(this.domNode,"show-time-slider"),"closed"!==this.state&&g.setStyle(this.noTimeContentNode,"display","block"),"closed"===this.state&&(g.removeClass(this.domNode,"mobile-time-slider"),g.removeClass(this.timeContentNode,"mobile")))},getTimeSliderProps:function(a){if(!this._timeSliderPropsDef){this._timeSliderPropsDef=
-new q;this.own(this._timeSliderPropsDef);a=a&&a.itemInfo;var c=f.getObject("itemData.widgets.timeSlider.properties",!1,a);if(a&&c){var b=f.clone(c);this.needUpdateFullTime()?this._getUpdatedFullTime().then(f.hitch(this,function(a){var c=a.startTime.getTime();a=a.endTime.getTime();b.startTime>a||b.endTime<c?(b.startTime=c,b.endTime=a):(b.startTime<c&&(b.startTime=c),b.endTime>a&&(b.endTime=a));this._timeSliderPropsDef.resolve(b)})):this._timeSliderPropsDef.resolve(b)}else this._timeSliderPropsDef.resolve(null)}return this._timeSliderPropsDef},
-_getUpdatedFullTime:function(){var a=0,c,b,d=[],a=0;for(c=this.map.layerIds.length;a<c;a++)b=this.map.layerIds[a],b=this.map.getLayer(b),d.push(this._getUpdatedTime(b));a=0;for(c=this.map.graphicsLayerIds.length;a<c;a++)b=this.map.graphicsLayerIds[a],b=this.map.getLayer(b),d.push(this._getUpdatedTime(b));return w(d).then(f.hitch(this,function(a){return this._getFullTimeExtent(a)}))},_getFullTimeExtent:function(a){var c=null;l.forEach(a,f.hitch(this,function(a){a&&(c?(c.startTime>a.startTime&&(c.startTime=
-new Date(a.startTime.getTime())),c.endTime<a.endTime&&(c.endTime=new Date(a.endTime.getTime()))):c=new y(new Date(a.startTime.getTime()),new Date(a.endTime.getTime())))}));return c},_getUpdatedTime:function(a){if(a&&a.url&&this._hasLiveData(a)){var c=null;return z({url:a.url,callbackParamName:"callback",content:{f:"json",returnUpdates:!0}}).then(f.hitch(this,function(a){a.timeExtent&&2===a.timeExtent.length&&(c=new y,c.startTime=new Date(a.timeExtent[0]),c.endTime=new Date(a.timeExtent[1]))})).always(f.hitch(this,
-function(){return h(c||f.getObject("timeInfo.timeExtent",!1,a)||null)}))}return h(f.getObject("timeInfo.timeExtent",!1,a)||null)},createTimeSlider:function(){return this.getTimeSliderProps(this.map).then(f.hitch(this,function(a){if(a){if(this.timeSlider)return this.timeSlider;this.timeSlider=new e({},this.sliderNode);this.map.setTimeSlider(this.timeSlider);var c=new y(new Date(a.startTime),new Date(a.endTime));this.timeSlider.setThumbCount(a.thumbCount);a.numberOfStops?this.timeSlider.createTimeStopsByCount(c,
-a.numberOfStops+1):this.timeSlider.createTimeStopsByTimeInterval(c,a.timeStopInterval.interval,a.timeStopInterval.units);this.timeSlider.setThumbMovingRate(a.thumbMovingRate);25<this.timeSlider.timeStops.length&&this.timeSlider.setTickCount(0);2===this.timeSlider.thumbCount&&this.timeSlider.setThumbIndexes([0,1]);this.timeSlider.setLoop(!0);this.timeSlider.startup();g.addClass(this.timeSlider.domNode,"jimu-float-leading");this.updateLayerLabel();this.updateTimeExtentLabel();this._timeHandles.push(s(this.timeSlider,
-"time-extent-change",f.hitch(this,this.updateTimeExtentLabel)));return this.timeSlider}}))},_onSelectSpeedItem:function(a){if(a.target){var c=g.getAttr(a.target,"speed");this.getTimeSliderProps(this.map).then(f.hitch(this,function(b){b&&c&&(c=parseFloat(c),this.timeSlider.setThumbMovingRate(b.thumbMovingRate/c),this.speedLabelNode.innerHTML=a.target.innerHTML);g.setStyle(this.speedMenu,"display","none")}))}},_setMenuPosition:function(){var a=g.position(this.speedLabelNode);0>a.y-123-2&&g.setStyle(this.speedMenu,
-{top:"27px",bottom:"auto"});var c=g.getMarginBox(window.jimuConfig.layoutId);window.isRTL?0>a.x-105&&g.setStyle(this.speedMenu,{left:0}):a.x+105>c.w&&g.setStyle(this.speedMenu,{right:0})},_onSpeedLabelClick:function(){this._onMouseEnterSpeedContainer()},_onMouseEnterSpeedContainer:function(){g.setStyle(this.speedMenu,"display","block")},_onMouseLeaveSpeedContainer:function(){g.setStyle(this.speedMenu,"display","none")},removeTimeSlider:function(){l.forEach(this._timeHandles,function(a){a&&a.remove&&
-a.remove()});this.timeSlider&&!this.timeSlider._destroyed&&(this.timeSlider.destroy(),this.timeSlider=null);this.map&&this.map.setTimeExtent(null);this.speedLabelNode.innerHTML="1X";this.sliderNode=g.create("div",{},this.speedContainerNode,"before")},updateLayerLabel:function(){if(this.config.showLabels){g.setStyle(this.layerLabelsNode,"display","block");var a=this.nls.layers,c=this._getVisibleTemporalLayerNames(),a=a+c.join(",");this.layerLabelsNode.innerHTML=a;g.setAttr(this.layerLabelsNode,"title",
-a)}else g.setStyle(this.layerLabelsNode,"display","none")},_getVisibleTemporalLayerNames:function(){var a=0,c,b,d=[],a=0;for(c=this.map.layerIds.length;a<c;a++)b=this.map.layerIds[a],b=this.map.getLayer(b),this._isTimeTemporalLayer(b,!0)&&d.push(b.id);a=0;for(c=this.map.graphicsLayerIds.length;a<c;a++)b=this.map.graphicsLayerIds[a],b=this.map.getLayer(b),this._isTimeTemporalLayer(b,!0)&&d.push(b.id);return l.map(d,f.hitch(this,function(a){return this.layerInfosObj.getLayerInfoById(a).title||""}))},
-updateTimeExtentLabel:function(a){var c=this.nls.timeExtent,b=null,e=null;a?(b=a.startTime,0<a.endTime.getTime()-a.startTime.getTime()&&(e=a.endTime)):2===this.timeSlider.thumbCount?(b=this.timeSlider.timeStops[0],e=this.timeSlider.timeStops[1]):b=this.timeSlider.timeStops[0];var f=null,h=a=null,k=!1,l=d[r.locale]||d.en;e&&b.getFullYear()===e.getFullYear()?(b.getMonth()===e.getMonth()?b.getDate()===e.getDate()?a=b.getHours()===e.getHours()?b.getMinutes()===e.getMinutes()?b.getSeconds()===e.getSeconds()?
-l.millisecondTimePattern:l.secondTimePattern:l.minuteTimePattern:l.minuteTimePattern:(2>e.getDate()-b.getDate()&&(a=l.minuteTimePattern),k=!0):k=!0,h="long"):e&&10<e.getFullYear()-b.getFullYear()?(f=l.yearPattern,k=!0):(k=!0,h="long");l=m.format(b,{datePattern:f,formatLength:h,selector:"date"});a&&(b=m.format(b,{timePattern:a,selector:"time"}),l=n.getLocalization("dojo.cldr","gregorian")["dateTimeFormat-medium"].replace(/\{1\}/g,l).replace(/\{0\}/g,b));b="";e&&(k&&(b=m.format(e,{datePattern:f,formatLength:h,
-selector:"date"})),a&&(f=m.format(e,{timePattern:a,selector:"time"}),b=k&&a?n.getLocalization("dojo.cldr","gregorian")["dateTimeFormat-medium"].replace(/\{1\}/g,b).replace(/\{0\}/g,f):f));c=e?x.substitute({FROMTIME:l,ENDTIME:b},c):l+"";this.timeExtentLabelNode.innerHTML=c;g.setAttr(this.timeExtentLabelNode,"title",c)},_adaptResponsive:function(){setTimeout(f.hitch(this,function(){var a=null;window.appInfo.isRunInMobile?(g.addClass(this.timeContentNode,"mobile"),g.addClass(this.domNode,"mobile-time-slider")):
-(g.removeClass(this.timeContentNode,"mobile"),g.removeClass(this.domNode,"mobile-time-slider"));if(this.timeSlider){var a=g.getContentBox(this.sliderContent),c=g.getMarginBox(this.speedContainerNode),a=a.w-c.w;g.setStyle(this.timeSlider.domNode,"width",a+"px")}}),10)},_onMapResize:function(){"closed"!==this.state&&this._adaptResponsive()},destroy:function(){this.map&&this.map.setTimeExtent(null);this.inherited(arguments)}})});
+///////////////////////////////////////////////////////////////////////////
+// Copyright © 2014 - 2017 Esri. All Rights Reserved.
+//
+// Licensed under the Apache License Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////
+
+define(['dojo/_base/declare',
+    'dojo/_base/lang',
+    'dojo/_base/html',
+    'dojo/_base/array',
+    'dojo/_base/fx',
+    "jimu/WidgetManager",
+    'dojo/dnd/move',
+    'dojo/on',
+    'dojo/query',
+    'dojo/Deferred',
+    'dojo/dom-geometry',
+    'jimu/LayerInfos/LayerInfos',
+    'jimu/BaseWidget',
+    'esri/TimeExtent',
+    'esri/dijit/TimeSlider',
+    './SpeedMenu',
+    'jimu/utils',
+    './TimeProcesser',
+    './LayerProcesser',
+    './utils',
+    "dojo/throttle"
+  ],
+  function(declare, lang, html, array, baseFx, WidgetManager, Move,
+    on, query, Deferred, domGeometry,
+    LayerInfos, BaseWidget, TimeExtent, TimeSlider,
+    SpeedMenu, jimuUtils,TimeProcesser,LayerProcesser, utils, throttle) {
+
+    var clazz = declare([BaseWidget], {
+      baseClass: 'jimu-widget-timeslider',
+      clasName: 'esri.widgets.TimeSlider',
+      speedMenu: null,
+      _showed: false,
+      _timeHandles: null,
+      layerInfosObj: null,
+
+      _layerInfosDef: null,
+      _timeSliderPropsDef: null,
+
+      _miniModeTimer: null,
+
+      postCreate: function() {
+        this.inherited(arguments);
+        this._timeHandles = [];
+
+        this.layerProcesser = new LayerProcesser({map:this.map});
+        this.timeProcesser = new TimeProcesser({map:this.map,nls:this.nls,config:this.config});
+
+        this._initLayerInfosObj().then(lang.hitch(this, function() {
+          this.timeProcesser.setLayerInfosObj(this.layerInfosObj);
+          this.layerProcesser.setLayerInfosObj(this.layerInfosObj);
+          this.layerProcesser.processTimeDisableLayer();
+        }));
+      },
+
+      startup: function() {
+        this.inherited(arguments);
+        this.own(on(this.map, 'resize', lang.hitch(this, this._onMapResize)));
+        //close btn
+        this.own(on(this.closeBtn, 'click', lang.hitch(this, this._closeHanlder)));
+        //toggle mini-mode(desktop)
+        this.own(on(this.domNode, 'mouseover', lang.hitch(this, function () {
+          if (!utils.isRunInMobile()) {
+            this._clearMiniModeTimer();
+          }
+        })));
+        this.own(on(this.domNode, 'mouseout', lang.hitch(this, function () {
+          if (!utils.isRunInMobile()) {
+            this._setMiniModeTimer();
+          }
+        })));
+        //toggle mini-mode(mobile)
+        this.own(on(this.domNode, 'click', lang.hitch(this, function () {
+          if (utils.isRunInMobile()) {
+            this._clearMiniModeTimer();
+            this._setMiniModeTimer();
+
+            var isInMiniMode = html.hasClass(this.domNode, 'mini-mode');
+            if (isInMiniMode) {
+              html.removeClass(this.domNode, 'mini-mode');
+              this._adaptResponsive();
+            }
+          }
+        })));
+      },
+
+      //overwrite for dijit in header-controller
+      setPosition: function(/*position, containerNode*/){
+        if (!this._isSetPosition) {
+          var containerNode = this.map.id;
+          var style = jimuUtils.getPositionStyle(this.position);
+          html.place(this.domNode, containerNode);
+          html.setStyle(this.domNode, style);
+
+          this._isSetPosition = true;
+        }
+      },
+
+      resize: function () {
+        throttle(lang.hitch(this, this._onMapResize), 200);
+      },
+
+      onOpen: function() {
+        this._initLayerInfosObj().then(lang.hitch(this, function () {
+          if (!this.layerProcesser.hasVisibleTemporalLayer()) {
+            this._showNoTimeLayer();
+          } else {
+            if (!this._showed) {
+              this.showTimeSlider();
+            }
+          }
+
+          //initPosition
+          utils.initPosition(this.map, this.domNode, this.position);
+          this._adaptResponsive();
+        }));
+      },
+
+      onClose: function() {
+        this._initLayerInfosObj().then(lang.hitch(this, function() {
+          if (!this.layerProcesser.hasVisibleTemporalLayer()) {
+            html.setStyle(this.noTimeContentNode, 'display', 'none');
+            this._showed = false;
+          } else {
+            if (this._showed) {
+              this.closeTimeSlider();
+            }
+          }
+        }));
+      },
+      //on close btn click
+      _closeHanlder: function(){
+        WidgetManager.getInstance().closeWidget(this);
+      },
+      _showNoTimeLayer: function () {
+        html.setStyle(this.noTimeContentNode, 'display', 'block');
+        html.setStyle(this.timeContentNode, 'display', 'none');
+        this._showed = true;
+      },
+
+      showTimeSlider: function() {
+        html.setStyle(this.noTimeContentNode, 'display', 'none');
+
+        this.createTimeSlider().then(lang.hitch(this, function() {
+          if("undefined" === typeof this.timeSlider){
+            this._showNoTimeLayer();
+            return;
+          }
+
+          this.timeProcesser.setTimeSlider(this.timeSlider);
+          this._updateTimeSliderUI();
+
+          //restore playBtn state
+          if (this.playBtn && html.hasClass(this.playBtn, "pause")) {
+            html.removeClass(this.playBtn, "pause");
+          }
+          //styles
+          html.setStyle(this.timeContentNode, 'display', 'block');
+          html.addClass(this.domNode, 'show-time-slider');
+          this._initSpeedMenu();
+
+          baseFx.animateProperty({
+            node: this.timeContentNode,
+            properties: {
+              opacity: {
+                start: 0,
+                end: 1
+              }
+            },
+            onEnd: lang.hitch(this, function() {
+              this._showed = true;
+              //auto play when open
+              if (false === html.hasClass(this.playBtn, "pause")) {
+                on.emit(this.playBtn, 'click', { cancelable: false, bubbles: true });
+              }
+              this._adaptResponsive();
+            }),
+            duration: 500
+          }).play();
+        }));
+      },
+
+      closeTimeSlider: function() {
+        this._draged = false;
+        this._isSetPosition = false;
+        this._showed = false;
+
+        html.setStyle(this.domNode, 'display', 'none');
+
+        this.removeTimeSlider();
+        this._destroySpeedMenu();
+
+        baseFx.animateProperty({
+          node: this.timeContentNode,
+          properties: {
+            opacity: {
+              start: 1,
+              end: 0
+            }
+          },
+          onEnd: lang.hitch(this, this._onCloseTimeSliderEnd),
+          duration: 500
+        }).play();
+      },
+
+      _onCloseTimeSliderEnd: function() {
+        if (this._destroyed) {
+          return;
+        }
+        html.removeClass(this.domNode, 'show-time-slider');
+        if (this.state === 'closed') {
+          html.removeClass(this.domNode, 'mobile-time-slider');
+          html.removeClass(this.timeContentNode, 'mobile');
+        }
+      },
+
+      getTimeSliderProps: function() {
+        if (!this._timeSliderPropsDef) {
+
+          this._timeSliderPropsDef = new Deferred();
+          this.own(this._timeSliderPropsDef);
+          //var itemInfo = map && map.itemInfo;
+          this.timeProcesser.getTsPros().then(lang.hitch(this, function (tsProps) {
+            if (null !== tsProps &&
+              (this.timeProcesser.needUpdateFullTime() || true === tsProps._needToFindDefaultInterval)) {
+              this.timeProcesser._getUpdatedFullTime().then(lang.hitch(this, function (fullTimeExtent) {
+                var start = fullTimeExtent.startTime.getTime();
+                var end = fullTimeExtent.endTime.getTime();
+
+                if (tsProps.startTime > end || tsProps.endTime < start) {
+                  tsProps.startTime = start;
+                  tsProps.endTime = end;
+                } else {
+                  if (tsProps.startTime < start) {
+                    tsProps.startTime = start;
+                  }
+                  if (tsProps.endTime > end) {
+                    tsProps.endTime = end;
+                  }
+                }
+
+                if (true === tsProps._needToFindDefaultInterval) {
+                  tsProps.timeStopInterval = this.timeProcesser.findDefaultInterval(fullTimeExtent);
+                }
+
+                this._timeSliderPropsDef.resolve(tsProps);
+              }));
+            } else {
+              this._timeSliderPropsDef.resolve(tsProps);
+            }
+          }));
+        }
+
+        return this._timeSliderPropsDef;
+      },
+
+      createTimeSlider: function() {
+        return this.getTimeSliderProps().then(lang.hitch(this, function(props) {
+          if (!props) {
+            return;
+          }
+          if (this.timeSlider) {
+            return this.timeSlider;
+          }
+          //this domNode will be deleted when TimeSlider destroy
+          this.sliderNode = html.create('div', {}, this.sliderNodeContainer);
+
+          this.timeSlider = new TimeSlider({}, this.sliderNode);
+
+          var fromTime = new Date(props.startTime);
+          var endTime = new Date(props.endTime);
+          var timeExtent = new TimeExtent(fromTime, endTime);
+          this.timeSlider.setThumbCount(props.thumbCount);
+          if (props.numberOfStops) {
+            this.timeSlider.createTimeStopsByCount(timeExtent, (props.numberOfStops + 1));
+          } else {
+            this.timeSlider.createTimeStopsByTimeInterval(
+              timeExtent,
+              props.timeStopInterval.interval,
+              props.timeStopInterval.units
+            );
+          }
+          this.timeSlider.setThumbMovingRate(props.thumbMovingRate);
+
+          if (this.timeSlider.timeStops.length > 25) {
+            this.timeSlider.setTickCount(0);
+          }
+          if (this.timeSlider.thumbCount === 2) {
+            this.timeSlider.setThumbIndexes([0, 1]);
+          }
+          this.timeSlider.setLoop(true);
+          this.timeSlider.startup();
+
+          this._timeHandles.push(on(
+            this.timeSlider,
+            'time-extent-change',
+            lang.hitch(this, this.updateTimeExtentLabel)
+          ));
+
+          this.map.setTimeSlider(this.timeSlider);
+
+          return this.timeSlider;
+        }));
+      },
+
+      _updateTimeSliderUI: function () {
+        this.updateLayerLabel();
+        this.updateTimeExtentLabel();
+        this._updateBtnsUI();
+      },
+      _updateBtnsUI: function(){
+        //find and hide raw btns
+        var btns = query(".esriTimeSlider > table > tbody > tr > td > span > span", this.esriTimeSlider);
+        if (btns && 3 === btns.length) {
+          this._rawPlayBtn = btns[0];
+          this._rawPreviousBtn = btns[1];
+          this._rawNextBtn = btns[2];
+        }
+        var tds = query(".esriTimeSlider > table > tbody > tr > td", this.esriTimeSlider);
+        if (tds && 4 === tds.length) {
+          html.addClass(tds[0], "hide");//_rawPlayBtn
+          html.addClass(tds[2], "hide");//_rawPreviousBtn
+          html.addClass(tds[3], "hide");//_rawNextBtn
+        }
+
+        //trigger events
+        if(!this._previousBtnHandler){
+          this._previousBtnHandler = this.own(on(this.previousBtn, 'click', lang.hitch(this, function () {
+            on.emit(this._rawPreviousBtn, 'click', { cancelable: false, bubbles: true });
+          })));
+        }
+        if(!this._playBtnHandler){
+          this._playBtnHandler = this.own(on(this.playBtn, 'click', lang.hitch(this, function (evt) {
+            on.emit(this._rawPlayBtn, 'click', {cancelable: false, bubbles: true });
+            //toggle pause class
+            if(html.hasClass(this.playBtn, "pause")){
+              html.removeClass(this.playBtn, "pause");
+            } else {
+              html.addClass(this.playBtn, "pause");
+              if(utils.isRunInMobile()){
+                html.addClass(this.domNode, 'mini-mode');
+                this._adaptResponsive();
+              }
+            }
+
+            evt.stopPropagation();
+            evt.preventDefault();
+          })));
+        }
+        if(!this._nextBtnHandler){
+          this._nextBtnHandler = this.own(on(this.nextBtn, 'click', lang.hitch(this, function () {
+            on.emit(this._rawNextBtn, 'click', { cancelable: false, bubbles: true });
+          })));
+        }
+        //replace play btns, under RTL
+        if (window.isRTL) {
+          html.place(this.previousBtn, this.playBtn, "after");
+          html.place(this.nextBtn, this.playBtn, "before");
+        }
+      },
+
+      removeTimeSlider: function() {
+        array.forEach(this._timeHandles, function(handle) {
+          if (handle && handle.remove) {
+            handle.remove();
+          }
+        });
+        if (this.timeSlider && !this.timeSlider._destroyed) {
+          this.timeSlider.destroy();
+          this.timeSlider = null;
+        }
+
+        if (this.map) {
+          this.map.setTimeExtent();
+        }
+      },
+
+      updateLayerLabel: function() {
+        if (this.config.showLabels) {
+          html.setStyle(this.layerLabelsNode, 'display', 'block');
+          var label = this.nls.layers;
+          var names = this.layerProcesser._getVisibleTemporalLayerNames();
+          label = label + names.join(',');
+          this.layerLabelsNode.innerHTML = label;
+          html.setAttr(this.layerLabelsNode, 'title', label);
+        } else {
+          html.setStyle(this.layerLabelsNode, 'display', 'none');
+        }
+      },
+
+      updateTimeExtentLabel: function (timeExtent) {
+        var label = this.timeProcesser._getTimeFormatLabel(timeExtent);
+        //console.log("===>"+label);
+        this.timeExtentLabelNode.innerHTML = label;
+        html.setAttr(this.timeExtentLabelNode, 'title', label);
+      },
+
+      _adaptResponsive: function (optison) {
+        if (!this._showed) {
+          return;
+        }
+
+        setTimeout(lang.hitch(this, function () {
+          if (utils.isRunInMobile()) {
+            this.disableMoveable();
+            html.addClass(this.timeContentNode, 'mobile');
+            html.addClass(this.domNode, 'mobile');
+          } else {
+            //DO NOT makeMoveable, when _clearMiniModeTimer
+            if (!(optison && "undefined" !== typeof optison.refreshMoveable && false === optison.refreshMoveable)) {
+              if ("none" !== html.getStyle(this.noTimeContentNode, "display")) {
+                this.dragHandler = this.noTimeContentNode;
+              } else {
+                this.dragHandler = this.labelContainer;
+              }
+
+              this.makeMoveable(this.dragHandler);
+            }
+
+            html.removeClass(this.timeContentNode, 'mobile');
+            html.removeClass(this.domNode, 'mobile');
+          }
+          this._setPopupPosition(utils.isRunInMobile());
+        }), 10);
+      },
+
+      _setPopupPosition: function (isRunInMobile) {
+        if(!isRunInMobile){
+          //height
+          if (this.config.showLabels){
+            html.setStyle(this.domNode, 'height','92px');
+          } else {
+            html.setStyle(this.domNode, 'height','72px');
+          }
+
+          //do not initPosition it, if moveed by drag
+          if (!this._draged) {
+            utils.initPosition(this.map, this.domNode, this.position);
+          }
+
+          if (!this._moving && this.position &&
+            this.position.left && this.position.top) {
+            html.setStyle(this.domNode, 'top', this.position.top + 'px');
+            html.setStyle(this.domNode, 'left', this.position.left + 'px');
+          }
+        } else {
+          //height
+          if (this.config.showLabels){
+            html.setStyle(this.domNode, 'height','128px');
+          } else {
+            html.setStyle(this.domNode, 'height','108px');
+          }
+        }
+
+        this._setUI(isRunInMobile);
+      },
+      _setUI:function(isRunInMobile){
+        var btnsContainer = html.getContentBox(this.btnsContainer);
+
+        if(isRunInMobile){
+          var screenWidth = window.innerWidth;
+          var middleOfScreenWidth = screenWidth / 2;
+          var left = middleOfScreenWidth - btnsContainer.w / 2;
+
+          if(window.isRTL){
+            html.setStyle(this.btnsContainer, 'margin-right', left + 'px');
+          } else {
+            html.setStyle(this.btnsContainer, 'margin-left', left + 'px');
+          }
+
+          if (this.config.showLabels && !html.hasClass(this.domNode, 'mini-mode')) {
+            html.setStyle(this.sliderContent, 'bottom', '-12px');
+          } else if (this.config.showLabels && html.hasClass(this.domNode, 'mini-mode')) {
+            html.setStyle(this.sliderContent, 'bottom', '20px');
+          }
+
+        } else {
+          html.setStyle(this.btnsContainer, 'margin-left', 'auto');
+          html.setStyle(this.btnsContainer, 'margin-right', 'auto');
+
+          if (this.config.showLabels && !html.hasClass(this.domNode, 'mini-mode')) {
+            //showLabels && no 'mini-mode'
+            html.setStyle(this.sliderContent, 'bottom', '-20px');
+          } else if (this.config.showLabels && html.hasClass(this.domNode, 'mini-mode')) {
+            //showLabels && 'mini-mode'
+            html.setStyle(this.sliderContent, 'bottom', '20px');
+          } else {
+            //no showLabels
+            html.setStyle(this.sliderContent, 'bottom', '0px');
+          }
+        }
+      },
+
+      _onMapResize: function() {
+        if (this.state === 'closed') {
+          return;
+        }
+
+        //initPosition when widget OutofScreen
+        if (utils.isOutOfScreen(this.map, this.position) && !utils.isRunInMobile()) {
+          utils.initPosition(this.map, this.domNode, this.position);
+        }
+
+        this._adaptResponsive();
+      },
+
+      destroy: function() {
+        if (this.map) {
+          this.map.setTimeExtent(null);
+        }
+        this.inherited(arguments);
+      },
+
+
+      //LayerInfosObj
+      _initLayerInfosObj: function () {
+        if (!this._layerInfosDef) {
+          this._layerInfosDef = new Deferred();
+          this.own(this._layerInfosDef);
+
+          LayerInfos.getInstance(this.map, this.map.itemInfo).then(lang.hitch(this, function (layerInfosObj) {
+            // if (this.domNode) {
+            //   }
+            this.layerInfosObj = layerInfosObj;
+            // should check whether is timeInfo layer.
+            this.own(on(
+              layerInfosObj,
+              'layerInfosIsShowInMapChanged',
+              lang.hitch(this, this.layerProcesser._onLayerInfosIsShowInMapChanged)));
+            this.own(layerInfosObj.on(
+              'layerInfosChanged',
+              lang.hitch(this, this.layerProcesser._onLayerInfosChanged)));
+
+            this._layerInfosDef.resolve(this.layerInfosObj);
+          }));
+        }
+
+        return this._layerInfosDef;
+      },
+
+      //miniModeTimer
+      _clearMiniModeTimer: function () {
+        html.removeClass(this.domNode, 'mini-mode');
+        this._adaptResponsive({ refreshMoveable:false });
+        if (this._miniModeTimer) {
+          clearTimeout(this._miniModeTimer);
+        }
+      },
+      _setMiniModeTimer: function () {
+        var time = utils.isRunInMobile() ? 5000 : 2000;
+        this._miniModeTimer = setTimeout(lang.hitch(this, function () {
+          html.addClass(this.domNode, 'mini-mode');
+          this._adaptResponsive();
+        }), time);
+      },
+
+      //moveable
+      makeMoveable: function (handleNode) {
+        this.disableMoveable();
+        var containerBox = domGeometry.getMarginBox(this.map.root);
+        //containerBox.l = containerBox.l - width + tolerance;
+        //containerBox.w = containerBox.w + 2 * (width - tolerance);
+        this.moveable = new Move.boxConstrainedMoveable(this.domNode, {
+          box: containerBox,
+          handle: handleNode || this.handleNode,
+          within: true
+        });
+        this.own(on(this.moveable, 'MoveStart', lang.hitch(this, this.onMoveStart)));
+        this.own(on(this.moveable, 'Moving', lang.hitch(this, this.onMoving)));
+        this.own(on(this.moveable, 'MoveStop', lang.hitch(this, this.onMoveStop)));
+      },
+      disableMoveable: function () {
+        if (this.moveable) {
+          this.dragHandler = null;
+          this.moveable.destroy();
+          this.moveable = null;
+        }
+      },
+      onMoveStart: function (mover) {
+        var containerBox = domGeometry.getMarginBox(this.map.root),
+          domBox = domGeometry.getMarginBox(this.domNode);
+        if (window.isRTL) {
+          var rightPx = html.getStyle(mover.node, 'right');
+          html.setStyle(mover.node, 'left', (containerBox.w - domBox.w - parseInt(rightPx, 10)) + 'px');
+          html.setStyle(mover.node, 'right', '');
+        }
+        //move flag
+        if (!this._draged) {
+          this._draged = true;
+        }
+      },
+      onMoving: function (/*mover*/) {
+        //html.setStyle(mover.node, 'opacity', 0.9);
+        this._moving = true;
+      },
+      onMoveStop: function (mover) {
+        if (mover && mover.node) {
+          html.setStyle(mover.node, 'opacity', 1);
+          var panelBox = domGeometry.getMarginBox(mover.node);
+          this.position.left = panelBox.l;
+          this.position.top = panelBox.t;
+          setTimeout(lang.hitch(this, function () {
+            this._moving = false;
+          }), 500);
+        }
+      },
+      _onHandleClick: function(evt) {
+        evt.stopPropagation();
+      },
+
+      //speed meun
+      _initSpeedMenu: function () {
+        if (!this.speedMenu) {
+          this.speedMenuNode = html.create('div', { "class": "jimu-float-trailing" }, this.sliderContent);
+
+          this.speedMenu = new SpeedMenu({ nls: this.nls }, this.speedMenuNode);
+          this.speedMenuSelectedHanlder = this.own(on(this.speedMenu, 'selected', lang.hitch(this, function (rateStr) {
+            this.getTimeSliderProps().then(lang.hitch(this, function (props) {
+              if (this.timeSlider && props && rateStr) {
+                var rate = parseFloat(rateStr);
+                this.timeSlider.setThumbMovingRate(props.thumbMovingRate / rate);
+              }
+            }));
+          })));
+
+          this.speedMenuOpenHanlder = this.own(on(this.speedMenu, 'open', lang.hitch(this, function () {
+            this._clearMiniModeTimer();
+          })));
+
+          this.speedMenuCloseHanlder = this.own(on(this.speedMenu, 'close', lang.hitch(this, function () {
+            this._setMiniModeTimer();
+          })));
+        }
+      },
+      _destroySpeedMenu: function () {
+        if(this.speedMenu && this.speedMenu.destroy){
+          this.speedMenu.destroy();
+        }
+        this.speedMenu = null;
+        this.speedMenuSelectedHanlder = null;
+        this.speedMenuOpenHanlder = null;
+        this.speedMenuCloseHanlder = null;
+      }
+    });
+    return clazz;
+  });

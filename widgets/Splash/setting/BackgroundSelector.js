@@ -1,11 +1,186 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-require({cache:{"url:widgets/Splash/setting/BackgroundSelector.html":'\x3cdiv\x3e\r\n  \x3cdiv class\x3d"titles"\x3e${nls.background}\x3c/div\x3e\r\n\r\n  \x3cdiv class\x3d"unit-item"\x3e\r\n    \x3cdiv data-dojo-type\x3d"jimu/dijit/RadioBtn" data-dojo-attach-point\x3d"colorFillBtn" data-dojo-props\x3d"group:\'background\'"\x3e\x3c/div\x3e\r\n    \x3clabel class\x3d""\x3e${nls.colorFill}\x3c/label\x3e\r\n  \x3c/div\x3e\r\n  \x3cdiv class\x3d"hide indent" data-dojo-attach-point\x3d"colorFillOptions"\x3e\r\n    \x3cdiv class\x3d"colorPicker" data-dojo-attach-point\x3d"backgroundColorPickerEditor"\x3e\x3c/div\x3e\r\n  \x3c/div\x3e\r\n\r\n  \x3cdiv class\x3d"unit-item"\x3e\r\n    \x3cdiv data-dojo-type\x3d"jimu/dijit/RadioBtn" data-dojo-attach-point\x3d"imageFillBtn" data-dojo-props\x3d"group:\'background\'"\x3e\x3c/div\x3e\r\n    \x3clabel class\x3d""\x3e${nls.imageFill}\x3c/label\x3e\r\n  \x3c/div\x3e\r\n  \x3cdiv class\x3d"hide indent" data-dojo-attach-point\x3d"imageFillOptions"\x3e\r\n    \x3cdiv class\x3d"clearFix"\x3e\r\n      \x3cdiv class\x3d"jimu-float-leading"\x3e\r\n        \x3cdiv class\x3d"image-chooser-base" data-dojo-attach-point\x3d"imageChooser"\x3e\x3c/div\x3e\r\n      \x3c/div\x3e\r\n      \x3cdiv class\x3d"file-name jimu-float-leading" data-dojo-attach-point\x3d"fileName"\x3e${nls.noFileChosen}\x3c/div\x3e\r\n    \x3c/div\x3e\r\n\r\n    \x3cdiv class\x3d"hide clearFix types" data-dojo-attach-point\x3d"fillsType"\x3e\r\n      \x3cdiv class\x3d"unit-item fillstype jimu-float-leading" data-dojo-attach-point\x3d"sizeFill"\x3e\r\n        \x3cdiv data-dojo-type\x3d"jimu/dijit/RadioBtn" data-dojo-attach-point\x3d"fill" data-dojo-props\x3d"group:\'fillStyle\'"\x3e\x3c/div\x3e\r\n        \x3clabel class\x3d""\x3e${nls.sizeFill}\x3c/label\x3e\r\n      \x3c/div\x3e\r\n      \x3cdiv class\x3d"unit-item fillstype jimu-float-leading hide" data-dojo-attach-point\x3d"sizeFit"\x3e\r\n        \x3cdiv data-dojo-type\x3d"jimu/dijit/RadioBtn" data-dojo-attach-point\x3d"fit" data-dojo-props\x3d"group:\'fillStyle\'"\x3e\x3c/div\x3e\r\n        \x3clabel class\x3d""\x3e${nls.sizeFit}\x3c/label\x3e\r\n      \x3c/div\x3e\r\n      \x3cdiv class\x3d"unit-item fillstype jimu-float-leading" data-dojo-attach-point\x3d"sizeStretch"\x3e\r\n        \x3cdiv data-dojo-type\x3d"jimu/dijit/RadioBtn" data-dojo-attach-point\x3d"stretch" data-dojo-props\x3d"group:\'fillStyle\'"\x3e\x3c/div\x3e\r\n        \x3clabel class\x3d""\x3e${nls.sizeStretch}\x3c/label\x3e\r\n      \x3c/div\x3e\r\n      \x3cdiv class\x3d"unit-item fillstype jimu-float-leading hide" data-dojo-attach-point\x3d"sizeCenter"\x3e\r\n        \x3cdiv data-dojo-type\x3d"jimu/dijit/RadioBtn" data-dojo-attach-point\x3d"center" data-dojo-props\x3d"group:\'fillStyle\'"\x3e\x3c/div\x3e\r\n        \x3clabel class\x3d""\x3e${nls.sizeCenter}\x3c/label\x3e\r\n      \x3c/div\x3e\r\n      \x3cdiv class\x3d"unit-item fillstype jimu-float-leading" data-dojo-attach-point\x3d"sizeTile"\x3e\r\n        \x3cdiv data-dojo-type\x3d"jimu/dijit/RadioBtn" data-dojo-attach-point\x3d"tile" data-dojo-props\x3d"group:\'fillStyle\'"\x3e\x3c/div\x3e\r\n        \x3clabel class\x3d""\x3e${nls.sizeTile}\x3c/label\x3e\r\n      \x3c/div\x3e\r\n    \x3c/div\x3e\r\n  \x3c/div\x3e\r\n\x3c/div\x3e'}});
-define("dojo/_base/declare dojo/_base/lang dojo/on dojo/_base/html ./ColorPickerEditor jimu/dijit/ImageChooser dijit/_WidgetBase dijit/_TemplatedMixin dijit/_WidgetsInTemplateMixin dojo/text!./BackgroundSelector.html jimu/dijit/RadioBtn".split(" "),function(f,b,c,d,g,e,h,k,l,m){return f([h,k,l],{templateString:m,nls:null,_defaultColor:"#485566",_defaultTransparency:0,_defaultFillType:"fill",_imageMaxSize:1024,postCreate:function(){this.backgroundColorPicker=new g({nls:this.nls},this.backgroundColorPickerEditor);
-this.backgroundColorPicker.startup();this.imageChooser=new e({cropImage:!1,showSelfImg:!0,format:[e.GIF,e.JPEG,e.PNG],goldenWidth:160,goldenHeight:90,maxSize:this._imageMaxSize,label:this.nls.chooseFile},this.imageChooser);this.inherited(arguments)},startup:function(){this._initBgEvent();this._selectItem(this._defaultFillType);this.sizeType=this._defaultFillType;this.inherited(arguments)},_initBgEvent:function(){this.own(c(this.colorFillBtn,"click",b.hitch(this,function(){this._clickColorFillBtn()})));
-this.own(c(this.imageFillBtn,"click",b.hitch(this,function(){this._clickImageFillBtnBtn()})));this.own(c(this.imageChooser,"imageChange",b.hitch(this,function(a,b){this._showFillsType();b&&this._setFileName(b.fileName)})));this.own(c(this.fill,"click",b.hitch(this,function(){this.sizeType="fill"})));this.own(c(this.fit,"click",b.hitch(this,function(){this.sizeType="fit"})));this.own(c(this.stretch,"click",b.hitch(this,function(){this.sizeType="stretch"})));this.own(c(this.center,"click",b.hitch(this,
-function(){this.sizeType="center"})));this.own(c(this.tile,"click",b.hitch(this,function(){this.sizeType="tile"})))},getValues:function(){var a={};a.mode=this.mode;a.image=this.imageChooser.imageData;a.type=this.sizeType;a.fileName=encodeURIComponent(this.fileName.innerHTML);var b=this.backgroundColorPicker.getValues();a.color=b.color;a.transparency=b.transparency;return a},_setColorPicker:function(a){var b=this._defaultColor,c=this._defaultTransparency;a&&(b=a.color,c=a.transparency);this.backgroundColorPicker.setValues({color:b,
-transparency:c})},setValues:function(a){"undefined"!==typeof a.splash&&"undefined"!==typeof a.splash.background&&(a=a.splash.background,this._setColorPicker(a),a.image&&(this.imageChooser.setDefaultSelfSrc(a.image),this._showFillsType()),a.fileName&&(this.fileName.innerHTML=decodeURIComponent(a.fileName)),a.type&&(this._selectItem(a.type),this.sizeType=a.type),"image"===a.mode?(this._selectItem("imageFillBtn"),this._clickImageFillBtnBtn()):(this._selectItem("colorFillBtn"),this._clickColorFillBtn()))},
-_selectItem:function(a){(a=this[a])&&a.check&&a.check(!0)},_clickColorFillBtn:function(){d.addClass(this.colorFillOptions,"hide");d.addClass(this.imageFillOptions,"hide");d.removeClass(this.colorFillOptions,"hide");this.mode="color"},_clickImageFillBtnBtn:function(){d.addClass(this.colorFillOptions,"hide");d.addClass(this.imageFillOptions,"hide");d.removeClass(this.imageFillOptions,"hide");this.mode="image"},_hideFillsType:function(){d.addClass(this.fillsType,"hide")},_showFillsType:function(){d.removeClass(this.fillsType,
-"hide")},_setFileName:function(a){this.fileName.innerHTML=a}})});
+///////////////////////////////////////////////////////////////////////////
+// Copyright © 2014 - 2017 Esri. All Rights Reserved.
+//
+// Licensed under the Apache License Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////
+
+define([
+    'dojo/_base/declare',
+    "dojo/_base/lang",
+    'dojo/on',
+    'dojo/_base/html',
+    './ColorPickerEditor',
+    'jimu/dijit/ImageChooser',
+    'dijit/_WidgetBase',
+    'dijit/_TemplatedMixin',
+    'dijit/_WidgetsInTemplateMixin',
+    'dojo/text!./BackgroundSelector.html',
+    'jimu/dijit/RadioBtn'
+  ],
+  function(declare, lang, on, html,
+           ColorPickerEditor, ImageChooser,
+           _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template) {
+    return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
+      templateString: template,
+      nls: null,
+      _defaultColor: '#485566',
+      _defaultTransparency: 0,
+      _defaultFillType: "fill",
+      _imageMaxSize: (1024),//1M
+
+      postCreate: function() {
+        this.backgroundColorPicker = new ColorPickerEditor({nls: this.nls}, this.backgroundColorPickerEditor);
+        this.backgroundColorPicker.startup();
+
+        this.imageChooser = new ImageChooser({
+          cropImage: false,
+          showSelfImg: true,
+          format: [ImageChooser.GIF, ImageChooser.JPEG, ImageChooser.PNG],
+          goldenWidth: 160,
+          goldenHeight: 90,
+          maxSize: this._imageMaxSize,
+          label: this.nls.chooseFile
+        }, this.imageChooser);
+
+        this.inherited(arguments);
+      },
+      startup: function() {
+        this._initBgEvent();
+        this._selectItem(this._defaultFillType);
+        this.sizeType = this._defaultFillType;
+        this.inherited(arguments);
+      },
+
+      _initBgEvent: function() {
+        this.own(on(this.colorFillBtn, 'click', lang.hitch(this, function() {
+          this._clickColorFillBtn();
+        })));
+        this.own(on(this.imageFillBtn, 'click', lang.hitch(this, function() {
+          this._clickImageFillBtnBtn();
+        })));
+
+        this.own(on(this.imageChooser, 'imageChange', lang.hitch(this, function(data, fileProperty) {
+          /* jshint unused: true */
+          this._showFillsType();
+          if (fileProperty) {
+            this._setFileName(fileProperty.fileName);
+          }
+        })));
+
+        this.own(on(this.fill, 'click', lang.hitch(this, function() {
+          this.sizeType = "fill";
+        })));
+        this.own(on(this.fit, 'click', lang.hitch(this, function() {
+          this.sizeType = "fit";
+        })));
+        this.own(on(this.stretch, 'click', lang.hitch(this, function() {
+          this.sizeType = "stretch";
+        })));
+        this.own(on(this.center, 'click', lang.hitch(this, function() {
+          this.sizeType = "center";
+        })));
+        this.own(on(this.tile, 'click', lang.hitch(this, function() {
+          this.sizeType = "tile";
+        })));
+      },
+      getValues: function() {
+        var bg = {};
+        bg.mode = this.mode;
+        //if ("image" === this.mode) {
+        //image
+        bg.image = this.imageChooser.imageData;
+        bg.type = this.sizeType;
+        bg.fileName = encodeURIComponent(this.fileName.innerHTML);
+        //} else {
+        //color
+        var bgColor = this.backgroundColorPicker.getValues();
+        bg.color = bgColor.color;
+        bg.transparency = bgColor.transparency;
+        //}
+        return bg;
+      },
+      _setColorPicker: function(bg) {
+        var color = this._defaultColor;
+        var transparency = this._defaultTransparency;
+        if (bg) {
+          color = bg.color;
+          transparency = bg.transparency;
+        }
+
+        this.backgroundColorPicker.setValues({
+          "color": color,
+          "transparency": transparency
+        });
+      },
+      setValues: function(config) {
+        if ("undefined" !== typeof config.splash && "undefined" !== typeof config.splash.background) {
+          var bg = config.splash.background;
+          //if ("image" === bg.mode) {
+          //this._setColorPicker();
+          // } else {
+          this._setColorPicker(bg);
+          if (bg.image) {
+            this.imageChooser.setDefaultSelfSrc(bg.image);
+            this._showFillsType();
+          }
+          if (bg.fileName) {
+            this.fileName.innerHTML = decodeURIComponent(bg.fileName);
+          }
+          if (bg.type) {
+            this._selectItem(bg.type);
+            this.sizeType = bg.type;
+          }
+
+          if ("image" === bg.mode) {
+            this._selectItem("imageFillBtn");
+            this._clickImageFillBtnBtn();
+          } else {
+            this._selectItem("colorFillBtn");
+            this._clickColorFillBtn();
+          }
+          //}
+          // } else {
+          //   this._setColorPicker();
+          //   this._selectItem("colorFillBtn");
+          //   this._clickColorFillBtn();
+        }
+      },
+      _selectItem: function(name) {
+        var _radio = this[name];//registry.byNode(query('.jimu-radio', this[name])[0]);
+        if (_radio && _radio.check) {
+          _radio.check(true);
+        }
+      },
+      _clickColorFillBtn: function() {
+        html.addClass(this.colorFillOptions, 'hide');
+        html.addClass(this.imageFillOptions, 'hide');
+        html.removeClass(this.colorFillOptions, 'hide');
+        this.mode = "color";
+      },
+      _clickImageFillBtnBtn: function() {
+        html.addClass(this.colorFillOptions, 'hide');
+        html.addClass(this.imageFillOptions, 'hide');
+        html.removeClass(this.imageFillOptions, 'hide');
+        this.mode = "image";
+      },
+      _hideFillsType: function() {
+        html.addClass(this.fillsType, 'hide');
+      },
+      _showFillsType: function() {
+        html.removeClass(this.fillsType, 'hide');
+      },
+      _setFileName: function(str) {
+        this.fileName.innerHTML = str;
+      }
+    });
+  });

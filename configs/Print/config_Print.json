@@ -1,0 +1,8 @@
+{
+  "serviceURL": "https://sampleserver6.arcgisonline.com/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task",
+  "defaultTitle": "Min utskrift",
+  "defaultAuthor": "Geonorge",
+  "defaultCopyright": "",
+  "defaultFormat": "PDF",
+  "defaultLayout": "A4 Landscape"
+}

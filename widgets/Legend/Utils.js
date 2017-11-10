@@ -1,5 +1,117 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-define(["dojo/_base/array","jimu/LayerInfos/LayerInfos"],function(c,g){var f=function(){var b=[],d=g.getInstanceSync().getLayerInfoArray();c.forEach(d,function(a){var e=[];a.getShowLegendOfWebmap()&&(a.layerObject&&("esri.layers.ArcGISDynamicMapServiceLayer"===a.layerObject.declaredClass||"esri.layers.ArcGISTiledMapServiceLayer"===a.layerObject.declaredClass)&&a.traversal(function(a){a.isLeaf()&&!a.getShowLegendOfWebmap()&&e.push(a.originOperLayer.mapService.subId)}),a.isMapNotesLayerInfo()?c.forEach(a.getSubLayers(),
-function(a){b.push({layer:a.layerObject,title:"Map Notes - "+a.title})}):b.push({hideLayers:e,layer:a.layerObject,title:a.title}))});return b.reverse()},h=function(b,d){return c.filter(b.layerInfos,function(a){var b=!1;a.id===d&&(b=!0);return b})[0]};return{getLayerInfosParam:function(){return f()},getLayerInfosParamByConfig:function(b){var d=[],a;b.layerInfos&&b.layerInfos.length&&(a=f(),c.forEach(a,function(a){var c=h(b,a.jimuLayerInfo.id);c&&(a.hideLayers=c.hideLayers,d.push(a))}));return d}}});
+/*
+// Copyright © 2014 - 2017 Esri. All rights reserved.
+
+TRADE SECRETS: ESRI PROPRIETARY AND CONFIDENTIAL
+Unpublished material - all rights reserved under the
+Copyright Laws of the United States and applicable international
+laws, treaties, and conventions.
+
+For additional information, contact:
+Attn: Contracts and Legal Department
+Environmental Systems Research Institute, Inc.
+380 New York Street
+Redlands, California, 92373
+USA
+
+email: contracts@esri.com
+*/
+
+define([
+  'dojo/_base/array',
+  'jimu/LayerInfos/LayerInfos'
+], function(array, LayerInfos) {
+
+  var mo = {};
+
+  mo.getLayerInfosParam = function() {
+    // summary:
+    //   get layerInfos parameter for create/refresh/settingPage in legend dijit.
+    // description:
+    var layerInfosParamFromCurrentMap = getLayerInfosParamFromCurrentMap();
+    return layerInfosParamFromCurrentMap;
+  };
+
+  mo.getLayerInfosParamByConfig = function(legendConfig) {
+    var layerInfosParam     = [];
+    var layerInfosParamFromCurrentMap;
+    if(legendConfig.layerInfos && legendConfig.layerInfos.length) {
+      layerInfosParamFromCurrentMap = getLayerInfosParamFromCurrentMap();
+      // respect config
+      array.forEach(layerInfosParamFromCurrentMap, function(layerInfoParam) {
+        var layerInfoConfig = getLayerInfoConfigById(legendConfig, layerInfoParam.jimuLayerInfo.id);
+        if(layerInfoConfig) {
+          layerInfoParam.hideLayers = layerInfoConfig.hideLayers;
+          layerInfosParam.push(layerInfoParam);
+        }
+      });
+    }
+    return layerInfosParam;
+  };
+
+  var getLayerInfosParamFromCurrentMap = function() {
+    var layerInfosParam     = [];
+    var jimuLayerInfos      = LayerInfos.getInstanceSync();
+    var jimuLayerInfoArray  = jimuLayerInfos.getLayerInfoArray();
+    array.forEach(jimuLayerInfoArray, function(topLayerInfo) {
+      var hideLayers = [];
+      if(topLayerInfo.getShowLegendOfWebmap()) {
+        // temporary code.
+        if(topLayerInfo.layerObject &&
+           (topLayerInfo.layerObject.declaredClass === 'esri.layers.ArcGISDynamicMapServiceLayer' ||
+            topLayerInfo.layerObject.declaredClass === 'esri.layers.ArcGISTiledMapServiceLayer')) {
+          // topLayerInfo.traversal(function(layerInfo) {
+          //   if(layerInfo.isLeaf() && !layerInfo.getShowLegendOfWebmap()) {
+          //     hideLayers.push(layerInfo.originOperLayer.mapService.subId);
+          //   }
+          // });
+          var baseLayerInfos = topLayerInfo.layerObject.dynamicLayerInfos || topLayerInfo.layerObject.layerInfos;
+          array.forEach(baseLayerInfos, function(jsapiLayerInfo) {
+            var subLayerInfo = null;
+            topLayerInfo.traversal(function(layerInfo) {
+              if(layerInfo.subId === jsapiLayerInfo.id) {
+                if(layerInfo.isLeaf() && !layerInfo.getShowLegendOfWebmap()) {
+                  hideLayers.push(layerInfo.originOperLayer.mapService.subId);
+                }
+                subLayerInfo = layerInfo;
+                return true;
+              }
+            });
+            if(!subLayerInfo) {
+              hideLayers.push(jsapiLayerInfo.id);
+            }
+          });
+        }
+        // add to layerInfosparam
+        if(topLayerInfo.isMapNotesLayerInfo()) {
+          array.forEach(topLayerInfo.getSubLayers(), function(mapNotesSubLayerInfo) {
+            var layerInfoParam = {
+              layer: mapNotesSubLayerInfo.layerObject,
+              title: "Map Notes - " + mapNotesSubLayerInfo.title
+            };
+            layerInfosParam.push(layerInfoParam);
+          });
+        } else {
+          var layerInfoParam = {
+            hideLayers: hideLayers,
+            layer: topLayerInfo.layerObject,
+            title: topLayerInfo.title
+          };
+          layerInfosParam.push(layerInfoParam);
+        }
+      }
+    });
+    return layerInfosParam.reverse();
+  };
+
+  var getLayerInfoConfigById = function(legendConfig, id) {
+    var layerInfoConfig = array.filter(legendConfig.layerInfos, function(layerInfoConfig) {
+      var result = false;
+      if(layerInfoConfig.id === id) {
+        result = true;
+      }
+      return result;
+    });
+    return layerInfoConfig[0];
+  };
+  return mo;
+});

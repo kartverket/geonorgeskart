@@ -1,5 +1,0 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-define({"dojox/form/nls/CheckedMultiSelect":{invalidMessage:"Er moet ten minste \u00e9\u00e9n item geselecteerd worden.",multiSelectLabelText:"{num} item(s) geselecteerd",_localized:{}},"widgets/ObliqueViewer/setting/nls/strings":{layerSelect:"Selecteer de laag",elevationFieldSelect:"Hoogteveld",azimuthFieldSelect:"Azimuth-veld",showThumbnailText:"Miniatuurweergaven weergeven in rasterlijst",rasterInfoFieldsSelect:"Selecteer lijst infovelden",fieldLimitText:"Er kunnen maximaal 3 velden geselecteerd worden.",
-autoSyncText:"Synchroniseer hoofdkaart",errorSectionMeasage:"Geen imageservicelagen aanwezig in de geselecteerde kaart. Selecteer een kaart met een imageservicelaag met obliekbeelden.",_localized:{}}});

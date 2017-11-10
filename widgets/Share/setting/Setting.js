@@ -1,8 +1,86 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-require({cache:{"widgets/Share/setting/_build-generate_module":function(){define(["dojo/text!./Setting.html","dojo/text!./css/style.css","dojo/i18n!./nls/strings"],function(){})},"url:widgets/Share/setting/Setting.html":'\x3cdiv\x3e\r\n  ${nls.selectSocialNetwork}\r\n  \x3cdiv class\x3d"row"\x3e\r\n    \x3cdiv class\x3d"cb" data-dojo-type\x3d"jimu/dijit/CheckBox" data-dojo-attach-point\x3d"email"\x3e\x3c/div\x3e\r\n    \x3cdiv class\x3d"cb-label"\x3e${nls.email}\x3c/div\x3e\r\n  \x3c/div\x3e\r\n  \x3cdiv class\x3d"row"\x3e\r\n    \x3cdiv class\x3d"cb" data-dojo-type\x3d"jimu/dijit/CheckBox" data-dojo-attach-point\x3d"facebook"\x3e\x3c/div\x3e\r\n    \x3cdiv class\x3d"cb-label"\x3e${nls.facebook}\x3c/div\x3e\r\n  \x3c/div\x3e\r\n  \x3cdiv class\x3d"row"\x3e\r\n    \x3cdiv class\x3d"cb" data-dojo-type\x3d"jimu/dijit/CheckBox" data-dojo-attach-point\x3d"twitter"\x3e\x3c/div\x3e\r\n    \x3cdiv class\x3d"cb-label"\x3e${nls.twitter}\x3c/div\x3e\r\n  \x3c/div\x3e\r\n  \x3cdiv class\x3d"row"\x3e\r\n    \x3cdiv class\x3d"cb" data-dojo-type\x3d"jimu/dijit/CheckBox" data-dojo-attach-point\x3d"googlePlus"\x3e\x3c/div\x3e\r\n    \x3cdiv class\x3d"cb-label"\x3e${nls.googlePlus}\x3c/div\x3e\r\n  \x3c/div\x3e\r\n\x3c/div\x3e\r\n',
-"url:widgets/Share/setting/css/style.css":".jimu-widget-share-setting {}.jimu-widget-share-setting .row {height: 30px; line-height: 30px; vertical-align: middle;}.jimu-widget-share-setting .cb {vertical-align: middle; margin: 0 5px;}.jimu-widget-share-setting .cb-label {display: inline-block; vertical-align: middle;}","*now":function(b){b(['dojo/i18n!*preload*widgets/Share/setting/nls/Setting*["ar","cs","da","de","en","el","es","et","fi","fr","he","hr","it","ja","ko","lt","lv","nb","nl","pl","pt-br","pt-pt","ro","ru","sr","sv","th","tr","zh-cn","vi","zh-hk","zh-tw","ROOT"]'])}}});
-define(["dojo/_base/declare","dojo/_base/lang","dijit/_WidgetsInTemplateMixin","jimu/BaseWidgetSetting","jimu/dijit/CheckBox"],function(b,c,d,e){return b([e,d],{baseClass:"jimu-widget-share-setting",postMixInProperties:function(){this.inherited(arguments);this.nls.email=window.jimuNls.shareLink.email;this.nls.facebook=window.jimuNls.shareLink.facebook;this.nls.googlePlus=window.jimuNls.shareLink.googlePlus;this.nls.twitter=window.jimuNls.shareLink.twitter},startup:function(){this.inherited(arguments);
-this.config||(this.config={});this.setConfig(this.config)},setConfig:function(a){this.config=a;this.email.setValue(!0);this.facebook.setValue(!0);this.twitter.setValue(!0);this.googlePlus.setValue(!0);a.socialMedias&&(!1===a.socialMedias.email&&this.email.setValue(!1),!1===a.socialMedias.facebook&&this.facebook.setValue(!1),!1===a.socialMedias.twitter&&this.twitter.setValue(!1),!1===a.socialMedias.googlePlus&&this.googlePlus.setValue(!1))},getConfig:function(){var a={},a=c.mixin(a,this.config.socialMedias);
-this.email&&(a.email=this.email.getValue());this.facebook&&(a.facebook=this.facebook.getValue());this.twitter&&(a.twitter=this.twitter.getValue());this.googlePlus&&(a.googlePlus=this.googlePlus.getValue());this.config.socialMedias=a;return this.config}})});
+///////////////////////////////////////////////////////////////////////////
+// Copyright © 2014 - 2017 Esri. All Rights Reserved.
+//
+// Licensed under the Apache License Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////
+
+define([
+    'dojo/_base/declare',
+    "dojo/_base/lang",
+    'dijit/_WidgetsInTemplateMixin',
+    'jimu/BaseWidgetSetting',
+    'jimu/dijit/CheckBox'
+  ],
+  function(declare, lang, _WidgetsInTemplateMixin, BaseWidgetSetting) {
+    return declare([BaseWidgetSetting, _WidgetsInTemplateMixin], {
+      baseClass: 'jimu-widget-share-setting',
+
+      postMixInProperties: function() {
+        this.inherited(arguments);
+        this.nls.email = window.jimuNls.shareLink.email;
+        this.nls.facebook = window.jimuNls.shareLink.facebook;
+        this.nls.googlePlus = window.jimuNls.shareLink.googlePlus;
+        this.nls.twitter = window.jimuNls.shareLink.twitter;
+      },
+
+      startup: function() {
+        this.inherited(arguments);
+        if (!this.config) {
+          this.config = {};
+        }
+        this.setConfig(this.config);
+      },
+
+      setConfig: function(config) {
+        this.config = config;
+
+        this.email.setValue(true);
+        this.facebook.setValue(true);
+        this.twitter.setValue(true);
+        this.googlePlus.setValue(true);
+        if (config.socialMedias) {
+          if (false === config.socialMedias.email) {
+            this.email.setValue(false);
+          }
+          if (false === config.socialMedias.facebook) {
+            this.facebook.setValue(false);
+          }
+          if (false === config.socialMedias.twitter) {
+            this.twitter.setValue(false);
+          }
+          if (false === config.socialMedias.googlePlus) {
+            this.googlePlus.setValue(false);
+          }
+        }
+      },
+
+      getConfig: function() {
+        var socialMedias = {};
+        socialMedias = lang.mixin(socialMedias, this.config.socialMedias);
+        if (this.email) {
+          socialMedias.email = this.email.getValue();
+        }
+        if (this.facebook) {
+          socialMedias.facebook = this.facebook.getValue();
+        }
+        if (this.twitter) {
+          socialMedias.twitter = this.twitter.getValue();
+        }
+        if (this.googlePlus) {
+          socialMedias.googlePlus = this.googlePlus.getValue();
+        }
+        this.config.socialMedias = socialMedias;
+        return this.config;
+      }
+    });
+  });

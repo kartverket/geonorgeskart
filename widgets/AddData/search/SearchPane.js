@@ -1,11 +1,202 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-require({cache:{"url:widgets/AddData/search/templates/SearchPane.html":'\x3cdiv class\x3d"search-pane-wrapper"\x3e\r\n  \x3cdiv data-dojo-attach-point\x3d"tabNode"\x3e\x3c/div\x3e\r\n  \x3cdiv class\x3d"search-pane" data-dojo-attach-point\x3d"onlinePane"\x3e\r\n    \x3cdiv class\x3d"search-pane-header" data-dojo-attach-point\x3d"headerNode"\x3e\r\n      \x3cdiv class\x3d"search-bar main-search-bar"\x3e\r\n        \x3cdiv data-dojo-type\x3d"widgets/AddData/search/ScopeOptions"\r\n          data-dojo-attach-point\x3d"scopeOptions"\x3e\r\n        \x3c/div\x3e\r\n        \x3cspan class\x3d"search-box-placeholder" data-dojo-attach-point\x3d"searchBoxPlaceholder"\x3e\x3c/span\x3e\r\n        \x3cdiv data-dojo-type\x3d"widgets/AddData/search/SearchBox"\r\n          data-dojo-attach-point\x3d"searchBox"\x3e\r\n        \x3c/div\x3e\r\n      \x3c/div\x3e\r\n      \x3cdiv class\x3d"search-bar-separator"\x3e\x3c/div\x3e\r\n      \x3cdiv class\x3d"search-bar search-bar-secondary" data-dojo-attach-point\x3d"optionsNode"\x3e\r\n        \x3cdiv data-dojo-type\x3d"widgets/AddData/search/BBoxOption"\r\n          data-dojo-attach-point\x3d"bboxOption"\x3e\r\n        \x3c/div\x3e\r\n        \x3cspan class\x3d"filter-placeholder" data-dojo-attach-point\x3d"filterPlaceholder"\x3e\x3c/span\x3e\r\n        \x3cdiv class\x3d"filter-wrapper" data-dojo-attach-point\x3d"filterWrapper"\x3e\r\n          \x3cdiv data-dojo-type\x3d"widgets/AddData/search/TypeOptions"\r\n            data-dojo-attach-point\x3d"typeOptions"\x3e\r\n          \x3c/div\x3e\r\n          \x3cdiv data-dojo-type\x3d"widgets/AddData/search/SortOptions"\r\n            data-dojo-attach-point\x3d"sortOptions"\x3e\r\n          \x3c/div\x3e\r\n        \x3c/div\x3e\r\n      \x3c/div\x3e\r\n    \x3c/div\x3e\r\n    \x3cdiv class\x3d"search-pane-content" data-dojo-attach-point\x3d"contentNode"\x3e\r\n      \x3cdiv data-dojo-type\x3d"widgets/AddData/search/ResultsPane"\r\n        data-dojo-attach-point\x3d"resultsPane"\x3e\r\n      \x3c/div\x3e\r\n    \x3c/div\x3e\r\n    \x3cdiv class\x3d"search-bar search-pane-footer" data-dojo-attach-point\x3d"footerNode"\x3e\r\n      \x3cdiv data-dojo-type\x3d"widgets/AddData/search/Paging"\r\n        data-dojo-attach-point\x3d"paging"\x3e\r\n      \x3c/div\x3e\r\n      \x3cdiv data-dojo-type\x3d"widgets/AddData/search/ResultCount"\r\n        data-dojo-attach-point\x3d"resultCount"\x3e\r\n      \x3c/div\x3e\r\n      \x3c!-- \x3cdiv class\x3d"footerOptions"\x3e\r\n        \x3ca href\x3d"#"\r\n          data-dojo-attach-point\x3d"FromUrlNode"\r\n          data-dojo-attach-event\x3d"onClick: addFromUrlClicked"\x3e${i18n.addFromUrl.buttonLabel}\x3c/a\x3e\r\n      \x3c/div\x3e --\x3e\r\n      \x3cdiv style\x3d"clear:both"\x3e\x3c/div\x3e\r\n    \x3c/div\x3e\r\n  \x3c/div\x3e\r\n  \x3cdiv class\x3d"search-pane" data-dojo-attach-point\x3d"urlPane"\x3e\r\n    \x3c!-- \x3cdiv data-dojo-type\x3d"widgets/AddData/search/AddFromUrlPane" data-dojo-attach-point\x3d"addFromUrlPane"\x3e\x3c/div\x3e --\x3e\r\n  \x3c/div\x3e\r\n\x3c/div\x3e\r\n'}});
-define("dojo/_base/declare dojo/_base/lang dojo/_base/array dojo/_base/html dojo/on dojo/dom-class dijit/_WidgetBase dijit/_TemplatedMixin dijit/_WidgetsInTemplateMixin dojo/text!./templates/SearchPane.html dojo/i18n!../nls/strings jimu/dijit/TabContainer3 ./AddFromUrlPane ./SearchBox ./BBoxOption ./ScopeOptions ./TypeOptions ./SortOptions ./ResultsPane ./Paging ./ResultCount".split(" "),function(h,d,f,e,g,b,k,l,m,n,p,q,r){return h([k,l,m],{i18n:p,templateString:n,qDefaultFilter:null,qRequiredFilter:null,
-searchOnStart:!0,searchContext:null,wabWidget:null,_dfd:null,postCreate:function(){this.inherited(arguments);f.forEach(this.getComponents(),function(b){b.searchPane=this},this);this.initTabs()},startup:function(){this._started||(this.inherited(arguments),this.bindEvents(),this.initOptions(),this.searchOnStart&&this.search())},initTabs:function(){this.addFromUrlPane=new r({searchPane:this});e.place(this.addFromUrlPane.domNode,this.urlPane);this.tab=new q({tabs:[{title:this.nls.search.searchBox.search,
-content:this.onlinePane},{title:this.nls.search.url,content:this.urlPane}]},this.tabNode);e.place(this.tab.domNode,this.domNode)},_onFilterPlaceholderChanged:function(){b.contains(this.filterPlaceholder,"opened")?(b.remove(this.filterPlaceholder,"opened"),b.remove(this.filterWrapper,"show")):(this.filterWrapper.style.top=this.headerNode.clientHeight+"px",b.add(this.filterPlaceholder,"opened"),b.add(this.filterWrapper,"show"))},_onSearchBoxPlaceholderChanged:function(){this.searchBox&&(b.contains(this.searchBoxPlaceholder,
-"opened")?(b.remove(this.searchBoxPlaceholder,"opened"),b.remove(this.searchBox.domNode,"show")):(b.add(this.searchBoxPlaceholder,"opened"),b.add(this.searchBox.domNode,"show"),this.searchBox.searchTextBox.focus()))},bindEvents:function(){this.own(g(this.filterPlaceholder,"click",d.hitch(this,this._onFilterPlaceholderChanged)));this.own(g(this.searchBoxPlaceholder,"click",d.hitch(this,this._onSearchBoxPlaceholderChanged)))},buildQueryParams:function(b){var c=null;"string"===typeof this.qRequiredFilter&&
-0<this.qRequiredFilter.length&&(c=this.qRequiredFilter);var a={q:c,canSortByRelevance:!1};f.forEach(this.getComponents(),function(c){c.appendQueryParams(a,b)});delete a.canSortByRelevance;null===a.q&&("string"===typeof this.qDefaultFilter&&0<this.qDefaultFilter.length)&&(a.q=this.qDefaultFilter);return a},getComponents:function(){return[this.searchBox,this.bboxOption,this.scopeOptions,this.typeOptions,this.sortOptions,this.resultsPane,this.paging,this.resultCount]},initOptions:function(){},resize:function(){this.contentNode.style.top=
-this.headerNode.clientHeight+1+"px";this.contentNode.style.bottom=this.footerNode.clientHeight+1+"px"},search:function(){var b=this,c={},a=this.buildQueryParams(c);if(!(null===a||null===a.q)){a&&null===a.sortField&&(a.sortOrder="desc");var d=this.searchContext.portal;c.scopeIsArcGISOnline&&this.searchContext.arcgisOnlinePortal&&(d=this.searchContext.arcgisOnlinePortal);null!==this._dfd&&this._dfd.cancel("Search aborted.",!1);var e=null;this._dfd=e=d.queryItems(a).then(function(a){e.isCanceled()||
-(a.queryParams||(a.queryParams={start:a.start,num:a.num},!a.nextQueryParams&&("undefined"!==typeof a.nextStart&&-1!==a.nextStart)&&(a.nextQueryParams={start:a.nextStart})),f.forEach(b.getComponents(),function(b){b.processResults(a)}))}).otherwise(function(a){console.warn("searchError",a)})}}})});
+///////////////////////////////////////////////////////////////////////////
+// Copyright © 2016 Esri. All Rights Reserved.
+//
+// Licensed under the Apache License Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////
+define(["dojo/_base/declare",
+    "dojo/_base/lang",
+    "dojo/_base/array",
+    "dojo/on",
+    "dojo/dom-class",
+    "dijit/_WidgetBase",
+    "dijit/_TemplatedMixin",
+    "dijit/_WidgetsInTemplateMixin",
+    "dojo/text!./templates/SearchPane.html",
+    "dojo/i18n!../nls/strings",
+    "./SearchBox",
+    "./BBoxOption",
+    "./ScopeOptions",
+    "./TypeOptions",
+    "./SortOptions",
+    "./ResultsPane",
+    "./Paging",
+    "./ResultCount"
+  ],
+  function(declare, lang, array, on, domClass, _WidgetBase, _TemplatedMixin,
+    _WidgetsInTemplateMixin, template, i18n) {
+
+    return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
+
+      i18n: i18n,
+      templateString: template,
+
+      qDefaultFilter: null,
+      qRequiredFilter: null,
+      searchOnStart: true,
+
+      searchContext: null,
+      wabWidget: null,
+
+      _dfd: null,
+
+      postCreate: function() {
+        this.inherited(arguments);
+        array.forEach(this.getComponents(), function(component) {
+          component.searchPane = this;
+        }, this);
+      },
+
+      startup: function() {
+        if (this._started) {
+          return;
+        }
+        this.inherited(arguments);
+        //console.warn("SearchPane.startup .......................");
+        this.bindEvents();
+        if (this.searchOnStart) {
+          this.search();
+        }
+      },
+
+      _onFilterPlaceholderChanged: function() {
+        if (domClass.contains(this.filterPlaceholder, "opened")) {
+          domClass.remove(this.filterPlaceholder, "opened");
+          domClass.remove(this.filterWrapper, "show");
+        } else {
+          this.filterWrapper.style.top = this.headerNode.clientHeight + "px";
+          domClass.add(this.filterPlaceholder, "opened");
+          domClass.add(this.filterWrapper, "show");
+        }
+      },
+
+      _onSearchBoxPlaceholderChanged: function() {
+        /*
+        if (!this.searchBox) {
+          return;
+        }
+        if (domClass.contains(this.searchBoxPlaceholder, "opened")) {
+          domClass.remove(this.searchBoxPlaceholder, "opened");
+          domClass.remove(this.searchBox.domNode, "show");
+        } else {
+          domClass.add(this.searchBoxPlaceholder, "opened");
+          domClass.add(this.searchBox.domNode, "show");
+          this.searchBox.searchTextBox.focus();
+        }
+        */
+      },
+
+      bindEvents: function() {
+        // TODO
+        this.own(on(this.filterPlaceholder,'click',
+          lang.hitch(this, this._onFilterPlaceholderChanged)));
+
+        // TODO
+        /*
+        this.own(on(this.searchBoxPlaceholder,
+          'click',
+          lang.hitch(this, this._onSearchBoxPlaceholderChanged)));
+        */
+      },
+
+      buildQueryParams: function(task) {
+        var qRequired = null;
+        if (typeof this.qRequiredFilter === "string" && this.qRequiredFilter.length > 0) {
+          qRequired = this.qRequiredFilter;
+        }
+        var params = {
+          q: qRequired,
+          canSortByRelevance: false
+        };
+        array.forEach(this.getComponents(), function(component) {
+          component.appendQueryParams(params, task);
+        });
+        delete params.canSortByRelevance;
+        if (params.q === null && typeof this.qDefaultFilter === "string" &&
+          this.qDefaultFilter.length > 0) {
+          params.q = this.qDefaultFilter;
+        }
+        return params;
+      },
+
+      getComponents: function() {
+        return [this.searchBox,
+          this.bboxOption,
+          this.scopeOptions,
+          this.typeOptions,
+          this.sortOptions,
+          this.resultsPane,
+          this.paging,
+          this.resultCount
+        ];
+      },
+
+      resize: function() {
+        this.contentNode.style.top = this.headerNode.clientHeight + 1 + "px";
+      },
+
+      search: function() {
+        var self = this, task = {};
+        var params = this.buildQueryParams(task);
+        if (params === null || params.q === null) {
+          return;
+        }
+        if (params && params.sortField === null) {
+          params.sortOrder = "desc"; // (wab queryItems issue - unable to use relevance)
+          //console.warn("search-params",params);
+        }
+        var portal = this.searchContext.portal;
+        if (task.scopeIsArcGISOnline && this.searchContext.arcgisOnlinePortal) {
+          portal = this.searchContext.arcgisOnlinePortal;
+        }
+        //console.warn("portal",portal);
+
+        if (this._dfd !== null) {
+          this._dfd.cancel("Search aborted.", false);
+        }
+        var dfd = null;
+        this._dfd = dfd = portal.queryItems(params).then(function(searchResponse) {
+          //console.warn("searchResponse",searchResponse);
+          if (!dfd.isCanceled()) {
+            if (!searchResponse.queryParams) {
+              searchResponse.queryParams = {
+                start: searchResponse.start,
+                num: searchResponse.num
+              };
+              if (!searchResponse.nextQueryParams) {
+                if (typeof searchResponse.nextStart !== "undefined" &&
+                  searchResponse.nextStart !== -1) {
+                  searchResponse.nextQueryParams = {
+                    start: searchResponse.nextStart
+                  };
+                }
+              }
+            }
+            array.forEach(self.getComponents(), function(component) {
+              component.processResults(searchResponse);
+            });
+          }
+        }).otherwise(function(error) {
+          // TODO handle the error
+          console.warn("searchError", error);
+        });
+      },
+
+      _showLayers: function(){
+        if (this.wabWidget) {
+          this.wabWidget.showLayers();
+        }
+      }
+
+    });
+
+  });

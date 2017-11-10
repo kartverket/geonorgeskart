@@ -1,29 +1,512 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-require({cache:{"widgets/Edit/setting/EditFields":function(){define("dojo/_base/declare dojo/_base/lang dojo/_base/array dojo/text!./EditFields.html dijit/_TemplatedMixin jimu/BaseWidgetSetting jimu/dijit/SimpleTable jimu/dijit/Popup".split(" "),function(l,k,m,a,g,e,b,h){return l([e,g],{baseClass:"jimu-widget-edit-setting-fields",templateString:a,_layerInfo:null,postCreate:function(){this.inherited(arguments);this.nls=k.mixin(this.nls,window.jimuNls.common);this._initFieldsTable();this._setFiedsTabele(this._layerInfo.fieldInfos)},
-popupEditPage:function(){var a=new h({titleLabel:this.nls.configureFields,width:640,maxHeight:600,autoHeight:!0,content:this,buttons:[{label:this.nls.ok,onClick:k.hitch(this,function(){this._resetFieldInfos();a.close()})},{label:this.nls.cancel,classNames:["jimu-btn-vacation"],onClick:k.hitch(this,function(){a.close()})}],onClose:k.hitch(this,function(){})})},_initFieldsTable:function(){this._fieldsTable=new b({fields:[{name:"visible",title:this.nls.display,type:"checkbox","class":"display"},{name:"isEditable",
-title:this.nls.edit,type:"checkbox","class":"editable"},{name:"fieldName",title:this.nls.editpageName,type:"text"},{name:"label",title:this.nls.editpageAlias,type:"text",editable:!0},{name:"actions",title:this.nls.actions,type:"actions",actions:["up","down"],"class":"actions"}],selectable:!1,style:{height:"300px",maxHeight:"300px"}});this._fieldsTable.placeAt(this.fieldsTable);this._fieldsTable.startup()},_setFiedsTabele:function(a){m.forEach(a,function(a){this._fieldsTable.addRow({fieldName:a.fieldName,
-isEditable:a.isEditable,label:a.label,visible:a.visible})},this);setTimeout(k.hitch(this,function(){m.forEach(this._fieldsTable.fields,function(a){"visible"===a.name?a.onChange=k.hitch(this,this._onDisplayFieldChanged):"isEditable"===a.name&&(a.onChange=k.hitch(this,this._onIsEditableFieldChanged))},this)}),300)},_onDisplayFieldChanged:function(a){var b=this._fieldsTable.getRowData(a);!b.visible&&b.isEditable&&(b.isEditable=!1,this._fieldsTable.editRow(a,b))},_onIsEditableFieldChanged:function(a){var b=
-this._fieldsTable.getRowData(a);b.isEditable&&!b.visible&&(b.visible=!0,this._fieldsTable.editRow(a,b))},_resetFieldInfos:function(){var a=[],b=this._fieldsTable.getData();m.forEach(b,function(b){a.push({fieldName:b.fieldName,label:b.label,isEditable:b.isEditable,visible:b.visible})});this._layerInfo.fieldInfos=a}})})},"widgets/Edit/utils":function(){define(["dojo/_base/lang","dojo/_base/array","jimu/utils"],function(l,k,m){_ignoreCaseToGetFieldObject=function(a,g){var e=null;a&&a.fields&&k.some(a.fields,
-function(a){if(a.name.toLowerCase()===g.toLowerCase())return e=a,!0});return e};_ignoreCaseToGetOrUpdateAttrByFieldKey=function(a,g,e){var b=null;if(a&&a.attributes)for(var h in a.attributes)if(a.attributes.hasOwnProperty(h)&&"function"!==typeof a.attributes[h]&&h.toLowerCase()===g.toLowerCase()){b=e?a.attributes[h]=e:a.attributes[h];break}return b};return{getFieldInfosFromWebmap:function(a,g){var e=null,b=g.getLayerInfoByTopLayerId(a);b&&(b=b.getPopupInfo())&&b.fieldInfos&&(e=l.clone(b.fieldInfos));
-e&&k.forEach(e,function(a){a.format&&(a.format.dateFormat&&a.format.dateFormat.toLowerCase()&&0<=a.format.dateFormat.toLowerCase().indexOf("time"))&&(a.format.time=!0)});return e},getLocaleDateTime:function(a){return m.localizeDate(new Date(a),{fullYear:!0,formatLength:"medium"})},getAttrByFieldKey:function(a,g){return _ignoreCaseToGetOrUpdateAttrByFieldKey(a,g)},setAttrByFieldKey:function(a,g,e){return _ignoreCaseToGetOrUpdateAttrByFieldKey(a,g,e)},ignoreCaseToGetFieldKey:function(a,g){var e=null,
-b=_ignoreCaseToGetFieldObject(a,g);b&&(e=b.name);return e},ignoreCaseToGetFieldObject:function(a,g){return _ignoreCaseToGetFieldObject(a,g)}}})},"widgets/Edit/setting/_build-generate_module":function(){define(["dojo/text!./Setting.html","dojo/text!./css/style.css","dojo/i18n!./nls/strings"],function(){})},"url:widgets/Edit/setting/EditFields.html":'\x3cdiv\x3e\r\n  \x3cdiv data-dojo-attach-point\x3d"fieldsTable"\x3e\x3c/div\x3e\r\n\x3c/div\x3e',"url:widgets/Edit/setting/Setting.html":'\x3cdiv style\x3d"width:100%;"\x3e\r\n  \x3cdiv data-dojo-attach-point\x3d"firstPageDiv"\x3e\r\n    \x3ctable class\x3d"setting-table input-table" cellspacing\x3d"0"\x3e\r\n      \x3ctbody\x3e\r\n        \x3ctr\x3e\r\n            \x3ctd class\x3d"first jimu-trailing-padding1"\x3e${nls.useFilterEdit}\x3c/td\x3e\r\n            \x3ctd class\x3d"second jimu-leading-padding1"\x3e\r\n                \x3cdiv class\x3d"" style\x3d""\x3e\r\n                    \x3cinput data-dojo-attach-point\x3d"useFilterEdit"\r\n                           data-dojo-type\x3d"dijit/form/CheckBox" /\x3e\r\n                \x3c/div\x3e\r\n            \x3c/td\x3e\r\n        \x3c/tr\x3e\r\n        \x3ctr\x3e\r\n          \x3ctd class\x3d"first jimu-trailing-padding1"\x3e${nls.toolbarVisible}\x3c/td\x3e\r\n          \x3ctd class\x3d"second jimu-leading-padding1"\x3e\r\n            \x3cdiv class\x3d"" style\x3d""\x3e\r\n              \x3cinput data-dojo-attach-point\x3d"toolbarVisible" \r\n              data-dojo-attach-event\x3d"click:_onToolbarSelected"\r\n              data-dojo-type\x3d"dijit/form/CheckBox"/\x3e\r\n            \x3c/div\x3e\r\n          \x3c/td\x3e\r\n        \x3c/tr\x3e\r\n        \x3ctr class\x3d"toolbar-options-tr" data-dojo-attach-point\x3d"toolbarOptionsTr"\x3e\r\n          \x3ctd class\x3d"first jimu-trailing-padding1  toolbar-options-td" data-dojo-attach-point\x3d"toolbarOptionsLabel"\x3e${nls.toolbarOptions}\x3c/td\x3e\r\n          \x3ctd class\x3d"second jimu-leading-padding1  toolbar-options-td" data-dojo-attach-point\x3d"toolbarOptionsTd"\x3e\r\n            \x3cspan class\x3d"jimu-trailing-margin05 jimu-float-leading"\x3e${nls.mergeVisible}\x3c/span\x3e\r\n            \x3cdiv class\x3d"jimu-trailing-margin2 jimu-float-leading" style\x3d"position: relative"\x3e\r\n              \x3cdiv class\x3d"toolbar-options-coverage" data-dojo-attach-point\x3d"toolbarOptionsCoverage"\x3e\x3c/div\x3e\r\n              \x3cinput   data-dojo-attach-point\x3d"mergeVisible" \r\n              data-dojo-type\x3d"dijit/form/CheckBox"/\x3e\r\n            \x3c/div\x3e\r\n\r\n            \x3cspan class\x3d"jimu-trailing-margin05 jimu-float-leading" \x3e${nls.cutVisible}\x3c/span\x3e\r\n            \x3cdiv class\x3d"jimu-trailing-margin2 jimu-float-leading"\x3e\r\n              \x3cinput data-dojo-attach-point\x3d"cutVisible" \r\n              data-dojo-type\x3d"dijit/form/CheckBox"/\x3e\r\n            \x3c/div\x3e\r\n\r\n            \x3cspan class\x3d"jimu-trailing-margin05 jimu-float-leading" \x3e${nls.reshapeVisible}\x3c/span\x3e\r\n            \x3cdiv class\x3d"jimu-trailing-margin2 jimu-float-leading"\x3e\r\n              \x3cinput data-dojo-attach-point\x3d"reshapeVisible" \r\n              data-dojo-type\x3d"dijit/form/CheckBox"/\x3e\r\n            \x3c/div\x3e\r\n\r\n            \x3cspan class\x3d"jimu-trailing-margin05 jimu-float-leading" \x3e${nls.enableUndoRedo}\x3c/span\x3e\r\n             \x3cdiv class\x3d"jimu-trailing-margin2 jimu-float-leading"\x3e\r\n              \x3cinput  data-dojo-attach-point\x3d"enableUndoRedo" \r\n              data-dojo-type\x3d"dijit/form/CheckBox"/\x3e\r\n            \x3c/div\x3e\r\n          \x3c/td\x3e\r\n          \x3ctd\x3e\x3cdiv style\x3d"height: 40px;"\x3e\x3c/div\x3e\x3c/td\x3e\r\n        \x3c/tr\x3e\r\n        \x3ctr\x3e\r\n          \x3ctd class\x3d"first jimu-trailing-padding1"\x3e${nls.autoApplyEditWhenGeometryIsMoved}\x3c/td\x3e\r\n          \x3ctd class\x3d"second jimu-leading-padding1"\x3e\r\n            \x3cdiv class\x3d"" style\x3d""\x3e\r\n              \x3cinput data-dojo-attach-point\x3d"autoApplyEditWhenGeometryIsMoved" \r\n              data-dojo-type\x3d"dijit/form/CheckBox"/\x3e\r\n            \x3c/div\x3e\r\n          \x3c/td\x3e\r\n        \x3c/tr\x3e\r\n        \x3ctr\x3e\r\n          \x3ctd class\x3d"first jimu-trailing-padding1"\x3e${nls.snappingTolerance}\x3c/td\x3e\r\n          \x3ctd class\x3d"second jimu-leading-padding1"\x3e\r\n            \x3cdiv class\x3d"" style\x3d""\x3e\r\n              \x3cinput data-dojo-attach-point\x3d"snappingTolerance" \r\n              data-dojo-type\x3d"dijit/form/NumberSpinner"\r\n              data-dojo-props\x3d"smallDelta:5, constraints:{min:0,max:1000,places:0}"\r\n              name\x3d"snappingTolerance"\r\n              /\x3e\r\n            \x3c/div\x3e\r\n          \x3c/td\x3e\r\n        \x3c/tr\x3e\r\n        \x3ctr\x3e\r\n          \x3ctd class\x3d"first jimu-trailing-padding1"\x3e${nls.popupTolerance}\x3c/td\x3e\r\n          \x3ctd class\x3d"second jimu-leading-padding1"\x3e\r\n            \x3cdiv class\x3d"" style\x3d""\x3e\r\n              \x3cinput data-dojo-attach-point\x3d"popupTolerance" \r\n              data-dojo-type\x3d"dijit/form/NumberSpinner"\r\n              data-dojo-props\x3d"smallDelta:5, constraints:{min:0,max:1000,places:0}"\r\n              name\x3d"popupTolerance"\r\n              /\x3e\r\n            \x3c/div\x3e\r\n          \x3c/td\x3e\r\n        \x3c/tr\x3e\r\n        \x3ctr\x3e\r\n          \x3ctd class\x3d"first jimu-trailing-padding1"\x3e${nls.stickyMoveTolerance}\x3c/td\x3e\r\n          \x3ctd class\x3d"second jimu-leading-padding1"\x3e\r\n            \x3cdiv class\x3d"" style\x3d""\x3e\r\n              \x3cinput data-dojo-attach-point\x3d"stickyMoveTolerance" \r\n              data-dojo-type\x3d"dijit/form/NumberSpinner"\r\n              data-dojo-props\x3d"smallDelta:5, constraints:{min:0,max:2000,places:0}"\r\n              name\x3d"stickyMoveTolerance"\r\n              /\x3e\r\n            \x3c/div\x3e\r\n          \x3c/td\x3e\r\n        \x3c/tr\x3e\r\n      \x3c/tbody\x3e\r\n    \x3c/table\x3e\r\n    \x3cdiv class\x3d"layerInfos-table" data-dojo-attach-point\x3d"layerInfosTable"\x3e\x3c/div\x3e\r\n    \x3cdiv class\x3d"tableInfos-loading" data-dojo-attach-point\x3d"tableInfosLoading"\x3e\x3c/div\x3e\r\n    \x3cdiv class\x3d"tableInfos-table" data-dojo-attach-point\x3d"tableInfosTable"\x3e\x3c/div\x3e\r\n  \x3c/div\x3e\r\n\x3c/div\x3e\r\n',
-"url:widgets/Edit/setting/css/style.css":".jimu-widget-edit-setting{margin:0; padding:0; font-size:15px;}.jimu-widget-edit-setting .editable{width: 100px;}.jimu-widget-edit-setting .edit-fields{width: 100px;}.jimu-widget-edit-setting .update{width: 200px;}.jimu-widget-edit-setting .setting-table \x3e thead \x3e tr \x3e th,.jimu-widget-edit-setting .setting-table \x3e tbody \x3e tr \x3e td{height:40px; line-height:40px; vertical-align:middle;}.jimu-widget-edit-setting .input-table \x3e tbody \x3e tr \x3e .first{width:auto; min-width: 160px; text-align: left;}.jimu-rtl .jimu-widget-edit-setting .input-table \x3e tbody \x3e tr \x3e .first{text-align: right;}.jimu-widget-edit-setting .input-table \x3e tbody \x3e tr \x3e .second{width: auto;}.jimu-widget-edit-setting .input-table \x3e tbody \x3e tr \x3e .second \x3e span{display: inline-block; height: 40px; line-height: 40px;}.jimu-widget-edit-setting .dijitArrowButtonContainer{width: 17px;}.jimu-widget-edit-setting .dijitSelect{height: 30px; width: 100%;}.jimu-widget-edit-setting .toolbar-options-tr {position: relative;}.jimu-widget-edit-setting .toolbar-options-tr.disable {opacity: 0.4;}.jimu-widget-edit-setting .toolbar-options-coverage{position: absolute; width: 390px; height: 40px; z-index: 1;}.jimu-widget-edit-setting .dijitTextBoxFocused{border-color: #406b9b !important; box-shadow: 0 0 0;}.jimu-widget-edit-setting .tableInfos-loading{top: 65px; position: relative;}.jimu-widget-edit-setting .tableInfos-table{display: none; margin-top: 30px; margin-bottom: 5px; position: relative;}",
-"*now":function(l){l(['dojo/i18n!*preload*widgets/Edit/setting/nls/Setting*["ar","cs","da","de","en","el","es","et","fi","fr","he","hr","it","ja","ko","lt","lv","nb","nl","pl","pt-br","pt-pt","ro","ru","sr","sv","th","tr","zh-cn","vi","zh-hk","zh-tw","ROOT"]'])}}});
-define("dojo/_base/declare dijit/_WidgetsInTemplateMixin jimu/BaseWidgetSetting jimu/dijit/SimpleTable jimu/LayerInfos/LayerInfos jimu/dijit/LoadingIndicator dojo/_base/lang dojo/_base/html dojo/on dojo/_base/array dojo/promise/all ./EditFields ../utils dijit/form/NumberSpinner".split(" "),function(l,k,m,a,g,e,b,h,p,n,s,t,q){return l([m,k],{baseClass:"jimu-widget-edit-setting",_jimuLayerInfos:null,_layersTable:null,_tablesTable:null,_editableLayerInfos:null,_editableTableInfos:null,startup:function(){this.inherited(arguments);
-g.getInstance(this.map,this.map.itemInfo).then(b.hitch(this,function(a){this._jimuLayerInfos=a;this._init();this.setConfig()}))},_init:function(){this._initToolbar();this._initLayersTable();this._initTablesTable()},_initToolbar:function(){this.useFilterEdit.set("checked",this.config.editor.useFilterEdit);this.toolbarVisible.set("checked",this.config.editor.toolbarVisible);this.enableUndoRedo.set("checked",this.config.editor.enableUndoRedo);this.mergeVisible.set("checked",this.config.editor.toolbarOptions.mergeVisible);
-this.cutVisible.set("checked",this.config.editor.toolbarOptions.cutVisible);this.reshapeVisible.set("checked",this.config.editor.toolbarOptions.reshapeVisible);this.autoApplyEditWhenGeometryIsMoved.set("checked",this.config.editor.autoApplyEditWhenGeometryIsMoved);this._onToolbarSelected();this.snappingTolerance.set("value",void 0===this.config.editor.snappingTolerance?15:this.config.editor.snappingTolerance);this.popupTolerance.set("value",void 0===this.config.editor.popupTolerance?5:this.config.editor.popupTolerance);
-this.stickyMoveTolerance.set("value",void 0===this.config.editor.stickyMoveTolerance?0:this.config.editor.stickyMoveTolerance)},_initLayersTable:function(){this._layersTable=new a({fields:[{name:"edit",title:this.nls.edit,type:"checkbox","class":"editable"},{name:"label",title:this.nls.label,type:"text"},{name:"disableGeometryUpdate",title:this.nls.update,type:"checkbox","class":"update",width:"300px"},{name:"actions",title:this.nls.fields,type:"actions","class":"edit-fields",actions:["edit"]}],selectable:!1});
-this._layersTable.placeAt(this.layerInfosTable);this._layersTable.startup();this.own(p(this._layersTable,"actions-edit",b.hitch(this,this._onEditFieldInfoClick,this._layersTable)))},_initTablesTable:function(){this._tablesTable=new a({fields:[{name:"edit",title:this.nls.edit,type:"checkbox","class":"editable"},{name:"label",title:window.jimuNls.common.table,type:"text"},{name:"actions",title:this.nls.fields,type:"actions","class":"edit-fields",actions:["edit"]}],selectable:!1});this._tablesTable.placeAt(this.tableInfosTable);
-this._tablesTable.startup();this.own(p(this._tablesTable,"actions-edit",b.hitch(this,this._onEditFieldInfoClick,this._tablesTable)))},setConfig:function(){this._editableLayerInfos=this._getEditableLayerInfos();this._setTable(this._editableLayerInfos,this._layersTable);var a=(new e({hidden:!1})).placeAt(this.tableInfosLoading);this._getEditableTableInfos().then(b.hitch(this,function(b){a.destroy();this._editableTableInfos=b;0<this._editableTableInfos.length&&(this._setTable(b,this._tablesTable),h.setStyle(this.tableInfosTable,
-"display","block"))}))},_getEditableTableInfos:function(){var a=[],r=[],c=this._jimuLayerInfos.getTableInfoArray();n.forEach(c,function(c){a.push(c.getLayerObject())},this);return s(a).then(b.hitch(this,function(){n.forEach(c,function(a){var c=a.layerObject;a=(a=a.getCapabilitiesOfWebMap())&&-1===a.toLowerCase().indexOf("editing")?!1:!0;"Table"===c.type&&(c.url&&c.isEditable&&c.isEditable()&&a)&&((a=this._getLayerInfoFromConfiguration(c))||(a=this._getDefaultLayerInfo(c)),r.push(a))},this);return r}))},
-_getEditableLayerInfos:function(){for(var a=[],b=this.map.graphicsLayerIds.length-1;0<=b;b--){var c=this.map.getLayer(this.map.graphicsLayerIds[b]);if("Feature Layer"===c.type&&c.url&&c.isEditable&&c.isEditable()){var d=this._getLayerInfoFromConfiguration(c);d||(d=this._getDefaultLayerInfo(c));a.push(d)}}return a},_getLayerInfoFromConfiguration:function(a){var b=null,c=this.config.editor.layerInfos?this.config.editor.layerInfos:[];if((c=c.concat(this.config.editor.tableInfos?this.config.editor.tableInfos:
-[]))&&0<c.length){for(var d=0;d<c.length;d++)if(c[d].featureLayer&&c[d].featureLayer.id===a.id){b=c[d];break}b&&(b.fieldInfos=this._getSimpleFieldInfos(a,b),b._editFlag=!0)}return b},_getDefaultLayerInfo:function(a){var b=this.config.editor.layerInfos&&this.config.editor.tableInfos?this.config.editor.layerInfos.concat(this.config.editor.tableInfos):null;return{featureLayer:{id:a.id},disableGeometryUpdate:!1,fieldInfos:this._getSimpleFieldInfos(a),_editFlag:b&&0===b.length?!0:!1}},_setTable:function(a,
-b){n.forEach(a,function(a){var d=this._jimuLayerInfos.getLayerOrTableInfoById(a.featureLayer.id);b.addRow({label:d.title,edit:a._editFlag,disableGeometryUpdate:a.disableGeometryUpdate}).tr._layerInfo=a},this)},_getDefaultSimpleFieldInfos:function(a){for(var b=[],c,d,f=0;f<a.fields.length;f++)c=!a.fields[f].editable?null:!0,d=("globalid"===a.fields[f].name.toLowerCase()||a.fields[f].name===a.objectIdField)&&!a.fields[f].editable?!1:!0,b.push({fieldName:a.fields[f].name,label:a.fields[f].alias||a.fields[f].name,
-isEditable:c,visible:d||c?!0:!1});return b},_getWebmapSimpleFieldInfos:function(a){var b,c,d=[],f=q.getFieldInfosFromWebmap(a.id,this._jimuLayerInfos);f?(n.forEach(f,function(f){void 0!==f.isEditableOnLayer&&q.ignoreCaseToGetFieldKey(a,f.fieldName)&&(b=!f.isEditableOnLayer?null:f.isEditable,c=f.visible,d.push({fieldName:f.fieldName,label:f.label,isEditable:b,visible:c||b?!0:!1}))}),0===d.length&&(d=null)):d=null;return d},_getSimpleFieldInfos:function(a,b){var c,d=[],f=this._getDefaultSimpleFieldInfos(a),
-e=this._getWebmapSimpleFieldInfos(a);c=e?e:f;b&&b.fieldInfos?(n.forEach(b.fieldInfos,function(a){if(void 0===a.visible)if(e)for(var b=0;b<e.length;b++)a.fieldName===e[b].fieldName&&(a.visible=e[b].visible||e[b].isEditable);else a.visible=!0;for(b=0;b<c.length;b++)if(a.fieldName===c[b].fieldName){d.push(a);c[b]._exit=!0;break}}),n.forEach(c,function(a){a._exit||d.push(a)})):d=c;return d},_onEditFieldInfoClick:function(a,b){var c=a.getRowData(b);c&&c.edit&&(new t({nls:this.nls,_layerInfo:b._layerInfo})).popupEditPage()},
-_onToolbarSelected:function(){this.toolbarVisible.checked?(h.removeClass(this.toolbarOptionsTr,"disable"),h.setStyle(this.toolbarOptionsCoverage,"display","none")):(h.addClass(this.toolbarOptionsTr,"disable"),h.setStyle(this.toolbarOptionsCoverage,"display","block"))},_resetToolbarConfig:function(){this.config.editor.useFilterEdit=this.useFilterEdit.checked;this.config.editor.toolbarVisible=this.toolbarVisible.checked;this.config.editor.enableUndoRedo=this.enableUndoRedo.checked;this.config.editor.toolbarOptions.mergeVisible=
-this.mergeVisible.checked;this.config.editor.toolbarOptions.cutVisible=this.cutVisible.checked;this.config.editor.toolbarOptions.reshapeVisible=this.reshapeVisible.checked;this.config.editor.autoApplyEditWhenGeometryIsMoved=this.autoApplyEditWhenGeometryIsMoved.checked;this.config.editor.snappingTolerance=this.snappingTolerance.value;this.config.editor.popupTolerance=this.popupTolerance.value;this.config.editor.stickyMoveTolerance=this.stickyMoveTolerance.value},_getCheckedLayerOrTableInfos:function(a,
-b){var c=[],d=b.getData();n.forEach(a,function(a,b){a._editFlag=d[b].edit;a.disableGeometryUpdate=d[b].disableGeometryUpdate;a._editFlag&&(delete a._editFlag,c.push(a))});return c},getConfig:function(){this._resetToolbarConfig();var a=this._getCheckedLayerOrTableInfos(this._editableLayerInfos,this._layersTable);0===a.length?delete this.config.editor.layerInfos:this.config.editor.layerInfos=a;a=this._getCheckedLayerOrTableInfos(this._editableTableInfos,this._tablesTable);0===a.length?delete this.config.editor.tableInfos:
-this.config.editor.tableInfos=a;return this.config}})});
+///////////////////////////////////////////////////////////////////////////
+// Copyright © 2014 - 2017 Esri. All Rights Reserved.
+//
+// Licensed under the Apache License Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////
+
+define([
+    'dojo/_base/declare',
+    'dijit/_WidgetsInTemplateMixin',
+    'jimu/BaseWidgetSetting',
+    'jimu/dijit/SimpleTable',
+    'jimu/LayerInfos/LayerInfos',
+    'jimu/dijit/LoadingIndicator',
+    'dojo/_base/lang',
+    'dojo/_base/html',
+    'dojo/on',
+    'dojo/_base/array',
+    'dojo/promise/all',
+    "./EditFields",
+    "../utils",
+    'dijit/form/NumberSpinner'
+  ],
+  function(
+    declare,
+    _WidgetsInTemplateMixin,
+    BaseWidgetSetting,
+    Table,
+    LayerInfos,
+    LoadingIndicator,
+    lang,
+    html,
+    on,
+    array,
+    all,
+    EditFields,
+    editUtils) {
+    return declare([BaseWidgetSetting, _WidgetsInTemplateMixin], {
+      //these two properties is defined in the BaseWidget
+      baseClass: 'jimu-widget-edit-setting',
+      // selectLayer: null,
+      // tooltipDialog: null,
+      // featurelayers: [],
+      // indexLayer: -1,
+
+      _jimuLayerInfos: null,
+      _layersTable: null,
+      _tablesTable: null,
+      _editableLayerInfos: null,
+      _editableTableInfos: null,
+
+      startup: function() {
+        this.inherited(arguments);
+        LayerInfos.getInstance(this.map, this.map.itemInfo)
+          .then(lang.hitch(this, function(operLayerInfos) {
+            this._jimuLayerInfos = operLayerInfos;
+            this._init();
+            this.setConfig();
+          }));
+      },
+
+      _init: function() {
+        this._initToolbar();
+        this._initLayersTable();
+        this._initTablesTable();
+      },
+
+      _initToolbar: function() {
+        this.useFilterEdit.set('checked', this.config.editor.useFilterEdit);
+        this.toolbarVisible.set('checked', this.config.editor.toolbarVisible);
+        this.enableUndoRedo.set('checked', this.config.editor.enableUndoRedo);
+        this.mergeVisible.set('checked', this.config.editor.toolbarOptions.mergeVisible);
+        this.cutVisible.set('checked', this.config.editor.toolbarOptions.cutVisible);
+        this.reshapeVisible.set('checked', this.config.editor.toolbarOptions.reshapeVisible);
+        this.autoApplyEditWhenGeometryIsMoved.set('checked',
+            this.config.editor.autoApplyEditWhenGeometryIsMoved);
+        this._onToolbarSelected();
+        // default value is 15 pixels, compatible with old version app.
+        this.snappingTolerance.set('value', this.config.editor.snappingTolerance === undefined ?
+                                            15 :
+                                            this.config.editor.snappingTolerance);
+        // default value is 5 pixels, compatible with old version app.
+        this.popupTolerance.set('value', this.config.editor.popupTolerance === undefined ?
+                                            5 :
+                                            this.config.editor.popupTolerance);
+
+        // default value is 0 pixels, compatible with old version app.
+        this.stickyMoveTolerance.set('value', this.config.editor.stickyMoveTolerance === undefined ?
+                                            0 :
+                                            this.config.editor.stickyMoveTolerance);
+      },
+
+      _initLayersTable: function() {
+        var fields = [{
+          name: 'edit',
+          title: this.nls.edit,
+          type: 'checkbox',
+          'class': 'editable'
+        }, {
+          name: 'label',
+          title: this.nls.label,
+          type: 'text'
+        }, {
+          name: 'disableGeometryUpdate',
+          title: this.nls.update,
+          type: 'checkbox',
+          'class': 'update',
+          width: '300px'
+        }, {
+          name: 'actions',
+          title: this.nls.fields,
+          type: 'actions',
+          'class': 'edit-fields',
+          actions: ['edit']
+        }];
+        var args = {
+          fields: fields,
+          selectable: false
+        };
+        this._layersTable = new Table(args);
+        this._layersTable.placeAt(this.layerInfosTable);
+        this._layersTable.startup();
+
+        this.own(on(this._layersTable,
+          'actions-edit',
+          lang.hitch(this, this._onEditFieldInfoClick, this._layersTable)));
+      },
+
+      _initTablesTable: function() {
+        var fields = [{
+          name: 'edit',
+          title: this.nls.edit,
+          type: 'checkbox',
+          'class': 'editable'
+        }, {
+          name: 'label',
+          title: window.jimuNls.common.table,
+          type: 'text'
+        }, {
+          name: 'actions',
+          title: this.nls.fields,
+          type: 'actions',
+          'class': 'edit-fields',
+          actions: ['edit']
+        }];
+        var args = {
+          fields: fields,
+          selectable: false
+        };
+        this._tablesTable = new Table(args);
+        this._tablesTable.placeAt(this.tableInfosTable);
+        this._tablesTable.startup();
+
+        this.own(on(this._tablesTable,
+          'actions-edit',
+          lang.hitch(this, this._onEditFieldInfoClick, this._tablesTable)));
+      },
+
+      setConfig: function() {
+        // if (!config.editor.layerInfos) { //***************
+        //   config.editor.layerInfos = [];
+        // }
+        this._editableLayerInfos = this._getEditableLayerInfos();
+        this._setTable(this._editableLayerInfos, this._layersTable);
+        var loading = new LoadingIndicator({hidden: false}).placeAt(this.tableInfosLoading);
+        this._getEditableTableInfos().then(lang.hitch(this, function(editableTableInfos) {
+          loading.destroy();
+          this._editableTableInfos = editableTableInfos;
+          if(this._editableTableInfos.length > 0) {
+            this._setTable(editableTableInfos, this._tablesTable);
+            html.setStyle(this.tableInfosTable, 'display', 'block');
+          }
+        }));
+      },
+
+
+      _getEditableTableInfos: function() {
+        var defs = [];
+        var editableTableInfos = [];
+        var tableInfoArray = this._jimuLayerInfos.getTableInfoArray();
+        array.forEach(tableInfoArray, function(jimuTableInfo) {
+          defs.push(jimuTableInfo.getLayerObject());
+        }, this);
+
+        return all(defs).then(lang.hitch(this, function() {
+          array.forEach(tableInfoArray, function(jimuTableInfo) {
+            var tableObject = jimuTableInfo.layerObject;
+            var capabilities = jimuTableInfo.getCapabilitiesOfWebMap();
+            var isEditableInWebMap;
+            if(capabilities && capabilities.toLowerCase().indexOf('editing') === -1) {
+              isEditableInWebMap = false;
+            } else {
+              isEditableInWebMap = true;
+            }
+
+            if (tableObject.type === "Table" &&
+                tableObject.url &&
+                tableObject.isEditable &&// todo...********
+                tableObject.isEditable() &&
+                isEditableInWebMap) {
+              var tableInfo = this._getLayerInfoFromConfiguration(tableObject);
+              if(!tableInfo) {
+                tableInfo = this._getDefaultLayerInfo(tableObject);
+              }
+              editableTableInfos.push(tableInfo);
+            }
+          }, this);
+          return editableTableInfos;
+        }));
+      },
+
+
+      _getEditableLayerInfos: function() {
+        // summary:
+        //   get all editable layers from map.
+        // description:
+        //   layerInfo will honor the configuration if that layer has been configured.
+        var editableLayerInfos = [];
+        for(var i = this.map.graphicsLayerIds.length - 1; i >= 0; i--) {
+          var layerObject = this.map.getLayer(this.map.graphicsLayerIds[i]);
+          if (layerObject.type === "Feature Layer" &&
+              layerObject.url &&
+              layerObject.isEditable &&
+              layerObject.isEditable()) {
+            var layerInfo = this._getLayerInfoFromConfiguration(layerObject);
+            if(!layerInfo) {
+              layerInfo = this._getDefaultLayerInfo(layerObject);
+            }
+            editableLayerInfos.push(layerInfo);
+          }
+        }
+        return editableLayerInfos;
+      },
+
+      _getLayerInfoFromConfiguration: function(layerObject) {
+        var layerInfo = null;
+        var layerInfos = this.config.editor.layerInfos ? this.config.editor.layerInfos : [];
+        layerInfos = layerInfos.concat(this.config.editor.tableInfos ?
+                                       this.config.editor.tableInfos :
+                                       []);
+        if(layerInfos && layerInfos.length > 0) {
+          for(var i = 0; i < layerInfos.length; i++) {
+            if(layerInfos[i].featureLayer &&
+               layerInfos[i].featureLayer.id === layerObject.id) {
+              layerInfo = layerInfos[i];
+              break;
+            }
+          }
+
+          if(layerInfo) {
+            // update fieldInfos.
+            layerInfo.fieldInfos = this._getSimpleFieldInfos(layerObject, layerInfo);
+            // set _editFlag to true
+            layerInfo._editFlag = true;
+          }
+        }
+        return layerInfo;
+      },
+
+      _getDefaultLayerInfo: function(layerObject) {
+        var configedLayerOrTableInfos = this.config.editor.layerInfos && this.config.editor.tableInfos ?
+                                        this.config.editor.layerInfos.concat(this.config.editor.tableInfos):
+                                        null;
+        var layerInfo = {
+          'featureLayer': {
+            'id': layerObject.id
+          },
+          'disableGeometryUpdate': false,
+          'fieldInfos': this._getSimpleFieldInfos(layerObject),
+          '_editFlag': configedLayerOrTableInfos &&
+                        configedLayerOrTableInfos.length === 0 ? true : false
+        };
+        return layerInfo;
+      },
+
+      _setTable: function(layerOrTableInfos, tableDijit) {
+        array.forEach(layerOrTableInfos, function(layerInfo) {
+          var _jimuLayerInfo = this._jimuLayerInfos.getLayerOrTableInfoById(layerInfo.featureLayer.id);
+          var addRowResult = tableDijit.addRow({
+            label: _jimuLayerInfo.title,
+            edit: layerInfo._editFlag,
+            disableGeometryUpdate: layerInfo.disableGeometryUpdate
+          });
+          addRowResult.tr._layerInfo = layerInfo;
+
+          // var editableCheckBox;
+          // var editableCheckBoxDomNode = query(".editable .jimu-checkbox", addRowResult.tr)[0];
+          // if(editableCheckBoxDomNode) {
+          //   editableCheckBox = registry.byNode(editableCheckBoxDomNode);
+          //   // this.own(on(editableCheckBox,
+          //   // 'change',
+          //   // lang.hitch(this, function() {
+          //   //   console.log(layerInfo.id);
+          //   // })));
+          //   editableCheckBox.onChange = lang.hitch(this, function(checked) {
+          //     layerInfo._editFlag = checked;
+          //   });
+          // }
+        }, this);
+      },
+
+      // about fieldInfos mehtods.
+      _getDefaultSimpleFieldInfos: function(layerObject) {
+        var fieldInfos = [];
+        var isEditable;
+        var visible;
+        for (var i = 0; i < layerObject.fields.length; i++) {
+          isEditable = !layerObject.fields[i].editable ?
+                        null :
+                        true;
+          visible = (layerObject.fields[i].name.toLowerCase() === "globalid" ||
+                    layerObject.fields[i].name === layerObject.objectIdField) &&
+                    !layerObject.fields[i].editable ?
+                    false:
+                    true;
+
+          fieldInfos.push({
+            fieldName: layerObject.fields[i].name,
+            label: layerObject.fields[i].alias || layerObject.fields[i].name,
+            isEditable: isEditable,
+            visible: (visible || isEditable) ? true : false // isEditable probably is null
+          });
+        }
+        return fieldInfos;
+      },
+
+      _getWebmapSimpleFieldInfos: function(layerObject) {
+        var isEditable;
+        var visible;
+        var webmapSimpleFieldInfos = [];
+        var webmapFieldInfos =
+          editUtils.getFieldInfosFromWebmap(layerObject.id, this._jimuLayerInfos);
+        if(webmapFieldInfos) {
+          array.forEach(webmapFieldInfos, function(webmapFieldInfo) {
+            if(webmapFieldInfo.isEditableOnLayer !== undefined &&
+               // disable relationship's field.
+               editUtils.ignoreCaseToGetFieldKey(layerObject, webmapFieldInfo.fieldName)) {
+              isEditable = !webmapFieldInfo.isEditableOnLayer ?
+                           null :
+                           webmapFieldInfo.isEditable;
+              visible = webmapFieldInfo.visible;
+
+              webmapSimpleFieldInfos.push({
+                fieldName: webmapFieldInfo.fieldName,
+                label: webmapFieldInfo.label,
+                isEditable: isEditable,
+                visible: (visible || isEditable) ? true : false // isEditable probably is null
+              });
+            }
+          });
+          if(webmapSimpleFieldInfos.length === 0) {
+            webmapSimpleFieldInfos = null;
+          }
+        } else {
+          webmapSimpleFieldInfos = null;
+        }
+        return webmapSimpleFieldInfos;
+      },
+
+      _getSimpleFieldInfos: function(layerObject, layerInfo) {
+        var baseSimpleFieldInfos;
+        var simpleFieldInfos = [];
+        var defautlSimpleFieldInfos = this._getDefaultSimpleFieldInfos(layerObject);
+        var webmapSimpleFieldInfos = this._getWebmapSimpleFieldInfos(layerObject);
+
+        baseSimpleFieldInfos =
+          webmapSimpleFieldInfos ? webmapSimpleFieldInfos : defautlSimpleFieldInfos;
+
+        if(layerInfo && layerInfo.fieldInfos) {
+          // Edit widget had been configured
+
+          // keep order of config fieldInfos and add new fieldInfos at end.
+          array.forEach(layerInfo.fieldInfos, function(configuredFieldInfo) {
+            // Compatible with old version fieldInfo that does not defined
+            // the visible attribute. Init visible according to webmap field infos.
+            if(configuredFieldInfo.visible === undefined) {
+              if(webmapSimpleFieldInfos) {
+                for(var j = 0; j < webmapSimpleFieldInfos.length; j++) {
+                  if(configuredFieldInfo.fieldName === webmapSimpleFieldInfos[j].fieldName) {
+                    configuredFieldInfo.visible = webmapSimpleFieldInfos[j].visible ||
+                                                  webmapSimpleFieldInfos[j].isEditable;
+                  }
+                }
+                // if configuredFieldInfo.name is not matching any field of webmapSimpleFieldInfos,
+                // this configured field will not display in field setting popup.
+              } else {
+                configuredFieldInfo.visible = true;
+              }
+            }
+
+            // keep order.
+            for(var i = 0; i < baseSimpleFieldInfos.length; i++) {
+              if(configuredFieldInfo.fieldName === baseSimpleFieldInfos[i].fieldName) {
+                simpleFieldInfos.push(configuredFieldInfo);
+                baseSimpleFieldInfos[i]._exit = true;
+                break;
+              }
+            }
+          });
+          // add new fieldInfos at end.
+          array.forEach(baseSimpleFieldInfos, function(baseSimpleFieldInfo) {
+            if(!baseSimpleFieldInfo._exit) {
+              simpleFieldInfos.push(baseSimpleFieldInfo);
+            }
+          });
+        } else {
+          simpleFieldInfos = baseSimpleFieldInfos;
+        }
+        return simpleFieldInfos;
+      },
+
+      _onEditFieldInfoClick: function(table, tr) {
+        var rowData = table.getRowData(tr);
+        if(rowData && rowData.edit) {
+          var editFields = new EditFields({
+            nls: this.nls,
+            _layerInfo: tr._layerInfo
+          });
+          editFields.popupEditPage();
+        }
+      },
+
+      _onToolbarSelected: function() {
+        if (this.toolbarVisible.checked) {
+          //html.setStyle(this.toolbarOptionsLabel, 'display', 'table-cell');
+          //html.setStyle(this.toolbarOptionsTd, 'display', 'table-cell');
+          html.removeClass(this.toolbarOptionsTr, 'disable');
+          html.setStyle(this.toolbarOptionsCoverage, 'display', 'none');
+        } else {
+          //html.setStyle(this.toolbarOptionsLabel, 'display', 'none');
+          //html.setStyle(this.toolbarOptionsTd, 'display', 'none');
+          html.addClass(this.toolbarOptionsTr, 'disable');
+          html.setStyle(this.toolbarOptionsCoverage, 'display', 'block');
+        }
+      },
+
+      _resetToolbarConfig: function() {
+        this.config.editor.useFilterEdit = this.useFilterEdit.checked;
+        this.config.editor.toolbarVisible = this.toolbarVisible.checked;
+        this.config.editor.enableUndoRedo = this.enableUndoRedo.checked;
+        this.config.editor.toolbarOptions.mergeVisible = this.mergeVisible.checked;
+        this.config.editor.toolbarOptions.cutVisible = this.cutVisible.checked;
+        this.config.editor.toolbarOptions.reshapeVisible = this.reshapeVisible.checked;
+        this.config.editor.autoApplyEditWhenGeometryIsMoved =
+          this.autoApplyEditWhenGeometryIsMoved.checked;
+        this.config.editor.snappingTolerance = this.snappingTolerance.value;
+        this.config.editor.popupTolerance = this.popupTolerance.value;
+        this.config.editor.stickyMoveTolerance = this.stickyMoveTolerance.value;
+      },
+
+
+      _getCheckedLayerOrTableInfos: function(editableLayerOrTableInfos, tableDijit) {
+        // get layerInfos or tableInfos config
+        var checkedLayerInfos = [];
+        var layersTableData =  tableDijit.getData();
+        array.forEach(editableLayerOrTableInfos, function(layerInfo, index) {
+          layerInfo._editFlag = layersTableData[index].edit;
+          layerInfo.disableGeometryUpdate = layersTableData[index].disableGeometryUpdate;
+          if(layerInfo._editFlag) {
+            delete layerInfo._editFlag;
+            checkedLayerInfos.push(layerInfo);
+          }
+        });
+        return checkedLayerInfos;
+      },
+
+      getConfig: function() {
+        // get toolbar config
+        this._resetToolbarConfig();
+
+        /*
+        // get layerInfos config
+        var checkedLayerInfos = [];
+        var layersTableData =  this._layersTable.getData();
+        array.forEach(this._editableLayerInfos, function(layerInfo, index) {
+          layerInfo._editFlag = layersTableData[index].edit;
+          layerInfo.disableGeometryUpdate = layersTableData[index].disableGeometryUpdate;
+          if(layerInfo._editFlag) {
+            delete layerInfo._editFlag;
+            checkedLayerInfos.push(layerInfo);
+          }
+        });
+        */
+
+        // get layerInfos config
+        var checkedLayerInfos = this._getCheckedLayerOrTableInfos(this._editableLayerInfos, this._layersTable);
+        if(checkedLayerInfos.length === 0) {
+          delete this.config.editor.layerInfos;
+        } else {
+          this.config.editor.layerInfos = checkedLayerInfos;
+        }
+        // get tableInfos config
+        var checkedTableInfos = this._getCheckedLayerOrTableInfos(this._editableTableInfos, this._tablesTable);
+        if(checkedTableInfos.length === 0) {
+          delete this.config.editor.tableInfos;
+        } else {
+          this.config.editor.tableInfos = checkedTableInfos;
+        }
+
+        return this.config;
+      }
+    });
+  });

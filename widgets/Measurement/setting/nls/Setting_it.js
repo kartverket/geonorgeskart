@@ -1,5 +1,0 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-define({"widgets/Measurement/setting/nls/strings":{defaultAreaUnit:"Unit\u00e0 di superficie predefinita",defaultLengthUnit:"Unit\u00e0 di lunghezza predefinita",acres:"Acri",sqMiles:"Miglia quadre",sqKilometers:"Chilometri quadri",hectares:"Ettari",sqYards:"Iarde quadre",sqFeet:"Piedi quadri",sqFeetUS:"Piede quadrato (USA)",sqMeters:"Metri quadri",miles:"Miglia",kilometers:"Chilometri",feet:"Piedi",feetUS:"Piede (USA)",meters:"Metri",yards:"Iarde",nauticalMiles:"Miglia nautiche",showArea:"Area",
-showDistance:"Distanza",showLocation:"Posizione",showtools:"Mostra strumenti di misurazione:",allHidedTips:"Selezionare almeno uno strumento.",_localized:{}}});

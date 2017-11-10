@@ -1,12 +1,345 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-require({cache:{"url:widgets/LayerList/setting/LayerSelector.html":'\x3cdiv\x3e\r\n  \x3ctable class\x3d"layer-list-table"\x3e\r\n    \x3ctbody class\x3d"layers-list-body" data-dojo-attach-point\x3d"layerListTable"\x3e\x3c/tbody\x3e\r\n    \x3ctbody class\x3d"layers-list-body" data-dojo-attach-point\x3d"tableListTable"\x3e\x3c/tbody\x3e       \r\n  \x3c/table\x3e\r\n\x3c/div\x3e\r\n'}});
-define("dijit/_WidgetBase dojo/_base/declare dojo/_base/lang dojo/_base/array dojo/dom-construct dojo/on dojo/query jimu/dijit/CheckBox dijit/_TemplatedMixin dojo/text!./LayerSelector.html dojo/dom-class dojo/dom-style".split(" "),function(q,r,k,l,e,p,s,t,u,v,f,n){return r([q,u],{templateString:v,baseClass:"layer-selector",_currentSelectedLayerRowNode:null,_displayStateStorage:null,postMixInProperties:function(){this.inherited(arguments);this._displayStateStorage={}},postCreate:function(){l.forEach(this.operLayerInfos.getLayerInfoArray(),
-function(a){this.drawListNode(a,0,this.layerListTable)},this);l.forEach(this.operLayerInfos.getTableInfoArray(),function(a){this.drawListNode(a,0,this.tableListTable)},this)},drawListNode:function(a,b,c){var d;0===a.newSubLayers.length?(d=this.addLayerNode(a,b,c),f.add(s(".showLegend-div",d.currentNode)[0],"hidden")):(d=this.addLayerNode(a,b,c),l.forEach(a.newSubLayers,k.hitch(this,function(a,b){this.drawListNode(b,a+1,d.subNode)},b)))},addLayerNode:function(a,b,c){var d=e.create("tr",{"class":"jimu-widget-row layer-row ",
-layerTrNodeId:a.id},c),g,l,h,m;g=e.create("td",{"class":"col col1"},d);for(m=0;m<b;m++)e.create("div",{"class":"begin-blank-div jimu-float-leading",innerHTML:""},g);m=e.create("div",{"class":"showLegend-div jimu-float-leading"},g);l=e.create("div",{"class":"div-select jimu-float-leading"},g);h=!0;this.config.layerOptions&&void 0!==this.config.layerOptions[a.id]&&(h=this.config.layerOptions[a.id].display);h=new t({checked:h,"class":"visible-checkbox-"+a.id});e.place(h.domNode,l);n.set(g,"width",12*
-b+35+"px");b=e.create("td",{"class":"col col2"},d);g=e.create("div",{"class":"noLegend-div jimu-float-leading"},b);a.isTable&&f.add(g,"table");a.isTable&&n.set(g,"display","block");b=e.create("div",{innerHTML:a.title,"class":"layer-title-div-"+a.id+" div-content jimu-float-leading "},b);g=e.create("td",{"class":"col col3"},d);e.create("div",{"class":"layers-list-popupMenu-div"},g);c=e.create("tr",{"class":"",layerContentTrNodeId:a.id},c);c=e.create("td",{"class":"",colspan:"3"},c);c=e.create("table",
-{"class":"layer-sub-node"},c);this.initDisplayStateStorage(a,h,b);this.own(p(m,"click",k.hitch(this,this._onRowTrClick,a,m,d,c)));this.own(p(d,"mouseover",k.hitch(this,this._onLayerNodeMouseover,d,void 0)));this.own(p(d,"mouseout",k.hitch(this,this._onLayerNodeMouseout,d,void 0)));this.own(p(h.domNode,"click",k.hitch(this,this._onCkSelectNodeClick,a,h)));return{currentNode:d,subNode:c}},_fold:function(a,b,c){"none"===n.get(c,"display")?(n.set(c,"display","table"),f.add(b,"unfold"),a=!1):(n.set(c,
-"display","none"),f.remove(b,"unfold"),a=!0);return a},_onCkSelectNodeClick:function(a,b,c){a.traversal(k.hitch(this,function(a){this._grayedLayerLabel(a)}));c.stopPropagation()},_onLayerNodeMouseover:function(a,b){f.add(a,"layer-row-mouseover");b&&f.add(b.btnNode,"jimu-icon-btn-selected")},_onLayerNodeMouseout:function(a,b){f.remove(a,"layer-row-mouseover");b&&f.remove(b.btnNode,"jimu-icon-btn-selected")},_onRowTrClick:function(a,b,c,d){this._changeSelectedLayerRow(c);this._fold(a,b,d)},_changeSelectedLayerRow:function(a){this._currentSelectedLayerRowNode&&
-this._currentSelectedLayerRowNode===a||(this._currentSelectedLayerRowNode&&f.remove(this._currentSelectedLayerRowNode,"jimu-widget-row-selected"),f.add(a,"jimu-widget-row-selected"),this._currentSelectedLayerRowNode=a)},initDisplayStateStorage:function(a,b,c){this._displayStateStorage[a.id]={displayCK:b,labelDiv:c};this._grayedLayerLabel(a)},_grayedLayerLabel:function(a){var b=!0,c=a;if(a=this._displayStateStorage[a.id].labelDiv){for(;c;){b=b&&this._displayStateStorage[c.id].displayCK.checked;if(!b)break;
-c=c.parentLayerInfo}b?f.remove(a,"grayed-title"):f.add(a,"grayed-title")}},getLayerOptions:function(){var a={},b;for(b in this._displayStateStorage)this._displayStateStorage.hasOwnProperty(b)&&"function"!==typeof this._displayStateStorage[b]&&(a[b]={display:this._displayStateStorage[b].displayCK.checked});return a}})});
+///////////////////////////////////////////////////////////////////////////
+// Copyright © 2014 - 2017 Esri. All Rights Reserved.
+//
+// Licensed under the Apache License Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////
+
+define([
+  'dijit/_WidgetBase',
+  'dojo/_base/declare',
+  'dojo/_base/lang',
+  'dojo/_base/array',
+  'dojo/dom-construct',
+  'dojo/on',
+  'dojo/query',
+  'jimu/dijit/CheckBox',
+  'dijit/_TemplatedMixin',
+  'dojo/text!./LayerSelector.html',
+  'dojo/dom-class',
+  'dojo/dom-style'
+], function(_WidgetBase, declare, lang, array, domConstruct, on, query,
+  CheckBox, _TemplatedMixin, template,
+  domClass, domStyle) {
+
+  return declare([_WidgetBase, _TemplatedMixin], {
+    templateString: template,
+    baseClass: 'layer-selector',
+    _currentSelectedLayerRowNode: null,
+    _displayStateStorage: null,
+
+    postMixInProperties: function() {
+      this.inherited(arguments);
+      this._displayStateStorage = {};
+    },
+
+    postCreate: function() {
+      array.forEach(this.operLayerInfos.getLayerInfoArray(), function(layerInfo) {
+        this.drawListNode(layerInfo, 0, this.layerListTable);
+      }, this);
+
+      array.forEach(this.operLayerInfos.getTableInfoArray(), function(layerInfo) {
+        this.drawListNode(layerInfo, 0, this.tableListTable);
+      }, this);
+    },
+
+    drawListNode: function(layerInfo, level, toTableNode) {
+      var nodeAndSubNode;
+      if (layerInfo.newSubLayers.length === 0) {
+        //addLayerNode
+        nodeAndSubNode = this.addLayerNode(layerInfo, level, toTableNode);
+
+        // don't add legend node, hide show legend image.
+        domClass.add(query(".showLegend-div",
+          nodeAndSubNode.currentNode)[0],
+          'hidden');
+        return;
+      }
+      //addLayerNode
+      nodeAndSubNode = this.addLayerNode(layerInfo, level, toTableNode);
+      array.forEach(layerInfo.newSubLayers, lang.hitch(this, function(level, subLayerInfo) {
+        this.drawListNode(subLayerInfo, level + 1, nodeAndSubNode.subNode);
+      }, level));
+    },
+
+    addLayerNode: function(layerInfo, level, toTableNode) {
+      var layerTrNode = domConstruct.create('tr', {
+          'class': 'jimu-widget-row layer-row ' +
+            ( /*visible*/ false ? 'jimu-widget-row-selected' : ''),
+          'layerTrNodeId': layerInfo.id
+        }, toTableNode),
+        layerTdNode, ckSelectDiv, ckSelect, imageTableDiv,
+        popupMenuNode, i, imageShowLegendDiv, popupMenu, divLabel;
+
+      layerTdNode = domConstruct.create('td', {
+        'class': 'col col1'
+      }, layerTrNode);
+
+      for (i = 0; i < level; i++) {
+        domConstruct.create('div', {
+          'class': 'begin-blank-div jimu-float-leading',
+          'innerHTML': ''
+        }, layerTdNode);
+      }
+
+
+      imageShowLegendDiv = domConstruct.create('div', {
+        'class': 'showLegend-div jimu-float-leading'
+      }, layerTdNode);
+
+
+      ckSelectDiv = domConstruct.create('div', {
+        'class': 'div-select jimu-float-leading'
+      }, layerTdNode);
+
+      /*
+      imageTableDiv = domConstruct.create('div', {
+        'class': 'noLegend-div jimu-float-leading'
+      }, layerTdNode);
+      if (layerInfo.isTable) {
+        domClass.add(imageTableDiv, 'table');
+      }
+      if (layerInfo.isTable) {
+        //domStyle.set(imageShowLegendDiv, 'display', 'none');
+        //domStyle.set(ckSelectDiv, 'display', 'none');
+        domStyle.set(imageTableDiv, 'display', 'block');
+      }
+      */
+
+
+      // if config has not been configured, default value is 'true'.
+      // if config has been configured, but new layer of webmap is ont in config file,
+      //   default value is 'true'.
+      var checkedValue = true;
+      if(this.config.layerOptions && this.config.layerOptions[layerInfo.id] !== undefined) {
+        checkedValue = this.config.layerOptions[layerInfo.id].display;
+      }
+      ckSelect = new CheckBox({
+        checked: checkedValue,
+        'class': "visible-checkbox-" + layerInfo.id
+      });
+
+      domConstruct.place(ckSelect.domNode, ckSelectDiv);
+
+
+      // set tdNode width
+      domStyle.set(layerTdNode, 'width', level * 12 + 35 + 'px');
+
+      var layerTitleTdNode = domConstruct.create('td', {
+        'class': 'col col2'
+      }, layerTrNode);
+
+      imageTableDiv = domConstruct.create('div', {
+        'class': 'noLegend-div jimu-float-leading'
+      }, layerTitleTdNode/*layerTdNode*/);
+      if (layerInfo.isTable) {
+        domClass.add(imageTableDiv, 'table');
+      }
+      if (layerInfo.isTable) {
+        //domStyle.set(imageShowLegendDiv, 'display', 'none');
+        //domStyle.set(ckSelectDiv, 'display', 'none');
+        domStyle.set(imageTableDiv, 'display', 'block');
+      }
+
+      /*
+      var grayedTitleClass = '';
+      try {
+        if (!layerInfo.isInScale()) {
+          grayedTitleClass = 'grayed-title';
+        }
+      } catch (err) {
+        console.warn(err.message);
+      }
+      */
+      var layerTitleDivIdClass = 'layer-title-div-' + layerInfo.id;
+      divLabel = domConstruct.create('div', {
+        'innerHTML': layerInfo.title,
+        'class':layerTitleDivIdClass + ' div-content jimu-float-leading '
+      }, layerTitleTdNode);
+
+      //domStyle.set(divLabel, 'width', 263 - level*13 + 'px');
+
+      layerTdNode = domConstruct.create('td', {
+        'class': 'col col3'
+      }, layerTrNode);
+
+      // add popupMenu
+      popupMenuNode = domConstruct.create('div', {
+        'class': 'layers-list-popupMenu-div'
+      }, layerTdNode);
+
+      //add a tr node to toTableNode.
+      var trNode = domConstruct.create('tr', {
+        'class': '',
+        'layerContentTrNodeId': layerInfo.id
+      }, toTableNode);
+
+      var tdNode = domConstruct.create('td', {
+        'class': '',
+        'colspan': '3'
+      }, trNode);
+
+      var tableNode = domConstruct.create('table', {
+        'class': 'layer-sub-node'
+      }, tdNode);
+
+      this.initDisplayStateStorage(layerInfo, ckSelect, divLabel);
+
+      //bind event
+      /*
+      this.own(on(layerTitleTdNode,
+        'click',
+        lang.hitch(this,
+          this._onRowTrClick,
+          layerInfo,
+          imageShowLegendDiv,
+          layerTrNode,
+          tableNode)));
+      */
+
+      this.own(on(imageShowLegendDiv,
+        'click',
+        lang.hitch(this,
+          this._onRowTrClick,
+          layerInfo,
+          imageShowLegendDiv,
+          layerTrNode,
+          tableNode)));
+
+      this.own(on(layerTrNode,
+        'mouseover',
+        lang.hitch(this, this._onLayerNodeMouseover, layerTrNode, popupMenu)));
+      this.own(on(layerTrNode,
+        'mouseout',
+        lang.hitch(this, this._onLayerNodeMouseout, layerTrNode, popupMenu)));
+      this.own(on(ckSelect.domNode, 'click', lang.hitch(this,
+        this._onCkSelectNodeClick,
+        layerInfo,
+        ckSelect)));
+
+      /*
+      this.own(on(popupMenuNode, 'click', lang.hitch(this,
+        this._onPopupMenuClick,
+        layerInfo,
+        popupMenu,
+        layerTrNode)));
+      */
+
+      return {
+        currentNode: layerTrNode,
+        subNode: tableNode
+      };
+    },
+
+
+    // return current state:
+    //   true:  fold,
+    //   false: unfold
+    _fold: function(layerInfo, imageShowLegendDiv, subNode) {
+      /*jshint unused: false*/
+      var state;
+      if (domStyle.get(subNode, 'display') === 'none') {
+        //unfold
+        domStyle.set(subNode, 'display', 'table');
+        domClass.add(imageShowLegendDiv, 'unfold');
+        state = false; //unfold
+      } else {
+        //fold
+        domStyle.set(subNode, 'display', 'none');
+        var src;
+        domClass.remove(imageShowLegendDiv, 'unfold');
+        state = true; // fold
+      }
+      return state;
+    },
+
+    _onCkSelectNodeClick: function(layerInfo, ckSelect, evt) {
+      /*jshint unused: false*/
+      layerInfo.traversal(lang.hitch(this, function(subLayerInfo) {
+        this._grayedLayerLabel(subLayerInfo);
+      }));
+      evt.stopPropagation();
+    },
+
+    _onLayerNodeMouseover: function(layerTrNode, popupMenu) {
+      domClass.add(layerTrNode, "layer-row-mouseover");
+      if (popupMenu) {
+        //domClass.add(popupMenuNode, "layers-list-popupMenu-div-selected");
+        domClass.add(popupMenu.btnNode, "jimu-icon-btn-selected");
+      }
+    },
+
+    _onLayerNodeMouseout: function(layerTrNode, popupMenu) {
+      domClass.remove(layerTrNode, "layer-row-mouseover");
+      if (popupMenu) {
+        //domClass.remove(popupMenuNode, "layers-list-popupMenu-div-selected");
+        domClass.remove(popupMenu.btnNode, "jimu-icon-btn-selected");
+      }
+    },
+
+    _onRowTrClick: function(layerInfo, imageShowLegendDiv, layerTrNode, subNode) {
+      this._changeSelectedLayerRow(layerTrNode);
+      this._fold(layerInfo, imageShowLegendDiv, subNode);
+    },
+
+    _changeSelectedLayerRow: function(layerTrNode) {
+      if (this._currentSelectedLayerRowNode && this._currentSelectedLayerRowNode === layerTrNode) {
+        return;
+      }
+      if (this._currentSelectedLayerRowNode) {
+        domClass.remove(this._currentSelectedLayerRowNode, 'jimu-widget-row-selected');
+      }
+      domClass.add(layerTrNode, 'jimu-widget-row-selected');
+      this._currentSelectedLayerRowNode = layerTrNode;
+    },
+
+    initDisplayStateStorage: function(layerInfo, displayCK, labelDiv) {
+      this._displayStateStorage[layerInfo.id] = {
+        displayCK: displayCK,
+        labelDiv: labelDiv
+      };
+      this._grayedLayerLabel(layerInfo);
+    },
+
+    _grayedLayerLabel: function(layerInfo) {
+      var display = true;
+      var currentLayerInfo = layerInfo;
+      var labelDiv = this._displayStateStorage[layerInfo.id].labelDiv;
+      if(labelDiv) {
+        while(currentLayerInfo) {
+          display = display && this._displayStateStorage[currentLayerInfo.id].displayCK.checked;
+          if(!display) {
+            break;
+          }
+          currentLayerInfo = currentLayerInfo.parentLayerInfo;
+        }
+        if(!display) {
+          domClass.add(labelDiv, 'grayed-title');
+        } else {
+          domClass.remove(labelDiv, 'grayed-title');
+        }
+      }
+    },
+
+    getLayerOptions: function() {
+      var layerOptions = {};
+      for(var child in this._displayStateStorage) {
+        if(this._displayStateStorage.hasOwnProperty(child) &&
+            (typeof this._displayStateStorage[child] !== 'function')) {
+          layerOptions[child] = {display: this._displayStateStorage[child].displayCK.checked};
+        }
+      }
+      return layerOptions;
+    }
+
+  });
+});

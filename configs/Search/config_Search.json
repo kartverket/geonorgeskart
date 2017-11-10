@@ -1,0 +1,21 @@
+{
+  "allPlaceholder": "",
+  "showInfoWindowOnSelect": true,
+  "sources": [
+    {
+      "url": "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer",
+      "name": "World",
+      "singleLineFieldName": "SingleLine",
+      "placeholder": "Søk",
+      "countryCode": "",
+      "zoomScale": 50000,
+      "maxSuggestions": 6,
+      "maxResults": 6,
+      "searchInCurrentMapExtent": false,
+      "enableLocalSearch": true,
+      "localSearchMinScale": 300000,
+      "localSearchDistance": 50000,
+      "type": "locator"
+    }
+  ]
+}

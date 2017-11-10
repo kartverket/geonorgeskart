@@ -1,0 +1,1324 @@
+{
+  "showLegend": false,
+  "contextMenu": {
+    "ZoomTo": true,
+    "Transparency": true,
+    "EnableOrDisablePopup": true,
+    "MoveupOrMovedown": true,
+    "OpenAttributeTable": true,
+    "DescriptionOrShowItemDetailsOrDownload": false
+  },
+  "layerOptions": {
+    "wms_8498": {
+      "display": false
+    },
+    "wms_8498_Transformatorstasjoner": {
+      "display": true
+    },
+    "wms_8498_Sjokabler": {
+      "display": true
+    },
+    "wms_8498_Sentralnett": {
+      "display": true
+    },
+    "wms_8498_Regionalnett": {
+      "display": true
+    },
+    "wms_8498_Omradekonsesjonaerer": {
+      "display": true
+    },
+    "wms_8498_Master og stolper": {
+      "display": true
+    },
+    "wms_9479": {
+      "display": false
+    },
+    "wms_9479_endret_etter_2008": {
+      "display": true
+    },
+    "wms_9479_dyrkbarjord": {
+      "display": true
+    },
+    "wms_9609": {
+      "display": false
+    },
+    "wms_9609_Jordkvalitet": {
+      "display": true
+    },
+    "wms_9807": {
+      "display": false
+    },
+    "wms_9807_Arealformal_01": {
+      "display": true
+    },
+    "wms_9807_Hensynsoner_bestemmelsesomrader_01": {
+      "display": true
+    },
+    "wms_9807_Grenser_og_juridiske_linjer_01": {
+      "display": true
+    },
+    "wms_9807_Planomrade_01": {
+      "display": true
+    },
+    "wms_9807_Juridiske_punkter_01": {
+      "display": true
+    },
+    "wms_9807_Paskrift_01": {
+      "display": true
+    },
+    "wms_9807_Arealformal_02": {
+      "display": true
+    },
+    "wms_9807_Hensynsoner_bestemmelsesomrader_02": {
+      "display": true
+    },
+    "wms_9807_Grenser_og_juridiske_linjer_02": {
+      "display": true
+    },
+    "wms_9807_Planomrade_02": {
+      "display": true
+    },
+    "wms_9807_Juridiske_punkter_02": {
+      "display": true
+    },
+    "wms_9807_Paskrift_02": {
+      "display": true
+    },
+    "wms_9807_Arealformal_03": {
+      "display": true
+    },
+    "wms_9807_Hensynsoner_bestemmelsesomrader_03": {
+      "display": true
+    },
+    "wms_9807_Grenser_og_juridiske_linjer_03": {
+      "display": true
+    },
+    "wms_9807_Planomrade_03": {
+      "display": true
+    },
+    "wms_9807_Juridiske_punkter_03": {
+      "display": true
+    },
+    "wms_9807_Paskrift_03": {
+      "display": true
+    },
+    "wms_9807_Arealformal_04": {
+      "display": true
+    },
+    "wms_9807_Hensynsoner_bestemmelsesomrader_04": {
+      "display": true
+    },
+    "wms_9807_Grenser_og_juridiske_linjer_04": {
+      "display": true
+    },
+    "wms_9807_Planomrade_04": {
+      "display": true
+    },
+    "wms_9807_Juridiske_punkter_04": {
+      "display": true
+    },
+    "wms_9807_Paskrift_04": {
+      "display": true
+    },
+    "wms_9807_Arealformal_05": {
+      "display": true
+    },
+    "wms_9807_Hensynsoner_bestemmelsesomrader_05": {
+      "display": true
+    },
+    "wms_9807_Grenser_og_juridiske_linjer_05": {
+      "display": true
+    },
+    "wms_9807_Planomrade_05": {
+      "display": true
+    },
+    "wms_9807_Juridiske_punkter_05": {
+      "display": true
+    },
+    "wms_9807_Paskrift_05": {
+      "display": true
+    },
+    "wms_8916": {
+      "display": false
+    },
+    "wms_8916_Arealformal_01": {
+      "display": true
+    },
+    "wms_8916_Hensynsoner_bestemmelsesomrader_01": {
+      "display": true
+    },
+    "wms_8916_Grenser_og_juridiske_linjer_01": {
+      "display": true
+    },
+    "wms_8916_Planomrade_01": {
+      "display": true
+    },
+    "wms_8916_Juridiske_punkter_01": {
+      "display": true
+    },
+    "wms_8916_Paskrift_01": {
+      "display": true
+    },
+    "wms_8916_Arealformal_02": {
+      "display": true
+    },
+    "wms_8916_Hensynsoner_bestemmelsesomrader_02": {
+      "display": true
+    },
+    "wms_8916_Grenser_og_juridiske_linjer_02": {
+      "display": true
+    },
+    "wms_8916_Planomrade_02": {
+      "display": true
+    },
+    "wms_8916_Juridiske_punkter_02": {
+      "display": true
+    },
+    "wms_8916_Paskrift_02": {
+      "display": true
+    },
+    "wms_8963": {
+      "display": false
+    },
+    "wms_8963_dtm10_33": {
+      "display": true
+    },
+    "wms_3718": {
+      "display": false
+    },
+    "wms_3718_dom10_33": {
+      "display": true
+    },
+    "wms_6546": {
+      "display": false
+    },
+    "wms_6546_Skytefelt": {
+      "display": true
+    },
+    "wms_1624": {
+      "display": false
+    },
+    "wms_1624_0": {
+      "display": true
+    },
+    "wms_1624_1": {
+      "display": true
+    },
+    "wms_1624_2": {
+      "display": true
+    },
+    "wms_1624_3": {
+      "display": true
+    },
+    "wms_1624_4": {
+      "display": true
+    },
+    "wms_1624_5": {
+      "display": true
+    },
+    "wms_1624_6": {
+      "display": true
+    },
+    "wms_1624_7": {
+      "display": true
+    },
+    "wms_2322": {
+      "display": false
+    },
+    "wms_2322_0": {
+      "display": true
+    },
+    "wms_5159": {
+      "display": false
+    },
+    "wms_5159_0": {
+      "display": true
+    },
+    "wms_5159_1": {
+      "display": true
+    },
+    "wms_5159_2": {
+      "display": true
+    },
+    "wms_5159_3": {
+      "display": true
+    },
+    "wms_2593": {
+      "display": false
+    },
+    "wms_2593_kart549": {
+      "display": true
+    },
+    "wms_2593_kart550": {
+      "display": true
+    },
+    "wms_2593_kart300": {
+      "display": true
+    },
+    "wms_2593_kart301": {
+      "display": true
+    },
+    "wms_2593_kart303": {
+      "display": true
+    },
+    "wms_2593_kart304": {
+      "display": true
+    },
+    "wms_2593_kart315": {
+      "display": true
+    },
+    "wms_2593_kart505": {
+      "display": true
+    },
+    "wms_2593_kart506": {
+      "display": true
+    },
+    "wms_2593_kart507": {
+      "display": true
+    },
+    "wms_2593_kart514": {
+      "display": true
+    },
+    "wms_2593_kart515": {
+      "display": true
+    },
+    "wms_2593_kart305_oslo": {
+      "display": true
+    },
+    "wms_2593_kart306": {
+      "display": true
+    },
+    "wms_2593_kart307": {
+      "display": true
+    },
+    "wms_2593_kart308": {
+      "display": true
+    },
+    "wms_2593_kart309": {
+      "display": true
+    },
+    "wms_2593_kart310": {
+      "display": true
+    },
+    "wms_2593_kart311": {
+      "display": true
+    },
+    "wms_2593_kart321": {
+      "display": true
+    },
+    "wms_2593_kart322": {
+      "display": true
+    },
+    "wms_2593_kart323": {
+      "display": true
+    },
+    "wms_2593_kart324": {
+      "display": true
+    },
+    "wms_2593_kart325": {
+      "display": true
+    },
+    "wms_2593_kart001": {
+      "display": true
+    },
+    "wms_2593_kart002": {
+      "display": true
+    },
+    "wms_2593_kart003": {
+      "display": true
+    },
+    "wms_2593_kart004_svel": {
+      "display": true
+    },
+    "wms_2593_kart005": {
+      "display": true
+    },
+    "wms_2593_kart006_krag": {
+      "display": true
+    },
+    "wms_2593_kart007": {
+      "display": true
+    },
+    "wms_2593_kart008": {
+      "display": true
+    },
+    "wms_2593_kart009_rand": {
+      "display": true
+    },
+    "wms_2593_kart010": {
+      "display": true
+    },
+    "wms_2593_kart011": {
+      "display": true
+    },
+    "wms_2593_kart012_feda": {
+      "display": true
+    },
+    "wms_2593_kart012_kvin": {
+      "display": true
+    },
+    "wms_2593_kart012_list": {
+      "display": true
+    },
+    "wms_2593_kart012_reke": {
+      "display": true
+    },
+    "wms_2593_kart013": {
+      "display": true
+    },
+    "wms_2593_kart014_risa": {
+      "display": true
+    },
+    "wms_2593_kart015_hyls": {
+      "display": true
+    },
+    "wms_2593_kart015_joes": {
+      "display": true
+    },
+    "wms_2593_kart015_saud": {
+      "display": true
+    },
+    "wms_2593_kart015_yrke": {
+      "display": true
+    },
+    "wms_2593_kart016_arda": {
+      "display": true
+    },
+    "wms_2593_kart016_botn": {
+      "display": true
+    },
+    "wms_2593_kart016_gand": {
+      "display": true
+    },
+    "wms_2593_kart017_akra": {
+      "display": true
+    },
+    "wms_2593_kart017_skjo": {
+      "display": true
+    },
+    "wms_2593_kart019_alfj": {
+      "display": true
+    },
+    "wms_2593_kart019_espe": {
+      "display": true
+    },
+    "wms_2593_kart019_kule": {
+      "display": true
+    },
+    "wms_2593_kart019_most": {
+      "display": true
+    },
+    "wms_2593_kart019_sagv": {
+      "display": true
+    },
+    "wms_2593_kart020_aakr": {
+      "display": true
+    },
+    "wms_2593_kart021": {
+      "display": true
+    },
+    "wms_2593_kart022_samn": {
+      "display": true
+    },
+    "wms_2593_kart022_lygr": {
+      "display": true
+    },
+    "wms_2593_kart022_venj": {
+      "display": true
+    },
+    "wms_2593_kart023": {
+      "display": true
+    },
+    "wms_2593_kart024_huso": {
+      "display": true
+    },
+    "wms_2593_kart024_stei": {
+      "display": true
+    },
+    "wms_2593_kart025_ston": {
+      "display": true
+    },
+    "wms_2593_kart026": {
+      "display": true
+    },
+    "wms_2593_kart027_dals": {
+      "display": true
+    },
+    "wms_2593_kart027_fofj": {
+      "display": true
+    },
+    "wms_2593_kart027_ford": {
+      "display": true
+    },
+    "wms_2593_kart028_gule": {
+      "display": true
+    },
+    "wms_2593_kart028_olde": {
+      "display": true
+    },
+    "wms_2593_kart028_rugs": {
+      "display": true
+    },
+    "wms_2593_kart028_skat": {
+      "display": true
+    },
+    "wms_2593_kart028_svel": {
+      "display": true
+    },
+    "wms_2593_kart029_sylt": {
+      "display": true
+    },
+    "wms_2593_kart029_honn": {
+      "display": true
+    },
+    "wms_2593_kart029_malo": {
+      "display": true
+    },
+    "wms_2593_kart030_egge": {
+      "display": true
+    },
+    "wms_2593_kart031_leps": {
+      "display": true
+    },
+    "wms_2593_kart031_vegs": {
+      "display": true
+    },
+    "wms_2593_kart032": {
+      "display": true
+    },
+    "wms_2593_kart033_tres": {
+      "display": true
+    },
+    "wms_2593_kart034_eids": {
+      "display": true
+    },
+    "wms_2593_kart035_lang": {
+      "display": true
+    },
+    "wms_2593_kart035_stop": {
+      "display": true
+    },
+    "wms_2593_kart035_stor": {
+      "display": true
+    },
+    "wms_2593_kart036": {
+      "display": true
+    },
+    "wms_2593_kart037": {
+      "display": true
+    },
+    "wms_2593_kart038": {
+      "display": true
+    },
+    "wms_2593_kart039_buvi": {
+      "display": true
+    },
+    "wms_2593_kart040_dyrn": {
+      "display": true
+    },
+    "wms_2593_kart040_stra": {
+      "display": true
+    },
+    "wms_2593_kart040_veid": {
+      "display": true
+    },
+    "wms_2593_kart041": {
+      "display": true
+    },
+    "wms_2593_kart042": {
+      "display": true
+    },
+    "wms_2593_kart043_aafj": {
+      "display": true
+    },
+    "wms_2593_kart044": {
+      "display": true
+    },
+    "wms_2593_kart045_ving": {
+      "display": true
+    },
+    "wms_2593_kart046": {
+      "display": true
+    },
+    "wms_2593_kart047": {
+      "display": true
+    },
+    "wms_2593_kart048_naeroe": {
+      "display": true
+    },
+    "wms_2593_kart049": {
+      "display": true
+    },
+    "wms_2593_kart050": {
+      "display": true
+    },
+    "wms_2593_kart051": {
+      "display": true
+    },
+    "wms_2593_kart052": {
+      "display": true
+    },
+    "wms_2593_kart053": {
+      "display": true
+    },
+    "wms_2593_kart054": {
+      "display": true
+    },
+    "wms_2593_kart055": {
+      "display": true
+    },
+    "wms_2593_kart056": {
+      "display": true
+    },
+    "wms_2593_kart057": {
+      "display": true
+    },
+    "wms_2593_kart058": {
+      "display": true
+    },
+    "wms_2593_kart059": {
+      "display": true
+    },
+    "wms_2593_kart060": {
+      "display": true
+    },
+    "wms_2593_kart061": {
+      "display": true
+    },
+    "wms_2593_kart062": {
+      "display": true
+    },
+    "wms_2593_kart063": {
+      "display": true
+    },
+    "wms_2593_kart064": {
+      "display": true
+    },
+    "wms_2593_kart065": {
+      "display": true
+    },
+    "wms_2593_kart066": {
+      "display": true
+    },
+    "wms_2593_kart067_grot": {
+      "display": true
+    },
+    "wms_2593_kart068_holm": {
+      "display": true
+    },
+    "wms_2593_kart069_kans": {
+      "display": true
+    },
+    "wms_2593_kart069_vest": {
+      "display": true
+    },
+    "wms_2593_kart070_rost": {
+      "display": true
+    },
+    "wms_2593_kart071_vaer": {
+      "display": true
+    },
+    "wms_2593_kart072_buks": {
+      "display": true
+    },
+    "wms_2593_kart073_stam": {
+      "display": true
+    },
+    "wms_2593_kart074": {
+      "display": true
+    },
+    "wms_2593_kart075": {
+      "display": true
+    },
+    "wms_2593_kart076_sorf": {
+      "display": true
+    },
+    "wms_2593_kart076_stok": {
+      "display": true
+    },
+    "wms_2593_kart076_sige_01": {
+      "display": true
+    },
+    "wms_2593_kart076_melb": {
+      "display": true
+    },
+    "wms_2593_kart076_sige_02": {
+      "display": true
+    },
+    "wms_2593_kart077_grat": {
+      "display": true
+    },
+    "wms_2593_kart077_rams": {
+      "display": true
+    },
+    "wms_2593_kart077_sand": {
+      "display": true
+    },
+    "wms_2593_kart078": {
+      "display": true
+    },
+    "wms_2593_kart079_aust": {
+      "display": true
+    },
+    "wms_2593_kart079_gull": {
+      "display": true
+    },
+    "wms_2593_kart079_riso": {
+      "display": true
+    },
+    "wms_2593_kart080_sagf": {
+      "display": true
+    },
+    "wms_2593_kart081_ande": {
+      "display": true
+    },
+    "wms_2593_kart081_nord": {
+      "display": true
+    },
+    "wms_2593_kart082": {
+      "display": true
+    },
+    "wms_2593_kart083_finn": {
+      "display": true
+    },
+    "wms_2593_kart084": {
+      "display": true
+    },
+    "wms_2593_kart085_hamn": {
+      "display": true
+    },
+    "wms_2593_kart086": {
+      "display": true
+    },
+    "wms_2593_kart087": {
+      "display": true
+    },
+    "wms_2593_kart088": {
+      "display": true
+    },
+    "wms_2593_kart089": {
+      "display": true
+    },
+    "wms_2593_kart090_kafj": {
+      "display": true
+    },
+    "wms_2593_kart090_sorf": {
+      "display": true
+    },
+    "wms_2593_kart090_stor": {
+      "display": true
+    },
+    "wms_2593_kart091_lang": {
+      "display": true
+    },
+    "wms_2593_kart092": {
+      "display": true
+    },
+    "wms_2593_kart093_skje": {
+      "display": true
+    },
+    "wms_2593_kart094_bunn": {
+      "display": true
+    },
+    "wms_2593_kart095": {
+      "display": true
+    },
+    "wms_2593_kart096_kafj": {
+      "display": true
+    },
+    "wms_2593_kart096_bukt": {
+      "display": true
+    },
+    "wms_2593_kart097_oksf": {
+      "display": true
+    },
+    "wms_2593_kart098": {
+      "display": true
+    },
+    "wms_2593_kart099": {
+      "display": true
+    },
+    "wms_2593_kart100": {
+      "display": true
+    },
+    "wms_2593_kart101": {
+      "display": true
+    },
+    "wms_2593_kart102_havo": {
+      "display": true
+    },
+    "wms_2593_kart103_rygg": {
+      "display": true
+    },
+    "wms_2593_kart103_honn": {
+      "display": true
+    },
+    "wms_2593_kart104": {
+      "display": true
+    },
+    "wms_2593_kart105": {
+      "display": true
+    },
+    "wms_2593_kart106": {
+      "display": true
+    },
+    "wms_2593_kart107_laks": {
+      "display": true
+    },
+    "wms_2593_kart107_pors": {
+      "display": true
+    },
+    "wms_2593_kart108_eids": {
+      "display": true
+    },
+    "wms_2593_kart109_gamv": {
+      "display": true
+    },
+    "wms_2593_kart109_meha": {
+      "display": true
+    },
+    "wms_2593_kart110_hops": {
+      "display": true
+    },
+    "wms_2593_kart110_lang": {
+      "display": true
+    },
+    "wms_2593_kart111": {
+      "display": true
+    },
+    "wms_2593_kart112": {
+      "display": true
+    },
+    "wms_2593_kart113_vard": {
+      "display": true
+    },
+    "wms_2593_kart114_kibe": {
+      "display": true
+    },
+    "wms_2593_kart115_vads": {
+      "display": true
+    },
+    "wms_2593_kart116_lang": {
+      "display": true
+    },
+    "wms_2593_kart116_neid": {
+      "display": true
+    },
+    "wms_2593_kart117": {
+      "display": true
+    },
+    "wms_2593_kart118_sorf": {
+      "display": true
+    },
+    "wms_2593_kart119_berg": {
+      "display": true
+    },
+    "wms_2593_kart119_bols": {
+      "display": true
+    },
+    "wms_2593_kart119_masf": {
+      "display": true
+    },
+    "wms_2593_kart119_tjuv": {
+      "display": true
+    },
+    "wms_2593_kart120_stur": {
+      "display": true
+    },
+    "wms_2593_kart121_bofj": {
+      "display": true
+    },
+    "wms_2593_kart121_finn": {
+      "display": true
+    },
+    "wms_2593_kart121_fugl": {
+      "display": true
+    },
+    "wms_2593_kart121_hoya": {
+      "display": true
+    },
+    "wms_2593_kart121_list": {
+      "display": true
+    },
+    "wms_2593_kart121_ortn": {
+      "display": true
+    },
+    "wms_2593_kart121_rutl": {
+      "display": true
+    },
+    "wms_2593_kart121_vadh": {
+      "display": true
+    },
+    "wms_2593_kart122_ardv": {
+      "display": true
+    },
+    "wms_2593_kart122_skjv": {
+      "display": true
+    },
+    "wms_2593_kart122_ards": {
+      "display": true
+    },
+    "wms_2593_kart122_esef": {
+      "display": true
+    },
+    "wms_2593_kart122_fimr": {
+      "display": true
+    },
+    "wms_2593_kart122_fjae": {
+      "display": true
+    },
+    "wms_2593_kart122_kaup": {
+      "display": true
+    },
+    "wms_2593_kart122_kvam": {
+      "display": true
+    },
+    "wms_2593_kart122_laer": {
+      "display": true
+    },
+    "wms_2593_kart122_skjs": {
+      "display": true
+    },
+    "wms_2593_kart122_viki": {
+      "display": true
+    },
+    "wms_2593_kart123_davi": {
+      "display": true
+    },
+    "wms_2593_kart123_hyen": {
+      "display": true
+    },
+    "wms_2593_kart123_nord": {
+      "display": true
+    },
+    "wms_2593_kart123_olde": {
+      "display": true
+    },
+    "wms_2593_kart123_sand": {
+      "display": true
+    },
+    "wms_2593_kart123_stry": {
+      "display": true
+    },
+    "wms_2593_kart124_aurl": {
+      "display": true
+    },
+    "wms_2593_kart124_bakk": {
+      "display": true
+    },
+    "wms_2593_kart125_aust": {
+      "display": true
+    },
+    "wms_2593_kart126": {
+      "display": true
+    },
+    "wms_2593_kart127_geir": {
+      "display": true
+    },
+    "wms_2593_kart128_sunn": {
+      "display": true
+    },
+    "wms_2593_kart129_vinj": {
+      "display": true
+    },
+    "wms_2593_kart130": {
+      "display": true
+    },
+    "wms_2593_kart131_verr": {
+      "display": true
+    },
+    "wms_2593_kart131_leva": {
+      "display": true
+    },
+    "wms_2593_kart131_stei": {
+      "display": true
+    },
+    "wms_2593_kart131_verd": {
+      "display": true
+    },
+    "wms_2593_kart132": {
+      "display": true
+    },
+    "wms_2593_kart133_tose": {
+      "display": true
+    },
+    "wms_2593_kart133_fold": {
+      "display": true
+    },
+    "wms_2593_kart134": {
+      "display": true
+    },
+    "wms_2593_kart135": {
+      "display": true
+    },
+    "wms_2593_kart136_sund": {
+      "display": true
+    },
+    "wms_2593_kart136_salt": {
+      "display": true
+    },
+    "wms_2593_kart137": {
+      "display": true
+    },
+    "wms_2593_kart138": {
+      "display": true
+    },
+    "wms_2593_kart139": {
+      "display": true
+    },
+    "wms_2593_kart140": {
+      "display": true
+    },
+    "wms_2593_kart141_efjo": {
+      "display": true
+    },
+    "wms_2593_kart142": {
+      "display": true
+    },
+    "wms_2593_kart143": {
+      "display": true
+    },
+    "wms_2593_kart144": {
+      "display": true
+    },
+    "wms_2593_kart501_aust": {
+      "display": true
+    },
+    "wms_2593_kart501_herw": {
+      "display": true
+    },
+    "wms_2593_kart501_soerh": {
+      "display": true
+    },
+    "wms_2593_kart501_telt": {
+      "display": true
+    },
+    "wms_2593_kart512": {
+      "display": true
+    },
+    "wms_2593_kart513_forl": {
+      "display": true
+    },
+    "wms_2593_kart513_kolk": {
+      "display": true
+    },
+    "wms_2593_kart513_loka": {
+      "display": true
+    },
+    "wms_2593_kart513_naka": {
+      "display": true
+    },
+    "wms_2593_kart513_nyal": {
+      "display": true
+    },
+    "wms_2593_kart513_svea": {
+      "display": true
+    },
+    "wms_2593_kart516": {
+      "display": true
+    },
+    "wms_2593_kart521_wood": {
+      "display": true
+    },
+    "wms_2593_kart522": {
+      "display": true
+    },
+    "wms_2593_kart523_pyra": {
+      "display": true
+    },
+    "wms_2593_kart524_eide": {
+      "display": true
+    },
+    "wms_2593_kart524_farm": {
+      "display": true
+    },
+    "wms_2593_kart524_rand": {
+      "display": true
+    },
+    "wms_2593_kart524_tord": {
+      "display": true
+    },
+    "wms_2593_kart525_akse": {
+      "display": true
+    },
+    "wms_2593_kart525_mari": {
+      "display": true
+    },
+    "wms_2593_kart526_gash": {
+      "display": true
+    },
+    "wms_2593_kart526_isbj": {
+      "display": true
+    },
+    "wms_2593_kart527": {
+      "display": true
+    },
+    "wms_2593_kart533_hele": {
+      "display": true
+    },
+    "wms_2593_kart533_ormh": {
+      "display": true
+    },
+    "wms_2593_kart534": {
+      "display": true
+    },
+    "wms_2593_kart535": {
+      "display": true
+    },
+    "wms_2593_kart536": {
+      "display": true
+    },
+    "wms_2593_kart537": {
+      "display": true
+    },
+    "wms_2593_kart539": {
+      "display": true
+    },
+    "wms_2593_kart540": {
+      "display": true
+    },
+    "wms_2593_kart541": {
+      "display": true
+    },
+    "wms_2593_kart401_bunn": {
+      "display": true
+    },
+    "wms_2593_kart401_illj": {
+      "display": true
+    },
+    "wms_2593_kart401_lysa": {
+      "display": true
+    },
+    "wms_2593_kart401_slem": {
+      "display": true
+    },
+    "wms_2593_kart401_stei": {
+      "display": true
+    },
+    "wms_2593_kart402_drob": {
+      "display": true
+    },
+    "wms_2593_kart451_grim": {
+      "display": true
+    },
+    "wms_2593_kart451_rivi": {
+      "display": true
+    },
+    "wms_2593_kart452": {
+      "display": true
+    },
+    "wms_2593_kart453_aren": {
+      "display": true
+    },
+    "wms_2593_kart453_eyde": {
+      "display": true
+    },
+    "wms_2593_kart454": {
+      "display": true
+    },
+    "wms_2593_kart455_dusa": {
+      "display": true
+    },
+    "wms_2593_kart455_stav": {
+      "display": true
+    },
+    "wms_2593_kart456_ales": {
+      "display": true
+    },
+    "wms_2593_kart457_mand": {
+      "display": true
+    },
+    "wms_2593_kart458": {
+      "display": true
+    },
+    "wms_2593_kart459": {
+      "display": true
+    },
+    "wms_2593_kart460": {
+      "display": true
+    },
+    "wms_2593_kart461": {
+      "display": true
+    },
+    "wms_2593_kart462": {
+      "display": true
+    },
+    "wms_2593_kart463": {
+      "display": true
+    },
+    "wms_2593_kart464": {
+      "display": true
+    },
+    "wms_2593_kart465": {
+      "display": true
+    },
+    "wms_2593_kart466_sand": {
+      "display": true
+    },
+    "wms_2593_kart466_trom": {
+      "display": true
+    },
+    "wms_2593_kart467_eger": {
+      "display": true
+    },
+    "wms_2593_kart467_hell": {
+      "display": true
+    },
+    "wms_2593_kart467_sire": {
+      "display": true
+    },
+    "wms_2593_kart468_tons": {
+      "display": true
+    },
+    "wms_2593_kart469_haug": {
+      "display": true
+    },
+    "wms_2593_kart470_hald": {
+      "display": true
+    },
+    "wms_2593_kart470_svin": {
+      "display": true
+    },
+    "wms_2593_kart471_kvit": {
+      "display": true
+    },
+    "wms_2593_kart471_skud": {
+      "display": true
+    },
+    "wms_2593_kart472": {
+      "display": true
+    },
+    "wms_2593_kart473": {
+      "display": true
+    },
+    "wms_2593_kart474_pors": {
+      "display": true
+    },
+    "wms_2593_kart474_skie": {
+      "display": true
+    },
+    "wms_2593_kart476": {
+      "display": true
+    },
+    "wms_2593_kart477": {
+      "display": true
+    },
+    "wms_2593_kart478_flekk": {
+      "display": true
+    },
+    "wms_2593_kart479": {
+      "display": true
+    },
+    "wms_2593_kart480_san": {
+      "display": true
+    },
+    "wms_2593_kart481": {
+      "display": true
+    },
+    "wms_2593_kart482_moss": {
+      "display": true
+    },
+    "wms_2593_kart483_base": {
+      "display": true
+    },
+    "wms_2593_kart483_raff": {
+      "display": true
+    },
+    "wms_2593_kart483_sloe": {
+      "display": true
+    },
+    "wms_2593_kart484": {
+      "display": true
+    },
+    "wms_2593_kart485_sand": {
+      "display": true
+    },
+    "wms_2593_kart486": {
+      "display": true
+    },
+    "wms_2593_kart487": {
+      "display": true
+    },
+    "wms_2593_kart488": {
+      "display": true
+    },
+    "wms_2593_kart489_melk": {
+      "display": true
+    },
+    "wms_2593_kart490": {
+      "display": true
+    },
+    "wms_2593_kart491_karm": {
+      "display": true
+    },
+    "wms_2593_kart492": {
+      "display": true
+    },
+    "wms_2593_kart493_kais": {
+      "display": true
+    },
+    "wms_2593_kart494_nyha": {
+      "display": true
+    },
+    "wms_2593_hoved_spesialer_omriss": {
+      "display": true
+    },
+    "wms_2593_svalbard_spesialer_omriss": {
+      "display": true
+    },
+    "wms_2593_havn_omriss": {
+      "display": true
+    },
+    "wms_2593_havn_spesialer_omriss": {
+      "display": true
+    },
+    "wms_4889": {
+      "display": false
+    },
+    "wms_4889_Kystkontur_Generalisert": {
+      "display": true
+    },
+    "wms_4889_Skjaer_Generalisert": {
+      "display": true
+    },
+    "wms_4889_Kystkontur": {
+      "display": true
+    },
+    "wms_4889_Skjaer": {
+      "display": true
+    },
+    "wms_913": {
+      "display": true
+    },
+    "wms_913_Marka": {
+      "display": true
+    },
+    "wms_4783": {
+      "display": false
+    },
+    "wms_4783_Kommunegrenser": {
+      "display": true
+    },
+    "wms_4783_Fylkesnavn": {
+      "display": true
+    },
+    "wms_4783_Fylkesgrenser": {
+      "display": true
+    },
+    "wms_4783_Kommunenavn": {
+      "display": true
+    },
+    "wms_4783_Kommunenummer": {
+      "display": true
+    },
+    "WMTS_402": {
+      "display": false
+    },
+    "WMTS_8535": {
+      "display": false
+    },
+    "WMTS_892": {
+      "display": false
+    }
+  }
+}

@@ -1,4 +1,45 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-define(["jimu/shared/BaseVersionManager"],function(c){function b(){this.versions=[{version:"1.0",upgrader:function(a){return a}},{version:"1.1",upgrader:function(a){return a}},{version:"1.2",upgrader:function(a){return a}},{version:"1.3",upgrader:function(a){a.initiallyExpand=!1;return a}},{version:"1.4",upgrader:function(a){return a}},{version:"2.0beta",upgrader:function(a){a.filterByMapExtent=!0;return a}}]}b.prototype=new c;return b.prototype.constructor=b});
+define(['jimu/shared/BaseVersionManager'],
+function(BaseVersionManager) {
+  function VersionManager(){
+    this.versions = [{
+      version: '1.0',
+      upgrader: function(oldConfig){
+        return oldConfig;
+      }
+    }, {
+      version: '1.1',
+      upgrader: function(oldConfig){
+        return oldConfig;
+      }
+    }, {
+      version: '1.2',
+      upgrader: function(oldConfig){
+        return oldConfig;
+      }
+    }, {
+      version: '1.3',
+      upgrader: function(oldConfig){
+        var newConfig = oldConfig;
+        newConfig.initiallyExpand = false;
+        return newConfig;
+      }
+    }, {
+      version: '1.4',
+      upgrader: function(oldConfig){
+        return oldConfig;
+      }
+    }, {
+      version: '2.0beta',
+      upgrader: function(oldConfig){
+        var newConfig = oldConfig;
+        newConfig.filterByMapExtent = true;
+
+        return newConfig;
+      }
+    }];
+  }
+
+  VersionManager.prototype = new BaseVersionManager();
+  VersionManager.prototype.constructor = VersionManager;
+  return VersionManager;
+});

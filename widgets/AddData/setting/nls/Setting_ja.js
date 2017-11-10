@@ -1,4 +1,0 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-define({"widgets/AddData/setting/nls/strings":{numPerPage:"1 \u30da\u30fc\u30b8\u306e\u30a2\u30a4\u30c6\u30e0\u6570",scopeOptions:{labelPlaceholder:"\u30aa\u30d7\u30b7\u30e7\u30f3\u306e\u30e9\u30d9\u30eb",MyContent:"\u30de\u30a4 \u30b3\u30f3\u30c6\u30f3\u30c4\u3092\u8a31\u53ef",MyOrganization:"\u7d44\u7e54\u3092\u8a31\u53ef",ArcGISOnline:"ArcGIS Online \u3092\u8a31\u53ef",FromUrl:"URL \u306e\u5165\u529b\u3092\u8a31\u53ef"},_localized:{}}});

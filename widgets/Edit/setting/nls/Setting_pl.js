@@ -1,6 +1,0 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-define({"widgets/Edit/setting/nls/strings":{enableUndoRedo:"W\u0142\u0105cz opcje Cofnij/Pon\u00f3w",toolbarVisible:"Widoczny pasek narz\u0119dziowy",toolbarOptions:"Opcje paska narz\u0119dziowego",mergeVisible:"Po\u0142\u0105cz",cutVisible:"Wytnij",reshapeVisible:"Przekszta\u0142\u0107",back:"Wstecz",label:"Warstwa",edit:"Edytowalne",update:"Wy\u0142\u0105cz aktualizacj\u0119 geometrii",fields:"Pola",actions:"Operacje",editpageName:"Nazwa",editpageAlias:"Alias",editpageVisible:"Widoczne",editpageEditable:"Edytowalne",
-noLayers:"Brak warstw obiektu mo\u017cliwych do edycji",configureFields:"Skonfiguruj pola warstwy",useFilterEdit:"U\u017cyj szablonu filtr\u00f3w obiektu",display:"Wy\u015bwietl",autoApplyEditWhenGeometryIsMoved:"Zastosuj zmian\u0119 automatycznie, gdy geometria zostanie przesuni\u0119ta",snappingTolerance:"Ustaw tolerancj\u0119 doci\u0105gania w pikselach",popupTolerance:"Ustaw tolerancj\u0119 okna podr\u0119cznego edycji atrybut\u00f3w w pikselach",stickyMoveTolerance:"Ustaw tolerancj\u0119 przenoszenia z op\u00f3\u017anieniem",
-_localized:{}}});

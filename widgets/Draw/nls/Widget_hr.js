@@ -1,6 +1,0 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-define({"widgets/Draw/nls/strings":{_widgetLabel:"Crtaj",selectDrawMode:"Odabir na\u010dina crtanja",clear:"O\u010disti",point:"To\u010dka",line:"Linija",polyline:"Polilinija",freehandPolyline:"Prostoru\u010dna polilinija",triangle:"Trokut",extent:"Omotnica",circle:"Krug",ellipse:"Elipsa",polygon:"Poligon",freehandPolygon:"Prostoru\u010dni poligon",text:"Tekst",style:"Stil",alpha:"Prozirnost",width:"\u0160irina",size:"Veli\u010dina",color:"Boja",markerColor:"Boja oznake",outlineColor:"Boja obrisa",
-lineColor:"Boja linija",fillColor:"Boja ispune",showMeasurements:"Prika\u017ei mjere",areaUnits:"Jedinice podru\u010dja",distanceUnits:"Jedinice udaljenosti",kilometers:"Kilometri",miles:"Milje",meters:"Metri",feet:"Stope",yards:"Jardi",squareKilometers:"Kvadratni kilometri",squareMiles:"Kvadratne milje",acres:"Jutra",hectares:"Hektari",squareMeters:"Kvadratni metri",squareFeet:"Kvadratne stope",squareYards:"Kvadratni jardi",undo:"Poni\u0161ti",redo:"Ponovi",results:"Rezultati",points:"To\u010dke",
-lines:"Linije",areas:"Podru\u010dja",_localized:{}}});

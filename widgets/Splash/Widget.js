@@ -1,20 +1,402 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-require({cache:{"widgets/Splash/_build-generate_module":function(){define(["dojo/text!./Widget.html","dojo/text!./css/style.css","dojo/i18n!./nls/strings"],function(){})},"url:widgets/Splash/Widget.html":'\x3cdiv class\x3d"jimu-widget-splash-desktop"\x3e\r\n  \x3cdiv class\x3d"overlay" data-dojo-attach-point\x3d"overlayNode"\x3e\x3c/div\x3e\r\n  \x3cdiv class\x3d"envelope buried" data-dojo-attach-point\x3d"envelopeNode"\x3e\r\n    \x3cdiv class\x3d"splash-container splash-bg" data-dojo-attach-point\x3d"splashContainerBackground"\x3e\x3c/div\x3e\r\n    \x3cdiv class\x3d"splash-container" data-dojo-attach-point\x3d"splashContainerNode"\x3e\r\n      \x3cdiv class\x3d"custom-content" data-dojo-attach-point\x3d"customContentNode"\x3e\x3c/div\x3e\r\n      \x3cdiv class\x3d"footer" data-dojo-attach-point\x3d"footerNode"\x3e\r\n        \x3cdiv class\x3d"confirmcheck-container" data-dojo-attach-point\x3d"confirmCheckContainer"\x3e\r\n          \x3cdiv data-dojo-attach-point\x3d"confirmCheck"\x3e\x3c/div\x3e\r\n        \x3c/div\x3e\r\n        \x3cdiv class\x3d"jimu-btn jimu-float-trailing" data-dojo-attach-point\x3d"okNode" data-dojo-attach-event\x3d"onclick:onOkClick"\x3e\x3c/div\x3e\r\n      \x3c/div\x3e\r\n    \x3c/div\x3e\r\n  \x3c/div\x3e\r\n\x3c/div\x3e',
-"url:widgets/Splash/css/style.css":".jimu-widget-splash{position: absolute !important; top: 0 !important; bottom: 0 !important; left: 0 !important; right: 0 !important; margin: auto !important; z-index: 110;}.jimu-widget-splash .buried{visibility: hidden;}.jimu-widget-splash .overlay{top: 0; left: 0; width: 100%; height: 100%; position: absolute; background-color:rgba(0,0,0,0.5);}.jimu-widget-splash-desktop .splash-container .jimu-checkbox,.jimu-widget-splash-mobile .splash-container .jimu-checkbox{font-size: 14px; color: #fff; overflow: auto; max-height: 50px; min-height: 25px; margin-top: 20px; margin-bottom: 10px; display: block;}.jimu-widget-splash-desktop .splash-container .jimu-checkbox .label,.jimu-widget-splash-mobile .splash-container .jimu-checkbox .label{white-space: normal; text-indent: 5px; margin-left: 5px; color: #fff; float: none !important; display: inline;}.jimu-rtl .jimu-widget-splash-desktop .splash-container .jimu-checkbox .label,.jimu-rtl .jimu-widget-splash-mobile .splash-container .jimu-checkbox .label{margin-left: auto; margin-right: 5px;}.jimu-widget-splash-desktop .envelope{}.jimu-widget-splash-desktop .envelope,.jimu-widget-splash-mobile .envelope{position: absolute; top: 0; bottom: 0; left: 0; right: 0; margin: auto; -moz-user-select: none; -webkit-user-select: none; -ms-user-select: none;}.jimu-widget-splash-desktop .splash-container .jimu-btn,.jimu-widget-splash-mobile .splash-container .jimu-btn{height: 33px; padding: 0; width: 60px; line-height: 33px;}.jimu-rtl .jimu-widget-splash-desktop .splash-container .jimu-btn,.jimu-rtl .jimu-widget-splash-mobile .splash-container .jimu-btn{left: 0; right: auto;}.jimu-widget-splash-desktop .splash-container .enable-btn,.jimu-widget-splash-mobile .splash-container .enable-btn{background-color: #518dca;}.jimu-widget-splash-desktop .splash-container .disable-btn,.jimu-widget-splash-mobile .splash-container .disable-btn{background-color: #a0acbf !important; color: rgb(255, 255, 255) !important;}.jimu-widget-splash-desktop .splash-container .jimu-checkbox .checkbox,.jimu-widget-splash-mobile .splash-container .jimu-checkbox .checkbox{background-color: #fff;}.jimu-widget-splash-desktop .envelope{border: 1px solid rgba(255,255,255,0.3);}.jimu-widget-splash-desktop .splash-container,.jimu-widget-splash-desktop .splash-bg{position: absolute; display: inline-block; margin: auto; top: 0; left: 0; bottom: 0; right: 0; overflow:auto;}.jimu-widget-splash-desktop .splash-container{z-index: 1; overflow: hidden;}.jimu-widget-splash .norepeat{background: no-repeat;}.jimu-widget-splash .fill {background-size: cover !important;}.jimu-widget-splash .fit {background-size: contain !important;}.jimu-widget-splash .stretch {background-size: 100% 100% !important;}.jimu-widget-splash .center {background-size: initial !important;}.jimu-widget-splash .tile {background-size: initial !important;}.jimu-widget-splash-desktop .splash-bg{z-index: 0;}.jimu-widget-splash-desktop .custom-content{margin: 20px; color: #fff; overflow-x: hidden; overflow-y: auto;}.jimu-widget-splash-desktop .splash-container .footer{position: absolute; overflow: hidden; bottom: 10px; width: 100%;}.jimu-widget-splash .footer .confirmcheck-container{margin: 0 20px;}.jimu-widget-splash .footer .jimu-btn {margin: 0 20px;}",
-"*now":function(k){k(['dojo/i18n!*preload*widgets/Splash/nls/Widget*["ar","cs","da","de","en","el","es","et","fi","fr","he","hr","it","ja","ko","lt","lv","nb","nl","pl","pt-br","pt-pt","ro","ru","sr","sv","th","tr","zh-cn","vi","zh-hk","zh-tw","ROOT"]'])}}});
-define("dojo/_base/declare dojo/_base/lang dojo/_base/html dojo/on dojo/query dojo/cookie dijit/_WidgetsInTemplateMixin jimu/BaseWidget jimu/dijit/CheckBox jimu/tokenUtils jimu/utils esri/lang jimu/dijit/LoadingShelter dojo/Deferred".split(" "),function(k,g,b,l,m,e,p,q,r,h,f,n,s,t){return k([q,p],{baseClass:"jimu-widget-splash",_hasContent:null,_requireConfirm:null,_isClosed:!1,postCreate:function(){this.inherited(arguments);this.shelter=new s({hidden:!0});this.shelter.placeAt(this.domNode);this.shelter.startup();
-this._hasContent=this.config.splash&&this.config.splash.splashContent;this._requireConfirm=this.config.splash&&this.config.splash.requireConfirm;this._showOption=this.config.splash&&this.config.splash.showOption;this._confirmEverytime=this.config.splash&&this.config.splash.confirmEverytime;this._hasContent&&(this.customContentNode.innerHTML=this.config.splash.splashContent);if(!this._requireConfirm&&!this._showOption)b.setStyle(this.confirmCheck,"display","none"),b.addClass(this.okNode,"enable-btn");
-else{var a="";this._requireConfirm?(a=this.config.splash.confirm.text,b.addClass(this.okNode,"disable-btn")):(a=this.nls.notShowAgain,b.addClass(this.okNode,"enable-btn"));this.confirmCheck=new r({label:f.stripHTML(a),checked:!1},this.confirmCheck);this.own(l(this.confirmCheck.domNode,"click",g.hitch(this,this.onCheckBoxClick)));b.setAttr(this.confirmCheck.domNode,"title",f.stripHTML(a));this.confirmCheck.startup()}},onOpen:function(){if(!h.isInConfigOrPreviewWindow()){var a=this._getCookieKey(),
-a=e(a);n.isDefined(a)&&"false"===a.toString()&&this.close()}},startup:function(){this.inherited(arguments);this.shelter.show();this._normalizeDomNodePosition();this._setConfig()},_setConfig:function(){this._setWidthForOldVersion().then(g.hitch(this,function(){this._setSizeFromConfig();var a=this.config.splash.button;"undefined"!==typeof a&&("undefined"!==typeof a.color&&(b.setStyle(this.okNode,"backgroundColor",a.color),b.setStyle(this.okNode,"color",f.invertColor(a.color))),"undefined"!==typeof a.transparency&&
-b.setStyle(this.okNode,"opacity",1-a.transparency));this.okNode.innerHTML=this.config.splash.button.text||this.nls.ok;var c=this.config.splash.background;if("undefined"!==typeof c)if("image"===c.mode&&"undefined"!==typeof c.image){var d=a="",a="url("+f.processUrlInWidgetConfig(c.image,this.folderUrl)+") center center ",d="no-repeat",c=c.type;"undefined"!==typeof c&&(b.addClass(this.splashContainerNode,c),"tile"===c&&(d="repeat"));b.setStyle(this.splashContainerNode,"background",a+d)}else"color"===
-c.mode&&"undefined"!==typeof c.color&&("undefined"!==typeof c.color&&b.setStyle(this.splashContainerBackground,"backgroundColor",c.color),"undefined"!==typeof c.transparency&&b.setStyle(this.splashContainerBackground,"opacity",1-c.transparency));a=this.config.splash.confirm;"undefined"!==typeof a&&(d=m(".label",this.dmoNode)[0],"undefined"!==typeof a.color&&b.setStyle(d,"color",a.color),"undefined"!==typeof a.transparency&&b.setStyle(d,"opacity",1-a.transparency));this.contentVertical="undefined"!==
-typeof this.config.splash.contentVertical?this.config.splash.contentVertical:"top";h.isInConfigOrPreviewWindow()||(a=this._getCookieKey(),a=e(a),n.isDefined(a)&&"false"===a.toString()&&this.close());this.resize();this.own(l(window,"resize",g.hitch(this,function(){this.resize()})));this._resizeContentImg();b.removeClass(this.envelopeNode,"buried");this.shelter.hide()}))},_normalizeDomNodePosition:function(){b.setStyle(this.domNode,"top",0);b.setStyle(this.domNode,"left",0);b.setStyle(this.domNode,
-"right",0);b.setStyle(this.domNode,"bottom",0)},setPosition:function(a){this.position=a;b.place(this.domNode,window.jimuConfig.layoutId);this._normalizeDomNodePosition();this.started&&this.resize()},resize:function(){this._changeStatus()},_resizeContentImg:function(){if(this._hasContent&&!this._isClosed){var a=b.getContentBox(this.envelopeNode);b.empty(this.customContentNode);var c=b.toDom(this.config.splash.splashContent);b.place(c,this.customContentNode);this.customContentNode.nodeType&&1===this.customContentNode.nodeType&&
-(c=m("img",this.customContentNode))&&c.length&&c.style({maxWidth:a.w-40-20+"px",maxHeight:a.h-40+"px"})}},_changeStatus:function(){window.appInfo.isRunInMobile?(b.setStyle(this.envelopeNode,"height","100%"),b.setStyle(this.envelopeNode,"width","100%")):this._setSizeFromConfig();this._moveContentToMiddle();this._resizeContentImg()},_getNodeStylePx:function(a,c){return a&&c?parseInt(b.getStyle(a,c),10):0},_moveContentToMiddle:function(){var a=b.getContentBox(this.splashContainerNode),c=this.customContentNode.scrollHeight,
-d=b.getMarginBox(this.footerNode),e=this._getNodeStylePx(this.customContentNode,"margin-top"),f=this._getNodeStylePx(this.customContentNode,"margin-bottom"),g=this._getNodeStylePx(this.footerNode,"bottom"),a=a.h-(d.h+g),d=(a-e)/2;"middle"===this.contentVertical&&(d=c/2-d,0>d?(d=Math.abs(d),b.setStyle(this.customContentNode,"marginTop",d+e+"px")):b.setStyle(this.customContentNode,"marginTop",e+"px"));!0===c>=a||window.appInfo.isRunInMobile?b.setStyle(this.customContentNode,"height",a-f+"px"):b.setStyle(this.customContentNode,
-"height","auto")},onCheckBoxClick:function(){this._requireConfirm&&(this.confirmCheck.getValue()?(b.addClass(this.okNode,"enable-btn"),b.removeClass(this.okNode,"disable-btn")):(b.addClass(this.okNode,"disable-btn"),b.removeClass(this.okNode,"enable-btn")))},_getCookieKey:function(){return"isfirst_"+encodeURIComponent(f.getAppIdFromUrl())},onOkClick:function(){var a=this._getCookieKey();this._requireConfirm?this.confirmCheck.getValue()&&(h.isInConfigOrPreviewWindow()||this._confirmEverytime?e(a,null,
-{expires:-1}):e(a,!1,{expires:1E3,path:"/"}),this.close()):(this._showOption?!h.isInConfigOrPreviewWindow()&&this.confirmCheck.getValue()&&e(a,!1,{expires:1E3,path:"/"}):e(a,null,{expires:-1}),this.close())},close:function(){this._isClosed=!0;this.widgetManager.closeWidget(this)},_setSizeFromConfig:function(){var a=this.config.splash.size;if("undefined"!==typeof a&&"object"===typeof a){var c=a.percent,d=a.wh;"percent"===a.mode&&"undefined"!==typeof c?(b.setStyle(this.envelopeNode,"width",c),b.setStyle(this.envelopeNode,
-"height",c)):"wh"===a.mode&&"undefined"!==typeof d&&(this._setWidthInCurrentScreen(d),this._setHeightInCurrentScreen(d))}},_setWidthInCurrentScreen:function(a){var c=window.innerWidth;!window.appInfo.isRunInMobile&&a.w<=c?b.setStyle(this.envelopeNode,"width",a.w+"px"):b.setStyle(this.envelopeNode,"width","100%")},_setHeightInCurrentScreen:function(a){var c=window.innerHeight;!window.appInfo.isRunInMobile&&a.h<=c?b.setStyle(this.envelopeNode,"height",a.h+"px"):b.setStyle(this.envelopeNode,"height",
-"100%")},_setWidthForOldVersion:function(){var a=new t,b=this.config.splash.size;if(!0===("wh"===b.mode&&"undefined"!==typeof b.wh&&null===b.wh.h))return f.getEditorContentHeight(this.config.splash.splashContent,this.domNode,{contentWidth:560,contentMarginTop:20,footerHeight:98}).then(g.hitch(this,function(a){return b.wh.h=a}));a.resolve();return a}})});
+///////////////////////////////////////////////////////////////////////////
+// Copyright © 2014 - 2017 Esri. All Rights Reserved.
+//
+// Licensed under the Apache License Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////
+
+define(['dojo/_base/declare',
+    'dojo/_base/lang',
+    'dojo/_base/html',
+    'dojo/on',
+    'dojo/query',
+    'dojo/cookie',
+    'dijit/_WidgetsInTemplateMixin',
+    'jimu/BaseWidget',
+    'jimu/dijit/CheckBox',
+    'jimu/utils',
+    'esri/lang',
+    'jimu/dijit/LoadingShelter',
+    'dojo/Deferred'
+  ],
+  function(declare, lang, html, on, query, cookie, _WidgetsInTemplateMixin, BaseWidget,
+           CheckBox, utils, esriLang, LoadingShelter, Deferred) {
+    var clazz = declare([BaseWidget, _WidgetsInTemplateMixin], {
+      baseClass: 'jimu-widget-splash',
+      _hasContent: null,
+      _requireConfirm: null,
+      _isClosed: false,
+
+      postCreate: function() {
+        this.inherited(arguments);
+        //LoadingShelter
+        this.shelter = new LoadingShelter({
+          hidden: true
+        });
+        this.shelter.placeAt(this.domNode);
+        this.shelter.startup();
+
+        this._hasContent = this.config.splash && this.config.splash.splashContent;
+        this._requireConfirm = this.config.splash && this.config.splash.requireConfirm;
+        this._showOption = this.config.splash && this.config.splash.showOption;
+        this._confirmEverytime = this.config.splash && this.config.splash.confirmEverytime;
+
+        if (this._hasContent) {
+          this.customContentNode.innerHTML = this.config.splash.splashContent;
+        }
+
+        if (!this._requireConfirm && !this._showOption) {
+          html.setStyle(this.confirmCheck, 'display', 'none');
+          html.addClass(this.okNode, 'enable-btn');
+        } else {
+          var hint = "";
+          if (this._requireConfirm) {
+            hint = this.config.splash.confirm.text;
+            html.addClass(this.okNode, 'disable-btn');
+          } else {
+            hint = this.nls.notShowAgain;
+            html.addClass(this.okNode, 'enable-btn');
+          }
+          this.confirmCheck = new CheckBox({
+            label: utils.stripHTML(hint),
+            checked: false,
+            tabindex: 0
+          }, this.confirmCheck);
+          this.own(on(this.confirmCheck, 'change', lang.hitch(this, this.onCheckBoxClick)));
+          html.setAttr(this.confirmCheck.domNode, 'title', utils.stripHTML(hint));
+          this.confirmCheck.startup();
+        }
+      },
+
+      onOpen: function() {
+        if (!utils.isInConfigOrPreviewWindow()) {
+          var isFirstKey = this._getCookieKey();
+          var isfirst = cookie(isFirstKey);
+          if (esriLang.isDefined(isfirst) && isfirst.toString() === 'false') {
+            this.close();
+          }
+        }
+        // if (true === this._requireConfirm) {
+        //   //checkbox
+        //   this.confirmCheck.focus();
+        // } else if ((false === this._requireConfirm && false === this._showOption) ||
+        //   (false === this._requireConfirm && true === this._showOption)) {
+        //   this.okNode.focus();
+        // }
+        if (!this._requireConfirm && !this._showOption) {
+          this.okNode.focus();
+        } else {
+          this.confirmCheck.focus();
+        }
+      },
+
+      startup: function() {
+        this.inherited(arguments);
+        this.shelter.show();
+        this._normalizeDomNodePosition();
+
+        this._setConfig();
+      },
+
+      _setConfig: function() {
+        this._setWidthForOldVersion().then(lang.hitch(this, function() {
+
+          this._setSizeFromConfig();
+
+          var button = this.config.splash.button;
+          if (typeof button !== "undefined") {
+            if (typeof button.color !== "undefined") {
+              html.setStyle(this.okNode, 'backgroundColor', button.color);
+              html.setStyle(this.okNode, 'color', utils.invertColor(button.color));//auto color for text
+            }
+            if (typeof button.transparency !== "undefined") {
+              html.setStyle(this.okNode, 'opacity', (1 - button.transparency));
+            }
+          }
+          this.okNode.innerHTML = this.config.splash.button.text || this.nls.ok;
+          html.attr(this.okNode, "title", this.config.splash.button.text || this.nls.ok);
+
+          var background = this.config.splash.background;
+          if (typeof background !== "undefined") {
+            //image
+            if ("image" === background.mode && typeof background.image !== "undefined") {
+              var bg = "", repeat = "";
+              bg = "url(" + utils.processUrlInWidgetConfig(background.image, this.folderUrl) + ") center center ";
+              repeat = "no-repeat";
+
+              var type = background.type;
+              if ("undefined" !== typeof type) {
+                html.addClass(this.splashContainerNode, type);
+                if ("tile" === type) {
+                  repeat = "repeat";//only "tile" need repeat
+                }
+              }
+              html.setStyle(this.splashContainerNode, 'background', bg + repeat);
+            } else if ("color" === background.mode && typeof background.color !== "undefined") {
+              //color
+              if ("undefined" !== typeof background.color) {
+                html.setStyle(this.splashContainerBackground, 'backgroundColor', background.color);
+              }
+              if ("undefined" !== typeof background.transparency) {
+                html.setStyle(this.splashContainerBackground, 'opacity', (1 - background.transparency));
+              }
+            }
+          }
+          //html.setStyle(query(".label", this.dmoNode)[0], 'color', utils.invertColor(background.color));//auto color for text
+          var confirm = this.config.splash.confirm;
+          if (typeof confirm !== "undefined") {
+            var dom = query(".label", this.dmoNode)[0];
+            if ("undefined" !== typeof confirm.color && dom) {
+              html.setStyle(dom, 'color', confirm.color);
+            }
+            if ("undefined" !== typeof confirm.transparency && dom) {
+              html.setStyle(dom, 'opacity', (1 - confirm.transparency));
+            }
+          }
+
+          if ("undefined" !== typeof this.config.splash.contentVertical) {
+            this.contentVertical = this.config.splash.contentVertical;
+          } else {
+            this.contentVertical = "top";
+          }
+
+          //resize
+          if (!utils.isInConfigOrPreviewWindow()) {
+            var isFirstKey = this._getCookieKey();
+            var isfirst = cookie(isFirstKey);
+            if (esriLang.isDefined(isfirst) && isfirst.toString() === 'false') {
+              this.close();
+            }
+          }
+
+          this.resize();
+          this.own(on(window, 'resize', lang.hitch(this, function() {
+            this.resize();
+          })));
+          this._resizeContentImg();
+
+          html.removeClass(this.envelopeNode, "buried");//show the node
+          this.shelter.hide();
+        }));
+      },
+
+      _normalizeDomNodePosition: function() {
+        html.setStyle(this.domNode, 'top', 0);
+        html.setStyle(this.domNode, 'left', 0);
+        html.setStyle(this.domNode, 'right', 0);
+        html.setStyle(this.domNode, 'bottom', 0);
+      },
+
+      setPosition: function(position) {
+        this.position = position;
+
+        html.place(this.domNode, window.jimuConfig.layoutId);
+        this._normalizeDomNodePosition();
+        if (this.started) {
+          this.resize();
+        }
+      },
+
+      resize: function() {
+        this._changeStatus();
+      },
+
+      _resizeContentImg: function() {
+        if (this._hasContent && !this._isClosed) {
+          var customBox = html.getContentBox(this.envelopeNode);
+          html.empty(this.customContentNode);
+
+          var splashContent = html.toDom(this.config.splash.splashContent);
+          html.place(splashContent, this.customContentNode);
+          // single node only(no DocumentFragment)
+          if (this.customContentNode.nodeType && this.customContentNode.nodeType === 1) {
+            var contentImgs = query('img', this.customContentNode);
+            if (contentImgs && contentImgs.length) {
+              contentImgs.style({
+                maxWidth: (customBox.w - 40 - 20) + 'px', // prevent x scroll
+                maxHeight: (customBox.h - 40) + 'px'
+              });
+            }
+          }
+        }
+      },
+
+      _changeStatus: function() {
+        if (window.appInfo.isRunInMobile) {
+          html.setStyle(this.envelopeNode, 'height', "100%");
+          html.setStyle(this.envelopeNode, 'width', "100%");
+        } else {
+          this._setSizeFromConfig();
+        }
+
+        this._resizeCustomContent();
+        this._resizeContentImg();
+      },
+      _getNodeStylePx: function(node, prop) {
+        if (node && prop) {
+          return parseInt(html.getStyle(node, prop), 10);
+        } else {
+          return 0;
+        }
+      },
+      _resizeCustomContent: function() {
+        var containerContent = html.getContentBox(this.splashContainerNode),
+          customContentScrollheight = this.customContentNode.scrollHeight,
+          footerBox = html.getMarginBox(this.footerNode);
+        var contentMarginButtom = this._getNodeStylePx(this.customContentNode, "margin-bottom"),//between content & confirm text
+          footerBottom = this._getNodeStylePx(this.footerNode, "bottom"),//between footer & splashBottom
+          contentSpace = containerContent.h - (footerBox.h + footerBottom);
+
+        var isNeedLimitCustomContentHeight = (customContentScrollheight >= contentSpace);
+        if (true === isNeedLimitCustomContentHeight || window.appInfo.isRunInMobile) {
+          //limit the customContent height   OR   extend height in mobile
+          html.setStyle(this.customContentNode, 'height', (contentSpace - contentMarginButtom) + 'px');
+        } else {
+          html.setStyle(this.customContentNode, 'height', 'auto');
+          this._moveContentToMiddle({
+            contentSpace: contentSpace,
+            customContentScrollheight: customContentScrollheight
+          });
+        }
+      },
+      //align custom content to vertically
+      _moveContentToMiddle: function(context) {
+        var contentMarginTop = 10,//this._getNodeStylePx(this.customContentNode, "margin-top"),
+          middleLine = (context.contentSpace - contentMarginTop) / 2;
+        //move the content to middle
+        if (this.contentVertical === "middle") {
+          //customContent half-height line is upon the middleLine
+          var uponTheMiddleline = context.customContentScrollheight / 2 - middleLine;
+          if (uponTheMiddleline < 0) {
+            //Content is short
+            var abs = Math.abs(uponTheMiddleline);
+            html.setStyle(this.customContentNode, 'marginTop', abs + contentMarginTop + 'px');
+          } else {
+            //Content too long
+            html.setStyle(this.customContentNode, 'marginTop', contentMarginTop + 'px');
+          }
+        }
+      },
+      onCheckBoxClick: function() {
+        if (this._requireConfirm) {
+          if (this.confirmCheck.getValue()) {
+            html.addClass(this.okNode, 'enable-btn');
+            html.removeClass(this.okNode, 'disable-btn');
+          } else {
+            html.addClass(this.okNode, 'disable-btn');
+            html.removeClass(this.okNode, 'enable-btn');
+          }
+        }
+      },
+
+      _getCookieKey: function() {
+        return 'isfirst_' + encodeURIComponent(utils.getAppIdFromUrl());
+      },
+
+      onOkClick: function() {
+        var isFirstKey = this._getCookieKey();
+        if (this._requireConfirm) {
+          if (this.confirmCheck.getValue()) {
+            if (utils.isInConfigOrPreviewWindow() || this._confirmEverytime) {
+              cookie(isFirstKey, null, {expires: -1});
+            } else {
+              cookie(isFirstKey, false, {
+                expires: 1000,
+                path: '/'
+              });
+            }
+            this.close();
+          }
+        } else {
+          if (this._showOption) {
+            if (!utils.isInConfigOrPreviewWindow() && this.confirmCheck.getValue()) {
+              cookie(isFirstKey, false, {
+                expires: 1000,
+                path: '/'
+              });
+            }
+          } else {
+            cookie(isFirstKey, null, {expires: -1});
+          }
+          this.close();
+        }
+      },
+
+      close: function() {
+        this._isClosed = true;
+        this.widgetManager.closeWidget(this);
+      },
+
+      _setSizeFromConfig: function() {
+        var size = this.config.splash.size;
+        if ("undefined" !== typeof size) {
+          if (typeof size === "object") {
+            var percent = size.percent;
+            var wh = size.wh;
+            if ("percent" === size.mode && typeof percent !== "undefined") {
+              html.setStyle(this.envelopeNode, 'width', percent);
+              html.setStyle(this.envelopeNode, 'height', percent);
+            } else if ("wh" === size.mode && typeof wh !== "undefined") {
+              this._setWidthInCurrentScreen(wh);
+              this._setHeightInCurrentScreen(wh);
+            }
+          }
+        }
+      },
+      //avoid to screen is too small to show the splash, when user use wh pixel
+      _setWidthInCurrentScreen: function(wh) {
+        var screenWidth = window.innerWidth;
+        if (!window.appInfo.isRunInMobile && wh.w <= screenWidth) {
+          html.setStyle(this.envelopeNode, 'width', wh.w + "px");
+        } else {
+          html.setStyle(this.envelopeNode, 'width', "100%");
+        }
+      },
+      _setHeightInCurrentScreen: function(wh) {
+        var screenHeight = window.innerHeight;
+        if (!window.appInfo.isRunInMobile && wh.h <= screenHeight) {
+          html.setStyle(this.envelopeNode, 'height', wh.h + "px");
+        } else {
+          html.setStyle(this.envelopeNode, 'height', "100%");
+        }
+      },
+      //for old version update
+      _setWidthForOldVersion: function() {
+        var def = new Deferred();
+        var size = this.config.splash.size;
+        var isOldVersion = ("wh" === size.mode && typeof size.wh !== "undefined" && null === size.wh.h);
+        if (true === isOldVersion) {
+          //this._setWhiteColorTextForOldVersion();
+          return utils.getEditorContentHeight(this.config.splash.splashContent, this.domNode, {
+            "contentWidth": 600 - 40,
+            "contentMarginTop": 20,//contentMarginTop
+            "footerHeight": 88 + 10//contentMarginBottom
+          }).then(
+            lang.hitch(this, function(h) {
+              size.wh.h = h;
+              return h;
+            }));
+        } else {
+          //this._restoreTextColorForNormal();
+          def.resolve();
+          return def;
+        }
+      }//,
+      // _setWhiteColorTextForOldVersion: function() {
+      //   html.setStyle(this.customContentNode, 'color', "#fff");
+      // },
+      // _restoreTextColorForNormal: function() {
+      //   html.setStyle(this.customContentNode, 'color', "#000");
+      // }
+    });
+    return clazz;
+  });

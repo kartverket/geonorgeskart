@@ -1,5 +1,98 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-define(["dojo/_base/array"],function(d){return{checkMixedContent:function(a){"string"===typeof window.location.href&&0===window.location.href.indexOf("https://")&&"string"===typeof a&&0===a.indexOf("http://")&&(a="https:"+a.substring("5"));return a},escapeForLucene:function(a){return a.replace(RegExp('(\\+|\\-|\\\x26|\\!|\\(|\\)|\\{|\\}|\\[|\\]|\\^|\\"|\\~|\\*|\\?|\\:|\\\\)',"g"),"\\$1")},findLayersAdded:function(a,c){var e=[],f=[],g=[],h={itemIds:f,layers:g};if(!a)return h;var k="string"===typeof c&&
-0<c.length;d.forEach(a.layerIds,function(a){e.push(a)});d.forEach(a.graphicsLayerIds,function(a){e.push(a)});d.forEach(e,function(b){if((b=a.getLayer(b))&&("string"===typeof b.xtnItemId&&0<b.xtnItemId.length)&&(!k||b.xtnItemId===c))g.push(b),-1===f.indexOf(b.xtnItemId)&&f.push(b.xtnItemId)});return h},setNodeText:function(a,c){a.innerHTML="";c&&a.appendChild(document.createTextNode(c))}}});
+///////////////////////////////////////////////////////////////////////////
+// Copyright © 2016 Esri. All Rights Reserved.
+//
+// Licensed under the Apache License Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////
+define(["dojo/_base/array"],
+  function(array) {
+
+    return {
+
+      checkMixedContent: function(uri) {
+        if ((typeof window.location.href === "string") &&
+          (window.location.href.indexOf("https://") === 0)) {
+          if ((typeof uri === "string") && (uri.indexOf("http://") === 0)) {
+            uri = "https:" + uri.substring("5");
+          }
+        }
+        return uri;
+      },
+
+      endsWith: function(sv, sfx) {
+        return (sv.indexOf(sfx, (sv.length - sfx.length)) !== -1);
+      },
+
+      escapeForLucene: function(value) {
+        var a = ['+', '-', '&', '!', '(', ')', '{', '}', '[', ']',
+        '^', '"', '~', '*', '?', ':', '\\'];
+        var r = new RegExp("(\\" + a.join("|\\") + ")", "g");
+        return value.replace(r, "\\$1");
+      },
+
+      findLayersAdded: function(map, itemId) {
+        var ids = [],
+          itemIds = [],
+          layers = [];
+        var response = {
+          itemIds: itemIds,
+          layers: layers
+        };
+        if (!map) {
+          return response;
+        }
+        var checkId = (typeof itemId === "string" && itemId.length > 0);
+        array.forEach(map.layerIds, function(id) {
+          ids.push(id);
+        });
+        array.forEach(map.graphicsLayerIds, function(id) {
+          ids.push(id);
+        });
+        array.forEach(ids, function(id) {
+          var lyr = map.getLayer(id);
+          if (lyr && typeof lyr.xtnItemId === "string" && lyr.xtnItemId.length > 0) {
+            //console.warn("found added layer",lyr);
+            if (!checkId || lyr.xtnItemId === itemId) {
+              layers.push(lyr);
+              if (itemIds.indexOf(lyr.xtnItemId) === -1) {
+                itemIds.push(lyr.xtnItemId);
+              }
+            }
+          }
+        });
+        return response;
+      },
+
+      setNodeText: function(nd, text) {
+        nd.innerHTML = "";
+        if (text) {
+          nd.appendChild(document.createTextNode(text));
+        }
+      },
+
+      setNodeTitle: function(nd, text) {
+        nd.title = "";
+        if (text) {
+          nd.setAttribute("title", text);
+        }
+      },
+
+      setNodeHTML: function(nd, html) {
+        nd.innerHTML = "";
+        if (html) {
+          nd.innerHTML = html;
+        }
+      }
+
+    };
+
+  });

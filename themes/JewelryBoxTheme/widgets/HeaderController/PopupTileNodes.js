@@ -1,12 +1,371 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-define("dojo/_base/declare dojo/_base/lang dojo/_base/array dojo/_base/html dojo/on dojo/dom-construct dojo/query dijit/_WidgetBase dijit/_TemplatedMixin jimu/dijit/ViewStack jimu/utils".split(" "),function(p,k,q,g,m,e,l,r,s,t,n){return p([r,s],{baseClass:"jimu-header-more-popup",templateString:'\x3cdiv\x3e\x3cdiv class\x3d"pages" data-dojo-attach-point\x3d"pagesNode"\x3e\x3c/div\x3e\x3cdiv class\x3d"points jimu-corner-bottom"\x3e\x3cdiv class\x3d"points-inner"data-dojo-attach-point\x3d"pointsNode"\x3e\x3c/div\x3e\x3c/div\x3e\x3c/div\x3e',
-margin:4,postCreate:function(){this.nodes=[];this.pages=[];this.createCloseBtn()},startup:function(){this.viewStack=new t({views:[],viewType:"dom"},this.pagesNode);this.viewStack.startup();this.resize()},resize:function(){var a=this._calculateGridParam(),d;if(null!==a){g.setStyle(this.domNode,n.getPositionStyle(a.position));this.nodeWidth=a.cellSize-this.margin;if(!this.oldGridParam||this.oldGridParam.rows!==a.rows||this.oldGridParam.cols!==a.cols)this.clearPages(),this.createPages(a);this.nodes.forEach(k.hitch(this,
-function(b,c){this.setItemNodePosition(b,c,a)}));this.oldGridParam=a;d=l("div.close",this.domNode)[0];g.setStyle(d,{width:0.25*this.nodeWidth+"px",height:0.25*this.nodeWidth+"px"})}else this.oldGridParam=null,g.setStyle(this.domNode,n.getPositionStyle({left:0,top:0,width:0,height:0,zIndex:111})),this.nodeWidth=0},setItemNodePosition:function(a,d,b){var c,f,h=48,e=16;c=0===d%b.cols?0:this.margin/2;f=d%(b.rows*b.cols)<b.cols?0:this.margin/2;d={};"number"===typeof this.nodeWidth&&(d.width=this.nodeWidth+
-"px",d.height=this.nodeWidth+"px");"number"===typeof c&&(window.isRTL?d.marginRight=c+"px":d.marginLeft=c+"px");"number"===typeof f&&(d.marginTop=f+"px");if(c=l("img",a)[0])b.iconScaled&&(h*=this.nodeWidth/120),g.setStyle(c,{width:h+"px",height:h+"px"});if(h=l("div.node-label",a)[0])b.showLabel?(b.iconScaled&&(e*=this.nodeWidth/120),g.setStyle(h,{"font-size":e+"px",display:"block"})):g.setStyle(h,{"font-size":e+"px",display:"none"});g.setStyle(a,d)},clearPages:function(){q.forEach(this.pages,function(a){this.viewStack.removeView(a.pageNode)},
-this);e.empty(this.pointsNode);this.pages=[];this.nodes=[]},createPages:function(a){var d,b,c,f;d=Math.ceil(this.items.length/(a.rows*a.cols));for(b=0;b<d;b++)c=e.create("div",{"class":"page"}),this.createPageItems(b,c,a),this.viewStack.addView(c),1<d&&(f=e.create("div",{"class":"point"},this.pointsNode),this.own(m(f,"click",k.hitch(this,this._onPageNodeClick,b)))),this.pages.push({pageNode:c,pointNode:f});0<this.viewStack.views.length&&this._selectPage(0)},_onPageNodeClick:function(a){this._selectPage(a)},
-_selectPage:function(a){1<this.pages.length&&(l(".point",this.domNode).removeClass("point-selected"),g.addClass(this.pages[a].pointNode,"point-selected"));this.viewStack.switchView(this.pages[a].pageNode)},createPageItems:function(a,d,b){var c,f;c=this.items.length;f=b.rows*b.cols;b=a*f;a=(a+1)*f;f=a-c;for(a=Math.min(a,c);b<a;b++)this.createItemNode(b,d);for(b=c;b<c+f;b++)this.createEmptyItemNode(d)},createItemNode:function(a,d){var b,c;c=this.items[a];b=e.create("div",{"class":"icon-node jimu-float-leading jimu-main-background",
-title:c.label,settingId:c.id,"data-widget-name":c.name},d);e.create("img",{src:c.icon},b);e.create("div",{"class":"node-label",title:c.label,innerHTML:n.stripHTML(c.label)},b);b.config=c;this.own(m(b,"click",k.hitch(this,function(){this.onNodeClicked(b)})));this.nodes.push(b)},createEmptyItemNode:function(a){a=e.create("div",{"class":"icon-node jimu-float-leading jimu-main-background"},a);this.nodes.push(a);return a},createCloseBtn:function(){var a;a=e.create("div",{"class":"close"},this.domNode);
-e.create("div",{"class":"close-inner jimu-main-background"},a);m(a,"click",k.hitch(this,function(){this.hide()}));return a},hide:function(){g.setStyle(this.domNode,"display","none")},show:function(){g.setStyle(this.domNode,"display","block")},onNodeClicked:function(a){this.hide()},_calculateGridParam:function(){var a,d,b,c,f=!1,e=!0;a=g.getContentBox(jimuConfig.mapId);d=Math.min(a.w,a.h)-40;if(360<=d)c=120;else{c=Math.floor(d/3);if(10>c)return null;f=!0;80>c&&(e=!1)}d=Math.floor((a.h-40)/c);b=Math.floor((a.w-
-40)/c);d=4<d?4:d;d=3>d?3:d;b=3>d?3:4<b?4:b;return{rows:d,cols:b,cellSize:c,iconScaled:f,showLabel:e,position:{top:(a.h-c*d)/2,bottom:(a.h-c*d)/2,left:(a.w-c*b)/2,right:(a.w-c*b)/2,width:c*b-this.margin*(b-1)/2,height:c*d-this.margin*(d-1)/2,zIndex:111}}}})});
+///////////////////////////////////////////////////////////////////////////
+// Copyright © 2014 - 2017 Esri. All Rights Reserved.
+//
+// Licensed under the Apache License Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////
+
+define([
+    'dojo/_base/declare',
+    'dojo/_base/lang',
+    'dojo/_base/array',
+    'dojo/_base/html',
+    'dojo/on',
+    'dojo/dom-construct',
+    'dojo/query',
+    'dijit/_WidgetBase',
+    'dijit/_TemplatedMixin',
+    'jimu/dijit/ViewStack',
+    'jimu/utils'
+  ],
+  function(
+    declare, lang, array, html, on, domConstruct,
+    query, _WidgetBase, _TemplatedMixin, ViewStack, utils) {
+    /* global jimuConfig */
+    //label is not visible if node width is less than 80px, and icon should be scaled.
+    var NORMAL_MIN_WIDTH = 80,
+        NORMAL_WIDTH = 120, //node width should not be larger than this value.
+        MIN_MARGIN = 20, //minimux margin between this dom and the map box.
+        MIN_NODE_WIDTH = 10, //If node width is less than 10px, the node will not be visible.
+        MAX_ROWCOL = 4,
+        MIN_ROWCOL = 3;
+    //3*3 tile nodes, with a close button
+    return declare([_WidgetBase, _TemplatedMixin], {
+      baseClass: 'jimu-header-more-popup',
+      templateString: '<div><div class="pages" data-dojo-attach-point="pagesNode"></div>' +
+        '<div class="points jimu-corner-bottom"><div class="points-inner"' +
+        'data-dojo-attach-point="pointsNode"></div></div></div>',
+      margin: 4,
+
+      postCreate: function() {
+        this.nodes = [];
+        this.pages = [];
+        this.createCloseBtn();
+      },
+
+      startup: function() {
+        this.viewStack = new ViewStack({
+          views: [],
+          viewType: 'dom'
+        }, this.pagesNode);
+        this.viewStack.startup();
+        // this.createPages();
+        // if (this.viewStack.views.length > 0) {
+        //   this._selectPage(0);
+        // }
+        this.resize();
+      },
+
+      resize: function() {
+        var gridParam = this._calculateGridParam(), closeDiv;
+        if(gridParam !== null){
+          html.setStyle(this.domNode, utils.getPositionStyle(gridParam.position));
+          this.nodeWidth = gridParam.cellSize - this.margin;
+
+          if(!this.oldGridParam || this.oldGridParam.rows !== gridParam.rows ||
+              this.oldGridParam.cols !== gridParam.cols){
+            //grid changed, re-create the pages
+            this.clearPages();
+            this.createPages(gridParam);
+          }
+
+          this.nodes.forEach(lang.hitch(this, function(node, i) {
+            this.setItemNodePosition(node, i, gridParam);
+          }));
+
+          this.oldGridParam = gridParam;
+
+          closeDiv = query('div.close', this.domNode)[0];
+          html.setStyle(closeDiv, {
+            width: this.nodeWidth * 0.25 + 'px',
+            height: this.nodeWidth * 0.25 + 'px'
+          });
+        }else{
+          this.oldGridParam = null;
+          html.setStyle(this.domNode, utils.getPositionStyle({
+            left:0,
+            top:0,
+            width:0,
+            height:0,
+            zIndex: 111
+          }));
+          this.nodeWidth = 0;
+        }
+      },
+
+      setItemNodePosition: function(node, i, gridParam) {
+        var ml, mt, imgWidth = 48, fontSize = 16, imgNode, labelNode; //margin-left, margin-top
+
+        if (i % gridParam.cols === 0) {
+          ml = 0;
+        } else {
+          ml = this.margin / 2;
+        }
+
+        // If the node is in the first row of each page, margin-top is 0, else margin-top is 2
+        if ((i % (gridParam.rows * gridParam.cols)) < gridParam.cols) {
+          mt = 0;
+        } else {
+          mt = this.margin / 2;
+        }
+
+        var nodeStyle = {};
+        if (typeof this.nodeWidth === "number") {
+          nodeStyle.width = this.nodeWidth + 'px';
+          nodeStyle.height = this.nodeWidth + 'px';
+        }
+        if (typeof ml === 'number') {
+          if (window.isRTL){
+            nodeStyle.marginRight = ml + 'px';
+          }else {
+            nodeStyle.marginLeft = ml + 'px';
+          }
+        }
+        if (typeof mt === 'number') {
+          nodeStyle.marginTop = mt + 'px';
+        }
+
+        imgNode = query('img', node)[0];
+        if(imgNode){
+          if(gridParam.iconScaled){
+            imgWidth = imgWidth * (this.nodeWidth / NORMAL_WIDTH);
+            html.setStyle(imgNode, {
+              width: imgWidth + 'px',
+              height: imgWidth + 'px'
+            });
+          }else{
+            html.setStyle(imgNode, {
+              width: imgWidth + 'px',
+              height: imgWidth + 'px'
+            });
+          }
+        }
+
+        labelNode = query('div.node-label', node)[0];
+        if(labelNode){
+          if(gridParam.showLabel){
+            if(gridParam.iconScaled){
+              fontSize = fontSize * (this.nodeWidth / NORMAL_WIDTH);
+              html.setStyle(labelNode, {
+                'font-size': fontSize + 'px',
+                display: 'block'
+              });
+            }else{
+              html.setStyle(labelNode, {
+                'font-size': fontSize + 'px',
+                display: 'block'
+              });
+            }
+          }else{
+            html.setStyle(labelNode, {
+              'font-size': fontSize + 'px',
+              display: 'none'
+            });
+          }
+        }
+
+        html.setStyle(node, nodeStyle);
+      },
+
+      clearPages: function(){
+        array.forEach(this.pages, function(page){
+          this.viewStack.removeView(page.pageNode);
+        }, this);
+
+        domConstruct.empty(this.pointsNode);
+        this.pages = [];
+        this.nodes = [];
+      },
+
+      /**
+       * Create node pages based on the gridParam object.
+       * @param  {object} gridParam include rows:number, cols:number, cellSize:number,
+       * iconScaled:boolean, showLabel:boolean,
+       * position:object(left, right, top, bottom, width, height)
+       */
+      createPages: function(gridParam) {
+        var count, pages, p, pageNode, pointNode;
+        count = this.items.length;
+        pages = Math.ceil(count / (gridParam.rows * gridParam.cols));
+        for (p = 0; p < pages; p++) {
+          pageNode = domConstruct.create('div', {
+            'class': 'page'
+          });
+          this.createPageItems(p, pageNode, gridParam);
+          this.viewStack.addView(pageNode);
+
+          if (pages > 1) {
+            pointNode = domConstruct.create('div', {
+              'class': 'point'
+            }, this.pointsNode);
+            this.own(on(pointNode, 'click', lang.hitch(this, this._onPageNodeClick, p)));
+          }
+
+          this.pages.push({
+            pageNode: pageNode,
+            pointNode: pointNode
+          });
+        }
+
+        if (this.viewStack.views.length > 0) {
+          this._selectPage(0);
+        }
+      },
+
+      _onPageNodeClick: function(p) {
+        this._selectPage(p);
+      },
+
+      _selectPage: function(p) {
+        if (this.pages.length > 1) {
+          query('.point', this.domNode).removeClass('point-selected');
+          html.addClass(this.pages[p].pointNode, 'point-selected');
+        }
+        this.viewStack.switchView(this.pages[p].pageNode);
+      },
+
+      createPageItems: function(page, pageNode, gridParam) {
+        var count, pageSize, i, b, e, empty;
+        count = this.items.length;
+        pageSize = gridParam.rows * gridParam.cols;
+        b = page * pageSize;
+        e = (page + 1) * pageSize;
+        empty = e - count;
+        e = Math.min(e, count);
+        for (i = b; i < e; i++) {
+          this.createItemNode(i, pageNode);
+        }
+        for (i = count; i < count + empty; i++) {
+          this.createEmptyItemNode(pageNode);
+        }
+      },
+
+      createItemNode: function(i, pageNode) {
+        var node, item;
+        item = this.items[i];
+        node = domConstruct.create('div', {
+          'class': 'icon-node jimu-float-leading jimu-main-background',
+          title: item.label,
+          settingId: item.id,
+          'data-widget-name': item.name
+        }, pageNode);
+
+        domConstruct.create('img', {
+          'src': item.icon
+        }, node);
+
+        domConstruct.create('div', {
+          'class': 'node-label',
+          'title': item.label,
+          'innerHTML': utils.stripHTML(item.label)
+        }, node);
+
+        node.config = item;
+
+        this.own(on(node, 'click', lang.hitch(this, function() {
+          this.onNodeClicked(node);
+        })));
+
+        this.nodes.push(node);
+      },
+
+      createEmptyItemNode: function(pageNode) {
+        var node;
+        node = domConstruct.create('div', {
+          'class': 'icon-node jimu-float-leading jimu-main-background'
+        }, pageNode);
+        this.nodes.push(node);
+        return node;
+      },
+
+      createCloseBtn: function() {
+        var node;
+        node = domConstruct.create('div', {
+          'class': 'close'
+        }, this.domNode);
+        domConstruct.create('div', {
+          'class': 'close-inner jimu-main-background'
+        }, node);
+
+        on(node, 'click', lang.hitch(this, function() {
+          this.hide();
+        }));
+
+        return node;
+      },
+
+      hide: function() {
+        html.setStyle(this.domNode, 'display', 'none');
+      },
+
+      show: function() {
+        html.setStyle(this.domNode, 'display', 'block');
+      },
+
+      onNodeClicked: function(node) {
+        /* jshint unused: false*/
+        this.hide();
+      },
+
+      _calculateGridParam: function(){
+        var mapBox, minLen, position, rows, cols, cellSize, iconScaled = false,
+            showLabel = true;
+        mapBox = html.getContentBox(jimuConfig.mapId);
+        minLen = Math.min(mapBox.w, mapBox.h) - MIN_MARGIN * 2;
+
+        //calculate node width
+        if(minLen >= NORMAL_WIDTH * MIN_ROWCOL){
+          cellSize = NORMAL_WIDTH;
+        }else{
+          cellSize = Math.floor(minLen / MIN_ROWCOL);
+
+          if(cellSize < MIN_NODE_WIDTH){
+            return null;
+          }
+
+          iconScaled = true;
+
+          if(cellSize < NORMAL_MIN_WIDTH){
+            showLabel = false;
+          }
+        }
+
+        //calculate rows and columns
+        rows = Math.floor((mapBox.h - MIN_MARGIN * 2) / cellSize);
+        cols = Math.floor((mapBox.w - MIN_MARGIN * 2) / cellSize);
+        rows = rows > MAX_ROWCOL ? MAX_ROWCOL : rows;
+        cols = cols > MAX_ROWCOL ? MAX_ROWCOL : cols;
+        rows = rows < MIN_ROWCOL ? MIN_ROWCOL : rows;
+        cols = rows < MIN_ROWCOL ? MIN_ROWCOL : cols;
+
+        //calculate position
+        position = {
+          top: (mapBox.h - cellSize * rows) / 2,
+          bottom: (mapBox.h - cellSize * rows) / 2,
+          left: (mapBox.w - cellSize * cols) / 2,
+          right: (mapBox.w - cellSize * cols) / 2,
+          width: cellSize * cols - this.margin * (cols - 1) / 2,
+          height: cellSize * rows - this.margin * (rows - 1) / 2,
+          zIndex: 111
+        };
+
+        return {
+          rows: rows,
+          cols: cols,
+          cellSize: cellSize,
+          iconScaled: iconScaled,
+          showLabel: showLabel,
+          position: position
+        };
+      }
+    });
+  });

@@ -1,5 +1,0 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-define({"dojox/form/nls/CheckedMultiSelect":{invalidMessage:"Trebuie s\u0103 selecta\u0163i cel pu\u0163in un articol.",multiSelectLabelText:"{num} articole selectate",_localized:{}},"widgets/ObliqueViewer/setting/nls/strings":{layerSelect:"Selecta\u0163i stratul tematic",elevationFieldSelect:"C\u00e2mpul Eleva\u0163ie",azimuthFieldSelect:"C\u00e2mp Azimut",showThumbnailText:"Afi\u015fare miniaturi \u00een lista raster",rasterInfoFieldsSelect:"Selectare c\u00e2mpuri cu informa\u0163ii ale listei",
-fieldLimitText:"Pot fi selectate maximum 3 c\u00e2mpuri.",autoSyncText:"Sincronizare hart\u0103 principal\u0103",errorSectionMeasage:"Harta selectat\u0103 nu con\u0163ine niciun strat tematic de serviciu de imagini. Selecta\u0163i o hart\u0103 cu un strat tematic de serviciu de imagini care con\u0163ine imagini oblice.",_localized:{}}});

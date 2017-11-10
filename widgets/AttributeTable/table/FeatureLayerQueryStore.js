@@ -1,8 +1,183 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-define("dojo/_base/declare dojo/_base/lang dojo/_base/array esri/tasks/query esri/tasks/QueryTask ./FeatureLayerQueryResult".split(" "),function(g,h,l,m,p,n){return g(null,{queryUrl:"",idProperty:"id",data:null,_entityData:null,constructor:function(b){g.safeMixin(this,b);this.data=[];this._entityData=[];this.layer=b.layer;this.objectIds=b.objectIds;this.where=b.where;this.orderByFields=b.orderByFields;this.totalCount=b.totalCount;this.batchCount=b.batchCount||25;this.idProperty=this.layer.objectIdField;
-this.spatialFilter=b.spatialFilter;this.layer&&this.layer.url&&(this.queryTask=new p(this.layer.url))},get:function(b){return this.data[b]},getIdentity:function(b){return b[this.idProperty]},query:function(b,f){var d=new m,a=f&&f.start||0,k=this.batchCount,e=null;"function"===typeof b?e=b(this._entityData):"[object Array]"===Object.prototype.toString.call(b)&&(e=b);if(this.objectIds)e=e?e:this.objectIds,d.objectIds=e.length>=a+this.batchCount?e.slice(a,a+k):e.slice(a);else if(e&&0<e.length?d.objectIds=
-e.length>=a+this.batchCount?e.slice(a,a+k):e.slice(a):(d.start=a,d.num=k,d.where=this.where,d.geometry=this.spatialFilter,d.spatialRelationship=m.SPATIAL_REL_INTERSECTS),(a=f.sort)&&0<a.length)a=l.map(a,function(a){return a.attribute+" "+(a.descending?"DESC":"ASC")}),d.orderByFields=a;d.returnGeometry="esriGeometryPoint"===this.layer.geometryType;d.outFields=["*"];var g=this.totalCount,a=null,a=!d.where;if(!(d.objectIds&&0<d.objectIds.length)&&a)return new n([]);a=this.queryTask?this.queryTask.execute(d):
-this.layer.queryFeatures(d);a.total=a.then(h.hitch(this,function(a){var c=0,b=this.layer.objectIdField;if(this.objectIds){if(!b)for(c=0;c<a.fields.length;c++)if("esriFieldTypeOID"===a.fields[c].type){b=a.fields[c].name;break}for(var e={},c=0;c<a.features.length;c++)e[a.features[c].attributes[b]]=a.features[c];a.features=l.map(d.objectIds,function(a){return e[a]})}for(c=0;c<a.features.length;c++)if(a.features[c]){var f=a.features[c];a.features[c]=h.mixin(h.clone(f.attributes),{geometry:f.geometry});
-this.data[a.features[c][b]]=a.features[c];this._entityData.push(a.features[c])}a=a.features;return g}),function(){console.log("FeatureLayerQueryStore queryFeatures failed.");return 0});return new n(a)}})});
+define([
+  "dojo/_base/declare",
+  "dojo/_base/lang",
+  "dojo/_base/array",
+  "esri/tasks/query",
+  "esri/tasks/QueryTask",
+  "./FeatureLayerQueryResult"
+], function(
+  declare, lang, array, Query, QueryTask, FeatureLayerQueryResult
+) {
+
+  //cache store for dgrid, vs memory store
+  var FeatureLayerQueryStore = declare(null, {
+
+    queryUrl: "",
+    idProperty: "id",//objectIdField
+    //data is objectId indexed
+    data: null, // [attributes1,...attributes25,undefined.....,attributes51,attributes52,..]
+    _entityData: null, // [attributes1,attributes2,...attributes25,attributes51,attributes52....]
+
+    constructor: function(options) {
+      declare.safeMixin(this, options);
+      this.data = [];
+      this._entityData = [];
+
+      this.layer = options.layer;
+
+      // null for server side paging
+      this.objectIds = options.objectIds;
+
+      // required for server side paging
+      this.where = options.where;
+      this.orderByFields = options.orderByFields;
+
+      this.totalCount = options.totalCount;
+      this.batchCount = options.batchCount || 25;
+      this.idProperty = this.layer.objectIdField;
+      this.spatialFilter = options.spatialFilter;
+
+      if (this.layer && this.layer.url) {
+        this.queryTask = new QueryTask(this.layer.url);
+      }
+    }, // End constructor
+
+    //get attributes by objectId
+    get: function(id) {
+      return this.data[id];
+    },
+
+    //get objectId value
+    getIdentity: function(object) {
+      return object[this.idProperty];
+    },
+
+    //query is user defiend
+    //query maybe function or {},_FeatureTable.showSelectedRecords()
+    //
+    //options is passed by dgrid,like
+    //{"sort":[{"attribute":"FID","descending":false}],"start":1603,"count":35}
+    //options.start means index of new start row, not objectId
+    query: function(query, options) {
+      var queryObj = new Query();
+      var start = (options && options.start) || 0;
+      var count = /*options.count ||*/ this.batchCount;
+      var filterIds = null;
+
+      if (typeof query === 'function') {
+        //if query is function, means we call _FeatureTable.showSelectedRecords(),
+        //so this method is called
+        filterIds = query(this._entityData);
+      } else if (Object.prototype.toString.call(query) === '[object Array]') {
+        filterIds = query;
+      }
+
+      if (this.objectIds) {
+        //if service support pagination, this.objectIds is null
+        //if service doesn't support objectId, this.objectIds is null
+        //if service support object but not support pagination, this.objectIds is [objectId]
+        filterIds = filterIds ? filterIds : this.objectIds;
+        if (filterIds.length >= (start + this.batchCount)) {
+          queryObj.objectIds = filterIds.slice(start, start + count);
+        } else {
+          queryObj.objectIds = filterIds.slice(start);
+        }
+      } else {
+        // server supports paging
+        if (filterIds && filterIds.length > 0) {
+          if (filterIds.length >= (start + this.batchCount)) {
+            queryObj.objectIds = filterIds.slice(start, start + count);
+          } else {
+            queryObj.objectIds = filterIds.slice(start);
+          }
+        } else {
+          queryObj.start = start;
+          queryObj.num = count; // doesn't matter if there are not <num> features left
+          queryObj.where = this.where;
+          queryObj.geometry = this.spatialFilter;
+          queryObj.spatialRelationship = Query.SPATIAL_REL_INTERSECTS;
+        }
+
+        var sort = options.sort;
+        if (sort && sort.length > 0) {
+          var orderByFields = array.map(sort, function(s) {
+            return s.attribute + " " + (s.descending ? "DESC" : "ASC");
+          });
+          queryObj.orderByFields = orderByFields; //this.orderByFields;
+        }
+      }
+
+      // queryObj.returnGeometry = false;
+      queryObj.returnGeometry = this.layer.geometryType === 'esriGeometryPoint';
+      queryObj.outFields = ["*"];
+      var totalCount = this.totalCount;
+
+      var results = null;
+      // never request data if objectIds and where clause is invalid
+      var invalidIds = !(queryObj.objectIds && queryObj.objectIds.length > 0);
+      var invalidWhereStr = !queryObj.where;
+      if (invalidIds && invalidWhereStr) {
+        return new FeatureLayerQueryResult([]);
+      }
+
+      if (this.queryTask) {
+        results = this.queryTask.execute(queryObj);
+      } else {
+        results = this.layer.queryFeatures(queryObj);
+      }
+
+      results.total = results.then(lang.hitch(this, function(result) {
+        var i = 0;
+        // var objectIdFieldName = result.objectIdFieldName;
+        var objectIdFieldName = this.layer.objectIdField;
+
+        if (this.objectIds) {
+          // sort the resulting features to the order of the objectIds sent in
+          if (!objectIdFieldName) {
+            for (i = 0; i < result.fields.length; i++) {
+              if (result.fields[i].type === "esriFieldTypeOID") {
+                objectIdFieldName = result.fields[i].name;
+                break;
+              }
+            }
+          }
+
+          var lookup = {};
+          for (i = 0; i < result.features.length; i++) {
+            lookup[result.features[i].attributes[objectIdFieldName]] = result.features[i];
+          }
+
+          result.features = array.map(queryObj.objectIds, function(objectId) {
+            return lookup[objectId];
+          });
+        }
+
+        // modify the JSON response to an array of objects containing the info for grid rows
+        for (i = 0; i < result.features.length; i++) {
+          if (result.features[i]) {
+            var feature = result.features[i];
+
+            //result.features will be attributes array
+            result.features[i] = lang.mixin(lang.clone(feature.attributes), {
+              geometry: feature.geometry
+            });
+            this.data[result.features[i][objectIdFieldName]] = result.features[i];//attributes
+            this._entityData.push(result.features[i]);
+          }
+        }
+
+        result = result.features;
+
+        return totalCount;
+
+      }), function() {
+        console.log("FeatureLayerQueryStore queryFeatures failed.");
+        return 0;
+      });
+
+      return new FeatureLayerQueryResult(results);
+    }
+
+  });
+  return FeatureLayerQueryStore;
+});

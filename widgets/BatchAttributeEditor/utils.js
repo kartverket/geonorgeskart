@@ -1,5 +1,0 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-define(["dojo/_base/lang","dojo/_base/array","jimu/utils"],function(f,d,g){return{getFieldInfosFromWebmap:function(h,k){var b=null,a=k.getLayerInfoByTopLayerId(h);if(a){var e=a.getPopupInfo();e&&e.fieldInfos?(b=f.clone(e.fieldInfos),a.layerObject&&d.forEach(b,function(c){d.some(a.layerObject.fields,function(b){if(c.fieldName===b.name)return c.type=b.type,!0})})):(b=[],a&&a.layerObject&&d.forEach(a.layerObject.fields,function(c){var a=g.getDefaultPortalFieldInfo(c);a.type=c.type;a.visible=!0;a.isEditable=
-!0;b.push(a)}))}b&&d.forEach(b,function(a){a.format&&(a.format.dateFormat&&a.format.dateFormat.toLowerCase()&&0<=a.format.dateFormat.toLowerCase().indexOf("time"))&&(a.format.time=!0)});return b}}});

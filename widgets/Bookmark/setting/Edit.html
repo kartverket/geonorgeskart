@@ -1,20 +1,25 @@
-<div style="width: 100%">
-  <table class="setting-table input-table" cellspacing="0">
-      <tbody>
-        <tr>
-          <td title="${nls.title}" class="first">*${nls.title}</td>
-          <td class="second">
-            <input type="text" data-dojo-type="dijit/form/ValidationTextBox" data-dojo-attach-point="displayName"
-            required="true" placeHolder=${nls.title} data-dojo-props='style:{width:"100%"}'/>
-          </td>
-        </tr>
-        <tr>
-          <td title="${nls.thumbnail}" class="first">${nls.thumbnail}</td>
-          <td class="second">
-            <div data-dojo-attach-point="imageChooserBase"></div>&nbsp;&nbsp;&nbsp;&nbsp;(${nls.thumbnailHint})
-          </td>
-        </tr>                                                                  
-      </tbody>
-    </table> 
-    <div class="extent-chooser" style="height: 400px" data-dojo-attach-point="extentChooserNode"></div>
+<div class="edit-page jimu-widget-bookmark">
+  <div class="info">
+    <div class="image">
+      <div data-dojo-attach-point="imageChooserBase"></div>
+    </div>
+    <div class="text">
+      <div class="lebel">
+        <span>${nls.title}</span><span class="start">*</span>
+      </div>
+      <input type="text" data-dojo-type="dijit/form/ValidationTextBox" data-dojo-attach-point="displayName" required="true" placeHolder=${nls.title} data-dojo-props='style:{width:"100%"}' class="title"/>
+      <div class="tips">(${nls.thumbnailHint})</div>
+    </div>
+  </div>
+
+  <div class="options hide">
+    <div>${nls.options}</div>
+    <div class="itmes" data-dojo-attach-point="saveExtent"></div>
+    <div class="itmes btns">
+      <div class="" data-dojo-attach-point="saveLayers"></div>
+      <div data-dojo-attach-point="setBtn"></div>
+    </div>  
+  </div>
+
+  <div class="extent-chooser" style="height: 400px" data-dojo-attach-point="extentChooserNode"></div>
 </div>

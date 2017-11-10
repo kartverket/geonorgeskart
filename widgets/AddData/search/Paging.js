@@ -1,8 +1,155 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-require({cache:{"url:widgets/AddData/search/templates/Paging.html":'\x3cdiv class\x3d"search-paging"\x3e\r\n\t\x3cul class\x3d"pagination pagination-sm"\x3e\r\n\t\t\x3cli\x3e\r\n\t\t\t\x3ca href\x3d"#" aria-label\x3d"First"\r\n\t\t\t\tdata-dojo-attach-point\x3d"firstButton"\r\n\t\t\t\tdata-dojo-attach-event\x3d"onClick: firstButtonClicked"\r\n\t\t\t\ttitle\x3d"${i18n.search.paging.firstTip}"\x3e\r\n\t\t\t\t\x3cspan aria-hidden\x3d"true" class\x3d"esri-icon-expand"\x3e\x3c/span\x3e\r\n\t\t\t\x3c/a\x3e\r\n\t\t\x3c/li\x3e\r\n\t\t\x3cli\x3e\r\n\t\t\t\x3ca href\x3d"#" aria-label\x3d"Previous"\r\n\t\t\t\tdata-dojo-attach-point\x3d"previousButton"\r\n\t\t\t\tdata-dojo-attach-event\x3d"onClick: previousButtonClicked"\r\n\t\t\t\ttitle\x3d"${i18n.search.paging.previousTip}"\x3e\r\n\t\t\t\t\x3cspan aria-hidden\x3d"true" class\x3d"esri-icon-left"\x3e\x3c/span\x3e\r\n\t\t\t\x3c/a\x3e\r\n\t\t\x3c/li\x3e\r\n\t\t\x3cli class\x3d"current-page"\x3e\r\n\t\t  \x3cspan data-dojo-attach-point\x3d"pageNode"\x3e\x3c/span\x3e\r\n\t\t\x3c/li\x3e\r\n\t\t\x3cli\x3e\r\n\t\t\t\x3ca href\x3d"#" aria-label\x3d"Next"\r\n\t\t\t\tdata-dojo-attach-point\x3d"nextButton"\r\n\t\t\t\tdata-dojo-attach-event\x3d"onClick: nextButtonClicked"\r\n\t\t\t\ttitle\x3d"${i18n.search.paging.nextTip}"\x3e\r\n\t\t\t\t\x3cspan aria-hidden\x3d"true" class\x3d"esri-icon-right"\x3e\x3c/span\x3e\r\n\t\t\t\x3c/a\x3e\r\n\t\t\x3c/li\x3e\r\n\t\x3c/ul\x3e\r\n\x3c/div\x3e'}});
-define("dojo/_base/declare dojo/dom-class ./SearchComponent dojo/text!./templates/Paging.html dojo/i18n!../nls/strings ./util".split(" "),function(e,b,f,g,h,k){return e([f],{i18n:h,templateString:g,hasLess:!1,hasMore:!1,nextStart:-1,numPerPage:null,previousStart:-1,start:1,postCreate:function(){this.inherited(arguments);null===this.numPerPage&&(this.numPerPage=30);this.enableOrDisable()},startup:function(){if(!this._started){this.inherited(arguments);try{var a=this.getConfig().numPerPage,c=Number(a);
-"number"===typeof c&&!isNaN(c)&&(c=Math.floor(c),1<=c&&100>=c&&(this.numPerPage=c))}catch(b){console.warn("Error setting numPerPage:"),console.warn(b)}null===this.numPerPage&&(this.numPerPage=30)}},enableOrDisable:function(){this.hasLess?(b.remove(this.firstButton.parentNode,"disabled"),b.remove(this.previousButton.parentNode,"disabled")):(b.add(this.firstButton.parentNode,"disabled"),b.add(this.previousButton.parentNode,"disabled"));this.hasMore?b.remove(this.nextButton.parentNode,"disabled"):b.add(this.nextButton.parentNode,
-"disabled")},firstButtonClicked:function(){this.hasLess&&(this.start=1,this.search())},previousButtonClicked:function(){this.hasLess&&(this.start=this.previousStart,this.search())},nextButtonClicked:function(){this.hasMore&&(this.start=this.nextStart,this.search())},appendQueryParams:function(a){a.start=this.start;a.num=this.numPerPage},processResults:function(a){this.start=1;var c=this.numPerPage,b=a.total,d=a.queryParams.start;1>d&&(d=1);this.hasLess=!1;this.previousStart=-1;1<d&&(this.hasLess=
-!0,this.previousStart=d-a.queryParams.num,1>this.previousStart&&(this.previousStart=1));this.hasMore=!1;this.nextStart=-1;a.nextQueryParams&&1<a.nextQueryParams.start&&(this.hasMore=!0,this.nextStart=a.nextQueryParams.start);a="";b>c?(b=1,1<d&&(b=Math.floor(d/c)+1),a=this.i18n.search.paging.pagePattern,a=a.replace("{page}",""+b)):(a=this.i18n.search.paging.pagePattern,a=a.replace("{page}","1"));k.setNodeText(this.pageNode,a);this.enableOrDisable()}})});
+///////////////////////////////////////////////////////////////////////////
+// Copyright © 2016 Esri. All Rights Reserved.
+//
+// Licensed under the Apache License Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////
+define(["dojo/_base/declare",
+    "dojo/dom-class",
+    "./SearchComponent",
+    "dojo/text!./templates/Paging.html",
+    "dojo/i18n!../nls/strings",
+    "./util"
+  ],
+  function(declare, domClass, SearchComponent, template, i18n, util) {
+
+    return declare([SearchComponent], {
+
+      i18n: i18n,
+      templateString: template,
+
+      hasLess: false,
+      hasMore: false,
+      nextStart: -1,
+      numPerPage: null,
+      previousStart: -1,
+      start: 1,
+
+      postCreate: function() {
+        this.inherited(arguments);
+        if (this.numPerPage === null) {
+          this.numPerPage = 30;
+        }
+        this.enableOrDisable();
+      },
+
+      startup: function() {
+        if (this._started) {
+          return;
+        }
+        this.inherited(arguments);
+
+        try {
+          var numPer = this.getConfig().numPerPage;
+          var v = Number(numPer);
+          if (typeof v === "number" && !isNaN(v)) {
+            v = Math.floor(v);
+            if (v >= 1 && v <= 100) {
+              this.numPerPage = v;
+            }
+          }
+        } catch (ex) {
+          console.warn("Error setting numPerPage:");
+          console.warn(ex);
+        }
+        if (this.numPerPage === null) {
+          this.numPerPage = 30;
+        }
+      },
+
+      enableOrDisable: function() {
+        if (this.hasLess) {
+          domClass.remove(this.firstButton.parentNode, "disabled");
+          domClass.remove(this.previousButton.parentNode, "disabled");
+        } else {
+          domClass.add(this.firstButton.parentNode, "disabled");
+          domClass.add(this.previousButton.parentNode, "disabled");
+        }
+        if (this.hasMore) {
+          domClass.remove(this.nextButton.parentNode, "disabled");
+        } else {
+          domClass.add(this.nextButton.parentNode, "disabled");
+        }
+      },
+
+      /* events ========================================================== */
+
+      firstButtonClicked: function() {
+        if (this.hasLess) {
+          this.start = 1;
+          this.search();
+        }
+      },
+      previousButtonClicked: function() {
+        if (this.hasLess) {
+          this.start = this.previousStart;
+          this.search();
+        }
+      },
+      nextButtonClicked: function() {
+        if (this.hasMore) {
+          this.start = this.nextStart;
+          this.search();
+        }
+      },
+
+      /* SearchComponent API ============================================= */
+
+      appendQueryParams: function(params) {
+        params.start = this.start;
+        params.num = this.numPerPage;
+      },
+
+      processResults: function(searchResponse) {
+        this.start = 1;
+        var nPer = this.numPerPage;
+        var nHits = searchResponse.total;
+        var nStart = searchResponse.queryParams.start;
+        if (nStart < 1) {
+          nStart = 1;
+        }
+
+        this.hasLess = false;
+        this.previousStart = -1;
+        if (nStart > 1) {
+          this.hasLess = true;
+          this.previousStart = nStart - searchResponse.queryParams.num;
+          if (this.previousStart < 1) {
+            this.previousStart = 1;
+          }
+        }
+
+        this.hasMore = false;
+        this.nextStart = -1;
+        if (searchResponse.nextQueryParams && searchResponse.nextQueryParams.start > 1) {
+          this.hasMore = true;
+          this.nextStart = searchResponse.nextQueryParams.start;
+        }
+
+        var sPage = "";
+        if (nHits > nPer) {
+          var nPage = 1;
+          if (nStart > 1) {
+            nPage = Math.floor(nStart / nPer) + 1;
+          }
+          sPage = this.i18n.search.paging.pagePattern;
+          sPage = sPage.replace("{page}", "" + nPage);
+        } else {
+          sPage = this.i18n.search.paging.pagePattern;
+          sPage = sPage.replace("{page}", "" + 1);
+        }
+        util.setNodeText(this.pageNode, sPage);
+        this.enableOrDisable();
+      }
+
+    });
+  });

@@ -1,6 +1,85 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-require({cache:{"url:widgets/AddData/search/templates/SearchBox.html":'\x3cdiv class\x3d"search-box"\x3e\r\n\t\x3cdiv class\x3d"input-group"\x3e\r\n\t\t\x3cinput type\x3d"text" class\x3d"search-textbox"\r\n\t\t\tplaceholder\x3d"${i18n.search.searchBox.placeholder}"\r\n\t\t\tdata-dojo-attach-point\x3d"searchTextBox"\x3e\r\n    \x3cspan class\x3d"search-btn"\x3e\r\n\t\t\t\x3cbutton class\x3d"btn btn-clear hidden" type\x3d"button"\r\n\t\t\t\tdata-dojo-attach-point\x3d"clearButton"\r\n\t\t\t\tdata-dojo-attach-event\x3d"onClick: clearButtonClicked"\x3e\r\n\t\t\t\t\x3cspan class\x3d"esri-icon-close"\x3e\x3c/span\x3e\r\n\t\t\t\x3c/button\x3e\r\n\t\t\t\x3cbutton class\x3d"btn btn-confirm" type\x3d"button"\r\n\t\t\t\tdata-dojo-attach-point\x3d"searchButton"\r\n\t\t\t\tdata-dojo-attach-event\x3d"onClick: searchButtonClicked"\r\n\t\t\t\ttitle\x3d"${i18n.search.searchBox.search}"\r\n\t\t\t\t\x3e\x3cspan class\x3d"esri-icon-search"\x3e\x3c/span\x3e\r\n\t\t\t\x3c/button\x3e\r\n\t\t\x3c/span\x3e\r\n\t\x3c/div\x3e\r\n\x3c/div\x3e\r\n'}});
-define("dojo/_base/declare dojo/_base/lang dojo/on dojo/dom-class dojo/keys ./SearchComponent dojo/text!./templates/SearchBox.html dojo/i18n!../nls/strings".split(" "),function(d,c,e,f,g,h,k,l){return d([h],{i18n:l,templateString:k,postCreate:function(){this.inherited(arguments);this._checkClearButton();this.own(e(this.searchTextBox,"keyup",c.hitch(this,function(b){this._checkClearButton();b.keyCode===g.ENTER&&this.search()})))},_checkClearButton:function(){f.add(this.clearButton,"hidden")},clearButtonClicked:function(){this.searchTextBox.value=
-"";this._checkClearButton();this.search()},searchButtonClicked:function(){this.search()},appendQueryParams:function(b){var a=this.searchTextBox.value;null!==a&&(a=c.trim(a));null!==a&&0<a.length&&(b.canSortByRelevance=!0,a="("+a+")",b.q=null!==b.q&&0<b.q.length?b.q+(" AND "+a):a)}})});
+///////////////////////////////////////////////////////////////////////////
+// Copyright © 2016 Esri. All Rights Reserved.
+//
+// Licensed under the Apache License Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////
+define(["dojo/_base/declare",
+    "dojo/_base/lang",
+    "dojo/on",
+    "dojo/keys",
+    "./SearchComponent",
+    "dojo/text!./templates/SearchBox.html",
+    "dojo/i18n!../nls/strings"
+  ],
+  function(declare, lang, on, keys, SearchComponent, template, i18n) {
+
+    return declare([SearchComponent], {
+
+      i18n: i18n,
+      templateString: template,
+
+      postCreate: function() {
+        this.inherited(arguments);
+        this._checkClearButton();
+
+        this.own(on(this.searchTextBox, "keyup", lang.hitch(this, function(evt) {
+          this._checkClearButton();
+          if (evt.keyCode === keys.ENTER) {
+            this.search();
+          }
+        })));
+      },
+
+      _checkClearButton: function() {
+        /*
+        var v = this.searchTextBox.value;
+        if (v !== null && v.length > 0) {
+          //domClass.remove(this.clearButton,"hidden");
+          domClass.add(this.clearButton, "hidden");
+        } else {
+          domClass.add(this.clearButton, "hidden");
+        }
+        */
+      },
+
+      clearButtonClicked: function() {
+        this.searchTextBox.value = "";
+        this._checkClearButton();
+        this.search();
+      },
+
+      searchButtonClicked: function() {
+        this.search();
+      },
+
+      /* SearchComponent API ============================================= */
+
+      appendQueryParams: function(params) {
+        var q = this.searchTextBox.value;
+        if (q !== null) {
+          q = lang.trim(q);
+        }
+        if (q !== null && q.length > 0) {
+          params.canSortByRelevance = true;
+          q = "(" + q + ")";
+          if (params.q !== null && params.q.length > 0) {
+            params.q += " AND " + q;
+          } else {
+            params.q = q;
+          }
+        }
+      }
+
+    });
+
+  });

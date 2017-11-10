@@ -1,5 +1,14 @@
 {
 	"bookmarks2D": [],
 	"bookmarks3D": [],
-	"flyTime": 3000
+	"layout": {
+		"cards": true,
+		"list": false,
+		"defaultMode": "cards"
+	},
+	"editable": true,
+	"syncMode": {
+		"webmap": true,
+		"custom": true
+	}
 }

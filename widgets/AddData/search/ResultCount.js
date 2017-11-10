@@ -1,6 +1,54 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-require({cache:{"url:widgets/AddData/search/templates/ResultCount.html":'\x3cdiv class\x3d"search-result-count"\x3e\r\n  \x3cspan class\x3d"search-count" data-dojo-attach-point\x3d"messageNode"\x3e\x3c/span\x3e\r\n\x3c/div\x3e'}});
-define("dojo/_base/declare dojo/number ./SearchComponent dojo/text!./templates/ResultCount.html dojo/i18n!../nls/strings ./util".split(" "),function(d,e,f,g,a,h){return d([f],{i18n:a,templateString:g,typePlural:a.search.resultCount.itemPlural,typeSingular:a.search.resultCount.itemSingular,postCreate:function(){this.inherited(arguments)},processResults:function(c){c=c.total;var a=this.typePlural;1===c&&(a=this.typeSingular);var b=this.i18n.search.resultCount.countPattern,b=b.replace("{count}",e.format(c)),
-b=b.replace("{type}",a);h.setNodeText(this.messageNode,b)}})});
+///////////////////////////////////////////////////////////////////////////
+// Copyright © 2016 Esri. All Rights Reserved.
+//
+// Licensed under the Apache License Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////
+define(["dojo/_base/declare",
+    "dojo/number",
+    "./SearchComponent",
+    "dojo/text!./templates/ResultCount.html",
+    "dojo/i18n!../nls/strings",
+    "./util"
+  ],
+  function(declare, number, SearchComponent, template, i18n, util) {
+
+    var oThisClass = declare([SearchComponent], {
+
+      i18n: i18n,
+      templateString: template,
+
+      typePlural: i18n.search.resultCount.itemPlural,
+      typeSingular: i18n.search.resultCount.itemSingular,
+
+      postCreate: function() {
+        this.inherited(arguments);
+      },
+
+      /* SearchComponent API ============================================= */
+
+      processResults: function(searchResponse) {
+        var nHits = searchResponse.total;
+        var sType = this.typePlural;
+        if (nHits === 1) {
+          sType = this.typeSingular;
+        }
+        var s = this.i18n.search.resultCount.countPattern;
+        s = s.replace("{count}", number.format(nHits));
+        s = s.replace("{type}", sType);
+        util.setNodeText(this.messageNode, s);
+      }
+
+    });
+
+    return oThisClass;
+  });

@@ -1,26 +1,146 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-require({cache:{"esri/dijit/LocateButton":function(){define("require dojo/Evented dojo/_base/declare dojo/_base/lang dojo/has ../kernel ../config dijit/_WidgetBase dijit/a11yclick dijit/_TemplatedMixin dojo/on dojo/Deferred dojo/text!./templates/LocateButton.html dojo/i18n!../nls/jsapi dojo/dom-class dojo/dom-style dojo/dom-attr ../geometry/webMercatorUtils ../geometry/Point ../SpatialReference ../graphic ../symbols/PictureMarkerSymbol ../tasks/ProjectParameters".split(" "),function(f,n,p,d,h,k,l,
-e,t,u,r,m,v,w,g,s,q,x,y,z,A,B,C){return p("esri.dijit.LocateButton",[e,u,n],{templateString:v,options:{theme:"LocateButton",map:null,visible:!0,highlightLocation:!0,symbol:new B(f.toUrl("./images/sdk_gps_location.png"),28,28),infoTemplate:null,scale:null,useTracking:!1,clearOnTrackingStop:!1,setScale:!0,centerAt:!0,timeout:15E3,graphicsLayer:null,geolocationOptions:{maximumAge:0,timeout:15E3,enableHighAccuracy:!0}},constructor:function(a,c){var b=d.mixin({},this.options,a);this.domNode=c;this._i18n=
-w;navigator.geolocation||(b.visible=!1,console.log("LocateButton::navigator.geolocation unsupported."));window.hasOwnProperty("isSecureContext")&&!window.isSecureContext&&(b.visible=!1,console.log("LocateButton::navigator.geolocation requires a secure origin."));this.set("map",b.map);this.set("theme",b.theme);this.set("visible",b.visible);this.set("scale",b.scale);this.set("highlightLocation",b.highlightLocation);this.set("symbol",b.symbol);this.set("infoTemplate",b.infoTemplate);this.set("geolocationOptions",
-b.geolocationOptions);this.set("useTracking",b.useTracking);this.set("setScale",b.setScale);this.set("centerAt",b.centerAt);this.set("timeout",b.timeout);this.set("graphicsLayer",b.graphicsLayer);this.set("clearOnTrackingStop",b.clearOnTrackingStop);this.watch("theme",this._updateThemeWatch);this.watch("visible",this._visible);this.watch("tracking",this._locate);this.watch("useTracking",d.hitch(this,function(){this.get("tracking")&&!this.get("useTracking")&&this._stopTracking();this._setTitle()}));
-this._css={container:"locateContainer",locate:"zoomLocateButton",loading:"loading",tracking:"tracking"}},postCreate:function(){this.inherited(arguments);this.own(r(this._locateNode,t,d.hitch(this,this.locate)))},startup:function(){this.inherited(arguments);this.get("map")||(this.set("visible",!1),console.log("LocateButton::map required"));if(this.get("map").loaded)this._init();else r.once(this.get("map"),"load",d.hitch(this,function(){this._init()}))},destroy:function(){this.clear();this._graphicsEvent&&
-this._graphicsEvent.remove();this._removeWatchPosition();this.inherited(arguments)},clear:function(){var a=this.get("highlightGraphic"),c=this.get("graphicsLayer");a&&(c?c.remove(a):this.get("map").graphics.remove(a),this.set("highlightGraphic",null))},locate:function(){this.get("useTracking")&&this.set("tracking",!this.get("tracking"));return this._locate()},show:function(){this.set("visible",!0)},hide:function(){this.set("visible",!1)},_setTitle:function(){this.get("useTracking")?this.get("tracking")?
-q.set(this._locateNode,"title",this._i18n.widgets.locateButton.locate.stopTracking):q.set(this._locateNode,"title",this._i18n.widgets.locateButton.locate.tracking):q.set(this._locateNode,"title",this._i18n.widgets.locateButton.locate.title)},_removeWatchPosition:function(){this.get("watchId")&&(navigator.geolocation.clearWatch(this.get("watchId")),this.set("watchId",null));this._removePrivateVars()},_stopTracking:function(){g.remove(this._locateNode,this._css.tracking);this._removeWatchPosition();
-this.get("clearOnTrackingStop")&&this.clear();this._hideLoading()},_positionToObject:function(a){return a?{coords:d.mixin({},a.coords),timestamp:a.timestamp}:{}},_startTracking:function(){g.add(this._locateNode,this._css.tracking);this._removeWatchPosition();var a=navigator.geolocation.watchPosition(d.hitch(this,function(a){a=this._positionToObject(a);this._setPosition(a).then(d.hitch(this,function(a){this._locateEvent(a)}),d.hitch(this,function(a){a||(a=Error("LocateButton::Error setting the position."));
-this._locateError(a)}))}),d.hitch(this,function(a){this.set("tracking",!1);a||(a=Error("LocateButton::Could not get tracking position."));this._locateError(a)}),this.get("geolocationOptions"));this.set("watchId",a)},_removePrivateVars:function(){this._scale=this._position=this._graphic=null},_getCurrentPosition:function(){var a=new m;this._removePrivateVars();var c=setTimeout(d.hitch(this,function(){clearTimeout(c);a.reject(Error("LocateButton::time expired for getting location."))}),this.get("timeout"));
-navigator.geolocation.getCurrentPosition(d.hitch(this,function(b){b=this._positionToObject(b);clearTimeout(c);this._setPosition(b).then(d.hitch(this,function(b){a.resolve(b)}),d.hitch(this,function(b){b||(b=Error("LocateButton::Error setting map position."));a.reject(b)}))}),d.hitch(this,function(b){b||(b=Error("LocateButton::Could not get current position."));a.reject(b)}),this.get("geolocationOptions"));return a.promise},_locate:function(){var a=new m;this._showLoading();if(navigator.geolocation)this.get("useTracking")?
-this.get("tracking")?(this._startTracking(),a.resolve({tracking:!0})):(this._stopTracking(),a.resolve({tracking:!1})):this._getCurrentPosition().then(d.hitch(this,function(b){this._locateEvent(b);a.resolve(b)}),d.hitch(this,function(b){b||(b=Error("LocateButton::Could not get current position."));this._locateError(b);a.reject(b)}));else{var c=Error("LocateButton::geolocation unsupported");this._locateError(c);a.reject(c)}this._setTitle();return a.promise},_projectPoint:function(a){var c=new m,b=this.get("map").spatialReference,
-e=b.wkid;b.isWebMercator()?(a=x.geographicToWebMercator(a),c.resolve(a)):l.defaults.geometryService&&4326!==e?(e=new C,e.geometries=[a],e.outSR=b,l.defaults.geometryService.project(e).then(d.hitch(this,function(a){a&&a.length?c.resolve(a[0]):c.reject(Error("LocateButton::Point was not projected."))}),function(a){a||(a=Error("LocateButton::please specify a geometry service on esri/config to project."));c.reject(a)})):c.resolve(a);return c.promise},_getScale:function(a){var c=this.get("scale");return a&&
-a.coords?c||a.coords.accuracy||5E4:c||5E4},_createPoint:function(a){var c;a&&a.coords&&(c=new y([a.coords.longitude,a.coords.latitude],new z({wkid:4326})));return c},_setPosition:function(a){var c=new m,b,e;this._removePrivateVars();if((this._position=a)&&a.coords){if(b=this._createPoint(a))this._graphic=e=this._createGraphic(b,a);var f=this._getScale(a);this._scale=f;b?this._projectPoint(b).then(d.hitch(this,function(b){this._graphic=e=this._createGraphic(b,a);var g={graphic:e,scale:f,position:a};
-this.get("setScale")&&this.get("map").setScale(f);this.get("centerAt")?this.get("map").centerAt(b).then(d.hitch(this,function(){c.resolve(g)}),d.hitch(this,function(a){a||(a=Error("LocateButton::Could not center map."));c.reject(a)})):c.resolve(g)}),d.hitch(this,function(a){a||(a=Error("LocateButton::Error projecting point."));c.reject(a)})):(b=Error("LocateButton::Invalid point"),c.reject(b))}else b=Error("LocateButton::Invalid position"),c.reject(b);return c.promise},_createGraphic:function(a,c){var b;
-a&&(b={position:c},b=new A(a,this.get("symbol"),b,this.get("infoTemplate")));return b},_locateEvent:function(a){if(a.graphic){var c=this.get("highlightGraphic"),b=this.get("graphicsLayer");c?(c.setGeometry(a.graphic.geometry),c.setAttributes(a.graphic.attributes),c.setInfoTemplate(a.graphic.infoTemplate),c.setSymbol(a.graphic.symbol)):(c=a.graphic,this.get("highlightLocation")&&(b?b.add(c):this.get("map").graphics.add(c)));this.set("highlightGraphic",c)}this._hideLoading();this.emit("locate",a)},
-_locateError:function(a){a={graphic:this._graphic,scale:this._scale,position:this._position,error:a};this._hideLoading();this.emit("locate",a)},_showLoading:function(){this.get("useTracking")||g.add(this._locateNode,this._css.loading)},_hideLoading:function(){this.get("useTracking")||g.remove(this._locateNode,this._css.loading)},_init:function(){this._visible();this._setTitle();this.get("tracking")&&this.get("useTracking")&&this._locate();this.set("loaded",!0);this.emit("load",{})},_updateThemeWatch:function(a,
-c,b){g.remove(this.domNode,c);g.add(this.domNode,b)},_visible:function(){this.get("visible")?s.set(this.domNode,"display","block"):s.set(this.domNode,"display","none")}})})},"widgets/MyLocation/_build-generate_module":function(){define(["dojo/text!./css/style.css","dojo/i18n!./nls/strings"],function(){})},"url:esri/dijit/templates/LocateButton.html":'\x3cdiv class\x3d"${theme}" role\x3d"presentation"\x3e\r\n    \x3cdiv class\x3d"${_css.container}"\x3e\r\n            \x3cdiv data-dojo-attach-point\x3d"_locateNode" role\x3d"button" class\x3d"${_css.locate}" tabindex\x3d"0"\x3e\x3cspan\x3e${_i18n.widgets.locateButton.locate.button}\x3c/span\x3e\x3c/div\x3e\r\n    \x3c/div\x3e\r\n\x3c/div\x3e\r\n',
-"url:widgets/MyLocation/css/style.css":'.jimu-widget-mylocation{border-radius: 5px; background-color: #ccc; background-color: rgba(0,0,0,0.2);}.jimu-widget-mylocation.onCenter {background-color: #000;}.jimu-widget-mylocation .place-holder {padding: 2px; width: 30px; height: 30px; background-color: #666; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; cursor: pointer; -webkit-border-radius: 5px; -moz-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; background-image: url("images/locate.png"); background-position: center center; background-repeat: no-repeat;}.jimu-widget-mylocation .place-holder.locating{background-image: url("images/loading.gif");}.jimu-widget-mylocation .place-holder.tracking{background-image: url("images/stop.png") !important; background-color: #000;}.jimu-widget-mylocation .place-holder.nohttps{background-image: url("images/locate_disabled.png") !important;}.jimu-widget-mylocation .nohttps:hover{background-color: rgba(0,0,0,0) !important;}.jimu-widget-mylocation .place-holder{background-color: rgba(0,0,0,0);}.jimu-widget-mylocation.onLocate .place-holder{background-color: rgba(0,0,0,0.4);}.jimu-widget-mylocation.onCenter .place-holder{background-color: #000;}.jimu-widget-mylocation .place-holder:hover{background-color: rgba(0,0,0,0.4);}',
-"*now":function(f){f(['dojo/i18n!*preload*widgets/MyLocation/nls/Widget*["ar","cs","da","de","en","el","es","et","fi","fr","he","hr","it","ja","ko","lt","lv","nb","nl","pl","pt-br","pt-pt","ro","ru","sr","sv","th","tr","zh-cn","vi","zh-hk","zh-tw","ROOT"]'])}}});
-define("dojo/_base/declare jimu/BaseWidget esri/dijit/LocateButton dojo/_base/html dojo/on dojo/_base/lang jimu/utils jimu/dijit/Message dojo/touch".split(" "),function(f,n,p,d,h,k,l){f=f([n],{name:"MyLocation",baseClass:"jimu-widget-mylocation",startup:function(){this.inherited(arguments);this.placehoder=d.create("div",{"class":"place-holder",title:this.label},this.domNode);this.isNeedHttpsButNot=l.isNeedHttpsButNot();!0===this.isNeedHttpsButNot?(console.log("LocateButton::navigator.geolocation requires a secure origin."),
-d.addClass(this.placehoder,"nohttps"),d.setAttr(this.placehoder,"title",this.nls.httpNotSupportError)):window.navigator.geolocation?(this.own(h(this.placehoder,"click",k.hitch(this,this.onLocationClick))),this.own(h(this.map,"extent-change",k.hitch(this,this._scaleChangeHandler)))):d.setAttr(this.placehoder,"title",this.nls.browserError)},onLocationClick:function(){d.hasClass(this.domNode,"onCenter")||d.hasClass(this.domNode,"locating")?(d.removeClass(this.domNode,"onCenter"),d.removeClass(this.placehoder,
-"tracking"),this._destroyGeoLocate()):(this._createGeoLocate(),this._scaleChangeHandler(),this.geoLocate.locate(),d.addClass(this.placehoder,"locating"))},_scaleChangeHandler:function(){var d=this.map.getScale();d&&this.geoLocate&&(this.geoLocate.scale=d)},onLocate:function(e){d.removeClass(this.placehoder,"locating");this.geoLocate.useTracking&&d.addClass(this.placehoder,"tracking");e.error?console.error(e.error):(d.addClass(this.domNode,"onCenter"),this.neverLocate=!1)},_createGeoLocate:function(){var d=
-this.config.locateButton;d.map=this.map;"undefined"===typeof this.config.locateButton.useTracking&&(d.useTracking=!0);d.centerAt=!0;d.setScale=!0;this.geoLocate=new p(d);this.geoLocate.startup();this.geoLocate.own(h(this.geoLocate,"locate",k.hitch(this,this.onLocate)))},_destroyGeoLocate:function(){this.geoLocate&&(this.geoLocate.clear(),this.geoLocate.destroy());this.geoLocate=null},destroy:function(){this._destroyGeoLocate();this.inherited(arguments)}});f.inPanel=!1;f.hasUIFile=!1;return f});
+///////////////////////////////////////////////////////////////////////////
+// Copyright © 2014 - 2017 Esri. All Rights Reserved.
+//
+// Licensed under the Apache License Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////
+
+define([
+    'dojo/_base/declare',
+    'jimu/BaseWidget',
+    "esri/dijit/LocateButton",
+    'dojo/_base/html',
+    'dojo/on',
+    'dojo/_base/lang',
+    'jimu/utils',
+    'jimu/dijit/Message',
+    'dojo/touch'
+  ],
+  function(declare, BaseWidget, LocateButton, html, on, lang, jimuUtils) {
+    var clazz = declare([BaseWidget], {
+
+      name: 'MyLocation',
+      baseClass: 'jimu-widget-mylocation',
+
+      startup: function() {
+        this.inherited(arguments);
+        this.placehoder = html.create('div', {
+          'class': 'place-holder',
+          title: this.label
+        }, this.domNode);
+
+        this.isNeedHttpsButNot = jimuUtils.isNeedHttpsButNot();
+
+        if (true === this.isNeedHttpsButNot) {
+          console.log('LocateButton::navigator.geolocation requires a secure origin.');
+          html.addClass(this.placehoder, "nohttps");
+          html.setAttr(this.placehoder, 'title', this.nls.httpNotSupportError);
+        } else if (window.navigator.geolocation) {
+          this.own(on(this.placehoder, 'click', lang.hitch(this, this.onLocationClick)));
+          this.own(on(this.map, 'zoom-end', lang.hitch(this, this._scaleChangeHandler)));
+        } else {
+          html.setAttr(this.placehoder, 'title', this.nls.browserError);
+        }
+      },
+
+      onLocationClick: function() {
+        if (html.hasClass(this.domNode, "onCenter") ||
+          html.hasClass(this.domNode, "locating")) {
+          html.removeClass(this.domNode, "onCenter");
+          html.removeClass(this.placehoder, "tracking");
+          this._destroyGeoLocate();
+        } else {
+          this._createGeoLocate();
+          this.geoLocate.locate();
+          html.addClass(this.placehoder, "locating");
+        }
+      },
+      //use current scale in Tracking
+      _scaleChangeHandler: function() {
+        var scale = this.map.getScale();
+        if (scale && this.geoLocate && this.geoLocate.useTracking) {
+          this.geoLocate.scale = scale;
+        }
+      },
+
+      //there is no "locate-error" event in 2d-api
+      onLocateOrError: function (evt) {
+        if (evt.error) {
+          this.onLocateError(evt);
+        } else {
+          this.onLocate(evt);
+        }
+      },
+
+      onLocate: function(parameters) {
+        html.removeClass(this.placehoder, "locating");
+        if (this.geoLocate.useTracking) {
+          html.addClass(this.placehoder, "tracking");
+        }
+
+        if (parameters.error) {
+          this.onLocateError(parameters);
+        } else {
+          html.addClass(this.domNode, "onCenter");
+          this.neverLocate = false;
+        }
+      },
+
+      onLocateError: function(evt) {
+        console.error(evt.error);
+        html.removeClass(this.placehoder, "locating");
+        html.removeClass(this.domNode, "onCenter");
+        html.removeClass(this.placehoder, "tracking");
+      },
+
+      _createGeoLocate: function() {
+        var json = this.config.locateButton;
+        json.map = this.map;
+        if (typeof(this.config.locateButton.useTracking) === "undefined") {
+          json.useTracking = true;
+        }
+        json.centerAt = true;
+        json.setScale = true;
+
+        var geoOptions = {
+          maximumAge: 0,
+          timeout: 15000,
+          enableHighAccuracy: true
+        };
+        if (json.geolocationOptions) {
+          json.geolocationOptions = lang.mixin(geoOptions, json.geolocationOptions);
+        }
+
+        this.geoLocate = new LocateButton(json);
+        this.geoLocate.startup();
+        //only 3d-api have error event
+        this.geoLocate.own(on(this.geoLocate, "locate", lang.hitch(this, this.onLocateOrError)));
+      },
+
+      _destroyGeoLocate: function() {
+        if (this.geoLocate) {
+          this.geoLocate.clear();
+          this.geoLocate.destroy();
+        }
+
+        this.geoLocate = null;
+      },
+
+      destroy: function() {
+        this._destroyGeoLocate();
+        this.inherited(arguments);
+      }
+    });
+    clazz.inPanel = false;
+    clazz.hasUIFile = false;
+    return clazz;
+  });

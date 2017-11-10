@@ -1,5 +1,0 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-define({"dojox/form/nls/CheckedMultiSelect":{invalidMessage:"Du m\u00e5 velge minst ett element.",multiSelectLabelText:"{num} element(er) valgt",_localized:{}},"widgets/ObliqueViewer/setting/nls/strings":{layerSelect:"Velg laget",elevationFieldSelect:"H\u00f8ydefelt",azimuthFieldSelect:"Asimutfelt",showThumbnailText:"Vis miniatyrbilder i rasterliste",rasterInfoFieldsSelect:"Velg listeinformasjonsfelt",fieldLimitText:"Maksimalt 3 felt kan velges.",autoSyncText:"Synkroniser hovedkart",errorSectionMeasage:"Det finnes ingen bildetjenestelag i kartet som er valgt. Velg et kart med et bildetjenestelag som inneholder skr\u00e5 bilder.",
-_localized:{}}});

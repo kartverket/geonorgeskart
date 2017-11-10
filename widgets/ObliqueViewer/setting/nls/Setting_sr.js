@@ -1,5 +1,0 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-define({"dojox/form/nls/CheckedMultiSelect":{invalidMessage:"Mora biti izabrana makar jedna stavka.",multiSelectLabelText:"{num} stavki izabrano",_localized:{}},"widgets/ObliqueViewer/setting/nls/strings":{layerSelect:"Izaberi sloj",elevationFieldSelect:"Polje elevacije",azimuthFieldSelect:"Polje azimuta",showThumbnailText:"Prika\u017ei sli\u010dice u rasterskoj listi",rasterInfoFieldsSelect:"Izaberi polja informacija o listama",fieldLimitText:"Mo\u017eete da izaberete najvi\u0161e 3 polja.",autoSyncText:"Sinhronizuj glavnu mapu",
-errorSectionMeasage:"Nema prisutnih slojeva servisa snimaka u izabranoj mapi. Izaberite mapu sa slojem servisa snimaka koji sadr\u017ei kose snimke.",_localized:{}}});

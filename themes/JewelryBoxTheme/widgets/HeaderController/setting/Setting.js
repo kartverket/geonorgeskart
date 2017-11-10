@@ -1,9 +1,123 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-require({cache:{"themes/JewelryBoxTheme/widgets/HeaderController/setting/_build-generate_module":function(){define(["dojo/text!./Setting.html","dojo/text!./css/style.css","dojo/i18n!./nls/strings"],function(){})},"url:themes/JewelryBoxTheme/widgets/HeaderController/setting/Setting.html":'\x3cdiv style\x3d"width:100%;height:100%;"\x3e\r\n  \x3cdiv class\x3d"main-label"\x3e${nls.groupSetLabel}\x3c/div\x3e\r\n  \x3cdiv data-dojo-attach-point\x3d"tableInfo"\x3e\x3c/div\x3e\r\n  \x3cdiv data-dojo-attach-point\x3d"noGroupTip" class\x3d"tip-message"\x3e${nls.noGroup}\x3c/div\x3e\r\n\x3c/div\x3e',
-"url:themes/JewelryBoxTheme/widgets/HeaderController/setting/css/style.css":".jimu-widget-headercontroller-setting{margin:0; padding:0; font-size:15px;}.jimu-widget-headercontroller-setting .group{width: 120px;}.jimu-widget-headercontroller-setting .main-label{font-size:16px; margin-bottom: 20px;}.jimu-widget-headercontroller-setting .tip-message{position: absolute; left: 50%; top: 50%; margin-left: -100px;}","*now":function(f){f(['dojo/i18n!*preload*themes/JewelryBoxTheme/widgets/HeaderController/setting/nls/Setting*["ar","cs","da","de","en","el","es","et","fi","fr","he","hr","it","ja","ko","lt","lv","nb","nl","pl","pt-br","pt-pt","ro","ru","sr","sv","th","tr","zh-cn","vi","zh-hk","zh-tw","ROOT"]'])}}});
-define("dojo/_base/declare dojo/_base/html jimu/BaseWidgetSetting dijit/_WidgetsInTemplateMixin jimu/dijit/SimpleTable dijit/form/Button dijit/form/ValidationTextBox".split(" "),function(f,c,g,h,k){return f([g,h],{baseClass:"jimu-widget-headercontroller-setting",openAll:"openAll",dropDown:"dropDown",startup:function(){this.inherited(arguments);this.config.groupSetting||(this.config.groupSetting=[]);this.displayFieldsTable=new k({fields:[{name:"group",title:this.nls.group,type:"text"},{name:"openAll",
-title:this.nls.openAll,type:"radio",radio:"row"},{name:"dropDown",title:this.nls.dropDown,type:"radio",radio:"row"}],selectable:!1});this.displayFieldsTable.placeAt(this.tableInfo);this.displayFieldsTable.startup();this.setConfig(this.config)},setConfig:function(b){this.config=b;this.displayFieldsTable.clear();if(void 0===this.appConfig.widgetPool.groups||0===this.appConfig.widgetPool.groups.length)c.setStyle(this.noGroupTip,"display","block"),c.setStyle(this.tableInfo,"display","none");else{c.setStyle(this.noGroupTip,
-"display","none");c.setStyle(this.tableInfo,"display","block");for(var e=this.appConfig.widgetPool.groups.length,d=0;d<e;d++){var a={};a.group=this.appConfig.widgetPool.groups[d].label;a.openAll=this.isOpenAll(b,a.group);a.dropDown=!this.isOpenAll(b,a.group);this.displayFieldsTable.addRow(a)}}},isOpenAll:function(b,e){for(var d=b.groupSetting.length,a=0;a<d;a++)if(b.groupSetting[a].label===e)if(b.groupSetting[a].type===this.openAll)break;else return!1;return!0},getConfig:function(){for(var b=this.displayFieldsTable.getData(),
-e=[],d=b.length,a=0;a<d;a++){var c={};c.label=b[a].group;c.type=b[a].openAll?this.openAll:this.dropDown;e.push(c)}this.config.groupSetting=e;return this.config}})});
+///////////////////////////////////////////////////////////////////////////
+// Copyright © 2014 - 2017 Esri. All Rights Reserved.
+//
+// Licensed under the Apache License Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////
+
+define([
+    'dojo/_base/declare',
+    'dojo/_base/html',
+    'jimu/BaseWidgetSetting',
+    'dijit/_WidgetsInTemplateMixin',
+    'jimu/dijit/SimpleTable',
+    'dijit/form/Button',
+    'dijit/form/ValidationTextBox'
+  ],
+  function(
+    declare, html,
+    BaseWidgetSetting,
+    _WidgetsInTemplateMixin,
+    Table) {
+    return declare([BaseWidgetSetting, _WidgetsInTemplateMixin], {
+
+      baseClass: 'jimu-widget-headercontroller-setting',
+      openAll: "openAll",
+      dropDown: "dropDown",
+
+      startup: function() {
+        this.inherited(arguments);
+        if (!this.config.groupSetting) {
+          this.config.groupSetting = [];
+        }
+
+        var fields = [{
+          name: 'group',
+          title: this.nls.group,
+          type: 'text'
+        }, {
+          name: 'openAll',
+          title: this.nls.openAll,
+          type: 'radio',
+          radio: 'row'
+        }, {
+          name: 'dropDown',
+          title: this.nls.dropDown,
+          type: 'radio',
+          radio: 'row'
+        }];
+        var args = {
+          fields: fields,
+          selectable: false
+        };
+        this.displayFieldsTable = new Table(args);
+        this.displayFieldsTable.placeAt(this.tableInfo);
+        this.displayFieldsTable.startup();
+        this.setConfig(this.config);
+      },
+
+      setConfig: function(config) {
+        this.config = config;
+        this.displayFieldsTable.clear();
+        if (this.appConfig.widgetPool.groups === undefined ||
+          this.appConfig.widgetPool.groups.length === 0) {
+          html.setStyle(this.noGroupTip, 'display', 'block');
+          html.setStyle(this.tableInfo, 'display', 'none');
+        } else {
+          html.setStyle(this.noGroupTip, 'display', 'none');
+          html.setStyle(this.tableInfo, 'display', 'block');
+          var len = this.appConfig.widgetPool.groups.length;
+          for (var i = 0; i < len; i++) {
+            var json = {};
+            json.group = this.appConfig.widgetPool.groups[i].label;
+            json.openAll = this.isOpenAll(config, json.group);
+            json.dropDown = !this.isOpenAll(config, json.group);
+            this.displayFieldsTable.addRow(json);
+          }
+        }
+      },
+
+      isOpenAll: function(config, label) {
+        var len = config.groupSetting.length;
+        for (var i = 0; i < len; i++) {
+          if (config.groupSetting[i].label === label) {
+            if (config.groupSetting[i].type === this.openAll) {
+              return true;
+            } else {
+              return false;
+            }
+          }
+        }
+        return true;
+      },
+
+      getConfig: function() {
+        var data = this.displayFieldsTable.getData();
+        var json = [];
+        var len = data.length;
+        for (var i = 0; i < len; i++) {
+          var g = {};
+          g.label = data[i].group;
+          if (data[i].openAll) {
+            g.type = this.openAll;
+          } else {
+            g.type = this.dropDown;
+          }
+          json.push(g);
+        }
+        this.config.groupSetting = json;
+        return this.config;
+      }
+
+
+    });
+  });

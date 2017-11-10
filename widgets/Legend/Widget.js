@@ -1,10 +1,150 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-require({cache:{"widgets/Legend/Utils":function(){define(["dojo/_base/array","jimu/LayerInfos/LayerInfos"],function(c,e){var h=function(){var b=[],d=e.getInstanceSync().getLayerInfoArray();c.forEach(d,function(a){var g=[];a.getShowLegendOfWebmap()&&(a.layerObject&&("esri.layers.ArcGISDynamicMapServiceLayer"===a.layerObject.declaredClass||"esri.layers.ArcGISTiledMapServiceLayer"===a.layerObject.declaredClass)&&a.traversal(function(a){a.isLeaf()&&!a.getShowLegendOfWebmap()&&g.push(a.originOperLayer.mapService.subId)}),
-a.isMapNotesLayerInfo()?c.forEach(a.getSubLayers(),function(a){b.push({layer:a.layerObject,title:"Map Notes - "+a.title})}):b.push({hideLayers:g,layer:a.layerObject,title:a.title}))});return b.reverse()},f=function(b,d){return c.filter(b.layerInfos,function(a){var b=!1;a.id===d&&(b=!0);return b})[0]};return{getLayerInfosParam:function(){return h()},getLayerInfosParamByConfig:function(b){var d=[],a;b.layerInfos&&b.layerInfos.length&&(a=h(),c.forEach(a,function(a){var c=f(b,a.jimuLayerInfo.id);c&&(a.hideLayers=
-c.hideLayers,d.push(a))}));return d}}})},"widgets/Legend/_build-generate_module":function(){define(["dojo/text!./Widget.html","dojo/text!./css/style.css","dojo/i18n!./nls/strings"],function(){})},"url:widgets/Legend/Widget.html":'\x3cdiv\x3e\r\n  \x3c!--div data-dojo-attach-point\x3d"legendDiv"\x3e\x3c/div--\x3e\r\n  \x3cdiv style\x3d"display:none" data-dojo-attach-point\x3d"removedDiv"\x3e\x3c/div\x3e\r\n\x3c/div\x3e\r\n\r\n\r\n',"url:widgets/Legend/css/style.css":".esriLegendServiceLabel {font-size: 14px;}.esriLegendLayer{font-size: 12px;}",
-"*now":function(c){c(['dojo/i18n!*preload*widgets/Legend/nls/Widget*["ar","cs","da","de","en","el","es","et","fi","fr","he","hr","it","ja","ko","lt","lv","nb","nl","pl","pt-br","pt-pt","ro","ru","sr","sv","th","tr","zh-cn","vi","zh-hk","zh-tw","ROOT"]'])}}});
-define("dojo/_base/declare dojo/_base/lang dojo/_base/html dojo/on ./Utils dijit/_WidgetsInTemplateMixin jimu/BaseWidget jimu/LayerInfos/LayerInfos esri/dijit/Legend".split(" "),function(c,e,h,f,b,d,a,g,k){return c([a,d],{name:"Legend",baseClass:"jimu-widget-legend",legend:null,_jimuLayerInfos:null,startup:function(){this.inherited(arguments)},onOpen:function(){this._jimuLayerInfos=g.getInstanceSync();var a={arrangement:this.config.legend.arrangement,autoUpdate:this.config.legend.autoUpdate,respectCurrentMapScale:this.config.legend.respectCurrentMapScale,
-map:this.map,layerInfos:this._getLayerInfosParam()};this.legend=new k(a,h.create("div",{},this.domNode));this.legend.startup();this._bindEvent()},onClose:function(){this.legend.destroy()},_bindEvent:function(){this.config.legend.autoUpdate&&(this.own(f(this._jimuLayerInfos,"layerInfosIsShowInMapChanged",e.hitch(this,"refreshLegend"))),this.own(f(this._jimuLayerInfos,"layerInfosChanged",e.hitch(this,"refreshLegend"))),this.own(f(this._jimuLayerInfos,"layerInfosRendererChanged",e.hitch(this,"refreshLegend"))))},
-_getLayerInfosParam:function(){return void 0===this.config.legend.layerInfos?b.getLayerInfosParam():b.getLayerInfosParamByConfig(this.config.legend)},refreshLegend:function(){var a=this._getLayerInfosParam();this.legend.refresh(a)}})});
+///////////////////////////////////////////////////////////////////////////
+// Copyright © 2014 - 2017 Esri. All Rights Reserved.
+//
+// Licensed under the Apache License Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////
+
+define([
+    'dojo/_base/declare',
+    'dojo/_base/lang',
+    'dojo/_base/html',
+    'dojo/on',
+    './Utils',
+    'dijit/_WidgetsInTemplateMixin',
+    'jimu/BaseWidget',
+    'jimu/LayerInfos/LayerInfos',
+    'esri/dijit/Legend'
+], function(declare, lang, html, on, legendUtils,
+_WidgetsInTemplateMixin, BaseWidget, LayerInfos, Legend) {
+
+  var clazz = declare([BaseWidget, _WidgetsInTemplateMixin], {
+    name: 'Legend',
+    baseClass: 'jimu-widget-legend',
+    legend: null,
+    _jimuLayerInfos: null,
+
+    startup: function() {
+      this.inherited(arguments);
+    },
+
+    onOpen: function() {
+      /*
+      this.config.legend.map = this.map;
+      */
+      this._jimuLayerInfos = LayerInfos.getInstanceSync();
+      var legendParams = {
+        arrangement: this.config.legend.arrangement,
+        autoUpdate: this.config.legend.autoUpdate,
+        respectCurrentMapScale: this.config.legend.respectCurrentMapScale,
+        //respectVisibility: false,
+        map: this.map,
+        layerInfos: this._getLayerInfosParam()
+      };
+      this.legend = new Legend(legendParams, html.create("div", {}, this.domNode));
+      this.legend.startup();
+      this._bindEvent();
+    },
+
+    onClose: function() {
+      this.legend.destroy();
+    },
+
+
+    _bindEvent: function() {
+      if(this.config.legend.autoUpdate) {
+        this.own(on(this._jimuLayerInfos,
+                    'layerInfosIsShowInMapChanged',
+                    lang.hitch(this, 'refreshLegend')));
+
+        this.own(on(this._jimuLayerInfos,
+                    'layerInfosChanged',
+                    lang.hitch(this, 'refreshLegend')));
+
+        this.own(on(this._jimuLayerInfos,
+                    'layerInfosRendererChanged',
+                    lang.hitch(this, 'refreshLegend')));
+      }
+    },
+
+    _getLayerInfosParam: function() {
+      var layerInfosParam;
+      /*
+      this.config.legend.layerInfos = [{
+        id: "NapervilleShelters_8858",
+        hideLayers: []
+      }, {
+        id: "Wildfire_6998",
+        hideLayers: []
+      }, {
+        id: "911CallsHotspot_3066",
+        hideLayers: [0, 1]
+      }];
+      */
+
+      if(this.config.legend.layerInfos === undefined) {
+        // widget has not been configed.
+        layerInfosParam = legendUtils.getLayerInfosParam();
+      } else {
+        // widget has been configed, respect config.
+        layerInfosParam = legendUtils.getLayerInfosParamByConfig(this.config.legend);
+      }
+
+      // filter layerInfosParam
+      //return this._filterLayerInfsParam(layerInfosParam);
+      return layerInfosParam;
+    },
+
+    refreshLegend: function() {
+      var layerInfos = this._getLayerInfosParam();
+      this.legend.refresh(layerInfos);
+    }
+
+    /*
+    _filterLayerInfsParam: function(layerInfosParam) {
+      var filteredLayerInfosParam;
+
+      filteredLayerInfosParam = array.filter(layerInfosParam, function(layerInfoParam) {
+        var result = true;
+        result = result && visiblilityFilter(layerInfoParam, this.config.legend)
+        return result;
+      }, this);
+
+      return filteredLayerInfosParam;
+      function visiblilityFilter(layerInfoParam, legendConfig) {
+        var filterResult;
+        if(legendConfig.autoUpdate) {
+          //filterResult = layerInfoParam.jimuLayerInfo.isShowInMap();
+          // filter sub layers
+          layerInfoParam.jimuLayerInfo.traversal(function(layerInfo) {
+            if(layerInfo.isLeaf()) {
+              if(layerInfo.isShowInMap()) {
+                filterResult = true;
+                if(layerInfo.originOperLayer.mapService &&
+                   layerInfo.originOperLayer.mapService.subId !== undefined) {
+                     layerInfoParam.hideLayers.push(layerInfo.originOperLayer.mapService.subId);
+                }
+              }
+            }
+          });
+
+          layerInfoParam.x = "abc";
+        } else {
+          filterResult = true;
+        }
+        return filterResult;
+      }
+    },
+  */
+  });
+  return clazz;
+});

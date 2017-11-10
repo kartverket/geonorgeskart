@@ -1,25 +1,545 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-require({cache:{"widgets/Draw/setting/_build-generate_module":function(){define(["dojo/text!./Setting.html","dojo/text!./css/style.css","dojo/i18n!./nls/strings"],function(){})},"url:widgets/Draw/setting/Setting.html":'\x3cdiv style\x3d"width:100%;height:auto;"\x3e\r\n  \x3cdiv class\x3d"tip" style\x3d"margin-bottom:10px;"\x3e${nls.defineUnits}\x3c/div\x3e\r\n\t\x3cdiv class\x3d"query-setting-content" data-dojo-attach-point\x3d"content"\x3e\r\n\t\t\x3cdiv class\x3d"distance-section" data-dojo-attach-point\x3d"distanceTabNode" onselectstart\x3d"return false;"\x3e\r\n\t\t\t\x3cdiv class\x3d"add-with-icon"  data-dojo-attach-point\x3d"btnAddDistance"\x3e\r\n\t\t\t\t\x3cspan class\x3d"jimu-icon jimu-icon-add" data-dojo-attach-point\x3d"btnAddDistanceIcon"\x3e\x3c/span\x3e\r\n\t\t\t\t\x3cspan class\x3d"add-label"\x3e${nls.addDistance}\x3c/span\x3e\r\n\t\t\t\x3c/div\x3e\r\n\t\t\t\x3cdiv data-dojo-attach-point\x3d"distanceTableDiv"\x3e\x3c/div\x3e\r\n\t\t\x3c/div\x3e\r\n\t\t\x3cdiv class\x3d"output-section" data-dojo-attach-point\x3d"areaTabNode" onselectstart\x3d"return false;"\x3e\r\n\t\t\t\x3cdiv class\x3d"add-with-icon" data-dojo-attach-point\x3d"btnAddArea"\x3e\r\n\t\t\t\t\x3cspan class\x3d"jimu-icon jimu-icon-add" data-dojo-attach-point\x3d"btnAddAreaIcon"\x3e\x3c/span\x3e\r\n\t\t\t\t\x3cspan class\x3d"add-label"\x3e${nls.addArea}\x3c/span\x3e\r\n\t\t\t\x3c/div\x3e\r\n\t\t\t\x3cdiv data-dojo-attach-point\x3d"areaTableDiv"\x3e\x3c/div\x3e\r\n\t\t\x3c/div\x3e\r\n\t\x3c/div\x3e\r\n\x3c/div\x3e',
-"url:widgets/Draw/setting/css/style.css":".jimu-widget-draw-setting .add-with-icon{margin-top:8px; margin-bottom:3px;}.jimu-widget-draw-setting .jimu-tab{position: static;}.jimu-widget-draw-setting .jimu-tab\x3e.jimu-viewstack{position: static; top: auto; left: auto; right: auto; bottom: auto; height: auto;}.jimu-widget-draw-setting .jimu-viewstack\x3e.view{height: auto;}.jimu-widget-draw-setting .tip{color: #596679; font-size: 14px;}.jimu-widget-draw-setting .add-with-icon.jimu-state-disabled{color: #ccc; cursor: default;}",
-"*now":function(k){k(['dojo/i18n!*preload*widgets/Draw/setting/nls/Setting*["ar","cs","da","de","en","el","es","et","fi","fr","he","hr","it","ja","ko","lt","lv","nb","nl","pl","pt-br","pt-pt","ro","ru","sr","sv","th","tr","zh-cn","vi","zh-hk","zh-tw","ROOT"]'])}}});
-define("dojo/_base/declare dojo/_base/lang dojo/_base/array dojo/_base/html dojo/_base/query dojo/on dijit/_WidgetsInTemplateMixin jimu/BaseWidgetSetting jimu/dijit/TabContainer jimu/utils dijit/form/Select jimu/dijit/CheckBox jimu/dijit/SimpleTable".split(" "),function(k,d,c,g,l,h,p,q,r,f,m,s,n){return k([q,p],{baseClass:"jimu-widget-draw-setting",distanceUnits:null,areaUnits:null,_disabledClass:"jimu-state-disabled",postMixInProperties:function(){this.inherited(arguments);this.distanceUnits=[{value:"KILOMETERS",
-label:this.nls.kilometers,abbr:this.nls.kilometersAbbreviation||"km",conversion:f.localizeNumber(0.0010,{places:3})},{value:"MILES",label:this.nls.miles,abbr:this.nls.milesAbbreviation||"mi",conversion:f.localizeNumber(6.21E-4,{places:6})},{value:"METERS",label:this.nls.meters,abbr:this.nls.metersAbbreviation||"m",conversion:f.localizeNumber(1)},{value:"FEET",label:this.nls.feet,abbr:this.nls.feetAbbreviation||"ft",conversion:f.localizeNumber(3.2808,{places:4})},{value:"YARDS",label:this.nls.yards,
-abbr:this.nls.yardsAbbreviation||"yd",conversion:f.localizeNumber(1.0936133,{places:7})}];this.areaUnits=[{value:"SQUARE_KILOMETERS",label:this.nls.squareKilometers,abbr:this.nls.squareKilometersAbbreviation||"sq km",conversion:f.localizeNumber(1E-6,{places:6})},{value:"SQUARE_MILES",label:this.nls.squareMiles,abbr:this.nls.squareMilesAbbreviation||"sq mi",conversion:f.localizeNumber(3.861021,{places:6})+"e-7"},{value:"ACRES",label:this.nls.acres,abbr:this.nls.acresAbbreviation||"ac",conversion:f.localizeNumber(2.4710538147E-4,
-{places:14})},{value:"HECTARES",label:this.nls.hectares,abbr:this.nls.hectaresAbbreviation||"ha",conversion:f.localizeNumber(1E-4,{places:4})},{value:"SQUARE_METERS",label:this.nls.squareMeters,abbr:this.nls.squareMetersAbbreviation||"sq m",conversion:f.localizeNumber(1)},{value:"SQUARE_FEET",label:this.nls.squareFeet,abbr:this.nls.squareFeetAbbreviation||"sq ft",conversion:f.localizeNumber(10.763910417,{places:9})},{value:"SQUARE_YARDS",label:this.nls.squareYards,abbr:this.nls.squareYardsAbbreviation||
-"sq yd",conversion:f.localizeNumber(1.19599005,{places:8})}]},postCreate:function(){this.inherited(arguments);this.distanceTable=new n({fields:[{name:"label",title:this.nls.label,"class":"label",type:"empty"},{name:"abbr",title:this.nls.abbr,"class":"abbr",type:"text",editable:!1},{name:"conversion",title:this.nls.conversion,"class":"conversion",type:"text",editable:!1},{name:"actions",title:this.nls.actions,"class":"actions",type:"actions",actions:["up","down","delete"]}]});this.distanceTable.placeAt(this.distanceTableDiv);
-this.areaTable=new n({fields:[{name:"label",title:this.nls.label,"class":"label",type:"empty"},{name:"abbr",title:this.nls.abbr,"class":"abbr",type:"text",editable:!1},{name:"conversion",title:this.nls.conversion,"class":"conversion",type:"text",editable:!1},{name:"actions",title:this.nls.actions,"class":"actions",type:"actions",actions:["up","down","delete"]}]});this.areaTable.placeAt(this.areaTableDiv);this.cbxOperationalLayer=new s({label:this.nls.operationalLayer,style:"margin-top:10px;"});g.addClass(this.cbxOperationalLayer.domNode,
-"tip");this.cbxOperationalLayer.placeAt(this.domNode);this.own(h(this.btnAddDistance,"click",d.hitch(this,this._addDistance)));this.own(h(this.btnAddArea,"click",d.hitch(this,this._addArea)));this.own(h(this.distanceTable,"row-delete",d.hitch(this,function(a){a.select&&(a.select.destroy(),delete a.select);this._resetDistanceSelectOptions();this._checkStatusForBtnAddDistance()})));this.own(h(this.areaTable,"row-delete",d.hitch(this,function(a){a.select&&(a.select.destroy(),delete a.select);this._resetAreaSelectOptions();
-this._checkStatusForBtnAddArea()})));this.setConfig(this.config)},startup:function(){this.inherited(arguments);this.tabContainer=new r({tabs:[{title:this.nls.distance,content:this.distanceTabNode},{title:this.nls.area,content:this.areaTabNode}],isNested:!0},this.content);this.tabContainer.startup()},setConfig:function(a){a.isOperationalLayer=!!a.isOperationalLayer;this.config=a;this._setDistanceTable(this.config.distanceUnits);this._setAreaTable(this.config.areaUnits);this.cbxOperationalLayer.setValue(a.isOperationalLayer)},
-_setDistanceTable:function(a){this.distanceTable.clear();c.forEach(a,d.hitch(this,function(a){var e=this._getDistanceUnitInfo(a.unit);e&&(e.abbr=a.abbr,this._addDistanceUnitRow(e))}))},_setAreaTable:function(a){this.areaTable.clear();c.forEach(a,d.hitch(this,function(a){var e=this._getAreaUnitInfo(a.unit);e&&(e.abbr=a.abbr,this._addAreaUnitRow(e))}))},getConfig:function(){var a={distanceUnits:[],areaUnits:[],isOperationalLayer:!1};a.distanceUnits=this._getDistanceConfig();a.areaUnits=this._getAreaConfig();
-a.isOperationalLayer=this.cbxOperationalLayer.getValue();return a},_getDistanceConfig:function(){var a=[],a=this.distanceTable.getRows();return a=c.map(a,d.hitch(this,function(a){var e=this.distanceTable.getRowData(a);return{unit:a.select.get("value"),abbr:e.abbr}}))},_getAreaConfig:function(){var a=[],a=this.areaTable.getRows();return a=c.map(a,d.hitch(this,function(a){var e=this.areaTable.getRowData(a);return{unit:a.select.get("value"),abbr:e.abbr}}))},_getAllDistanceUnitValues:function(){return c.map(this.distanceUnits,
-d.hitch(this,function(a){return a.value}))},_getUsedDistanceUnitValues:function(){var a=this.distanceTable.getRows();return c.map(a,d.hitch(this,function(a){return a.select.get("value")}))},_getNotUsedDistanceUnitValues:function(){var a=this._getAllDistanceUnitValues(),b=this._getUsedDistanceUnitValues();return c.filter(a,d.hitch(this,function(a){return 0>c.indexOf(b,a)}))},_getDistanceUnitInfo:function(a){var b=null,e=c.filter(this.distanceUnits,d.hitch(this,function(b){return b.value===a}));0<e.length&&
-(b=d.mixin({},e[0]));return b},_addDistance:function(){var a=this._getNotUsedDistanceUnitValues();0!==a.length&&(a=this._getDistanceUnitInfo(a[0]),this._addDistanceUnitRow(a))},_checkStatusForBtnAddDistance:function(){0===this._getNotUsedDistanceUnitValues().length?(g.addClass(this.btnAddDistance,this._disabledClass),g.addClass(this.btnAddDistanceIcon,this._disabledClass)):(g.removeClass(this.btnAddDistance,this._disabledClass),g.removeClass(this.btnAddDistanceIcon,this._disabledClass))},_addDistanceUnitRow:function(a){var b=
-this.distanceTable.addRow({abbr:a.abbr,conversion:a.conversion});if(b.success&&b.tr){var b=b.tr,e=l(".simple-table-cell",b)[0];g.setStyle(e,"verticalAlign","middle");var c=new m({style:"width:100%;height:18px;line-height:18px;"});c.placeAt(e);c.startup();c.addOption({value:a.value,label:a.label,selected:!0});this.own(h(c,"change",d.hitch(this,this._resetDistanceSelectOptions)));b.select=c}this._resetDistanceSelectOptions();this._checkStatusForBtnAddDistance()},_showCorrectDistanceInfoBySelectedOption:function(a){var b=
-this._getDistanceUnitInfo(a.select.value);this.distanceTable.editRow(a,{abbr:b.abbr,conversion:b.conversion})},_resetDistanceSelectOptions:function(){var a=this.distanceTable.getRows(),b=c.map(a,d.hitch(this,function(a){return a.select})),e=this._getNotUsedDistanceUnitValues(),f=c.map(e,d.hitch(this,function(a){return this._getDistanceUnitInfo(a)}));c.forEach(b,d.hitch(this,function(b,e){var g=b.get("value"),h=c.filter(b.getOptions(),d.hitch(this,function(a){return a.value!==g}));b.removeOption(h);
-c.forEach(f,d.hitch(this,function(a){b.addOption({value:a.value,label:a.label})}));b.set("value",g);this._showCorrectDistanceInfoBySelectedOption(a[e])}))},_getAllAreaUnitValues:function(){return c.map(this.areaUnits,d.hitch(this,function(a){return a.value}))},_getUsedAreaUnitValues:function(){var a=this.areaTable.getRows();return c.map(a,d.hitch(this,function(a){return a.select.get("value")}))},_getNotUsedAreaUnitValues:function(){var a=this._getAllAreaUnitValues(),b=this._getUsedAreaUnitValues();
-return c.filter(a,d.hitch(this,function(a){return 0>c.indexOf(b,a)}))},_getAreaUnitInfo:function(a){var b=null,e=c.filter(this.areaUnits,d.hitch(this,function(b){return b.value===a}));0<e.length&&(b=d.mixin({},e[0]));return b},_addArea:function(){var a=this._getNotUsedAreaUnitValues();0!==a.length&&(a=this._getAreaUnitInfo(a[0]),this._addAreaUnitRow(a))},_checkStatusForBtnAddArea:function(){0===this._getNotUsedAreaUnitValues().length?(g.addClass(this.btnAddArea,this._disabledClass),g.addClass(this.btnAddAreaIcon,
-this._disabledClass)):(g.removeClass(this.btnAddArea,this._disabledClass),g.removeClass(this.btnAddAreaIcon,this._disabledClass))},_addAreaUnitRow:function(a){var b=this.areaTable.addRow({abbr:a.abbr,conversion:a.conversion});if(b.success&&b.tr){var b=b.tr,c=l(".simple-table-cell",b)[0];g.setStyle(c,"verticalAlign","middle");var f=new m({style:"width:100%;height:18px;line-height:18px;"});f.placeAt(c);f.startup();f.addOption({value:a.value,label:a.label,selected:!0});this.own(h(f,"change",d.hitch(this,
-this._resetAreaSelectOptions)));b.select=f}this._resetAreaSelectOptions();this._checkStatusForBtnAddArea()},_showCorrectAreaInfoBySelectedOption:function(a){var b=this._getAreaUnitInfo(a.select.value);this.areaTable.editRow(a,{abbr:b.abbr,conversion:b.conversion})},_resetAreaSelectOptions:function(){var a=this.areaTable.getRows(),b=c.map(a,d.hitch(this,function(a){return a.select})),e=this._getNotUsedAreaUnitValues(),f=c.map(e,d.hitch(this,function(a){return this._getAreaUnitInfo(a)}));c.forEach(b,
-d.hitch(this,function(b,e){var g=b.get("value"),h=c.filter(b.getOptions(),d.hitch(this,function(a){return a.value!==g}));b.removeOption(h);c.forEach(f,d.hitch(this,function(a){b.addOption({value:a.value,label:a.label})}));b.set("value",g);this._showCorrectAreaInfoBySelectedOption(a[e])}))}})});
+///////////////////////////////////////////////////////////////////////////
+// Copyright © 2014 - 2017 Esri. All Rights Reserved.
+//
+// Licensed under the Apache License Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////
+
+define([
+    'dojo/_base/declare',
+    'dojo/_base/lang',
+    'dojo/_base/array',
+    'dojo/_base/html',
+    'dojo/_base/query',
+    'dojo/on',
+    'dijit/_WidgetsInTemplateMixin',
+    'jimu/BaseWidgetSetting',
+    'jimu/dijit/TabContainer',
+    'jimu/utils',
+    'dijit/form/Select',
+    'jimu/dijit/CheckBox',
+    'jimu/dijit/SimpleTable'
+  ],
+  function(declare, lang, array, html, query, on, _WidgetsInTemplateMixin, BaseWidgetSetting,
+    TabContainer, jimuUtils, Select, CheckBox, Table) {
+    return declare([BaseWidgetSetting, _WidgetsInTemplateMixin], {
+      baseClass: 'jimu-widget-draw-setting',
+      distanceUnits:null,
+      areaUnits:null,
+
+      _disabledClass: "jimu-state-disabled",
+
+      postMixInProperties:function(){
+        this.inherited(arguments);
+
+        this.distanceUnits = [{
+          value: 'KILOMETERS',
+          label: this.nls.kilometers,
+          abbr: this.nls.kilometersAbbreviation || 'km',
+          conversion: jimuUtils.localizeNumber(0.001, {
+            places: 3
+          })
+        }, {
+          value: 'MILES',
+          label: this.nls.miles,
+          abbr: this.nls.milesAbbreviation || 'mi',
+          conversion: jimuUtils.localizeNumber(0.000621, {
+            places: 6
+          })
+        }, {
+          value: 'METERS',
+          label: this.nls.meters,
+          abbr: this.nls.metersAbbreviation || 'm',
+          conversion: jimuUtils.localizeNumber(1)
+        }, {
+          value: 'FEET',
+          label: this.nls.feet,
+          abbr: this.nls.feetAbbreviation || 'ft',
+          conversion: jimuUtils.localizeNumber(3.2808, {
+            places: 4
+          })
+        }, {
+          value: 'YARDS',
+          label: this.nls.yards,
+          abbr: this.nls.yardsAbbreviation || 'yd',
+          conversion: jimuUtils.localizeNumber(1.0936133, {
+            places: 7
+          })
+        }, {
+          value: 'NAUTICAL_MILES',
+          label: this.nls.nauticalmiles,
+          abbr: this.nls.nauticalmilesAbbreviation || 'nm',
+          conversion: jimuUtils.localizeNumber(5.39956803455, {
+            places: 9
+          }) + 'e-4'
+        }
+        ];
+
+        this.areaUnits = [{
+          value: 'SQUARE_KILOMETERS',
+          label: this.nls.squareKilometers,
+          abbr: this.nls.squareKilometersAbbreviation || 'sq km',
+          conversion: jimuUtils.localizeNumber(0.000001, {
+            places: 6
+          })
+        }, {
+          value: 'SQUARE_MILES',
+          label: this.nls.squareMiles,
+          abbr: this.nls.squareMilesAbbreviation || 'sq mi',
+          conversion: jimuUtils.localizeNumber(3.861021, {
+              places: 6
+            }) + 'e-7'
+            //0.0000003861021
+        }, {
+          value: 'ACRES',
+          label: this.nls.acres,
+          abbr: this.nls.acresAbbreviation || 'ac',
+          conversion: jimuUtils.localizeNumber(0.00024710538147, {
+            places: 14
+          })
+        }, {
+          value: 'HECTARES',
+          label: this.nls.hectares,
+          abbr: this.nls.hectaresAbbreviation || 'ha',
+          conversion: jimuUtils.localizeNumber(0.0001, {
+            places: 4
+          })
+        }, {
+          value: 'SQUARE_METERS',
+          label: this.nls.squareMeters,
+          abbr: this.nls.squareMetersAbbreviation || 'sq m',
+          conversion: jimuUtils.localizeNumber(1)
+        }, {
+          value: 'SQUARE_FEET',
+          label: this.nls.squareFeet,
+          abbr: this.nls.squareFeetAbbreviation || 'sq ft',
+          conversion: jimuUtils.localizeNumber(10.763910417, {
+            places: 9
+          })
+        }, {
+          value: 'SQUARE_YARDS',
+          label: this.nls.squareYards,
+          abbr: this.nls.squareYardsAbbreviation || 'sq yd',
+          conversion: jimuUtils.localizeNumber(1.19599005, {
+            places: 8
+          })
+        }];
+      },
+
+      postCreate: function() {
+        this.inherited(arguments);
+
+        var distanceFields = [{name: "label", title: this.nls.label, "class": "label", type: "empty"}, {
+          name: "abbr",
+          title: this.nls.abbr,
+          "class": "abbr",
+          type: "text",
+          editable: false
+        }, {
+          name: "conversion",
+          title: this.nls.conversion,
+          "class": "conversion",
+          type: "text",
+          editable: false
+        }, {
+          name: "actions",
+          title: this.nls.actions,
+          "class": "actions",
+          type: "actions",
+          actions: ["up", "down", "delete"]
+        }];
+        this.distanceTable = new Table({
+          fields: distanceFields
+        });
+        this.distanceTable.placeAt(this.distanceTableDiv);
+
+        var areaFields = [{name: "label", title: this.nls.label, "class": "label", type: "empty"}, {
+          name: "abbr",
+          title: this.nls.abbr,
+          "class": "abbr",
+          type: "text",
+          editable: false
+        }, {
+          name: "conversion",
+          title: this.nls.conversion,
+          "class": "conversion",
+          type: "text",
+          editable: false
+        }, {
+          name: "actions",
+          title: this.nls.actions,
+          "class": "actions",
+          type: "actions",
+          actions: ["up", "down", "delete"]
+        }];
+        this.areaTable = new Table({
+          fields: areaFields
+        });
+        this.areaTable.placeAt(this.areaTableDiv);
+
+        this.cbxOperationalLayer = new CheckBox({
+          label: this.nls.operationalLayer,
+          style: 'margin-top:10px;'
+        });
+        html.addClass(this.cbxOperationalLayer.domNode, 'tip');
+        this.cbxOperationalLayer.placeAt(this.domNode);
+        this.own(on(this.btnAddDistance, 'click', lang.hitch(this, this._addDistance)));
+        this.own(on(this.btnAddArea, 'click', lang.hitch(this, this._addArea)));
+        this.own(on(this.distanceTable, 'row-delete', lang.hitch(this, function(tr) {
+          if (tr.select) {
+            tr.select.destroy();
+            delete tr.select;
+          }
+          this._resetDistanceSelectOptions();
+          this._checkStatusForBtnAddDistance();
+        })));
+        this.own(on(this.areaTable, 'row-delete', lang.hitch(this, function(tr) {
+          if (tr.select) {
+            tr.select.destroy();
+            delete tr.select;
+          }
+          this._resetAreaSelectOptions();
+          this._checkStatusForBtnAddArea();
+        })));
+        this.setConfig(this.config);
+      },
+
+      startup: function() {
+        this.inherited(arguments);
+
+        this.tabContainer = new TabContainer({
+          tabs: [{
+            title: this.nls.distance,
+            content: this.distanceTabNode
+          }, {
+            title: this.nls.area,
+            content: this.areaTabNode
+          }],
+          isNested: true
+        }, this.content);
+        this.tabContainer.startup();
+      },
+
+      setConfig: function(config) {
+        config.isOperationalLayer = !!config.isOperationalLayer;
+        this.config = config;
+        this._setDistanceTable(this.config.distanceUnits);
+        this._setAreaTable(this.config.areaUnits);
+        this.cbxOperationalLayer.setValue(config.isOperationalLayer);
+      },
+
+      _setDistanceTable:function(distanceUnits){
+        this.distanceTable.clear();
+        array.forEach(distanceUnits, lang.hitch(this, function(item){
+          var defaultUnitInfo = this._getDistanceUnitInfo(item.unit);
+          if(!defaultUnitInfo){
+            return;
+          }
+          defaultUnitInfo.abbr = item.abbr;
+          this._addDistanceUnitRow(defaultUnitInfo);
+        }));
+      },
+
+      _setAreaTable:function(areaUnits){
+        this.areaTable.clear();
+        array.forEach(areaUnits, lang.hitch(this, function(item){
+          var defaultUnitInfo = this._getAreaUnitInfo(item.unit);
+          if(!defaultUnitInfo){
+            return;
+          }
+          defaultUnitInfo.abbr = item.abbr;
+          this._addAreaUnitRow(defaultUnitInfo);
+        }));
+      },
+
+      getConfig: function() {
+        var config = {
+          distanceUnits:[],
+          areaUnits:[],
+          isOperationalLayer: false
+        };
+        config.distanceUnits = this._getDistanceConfig();
+        config.areaUnits = this._getAreaConfig();
+        config.isOperationalLayer = this.cbxOperationalLayer.getValue();
+        return config;
+      },
+
+      _getDistanceConfig:function(){
+        var result = [];
+        var trs = this.distanceTable.getRows();
+        result = array.map(trs, lang.hitch(this, function(tr){
+          var data = this.distanceTable.getRowData(tr);
+          var select = tr.select;
+          var unitInfo = {
+            unit:select.get('value'),
+            abbr:data.abbr
+          };
+          return unitInfo;
+        }));
+        return result;
+      },
+
+      _getAreaConfig:function(){
+        var result = [];
+        var trs = this.areaTable.getRows();
+        result = array.map(trs, lang.hitch(this, function(tr){
+          var data = this.areaTable.getRowData(tr);
+          var select = tr.select;
+          var unitInfo = {
+            unit:select.get('value'),
+            abbr:data.abbr
+          };
+          return unitInfo;
+        }));
+        return result;
+      },
+
+      _getAllDistanceUnitValues:function(){
+        var distanceUnitValues = array.map(this.distanceUnits, lang.hitch(this, function(item){
+          return item.value;
+        }));
+        return distanceUnitValues;
+      },
+
+      _getUsedDistanceUnitValues:function(){
+        var trs = this.distanceTable.getRows();
+        var usedDistanceUnitValues = array.map(trs, lang.hitch(this, function(tr){
+          return tr.select.get('value');
+        }));
+        return usedDistanceUnitValues;
+      },
+
+      _getNotUsedDistanceUnitValues:function(){
+        var allValues = this._getAllDistanceUnitValues();
+        var usedValues = this._getUsedDistanceUnitValues();
+        var notUsedValues = array.filter(allValues, lang.hitch(this, function(item){
+          return array.indexOf(usedValues, item) < 0;
+        }));
+        return notUsedValues;
+      },
+
+      _getDistanceUnitInfo:function(value){
+        var result = null;
+        var units = array.filter(this.distanceUnits, lang.hitch(this, function(unit){
+          return unit.value === value;
+        }));
+        if(units.length > 0){
+          result = lang.mixin({}, units[0]);
+        }
+        return result;
+      },
+
+      _addDistance:function(){
+        var notUsedValues = this._getNotUsedDistanceUnitValues();
+        if(notUsedValues.length === 0){
+          return;
+        }
+        var value = notUsedValues[0];
+        var unitInfo = this._getDistanceUnitInfo(value);
+        this._addDistanceUnitRow(unitInfo);
+      },
+
+      _checkStatusForBtnAddDistance: function(){
+        var notUsedValues = this._getNotUsedDistanceUnitValues();
+        if(notUsedValues.length === 0){
+          html.addClass(this.btnAddDistance, this._disabledClass);
+          html.addClass(this.btnAddDistanceIcon, this._disabledClass);
+        }else{
+          html.removeClass(this.btnAddDistance, this._disabledClass);
+          html.removeClass(this.btnAddDistanceIcon, this._disabledClass);
+        }
+      },
+
+      _addDistanceUnitRow:function(unitInfo){
+        var rowData = {
+          abbr:unitInfo.abbr,
+          conversion:unitInfo.conversion
+        };
+        var result = this.distanceTable.addRow(rowData);
+        if(result.success && result.tr){
+          var tr = result.tr;
+          var td = query('.simple-table-cell', tr)[0];
+          html.setStyle(td, "verticalAlign", "middle");
+          var select = new Select({style:"width:100%;height:18px;line-height:18px;"});
+          select.placeAt(td);
+          select.startup();
+          select.addOption({
+            value:unitInfo.value,
+            label:unitInfo.label,
+            selected:true
+          });
+          this.own(on(select, 'change', lang.hitch(this, this._resetDistanceSelectOptions)));
+          tr.select = select;
+        }
+        this._resetDistanceSelectOptions();
+        this._checkStatusForBtnAddDistance();
+      },
+
+      _showCorrectDistanceInfoBySelectedOption:function(tr){
+        var select = tr.select;
+        var unitInfo = this._getDistanceUnitInfo(select.value);
+        var rowData = {
+          abbr:unitInfo.abbr,
+          conversion:unitInfo.conversion
+        };
+        this.distanceTable.editRow(tr, rowData);
+      },
+
+      _resetDistanceSelectOptions:function(){
+        var trs = this.distanceTable.getRows();
+        var selects = array.map(trs, lang.hitch(this, function(tr){
+          return tr.select;
+        }));
+        var notUsedValues = this._getNotUsedDistanceUnitValues();
+        var notUsedUnitsInfo = array.map(notUsedValues, lang.hitch(this, function(value){
+          return this._getDistanceUnitInfo(value);
+        }));
+        array.forEach(selects, lang.hitch(this, function(select, index){
+          var currentValue = select.get('value');
+          var notSelectedOptions = array.filter(select.getOptions(),
+            lang.hitch(this, function(option){
+            return option.value !== currentValue;
+          }));
+          select.removeOption(notSelectedOptions);
+          array.forEach(notUsedUnitsInfo, lang.hitch(this, function(unitInfo){
+            select.addOption({
+              value:unitInfo.value,
+              label:unitInfo.label
+            });
+          }));
+          select.set('value', currentValue);
+          var tr = trs[index];
+          this._showCorrectDistanceInfoBySelectedOption(tr);
+        }));
+      },
+
+      _getAllAreaUnitValues:function(){
+        var areaUnitValues = array.map(this.areaUnits, lang.hitch(this, function(item){
+          return item.value;
+        }));
+        return areaUnitValues;
+      },
+
+      _getUsedAreaUnitValues:function(){
+        var trs = this.areaTable.getRows();
+        var usedAreaUnitValues = array.map(trs, lang.hitch(this, function(tr){
+          return tr.select.get('value');
+        }));
+        return usedAreaUnitValues;
+      },
+
+      _getNotUsedAreaUnitValues:function(){
+        var allValues = this._getAllAreaUnitValues();
+        var usedValues = this._getUsedAreaUnitValues();
+        var notUsedValues = array.filter(allValues, lang.hitch(this, function(item){
+          return array.indexOf(usedValues, item) < 0;
+        }));
+        return notUsedValues;
+      },
+
+      _getAreaUnitInfo:function(value){
+        var result = null;
+        var units = array.filter(this.areaUnits, lang.hitch(this, function(unit){
+          return unit.value === value;
+        }));
+        if(units.length > 0){
+          result = lang.mixin({}, units[0]);
+        }
+        return result;
+      },
+
+      _addArea:function(){
+        var notUsedValues = this._getNotUsedAreaUnitValues();
+        if(notUsedValues.length === 0){
+          return;
+        }
+        var value = notUsedValues[0];
+        var unitInfo = this._getAreaUnitInfo(value);
+        this._addAreaUnitRow(unitInfo);
+      },
+
+      _checkStatusForBtnAddArea: function(){
+        var notUsedValues = this._getNotUsedAreaUnitValues();
+        if(notUsedValues.length === 0){
+          html.addClass(this.btnAddArea, this._disabledClass);
+          html.addClass(this.btnAddAreaIcon, this._disabledClass);
+        }else{
+          html.removeClass(this.btnAddArea, this._disabledClass);
+          html.removeClass(this.btnAddAreaIcon, this._disabledClass);
+        }
+      },
+
+      _addAreaUnitRow:function(unitInfo){
+        var rowData = {
+          abbr:unitInfo.abbr,
+          conversion:unitInfo.conversion
+        };
+        var result = this.areaTable.addRow(rowData);
+        if(result.success && result.tr){
+          var tr = result.tr;
+          var td = query('.simple-table-cell', tr)[0];
+          html.setStyle(td, "verticalAlign", "middle");
+          var select = new Select({style:"width:100%;height:18px;line-height:18px;"});
+          select.placeAt(td);
+          select.startup();
+          select.addOption({
+            value:unitInfo.value,
+            label:unitInfo.label,
+            selected:true
+          });
+          this.own(on(select, 'change', lang.hitch(this, this._resetAreaSelectOptions)));
+          tr.select = select;
+        }
+        this._resetAreaSelectOptions();
+        this._checkStatusForBtnAddArea();
+      },
+
+      _showCorrectAreaInfoBySelectedOption:function(tr){
+        var select = tr.select;
+        var unitInfo = this._getAreaUnitInfo(select.value);
+        var rowData = {
+          abbr:unitInfo.abbr,
+          conversion:unitInfo.conversion
+        };
+        this.areaTable.editRow(tr, rowData);
+      },
+
+      _resetAreaSelectOptions:function(){
+        var trs = this.areaTable.getRows();
+        var selects = array.map(trs, lang.hitch(this, function(tr) {
+          return tr.select;
+        }));
+        var notUsedValues = this._getNotUsedAreaUnitValues();
+        var notUsedUnitsInfo = array.map(notUsedValues, lang.hitch(this, function(value) {
+          return this._getAreaUnitInfo(value);
+        }));
+        array.forEach(selects, lang.hitch(this, function(select, index) {
+          var currentValue = select.get('value');
+          var notSelectedOptions = array.filter(select.getOptions(),
+            lang.hitch(this, function(option) {
+            return option.value !== currentValue;
+          }));
+          select.removeOption(notSelectedOptions);
+          array.forEach(notUsedUnitsInfo, lang.hitch(this, function(unitInfo) {
+            select.addOption({
+              value: unitInfo.value,
+              label: unitInfo.label
+            });
+          }));
+          select.set('value', currentValue);
+          var tr = trs[index];
+          this._showCorrectAreaInfoBySelectedOption(tr);
+        }));
+      }
+
+    });
+  });

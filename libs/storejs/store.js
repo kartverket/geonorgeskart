@@ -1,6 +1,167 @@
-//>>built
-(function(g){var a={},e=g.document,c;a.disabled=!1;a.set=function(a,b){};a.get=function(a){};a.remove=function(a){};a.clear=function(){};a.transact=function(d,b,h){var c=a.get(d);null==h&&(h=b,b=null);"undefined"==typeof c&&(c=b||{});h(c);a.set(d,c)};a.getAll=function(){};a.forEach=function(){};a.serialize=function(a){return JSON.stringify(a)};a.deserialize=function(a){if("string"==typeof a)try{return JSON.parse(a)}catch(b){return a||void 0}};var l;try{l="localStorage"in g&&g.localStorage}catch(p){l=
-!1}if(l)c=g.localStorage,a.set=function(d,b){if(void 0===b)return a.remove(d);c.setItem(d,a.serialize(b));return b},a.get=function(d){return a.deserialize(c.getItem(d))},a.remove=function(a){c.removeItem(a)},a.clear=function(){c.clear()},a.getAll=function(){var d={};a.forEach(function(a,c){d[a]=c});return d},a.forEach=function(d){for(var b=0;b<c.length;b++){var h=c.key(b);d(h,a.get(h))}};else if(e.documentElement.addBehavior){var f,k;try{k=new ActiveXObject("htmlfile"),k.open(),k.write('\x3cscript\x3edocument.w\x3dwindow\x3c/script\x3e\x3ciframe src\x3d"/favicon.ico"\x3e\x3c/iframe\x3e'),
-k.close(),f=k.w.frames[0].document,c=f.createElement("div")}catch(q){c=e.createElement("div"),f=e.body}var e=function(d){return function(){var b=Array.prototype.slice.call(arguments,0);b.unshift(c);f.appendChild(c);c.addBehavior("#default#userData");c.load("localStorage");b=d.apply(a,b);f.removeChild(c);return b}},n=RegExp("[!\"#$%\x26'()*+,/\\\\:;\x3c\x3d\x3e?@[\\]^`{|}~]","g"),m=function(a){return a.replace(/^d/,"___$\x26").replace(n,"___")};a.set=e(function(d,b,c){b=m(b);if(void 0===c)return a.remove(b);
-d.setAttribute(b,a.serialize(c));d.save("localStorage");return c});a.get=e(function(d,b){b=m(b);return a.deserialize(d.getAttribute(b))});a.remove=e(function(a,b){b=m(b);a.removeAttribute(b);a.save("localStorage")});a.clear=e(function(a){var b=a.XMLDocument.documentElement.attributes;a.load("localStorage");for(var c=0,e;e=b[c];c++)a.removeAttribute(e.name);a.save("localStorage")});a.getAll=function(c){var b={};a.forEach(function(a,c){b[a]=c});return b};a.forEach=e(function(c,b){for(var e=c.XMLDocument.documentElement.attributes,
-g=0,f;f=e[g];++g)b(f.name,a.deserialize(c.getAttribute(f.name)))})}try{a.set("__storejs__","__storejs__"),"__storejs__"!=a.get("__storejs__")&&(a.disabled=!0),a.remove("__storejs__")}catch(r){a.disabled=!0}a.enabled=!a.disabled;"undefined"!=typeof module&&module.exports&&this.module!==module?module.exports=a:"function"===typeof define&&define.amd?define(a):g.store=a})(Function("return this")());
+;(function(win){
+	var store = {},
+		doc = win.document,
+		localStorageName = 'localStorage',
+		scriptTag = 'script',
+		storage
+
+	store.disabled = false
+	store.set = function(key, value) {}
+	store.get = function(key) {}
+	store.remove = function(key) {}
+	store.clear = function() {}
+	store.transact = function(key, defaultVal, transactionFn) {
+		var val = store.get(key)
+		if (transactionFn == null) {
+			transactionFn = defaultVal
+			defaultVal = null
+		}
+		if (typeof val == 'undefined') { val = defaultVal || {} }
+		transactionFn(val)
+		store.set(key, val)
+	}
+	store.getAll = function() {}
+	store.forEach = function() {}
+
+	store.serialize = function(value) {
+		return JSON.stringify(value)
+	}
+	store.deserialize = function(value) {
+		if (typeof value != 'string') { return undefined }
+		try { return JSON.parse(value) }
+		catch(e) { return value || undefined }
+	}
+
+	// Functions to encapsulate questionable FireFox 3.6.13 behavior
+	// when about.config::dom.storage.enabled === false
+	// See https://github.com/marcuswestin/store.js/issues#issue/13
+	function isLocalStorageNameSupported() {
+		try { return (localStorageName in win && win[localStorageName]) }
+		catch(err) { return false }
+	}
+
+	if (isLocalStorageNameSupported()) {
+		storage = win[localStorageName]
+		store.set = function(key, val) {
+			if (val === undefined) { return store.remove(key) }
+			storage.setItem(key, store.serialize(val))
+			return val
+		}
+		store.get = function(key) { return store.deserialize(storage.getItem(key)) }
+		store.remove = function(key) { storage.removeItem(key) }
+		store.clear = function() { storage.clear() }
+		store.getAll = function() {
+			var ret = {}
+			store.forEach(function(key, val) {
+				ret[key] = val
+			})
+			return ret
+		}
+		store.forEach = function(callback) {
+			for (var i=0; i<storage.length; i++) {
+				var key = storage.key(i)
+				callback(key, store.get(key))
+			}
+		}
+	} else if (doc.documentElement.addBehavior) {
+		var storageOwner,
+			storageContainer
+		// Since #userData storage applies only to specific paths, we need to
+		// somehow link our data to a specific path.  We choose /favicon.ico
+		// as a pretty safe option, since all browsers already make a request to
+		// this URL anyway and being a 404 will not hurt us here.  We wrap an
+		// iframe pointing to the favicon in an ActiveXObject(htmlfile) object
+		// (see: http://msdn.microsoft.com/en-us/library/aa752574(v=VS.85).aspx)
+		// since the iframe access rules appear to allow direct access and
+		// manipulation of the document element, even for a 404 page.  This
+		// document can be used instead of the current document (which would
+		// have been limited to the current path) to perform #userData storage.
+		try {
+			storageContainer = new ActiveXObject('htmlfile')
+			storageContainer.open()
+			storageContainer.write('<'+scriptTag+'>document.w=window</'+scriptTag+'><iframe src="/favicon.ico"></iframe>')
+			storageContainer.close()
+			storageOwner = storageContainer.w.frames[0].document
+			storage = storageOwner.createElement('div')
+		} catch(e) {
+			// somehow ActiveXObject instantiation failed (perhaps some special
+			// security settings or otherwse), fall back to per-path storage
+			storage = doc.createElement('div')
+			storageOwner = doc.body
+		}
+		function withIEStorage(storeFunction) {
+			return function() {
+				var args = Array.prototype.slice.call(arguments, 0)
+				args.unshift(storage)
+				// See http://msdn.microsoft.com/en-us/library/ms531081(v=VS.85).aspx
+				// and http://msdn.microsoft.com/en-us/library/ms531424(v=VS.85).aspx
+				storageOwner.appendChild(storage)
+				storage.addBehavior('#default#userData')
+				storage.load(localStorageName)
+				var result = storeFunction.apply(store, args)
+				storageOwner.removeChild(storage)
+				return result
+			}
+		}
+
+		// In IE7, keys cannot start with a digit or contain certain chars.
+		// See https://github.com/marcuswestin/store.js/issues/40
+		// See https://github.com/marcuswestin/store.js/issues/83
+		var forbiddenCharsRegex = new RegExp("[!\"#$%&'()*+,/\\\\:;<=>?@[\\]^`{|}~]", "g")
+		function ieKeyFix(key) {
+			return key.replace(/^d/, '___$&').replace(forbiddenCharsRegex, '___')
+		}
+		store.set = withIEStorage(function(storage, key, val) {
+			key = ieKeyFix(key)
+			if (val === undefined) { return store.remove(key) }
+			storage.setAttribute(key, store.serialize(val))
+			storage.save(localStorageName)
+			return val
+		})
+		store.get = withIEStorage(function(storage, key) {
+			key = ieKeyFix(key)
+			return store.deserialize(storage.getAttribute(key))
+		})
+		store.remove = withIEStorage(function(storage, key) {
+			key = ieKeyFix(key)
+			storage.removeAttribute(key)
+			storage.save(localStorageName)
+		})
+		store.clear = withIEStorage(function(storage) {
+			var attributes = storage.XMLDocument.documentElement.attributes
+			storage.load(localStorageName)
+			for (var i=0, attr; attr=attributes[i]; i++) {
+				storage.removeAttribute(attr.name)
+			}
+			storage.save(localStorageName)
+		})
+		store.getAll = function(storage) {
+			var ret = {}
+			store.forEach(function(key, val) {
+				ret[key] = val
+			})
+			return ret
+		}
+		store.forEach = withIEStorage(function(storage, callback) {
+			var attributes = storage.XMLDocument.documentElement.attributes
+			for (var i=0, attr; attr=attributes[i]; ++i) {
+				callback(attr.name, store.deserialize(storage.getAttribute(attr.name)))
+			}
+		})
+	}
+
+	try {
+		var testKey = '__storejs__'
+		store.set(testKey, testKey)
+		if (store.get(testKey) != testKey) { store.disabled = true }
+		store.remove(testKey)
+	} catch(e) {
+		store.disabled = true
+	}
+	store.enabled = !store.disabled
+
+	if (typeof module != 'undefined' && module.exports && this.module !== module) { module.exports = store }
+	else if (typeof define === 'function' && define.amd) { define(store) }
+	else { win.store = store }
+
+})(Function('return this')());

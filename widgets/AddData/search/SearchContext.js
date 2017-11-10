@@ -1,4 +1,20 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-define(["dojo/_base/declare","dojo/_base/lang"],function(a,b){return a(null,{allowArcGISOnline:!0,arcgisOnlinePortal:null,orgId:null,portal:null,username:null,constructor:function(a){b.mixin(this,a)}})});
+define(["dojo/_base/declare",
+    "dojo/_base/lang"
+  ],
+  function(declare, lang) {
+
+    return declare(null, {
+
+      allowArcGISOnline: true,
+      arcgisOnlinePortal: null,
+      orgId: null,
+      portal: null,
+      username: null,
+
+      constructor: function(args) {
+        lang.mixin(this, args);
+      }
+
+    });
+
+  });

@@ -1,16 +1,471 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-define("dojo/_base/declare dojo/_base/lang dojo/_base/array dojo/Deferred dojo/promise/all esri/lang jimu/portalUrlUtils ./table/_FeatureTable ./utils".split(" "),function(r,f,l,m,s,n,q,t,p){return r(null,{_activeLayerInfoId:null,_activeRelationshipKey:null,nls:null,config:null,map:null,_delayedLayerInfos:[],_layerInfosFromMap:[],featureTableSet:{},relationshipsSet:{},relationshipTableSet:{},currentRelationshipKey:null,constructor:function(a){this.map=a&&a.map;this.nls=a&&a.nls;this._delayedLayerInfos=
-[];this._layerInfosFromMap=[];this.featureTableSet={};this.relationshipsSet={};this.relationshipTableSet={};this.currentRelationshipKey=null},setConfig:function(a){this.config=f.clone(a||{})},setMap:function(a){this.map=a},updateLayerInfoResources:function(a){var b=new m;p.readConfigLayerInfosFromMap(this.map,!1,!0).then(f.hitch(this,function(d){this._layerInfosFromMap=d;this._processDelayedLayerInfos();a&&(0===this.config.layerInfos.length?(d=p.getConfigInfosFromLayerInfos(d),this.config.layerInfos=
-l.filter(d,function(a){return a.show})):this.config.layerInfos=l.filter(f.delegate(this.config.layerInfos),f.hitch(this,function(a){var b=this._getLayerInfoById(a.id);return a.show&&b&&(a.name=b.name||b.title)})));b.resolve()}),function(a){b.reject(a)});return b},isEmpty:function(){return this.config&&this.config.layerInfos&&0>=this.config.layerInfos.length},getConfigInfos:function(){return f.clone(this.config.layerInfos)},addLayerInfo:function(a){0===this._layerInfosFromMap.length?this._delayedLayerInfos.push(a):
-0<this._layerInfosFromMap.length&&!this._getLayerInfoById(a.id)&&this._layerInfosFromMap.push(a)},addConfigInfo:function(a){this._getConfigInfoById(a.id)||(a=p.getConfigInfoFromLayerInfo(a),this.config.layerInfos.push({id:a.id,name:a.name,layer:{url:a.layer.url,fields:a.layer.fields}}))},removeLayerInfo:function(a){a=this._getLayerInfoById(a);a=this._layerInfosFromMap.indexOf(a);this._layerInfosFromMap.splice(a,1)},removeConfigInfo:function(a){if(f.getObject("config.layerInfos",!1,this))for(var b=
-this.config.layerInfos.length,d=0;d<b;d++)if(this.config.layerInfos[d].id===a){this.featureTableSet[a]&&(this.featureTableSet[a].destroy(),delete this.featureTableSet[a]);this.config.layerInfos.splice(d,1);break}},getQueryTable:function(a,b,d){var c=new m;this._activeLayerInfoId=a;this.featureTableSet[a]?c.resolve({isSupportQuery:!0,table:this.featureTableSet[a]}):this._getQueryTableInfo(a).then(f.hitch(this,function(e){if(e){var g=e.layerInfo,k=e.layerObject;e=e.tableInfo;if(this.featureTableSet[a])c.resolve({isSupportQuery:e.isSupportQuery,
-table:this.featureTableSet[a]});else if(f.getObject("isSupportQuery",!1,e)){var h=this._getConfigInfoById(a);h||(this.addConfigInfo(g),h=this._getConfigInfoById(a));var u=f.getObject("layer.fields",!1,h);h.layer.fields=this._clipValidFields(u,k&&k.fields);g=new t({map:this.map,matchingMap:b,hideExportButton:d,layerInfo:g,configedInfo:h,nls:this.nls});this.featureTableSet[a]=g;c.resolve({isSupportQuery:e.isSupportQuery,table:g})}else c.resolve({isSupportQuery:!1})}else c.resolve(null)}),function(a){c.reject(a)});
-return c},getRelationTable:function(a,b,d,c){var e=new m,g=this.relationshipsSet[b];this._activeRelationshipKey=b;if(g){var k=this._getLayerInfoById(a);a=f.getObject("shipInfo.id",!1,g);this.getQueryTable(a,d,c).then(f.hitch(this,function(a){if(a&&a.table){var b=a.table;b.set("relatedOriginalInfo",k);b.set("relationship",g)}e.resolve(a)}),f.hitch(function(){e.resolve(null)}))}else e.resolve(null);return e},removeRelationTable:function(a){this.relationshipTableSet[a]&&(this.relationshipTableSet[a].destroy(),
-this.relationshipTableSet[a]=null)},getCurrentTable:function(a){return this.featureTableSet[a]||this.relationshipTableSet[a]},collectRelationShips:function(a,b){this._collectRelationShips(a,a.layerObject,b)},getConfigInfoById:function(a){return this._getConfigInfoById(a)},getLayerInfoById:function(a){return this._getLayerInfoById(a)},getRelationshipsByInfoId:function(a){var b=[],d;for(d in this.relationshipsSet){var c=this.relationshipsSet[d];c._layerInfoId===a&&b.push(c)}return b},empty:function(){this._delayedLayerInfos=
-[];this._layerInfosFromMap=[];this.featureTableSet={};for(var a in this.relationshipsSet)this.relationshipsSet[a].shipInfo=null;this.relationshipsSet={};this.relationshipTableSet={};this.nls=this.map=this.config=this.currentRelationshipKey=null},_processDelayedLayerInfos:function(){0<this._delayedLayerInfos.length&&(l.forEach(this._delayedLayerInfos,f.hitch(this,function(a){!this._getLayerInfoById(a&&a.id)&&(this.map&&this.map.getLayer(a.id))&&this._layerInfosFromMap.push(a)})),this._delayedLayerInfos=
-[])},_getLayerInfoById:function(a){for(var b=0,d=this._layerInfosFromMap.length;b<d;b++)if(this._layerInfosFromMap[b]&&this._layerInfosFromMap[b].id===a)return this._layerInfosFromMap[b]},_getConfigInfoById:function(a){if(!f.getObject("layerInfos.length",!1,this.config))return null;for(var b=0,d=this.config.layerInfos.length;b<d;b++){var c=this.config.layerInfos[b];if(c&&c.id===a)return c}return null},_getQueryTableInfo:function(a){var b=new m,d=this._getLayerInfoById(a);if(d){var c=[],e=d.getUrl();
-c.push(d.getLayerObject());c.push(d.getSupportTableInfo());e&&c.push(d.getRelatedTableInfoArray());s(c).then(f.hitch(this,function(g){if(this._activeLayerInfoId!==a||!g)b.resolve(null);else{var c=g[0],h=g[1];g=e?g[2]:[];n.isDefined(g)&&(n.isDefined(c)&&0<g.length)&&this._collectRelationShips(d,c,g);b.resolve({layerInfo:d,layerObject:c,tableInfo:h})}}),function(a){b.reject(a)})}else console.error("no activeLayerInfo!"),b.reject(Error());return b},_collectRelationShips:function(a,b,d){var c=b.relationships;
-if(c&&0<c.length&&b&&b.url){var e=b.url.split("/");l.forEach(c,f.hitch(this,function(c){e[e.length-1]=c.relatedTableId;var k=e.join("/"),h=l.filter(d,f.hitch(this,function(a){a=a.getUrl();return n.isDefined(a)&&n.isDefined(k)&&q.removeProtocol(a.toString().toLowerCase())===q.removeProtocol(k.toString().toLowerCase())}));h&&0<h.length&&(c.shipInfo=h[0]);h=a.id+"_"+c.name+"_"+c.id;c._relKey=h;c._layerInfoId=a.id;this.relationshipsSet[h]||(this.relationshipsSet[h]=c,this.relationshipsSet[h].objectIdField=
-b.objectIdField)}))}},_getLayerInfoLabel:function(a){return a.name||a.title},_getLayerInfoId:function(a){return a&&a.id||""},_clipValidFields:function(a,b){if(!a||!a.length)return b||[];if(!b||!b.length)return a;for(var d=[],c=0,e=a.length;c<e;c++)for(var g=a[c],f=0,h=b.length;f<h;f++)if(b[f].name===g.name){d.push(g);break}return d}})});
+///////////////////////////////////////////////////////////////////////////
+// Copyright © 2015 Esri. All Rights Reserved.
+//
+// Licensed under the Apache License Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////
+define([
+  'dojo/_base/declare',
+  'dojo/_base/lang',
+  'dojo/_base/array',
+  'dojo/Deferred',
+  'dojo/promise/all',
+  'esri/lang',
+  'jimu/portalUrlUtils',
+  './table/_FeatureTable',
+  // './_RelationshipTable',
+  './utils'
+  ], function(declare, lang, array, Deferred, all,
+    esriLang, portalUrlUtils,
+    _FeatureTable,/* _RelationshipTable,*/ attrUtils) {
+    return declare(null, {
+      _activeLayerInfoId: null,
+      _activeRelationshipKey: null,
+      nls: null,
+      config: null,
+      map: null,
+
+      //FeatureTable
+      _delayedLayerInfos: [],
+      _layerInfosFromMap: [],
+      featureTableSet: {},
+
+      //RelationshipTable
+      // one layer may be have multiple relationships, so we use key-value to store relationships
+      relationshipsSet: {},
+      relationshipTableSet: {},
+      currentRelationshipKey: null,
+
+      constructor: function(params) {
+        this.map = params && params.map;
+        this.nls = params && params.nls;
+
+        this._delayedLayerInfos = [];
+        this._layerInfosFromMap = [];
+        this.featureTableSet = {};
+
+        this.relationshipsSet = {};
+        this.relationshipTableSet = {};
+        this.currentRelationshipKey = null;
+      },
+
+      setConfig: function(tableConfig) {
+        this.config = lang.clone(tableConfig || {});
+      },
+
+      setMap: function(map) {
+        this.map = map;
+      },
+
+      //updateConfig: boolean.
+      updateLayerInfoResources: function(updateConfig) {
+        var def = new Deferred();
+        attrUtils.readConfigLayerInfosFromMap(this.map, false, true)
+        .then(lang.hitch(this, function(layerInfos) {
+          this._layerInfosFromMap = layerInfos;
+          this._processDelayedLayerInfos();
+
+          if (updateConfig) {
+            if (this.config.layerInfos.length === 0) {
+              // if no config only display visible layers
+              var configLayerInfos = attrUtils.getConfigInfosFromLayerInfos(layerInfos);
+              this.config.layerInfos = array.filter(configLayerInfos, function(layer) {
+                return layer.show;
+              });
+            } else {
+              // filter layer from current map and show property of layerInfo is true
+              this.config.layerInfos = array.filter(
+                lang.delegate(this.config.layerInfos),
+                lang.hitch(this, function(layerInfo) {
+                  var mLayerInfo = this._getLayerInfoById(layerInfo.id);
+                  return layerInfo.show && mLayerInfo &&
+                  (layerInfo.name = mLayerInfo.name || mLayerInfo.title);
+                }));
+            }
+          }
+          def.resolve();
+        }), function(err) {
+          def.reject(err);
+        });
+
+        return def;
+      },
+
+      isEmpty: function() {
+        return this.config && this.config.layerInfos && this.config.layerInfos.length <= 0;
+      },
+
+      getConfigInfos: function() {
+        return lang.clone(this.config.layerInfos);
+      },
+
+      //e.g. When Query create a new feature layer, AT get the layerInfoChanged event,
+      //AT needs to call addLayerInfo method to update this._layerInfosFromMap.
+      //But AT doesn't open this Query-created feature layer, so it doesn't call addConfigInfo().
+      addLayerInfo: function(newLayerInfo) {
+        if (this._layerInfosFromMap.length === 0) {
+          this._delayedLayerInfos.push(newLayerInfo);
+        } else if (this._layerInfosFromMap.length > 0 &&
+          !this._getLayerInfoById(newLayerInfo.id)) {
+          this._layerInfosFromMap.push(newLayerInfo); // _layerInfosFromMap read from map
+        }
+      },
+
+      //When user open AT from Query result page, AT will call addConfigInfo method to
+      //update this.config.layerInfos. this.config.layerInfos syncs with ContentPanes of AT.
+      addConfigInfo: function(newLayerInfo) {
+        if (!this._getConfigInfoById(newLayerInfo.id)) {
+          var info = attrUtils.getConfigInfoFromLayerInfo(newLayerInfo);
+          this.config.layerInfos.push({
+            id: info.id,
+            name: info.name,
+            layer: {
+              url: info.layer.url,
+              fields: info.layer.fields
+            }
+          });
+        }
+      },
+
+      removeLayerInfo: function(infoId) {
+        var _clayerInfo = this._getLayerInfoById(infoId);
+        var pos = this._layerInfosFromMap.indexOf(_clayerInfo);
+        this._layerInfosFromMap.splice(pos, 1);
+      },
+
+      removeConfigInfo: function(infoId) {
+        if (lang.getObject('config.layerInfos', false, this)) {
+          var len = this.config.layerInfos.length;
+          for (var i = 0; i < len; i++) {
+            if (this.config.layerInfos[i].id === infoId) {
+              if (this.featureTableSet[infoId]) {
+                this.featureTableSet[infoId].destroy();
+                delete this.featureTableSet[infoId];
+              }
+              this.config.layerInfos.splice(i, 1);
+              break;
+            }
+          }
+        }
+      },
+
+      // def.resolve({
+      //   isSupportQuery: tableInfo.isSupportQuery,
+      //   table: this.featureTableSet[tabId] // instance of _FeatureTable
+      // });
+      // tabId: id of layerInfo
+      getQueryTable: function(tabId, enabledMatchingMap, hideExportButton) {
+        var def = new Deferred();
+        this._activeLayerInfoId = tabId;
+
+        if (!this.featureTableSet[tabId]) {
+          this._getQueryTableInfo(tabId).then(lang.hitch(this, function(queryTableInfo) {
+            if (!queryTableInfo) {
+              def.resolve(null);
+              return;
+            }
+
+            var activeLayerInfo = queryTableInfo.layerInfo;
+            var layerObject = queryTableInfo.layerObject;
+            var tableInfo = queryTableInfo.tableInfo;
+            // prevent create duplicate table
+            // for asychronous request in both queryTable and queryRelationTable
+            if (this.featureTableSet[tabId]) {
+              def.resolve({
+                isSupportQuery: tableInfo.isSupportQuery,
+                table: this.featureTableSet[tabId]
+              });
+              return;
+            }
+
+            if (lang.getObject('isSupportQuery', false, tableInfo)) {
+              var configInfo = this._getConfigInfoById(tabId);
+              if (!configInfo) {
+                this.addConfigInfo(activeLayerInfo);
+                configInfo = this._getConfigInfoById(tabId);
+              }
+              var configFields = lang.getObject('layer.fields', false, configInfo);
+              var layerFields = layerObject && layerObject.fields;
+              // remove fields not exist in layerObject.fields
+              configInfo.layer.fields = this._clipValidFields(
+                configFields,
+                layerFields
+              );
+
+              var table = new _FeatureTable({
+                map: this.map,
+                matchingMap: enabledMatchingMap,
+                hideExportButton: hideExportButton,
+                layerInfo: activeLayerInfo,
+                configedInfo: configInfo,
+                nls: this.nls
+              });
+              this.featureTableSet[tabId] = table;
+              def.resolve({
+                isSupportQuery: tableInfo.isSupportQuery,
+                table: table
+              });
+            } else {
+              def.resolve({
+                isSupportQuery: false
+              });
+            }
+          }), function(err) {
+            def.reject(err);
+          });
+        } else {
+          def.resolve({
+            isSupportQuery: true,
+            table: this.featureTableSet[tabId]
+          });
+        }
+
+        return def;
+      },
+
+      getRelationTable: function(originalInfoId, key, enabledMatchingMap, hideExportButton) {
+        var def = new Deferred();
+        var currentShip = this.relationshipsSet[key];
+        this._activeRelationshipKey = key;
+
+        if (currentShip) {
+          var originalInfo = this._getLayerInfoById(originalInfoId);
+          var layerInfoId = lang.getObject('shipInfo.id', false, currentShip);
+
+          this.getQueryTable(layerInfoId, enabledMatchingMap, hideExportButton)
+          .then(lang.hitch(this, function(tableResult) {
+            if (tableResult && tableResult.table) {
+              var table = tableResult.table;
+              table.set('relatedOriginalInfo', originalInfo);
+              table.set('relationship', currentShip);
+            }
+            def.resolve(tableResult);
+          }), lang.hitch(function() {
+            def.resolve(null);
+          }));
+        } else {
+          def.resolve(null);
+        }
+
+        return def;
+      },
+
+      removeRelationTable: function(relationShipKey) {
+        if (this.relationshipTableSet[relationShipKey]) {
+          this.relationshipTableSet[relationShipKey].destroy();
+          this.relationshipTableSet[relationShipKey] = null;
+        }
+      },
+
+      getCurrentTable: function(key) {
+        return this.featureTableSet[key] || this.relationshipTableSet[key];
+      },
+
+      collectRelationShips: function(layerInfo, relatedTableInfos) {
+        this._collectRelationShips(layerInfo, layerInfo.layerObject, relatedTableInfos);
+      },
+
+      getConfigInfoById: function(id) {
+        return this._getConfigInfoById(id);
+      },
+
+      getLayerInfoById: function(id) {
+        return this._getLayerInfoById(id);
+      },
+
+      getRelationshipsByInfoId: function(id) {
+        var ships = [];
+        for (var p in this.relationshipsSet) {
+          var ship = this.relationshipsSet[p];
+          if (ship._layerInfoId === id) {
+            ships.push(ship);
+          }
+        }
+
+        return ships;
+      },
+
+      empty: function() {
+        this._delayedLayerInfos = [];
+        this._layerInfosFromMap = [];
+        this.featureTableSet = {};
+        for (var p in this.relationshipsSet) {
+          var ship = this.relationshipsSet[p];
+          ship.shipInfo = null;
+        }
+        this.relationshipsSet = {};
+        this.relationshipTableSet = {};
+        this.currentRelationshipKey = null;
+        this.config = null;
+        this.map = null;
+        this.nls = null;
+      },
+
+      _processDelayedLayerInfos: function() { // must be invoke after initialize this._layerInfos
+        if (this._delayedLayerInfos.length > 0) {
+          array.forEach(this._delayedLayerInfos, lang.hitch(this, function(delayedLayerInfo) {
+            if (!this._getLayerInfoById(delayedLayerInfo && delayedLayerInfo.id) &&
+              this.map && this.map.getLayer(delayedLayerInfo.id)) {
+              this._layerInfosFromMap.push(delayedLayerInfo);
+            }
+          }));
+
+          this._delayedLayerInfos = [];
+        }
+      },
+
+      _getLayerInfoById: function(layerId) {
+        for (var i = 0, len = this._layerInfosFromMap.length; i < len; i++) {
+          if (this._layerInfosFromMap[i] && this._layerInfosFromMap[i].id === layerId) {
+            return this._layerInfosFromMap[i];
+          }
+        }
+      },
+
+      _getConfigInfoById: function(id) {
+        if (!lang.getObject('layerInfos.length', false, this.config)) {
+          return null;
+        }
+
+        for (var i = 0, len = this.config.layerInfos.length; i < len; i++) {
+          var configInfo = this.config.layerInfos[i];
+          if (configInfo && configInfo.id === id) {
+            return configInfo;
+          }
+        }
+
+        return null;
+      },
+
+
+      // def.resolve({
+      //         layerInfo: activeLayerInfo,
+      //         layerObject: layerObject,
+      //         tableInfo: tableInfo
+      //       });
+      _getQueryTableInfo: function(tabId) {
+        var def = new Deferred();
+        var activeLayerInfo = this._getLayerInfoById(tabId);
+
+        if (!activeLayerInfo) {
+          console.error("no activeLayerInfo!");
+          def.reject(new Error());
+        } else {
+          var defs = [];
+          var hasUrl = activeLayerInfo.getUrl();
+          defs.push(activeLayerInfo.getLayerObject());
+          defs.push(activeLayerInfo.getSupportTableInfo());
+          if (hasUrl) {
+            defs.push(activeLayerInfo.getRelatedTableInfoArray());
+          }
+
+          all(defs).then(lang.hitch(this, function(results) {
+            if (this._activeLayerInfoId !== tabId || !results) {
+              def.resolve(null);
+              return;
+            }
+            var layerObject = results[0];
+            var tableInfo = results[1];
+            var relatedTableInfos = hasUrl ? results[2] : [];
+
+            if (esriLang.isDefined(relatedTableInfos) && esriLang.isDefined(layerObject) &&
+              relatedTableInfos.length > 0) {
+              this._collectRelationShips(activeLayerInfo, layerObject, relatedTableInfos);
+            }
+
+            def.resolve({
+              layerInfo: activeLayerInfo,
+              layerObject: layerObject,
+              tableInfo: tableInfo
+            });
+          }), function(err) {
+            def.reject(err);
+          });
+        }
+
+        return def;
+      },
+
+      _collectRelationShips: function(layerInfo, layerObject, relatedTableInfos) {
+        var ships = layerObject.relationships;
+        if (ships && ships.length > 0 && layerObject && layerObject.url) {
+          var layerUrl = layerObject.url;
+          var parts = layerUrl.split('/');
+
+          array.forEach(ships, lang.hitch(this, function(ship) {
+            parts[parts.length - 1] = ship.relatedTableId;
+            var relationUrl = parts.join('/');
+
+            var tableInfos = array.filter(relatedTableInfos, lang.hitch(this, function(tableInfo) {
+              var tableInfoUrl = tableInfo.getUrl();
+
+              return esriLang.isDefined(tableInfoUrl) && esriLang.isDefined(relationUrl) &&
+                (portalUrlUtils.removeProtocol(tableInfoUrl.toString().toLowerCase()) ===
+                portalUrlUtils.removeProtocol(relationUrl.toString().toLowerCase()));
+            }));
+
+            if (tableInfos && tableInfos.length > 0) {
+              ship.shipInfo = tableInfos[0];
+            }
+
+            var relKey = layerInfo.id + '_' + ship.name + '_' + ship.id;
+            ship._relKey = relKey;
+            ship._layerInfoId = layerInfo.id;
+
+            if (!this.relationshipsSet[relKey]) {
+              this.relationshipsSet[relKey] = ship;
+              this.relationshipsSet[relKey].objectIdField = layerObject.objectIdField;
+            }
+          }));
+        }
+      },
+
+      _getLayerInfoLabel: function(layerInfo) {
+        var label = layerInfo.name || layerInfo.title;
+        return label;
+      },
+
+      _getLayerInfoId: function(layerInfo) {
+        return layerInfo && layerInfo.id || "";
+      },
+
+      _clipValidFields: function(sFields, rFields) {
+        if (!(sFields && sFields.length)) {
+          return rFields || [];
+        }
+        if (!(rFields && rFields.length)) {
+          return sFields;
+        }
+        var validFields = [];
+        for (var i = 0, len = sFields.length; i < len; i++) {
+          var sf = sFields[i];
+          for (var j = 0, len2 = rFields.length; j < len2; j++) {
+            var rf = rFields[j];
+            if (rf.name === sf.name) {
+              validFields.push(sf);
+              break;
+            }
+          }
+        }
+        if(validFields.length === 0 && sFields.length > 0){
+          var fieldInfos = lang.clone(rFields);
+          array.forEach(fieldInfos, lang.hitch(this, function(fieldInfo){
+            if(fieldInfo.type !== 'esriFieldTypeGeometry'){
+              fieldInfo.show = true;
+              validFields.push(fieldInfo);
+            }
+          }));
+        }
+        return validFields;
+      }
+    });
+  });

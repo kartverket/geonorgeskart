@@ -1,134 +1,862 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://@sbaseurl@/jsapi/jsapi/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-require({cache:{"esri/dijit/Search":function(){define("require dojo/_base/declare dojo/_base/lang dojo/_base/array dojo/Evented dojo/Deferred dojo/keys dojo/on dojo/query dojo/uacss dojo/dom dojo/dom-attr dojo/dom-class dojo/dom-style dojo/dom-construct dojo/i18n!../nls/jsapi dojo/text!./Search/templates/Search.html dijit/_WidgetBase dijit/_TemplatedMixin dijit/_FocusMixin dijit/a11yclick dijit/focus ../lang ../InfoTemplate ../kernel ../SpatialReference ../graphic ../promiseList ../symbols/PictureMarkerSymbol ../symbols/SimpleMarkerSymbol ../symbols/SimpleLineSymbol ../symbols/SimpleFillSymbol ../symbols/TextSymbol ../symbols/Font ../geometry/Point ../geometry/Extent ../geometry/scaleUtils ../tasks/locator ../tasks/query ../Color ../styles/basic".split(" "),
-function(x,l,h,n,A,w,r,q,d,v,s,c,k,u,z,y,H,I,D,B,p,b,t,F,E,J,C,K,Q,R,L,S,T,G,M,N,O,U,P,V,W){return l([I,D,B,A],{declaredClass:"esri.dijit.Search",templateString:H,reHostedFS:/https?:\/\/services.*\.arcgis\.com/i,constructor:function(a,g){this.css={searchGroup:"searchGroup",searchInput:"searchInput",searchInputGroup:"searchInputGroup",searchBtn:"searchBtn",searchSubmit:"searchSubmit",searchIcon:"searchIcon esri-icon-search",searchButtonText:"searchButtonText",searchToggle:"searchToggle",searchToggleIcon:"searchIcon esri-icon-down-arrow",
-searchMenu:"searchMenu",searchMenuHeader:"menuHeader",searchClear:"searchClear",searchClearIcon:"searchIcon esri-icon-close searchClose",searchSpinner:"searchIcon esri-icon-loading-indicator searchSpinner",searchSourceName:"sourceName",suggestionsMenu:"suggestionsMenu",sourcesMenu:"sourcesMenu",activeSource:"active",hasValue:"hasValue",hasButtonMode:"hasButtonMode",hasMultipleSources:"hasMultipleSources",showSuggestions:"showSuggestions",showSources:"showSources",showNoResults:"showNoResults",searchLoading:"searchLoading",
-latLonHeader:"searchLatLongHeader",searchMoreResults:"moreResults",searchMoreResultsList:"resultsList",searchMoreResultsHeader:"moreHeader",searchMoreResultsItem:"moreItem",searchMoreResultsListHeader:"popupHeader",searchShowMoreResults:"showMoreResults",searchNoResultsMenu:"noResultsMenu",searchNoResultsBody:"noResultsBody",searchNoResultsHeader:"noResultsHeader",searchNoValueIcon:"noValueIcon esri-icon-notice-triangle",searchNoValueText:"noValueText",searchNoResultsText:"noResultsText",searchExpandContainer:"searchExpandContainer",
-searchAnimateContainer:"searchAnimate",searchExpanded:"searchExpanded",searchCollapsed:"searchCollapsed",searchClearFloat:"searchClearFloat"};this._allIndex="all";this._objectIdIdentifier="_objectId";this._deferreds=[];this.defaultSource={locator:new U("//geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer"),singleLineFieldName:"SingleLine",outFields:["Addr_type","Match_addr","StAddr","City"],name:y.widgets.Search.main.esriLocatorName,localSearchOptions:{minScale:3E5,distance:5E4},placeholder:y.widgets.Search.main.placeholder,
-highlightSymbol:(new Q(x.toUrl("./Search/images/search-pointer.png"),36,36)).setOffset(9,18)};this.options={map:null,theme:"arcgisSearch",visible:!0,value:"",allPlaceholder:"",sources:[this.defaultSource],activeSourceIndex:0,suggestionDelay:150,enableSourcesMenu:!0,enableSuggestionsMenu:!0,enableInfoWindow:!0,showInfoWindowOnSelect:!0,enableSuggestions:!0,enableButtonMode:!1,autoNavigate:!0,autoSelect:!0,addLayersFromMap:!1,zoomScale:1E3,graphicsLayer:null,enableHighlight:!0,highlightGraphic:null,
-enableLabel:!1,labelSymbol:(new T).setColor(new V([181,56,46,0.9])).setFont(new G("14px",G.STYLE_NORMAL,G.VARIANT_NORMAL,G.WEIGHT_BOLD,"Arial")),labelGraphic:null,infoTemplate:new F(y.widgets.Search.main.searchResult,'\x3cdiv class\x3d"${searchTheme}"\x3e\x3cdiv id\x3d"${searchMoreResultsId}" class\x3d"${searchMoreResults}"\x3e\x3cdiv class\x3d"${searchMoreResultsItem}"\x3e${searchResult}\x3c/div\x3e\x3cdiv\x3e${searchMoreResultsHtml}\x3c/div\x3e\x3c/div\x3e\x3c/div\x3e'),searchResults:null,suggestResults:null,
-selectedResult:null,magicKey:null,expanded:!1,maxLength:128,maxResults:6,maxSuggestions:6,locationToAddressDistance:1500,minCharacters:1,enableSearchingAll:!0};var f=h.mixin({},this.options,a);this.set(f);this._updateActiveSource();this._i18n=y;this._defaultSR=new J(4326);this.domNode=g},startup:function(){this.inherited(arguments);this.sources||(this.sources=[]);this._mapLoaded().then(h.hitch(this,this._init))},postCreate:function(){var a=this;this.inherited(arguments);this._moreResultsId=this.id+
-"_more_results";this.own(q(this.submitNode,p,h.hitch(this,this._searchButton)));this.own(q(this.sourcesBtnNode,p,h.hitch(this,this._toggleSourcesMenu)));this.own(q(this.inputNode,p,h.hitch(this,this._inputClick)));this.own(q(this.clearNode,p,h.hitch(this,this._clearButton)));this.own(q(this.formNode,"submit",h.hitch(this,function(a){a.preventDefault();this._cancelSuggest();this.search()})));this.own(q(this.inputNode,"keyup",h.hitch(this,function(a){this._inputKey(a)})));this.own(q(this.sourcesBtnNode,
-"keyup",h.hitch(this,function(a){this._sourceBtnKey(a)})));this.own(q(this.suggestionsNode,"li:click, li:keyup",function(g){a._suggestionsEvent(g,this)}));this.own(q(this.sourcesNode,"li:click, li:keyup",function(g){a._sourcesEvent(g,this)}));this.own(q(this.inputNode,"input, paste",h.hitch(this,function(){this._suggestDelay()})));this.map&&(this.map.infoWindow&&this.map.infoWindow.domNode&&this.enableInfoWindow)&&(this.own(q(this.map.infoWindow.domNode,"#"+this._moreResultsId+"_show:click",h.hitch(this,
-function(a){this._showMoreResultsClick(a)}))),this.own(q(this.map.infoWindow.domNode,"#"+this._moreResultsId+"_list li a:click",h.hitch(this,function(a){this._moreResultsClick(a)}))),this.own(q(this.map.infoWindow.domNode,"#"+this._moreResultsId+" [data-switch-coordinates]:click",h.hitch(this,function(a){this._switchCoordinatesClick(a)}))));this.value&&this._checkStatus();this._hideMenus();this._updateVisible();this._insertSources(this.sources);this._setPlaceholder(this.activeSourceIndex);this._updateButtonMode(this.enableButtonMode);
-this.toggle(this.expanded)},destroy:function(){this.clear();z.empty(this.domNode);this.inherited(arguments)},clear:function(){this.clearGraphics();c.get(this.inputNode,"value")&&c.set(this.inputNode,"value","");this._changeAttrValue("value","");this.set("searchResults",null);this.set("suggestResults",null);this.set("selectedResult",null);this.set("magicKey",null);k.remove(this.containerNode,this.css.hasValue);c.set(this.clearNode,"title","");this._hideMenus();this._closePopup();this._hideLoading();
-this.emit("clear-search")},show:function(){u.set(this.domNode,"display","block")},hide:function(){u.set(this.domNode,"display","none")},expand:function(){this.enableButtonMode&&(k.add(this.containerNode,this.css.searchExpanded),k.remove(this.containerNode,this.css.searchCollapsed),this._hideMenus(),this.set("expanded",!0))},collapse:function(){this.enableButtonMode&&(k.remove(this.containerNode,this.css.searchExpanded),k.add(this.containerNode,this.css.searchCollapsed),this._hideMenus(),this.set("expanded",
-!1))},toggle:function(a){this.enableButtonMode&&("undefined"===typeof a&&(a=!this.expanded),a?this.expand():this.collapse())},search:function(a){var g=new w;this._mapLoaded().then(h.hitch(this,function(){this._searchDeferred(a).then(h.hitch(this,function(a){var e=a.results;this.set("searchResults",e);0===a.numResults&&(this._noResults(a.value),this._showNoResultsMenu());this._hideLoading();this.emit("search-results",a);this._selectFirstResult(e,a.activeSourceIndex);g.resolve(e)}),h.hitch(this,function(a){g.reject(a)}))}));
-return g.promise},suggest:function(a){var g=new w;this._mapLoaded().then(h.hitch(this,function(){this._suggestDeferred(a).then(h.hitch(this,function(a){if(a){var e=a.results;this.set("suggestResults",e);this._insertSuggestions(e,a.value);this.emit("suggest-results",a);g.resolve(e)}}),h.hitch(this,function(a){g.reject(a)}))}));return g.promise},select:function(a){var g=this._getDefaultSymbol(a),f=this.labelSymbol,e,m=this.sources,b=this.activeSourceIndex,c=this.enableHighlight,p=this.enableLabel,d=
-this.autoNavigate,t=this.showInfoWindowOnSelect,k=this.enableInfoWindow,v=this.infoTemplate,s=new C(a.feature.toJson());if(b===this._allIndex){var u=this._getSourceIndexOfResult(a);null!==u&&(e=m[u],b=u)}else e=m[b];e&&(e.hasOwnProperty("highlightSymbol")&&(g=e.highlightSymbol),e.hasOwnProperty("labelSymbol")&&(f=e.labelSymbol),e.hasOwnProperty("enableHighlight")&&(c=e.enableHighlight),e.hasOwnProperty("enableLabel")&&(p=e.enableLabel),e.hasOwnProperty("autoNavigate")&&(d=e.autoNavigate),e.hasOwnProperty("showInfoWindowOnSelect")&&
-(t=e.showInfoWindowOnSelect),e.hasOwnProperty("enableInfoWindow")&&(k=e.enableInfoWindow),e.hasOwnProperty("infoTemplate")?v=e.infoTemplate:e.featureLayer&&e.featureLayer.infoTemplate&&(v=e.featureLayer.infoTemplate));this._hideMenus();this._hideLoading();if(s){var m=this.highlightGraphic,y=this.graphicsLayer,u=this.labelGraphic,E=h.mixin({},s.attributes,{searchTheme:this.theme,searchResult:this._searchResultHTML(a),searchMoreResults:this.css.searchMoreResults,searchMoreResultsItem:this.css.searchMoreResultsItem,
-searchMoreResultsId:this._moreResultsId,searchMoreResultsHtml:this._moreResultsHTML(a)}),z=null;k&&(z=v);u?(u.setGeometry(s.geometry),u.setAttributes(E),u.setSymbol(f),f&&"textsymbol"===f.type&&u.symbol.setText(a.name)):(u=new C(s.geometry,f,E),f&&"textsymbol"===f.type&&u.symbol.setText(a.name),p&&(y?y.add(u):this.map&&this.map.graphics&&this.map.graphics.add(u)));m?(m.setGeometry(s.geometry),m.setAttributes(E),m.setInfoTemplate(z),m.setSymbol(g)):(m=new C(s.geometry,g,E,z),c&&(y?y.add(m):this.map&&
-this.map.graphics&&this.map.graphics.add(m)));m&&(m.symbol&&"textsymbol"===m.symbol.type)&&m.symbol.setText(a.name);this.map&&(this.map.infoWindow&&k&&t)&&(this.map.infoWindow.setFeatures([m]),g=this._getPointFromGeometry(m.geometry),this.map.infoWindow.show(g));this.map&&d&&a&&a.hasOwnProperty("extent")&&"function"===typeof this.map.setExtent&&this.map.setExtent(a.extent);this.set("highlightGraphic",m);this.set("labelGraphic",u)}this.set("selectedResult",a);this.emit("select-result",{result:a,source:e,
-sourceIndex:b})},focus:function(){b.focus(this.inputNode)},blur:function(){this.inputNode.blur();b.curNode&&b.curNode.blur()},clearGraphics:function(){var a=this.highlightGraphic,g=this.graphicsLayer,f=this.labelGraphic;a&&(g?g.remove(a):this.map&&this.map.graphics&&this.map.graphics.remove(a));f&&(g?g.remove(f):this.map&&this.map.graphics&&this.map.graphics.remove(f));this.set("labelGraphic",null);this.set("highlightGraphic",null)},_mapLoaded:function(){var a=new w;if(this.map)if(this.map.loaded)a.resolve();
-else q.once(this.map,"load",h.hitch(this,function(){a.resolve()}));else a.resolve();return a.promise},_init:function(){this._getMapLayers().then(h.hitch(this,function(){this.set("loaded",!0);this.emit("load")}))},_clearButton:function(){this.clear();b.focus(this.inputNode)},_error:function(a){return Error(this.declaredClass+" "+a)},_searchDeferred:function(a){var g=new w,f=this.value,e=this.activeSourceIndex;a&&a.hasOwnProperty("index")&&(e=a.index);this._showLoading();this._hideMenus();this._closePopup();
-this.clearGraphics();var m={magicKey:this.magicKey,text:f};a?"string"===typeof a?(m.text=a,a=this._searchQueries(m)):a="object"===typeof a&&a.hasOwnProperty("magicKey")?this._searchQueries(a):"object"===typeof a&&a.hasOwnProperty("geometry")?this._searchQueries({geometry:a}):"object"===typeof a&&a.hasOwnProperty(this._objectIdIdentifier)?this._searchQueries(a):"object"===typeof a&&"point"===a.type?this._searchQueries({point:a}):a instanceof Array&&2===a.length?this._searchQueries({latlon:a}):this._searchQueries(m):
-a=this._searchQueries(m);a.always(h.hitch(this,function(a){a=this._formatResults(a,e,f);g.resolve(a)}));return g.promise},_suggestDeferred:function(a){var g=new w;this._deferreds.push(g);a||(a=this.value);var f=this.activeSourceIndex;this._suggestQueries({text:a}).always(h.hitch(this,function(e){var m;if(e)for(var b=0;b<e.length;b++)e[b]&&(m=!0);m?(e=this._formatResults(e,f,a),g.resolve(e)):g.resolve()}));return g.promise},_getDefaultSymbol:function(a){var g,f,e,m;this.map&&(m=this.map.getBasemap());
-m||(m="topo");a&&(a.feature&&a.feature.geometry)&&(e=a.feature.geometry.type);"polyline"===e?e="line":"circle"===e||"extent"===e?e="polygon":"multipoint"===e&&(e="point");if(e){if(a=W.getSchemes({theme:"default",basemap:m,geometryType:e}))f=a.primaryScheme;if(f){f.color&&f.hasOwnProperty("opacity")&&(f.color.a=f.opacity);g=f;a=f.color;f=f.size;var b;switch(e){case "point":b=new R;b.setColor(a);b.setSize(null!==f?f:g.size);e=new L;e.setColor(g.outline.color);e.setWidth(g.outline.width);b.setOutline(e);
-break;case "line":b=new L;b.setColor(a);b.setWidth(null!==f?f:g.width);break;case "polygon":b=new S,b.setColor(a),e=new L,e.setColor(g.outline.color),e.setWidth(g.outline.width),b.setOutline(e)}g=b}}return g},_selectFirstResult:function(a,g){if(this.autoSelect&&a){var f;g===this._allIndex?f=this._getFirstResult(a):a[g]&&a[g][0]&&(f=a[g][0]);f&&this.select(f)}},_getSourceIndexOfResult:function(a){var g=this.searchResults;if(g)for(var f in g)if(g[f]&&g[f].length)for(var e=0;e<g[f].length;e++)if(g[f][e]===
-a)return parseInt(f,10);return null},_getFirstResult:function(a){if(a)for(var g in a)if(a[g]&&a[g][0])return a[g][0];return!1},_onFocus:function(){this.map&&"function"===typeof this.map.disableKeyboardNavigation&&this.map.disableKeyboardNavigation();this.emit("focus");this.inherited(arguments)},_onBlur:function(){this._hideMenus();this.map&&"function"===typeof this.map.enableKeyboardNavigation&&this.map.enableKeyboardNavigation();this.enableButtonMode&&this.loaded&&this.collapse();this.emit("blur");
-this.inherited(arguments)},_getMapLayers:function(){var a=new w;if(this.addLayersFromMap&&this.map){var g=[],f=this.map.graphicsLayerIds;if(f&&f.length){for(var e=0;e<f.length;e++){var m=this.map.getLayer(f[e]);m&&g.push(this._featureLayerLoaded(m))}K(g).always(h.hitch(this,function(g){for(var e,f=this.sources,m=0;m<g.length;m++)g[m]&&(g[m].loaded&&"Feature Layer"===g[m].type)&&(f.push({featureLayer:g[m],enableSuggestions:!0}),e=!0);e&&this.set("sources",f);a.resolve()}))}else a.resolve()}else a.resolve();
-return a.promise},_switchCoordinatesClick:function(a){a.preventDefault();if(a=c.get(a.target,"data-switch-coordinates"))this._cancelSuggest(),this.set("value",a),this.search()},_moreResultsClick:function(a){a.preventDefault();var g=a.target;a=parseInt(c.get(g,"data-source-index"),10);var g=parseInt(c.get(g,"data-index"),10),f=this.searchResults;f&&f[a]&&(a=f[a][g])&&this.select(a)},_showMoreResultsClick:function(a){a.preventDefault();if(a=s.byId(this._moreResultsId)){k.toggle(a,this.css.searchShowMoreResults);
-var g=s.byId(this._moreResultsId+"_show");g&&(k.contains(a,this.css.searchShowMoreResults)?c.set(g,"textContent",y.widgets.Search.main.hideMoreResults):c.set(g,"textContent",y.widgets.Search.main.showMoreResults))}},_featureLayerLoaded:function(a){var g=new w;if(a.loaded)g.resolve(a);else if(a.loadError)g.reject(this._error("Layer failed to load."));else{var f,e;f=q.once(a,"load",h.hitch(this,function(){e.remove();g.resolve(a)}));e=q.once(a,"error",h.hitch(this,function(){f.remove();g.reject(this._error("Layer could not be loaded."))}))}return g.promise},
-_getObjectSize:function(a){var g=0,f;for(f in a)a.hasOwnProperty(f)&&g++;return g},_sourcesEvent:function(a,g){var f=c.get(g,"data-index"),e=d("li",this.sourcesNode),m=n.indexOf(e,g);f!==this._allIndex&&(f=parseInt(f,10));"click"===a.type||a.keyCode===r.ENTER?(this.set("activeSourceIndex",f),b.focus(this.inputNode),this._hideSourcesMenu()):a.keyCode===r.UP_ARROW?(a.stopPropagation(),a.preventDefault(),f=m-1,0>f?b.focus(this.sourcesBtnNode):b.focus(e[f])):a.keyCode===r.DOWN_ARROW?(a.stopPropagation(),
-a.preventDefault(),f=m+1,f>=e.length?b.focus(this.sourcesBtnNode):b.focus(e[f])):a.keyCode===r.ESCAPE&&(this._hideSourcesMenu(),b.focus(this.inputNode))},_suggestionsEvent:function(a,g){var f=c.get(g,"data-source-index"),e=parseInt(c.get(g,"data-index"),10),m=d("li",this.suggestionsNode),p=this.sources,k=n.indexOf(m,g);f!==this._allIndex&&(f=parseInt(f,10));this._clearQueryTimeout();if("click"===a.type||a.keyCode===r.ENTER){var m=this.suggestResults,t;m&&(m[f]&&m[f][e])&&(t=m[f][e]);t&&(t.index=f,
-p[f].featureLayer?t[this._objectIdIdentifier]=t.feature.attributes[p[f].featureLayer.objectIdField]:t.magicKey&&t.text&&(this.set("value",t.text),this.set("magicKey",t.magicKey)),this.search(t),b.focus(this.inputNode))}else a.keyCode===r.BACKSPACE||a.keyCode===r.DELETE?b.focus(this.inputNode):a.keyCode===r.UP_ARROW?(a.stopPropagation(),a.preventDefault(),f=k-1,0>f?b.focus(this.inputNode):b.focus(m[f])):a.keyCode===r.DOWN_ARROW?(a.stopPropagation(),a.preventDefault(),f=k+1,f>=m.length?b.focus(this.inputNode):
-b.focus(m[f])):a.keyCode===r.ESCAPE&&(this._hideMenus(),b.focus(this.inputNode))},_getResultName:function(a){var g;a.hasOwnProperty("name")&&null!==a.name&&(g=a.name.toString());g||(g=y.widgets.Search.main.untitledResult);return g},_getSuggestionName:function(a){var g;a.hasOwnProperty("name")&&(g=a.name.toString());a=a.text||g;a||(a=y.widgets.Search.main.untitledResult);return a},_searchResultHTML:function(a){var g="";if(a.feature&&a.feature.attributes&&a.feature.attributes.Addr_type&&"LatLong"===
-a.feature.attributes.Addr_type){var f=a.name.split(" "),e,m;2===f.length&&(e=f[0],m=f[1]);if(m&&e){if(a=parseFloat(e),m=parseFloat(m),f=m+", "+a,g+='\x3cdiv class\x3d"'+this.css.searchMoreResultsItem+'"\x3e',g+='\x3cdiv class\x3d"'+this.css.latLonHeader+'"\x3e'+y.widgets.Search.main.lonlat+"\x3c/div\x3e",g+=a+", "+m,g=g+"\x3c/div\x3e"+('\x3cdiv class\x3d"'+this.css.searchMoreResultsItem+'"\x3e'),a!==m&&!(90<a||-90>a||180<m||-180>m))g+='\x3cdiv class\x3d"'+this.css.latLonHeader+'"\x3e'+y.widgets.Search.main.reverseLonLatHeader+
-"\x3c/div\x3e",g+='\x3ca data-switch-coordinates\x3d"'+f+'" tabindex\x3d"0" href\x3d"#"\x3e'+f+"\x3c/a\x3e",g+="\x3c/div\x3e"}else g=a.name}else g=a.name;return g},_moreResultsHTML:function(a){var g="",f="",e=this.searchResults,m=this.sources,b=0;if(e){var f=f+('\x3cdiv class\x3d"'+this.css.searchMoreResultsItem+'"\x3e'),f=f+('\x3ca href\x3d"#" id\x3d"'+this._moreResultsId+'_show"\x3e'+y.widgets.Search.main.showMoreResults+"\x3c/a\x3e"),f=f+"\x3c/div\x3e"+('\x3cdiv class\x3d"'+this.css.searchMoreResultsList+
-'"\x3e'),f=f+('\x3cdiv id\x3d"'+this._moreResultsId+'_list"\x3e'),c;for(c in e)if(e[c]){var p=e[c].length;if(p){var t=1===p&&e[c][0]===a;if(1<this._getObjectSize(e)&&!t)var d=this._getSourceName(c),f=f+('\x3cdiv class\x3d"'+this.css.searchMoreResultsListHeader+'"\x3e'+d+"\x3c/div\x3e");if(p&&!t){f+="\x3cul\x3e";d=m[c].maxResults||this.maxResults;for(t=0;t<p&&t<d;++t)if(e[c][t]!==a){var k=this._getResultName(e[c][t]),f=f+('\x3cli\x3e\x3ca tabindex\x3d"0" data-index\x3d"'+t+'" data-source-index\x3d"'+
-c+'" href\x3d"#"\x3e'+k+"\x3c/a\x3e\x3c/li\x3e");b++}f+="\x3c/ul\x3e"}}}f+="\x3c/div\x3e";f+="\x3c/div\x3e"}b&&(g+=f);return g},_validField:function(a,g){return a.getField(g)},_validFields:function(a,g){if(a&&g&&g.length){for(var f=0;f<g.length;f++)if(!this._validField(a,g[f]))return!1;return!0}return!1},_getCodedName:function(a,g){if(a&&a.length)for(var f=0,e=a.length;f<e;f++){var m=a[f];if(m.code===g)return m.name}},_getCodedValue:function(a,g,f){if(a&&a.length)for(var e=0,m=a.length;e<m;e++){var b=
-a[e],c=b.name,p=g;f||(c=c.toLowerCase(),p=p.toLowerCase());if(c===p)return b.code}return!1},_whereClause:function(a,g,f,e){var m=null;if(a){var b="";this.reHostedFS.test(g.url)&&this._containsNonLatinCharacter(a)&&(b="N");if(f&&f.length)for(var c=0,p=f.length;c<p;c++){var t="",d=a.replace(/\'/g,"''"),t=f[c],k=g.getField(t),u=g.getDomain(t);u&&"codedValue"===u.type&&(d=this._getCodedValue(u.codedValues,d,e));!1!==d&&(k=k.type,"esriFieldTypeString"===k||"esriFieldTypeDate"===k?t=e?t+" \x3d "+b+"'"+
-d+"'":"UPPER("+t+") LIKE "+b+"'%"+d.toUpperCase()+"%'":"esriFieldTypeOID"===k||"esriFieldTypeSmallInteger"===k||"esriFieldTypeInteger"===k||"esriFieldTypeSingle"===k||"esriFieldTypeDouble"===k?(d=parseFloat(d),t=isNaN(d)?!1:t+" \x3d "+d):t=t+" \x3d "+d,t&&(m=m?m+" or ":"",m+=t))}}return m},_suggest:function(a){a||(a={index:this.activeSourceIndex,text:this.value});var g=new w,f=a.index,e=this.sources[f],m=this.enableSuggestions;e.hasOwnProperty("enableSuggestions")&&(m=e.enableSuggestions);var b=0,
-c;a.hasOwnProperty("text")&&a.text&&(c=h.trim(a.text),b=a.text.length);a=e.minCharacters||this.minCharacters;if(m&&c&&b>=a&&this._supportsPagination(e)){var p="";e.prefix&&(p+=e.prefix);p+=c;e.suffix&&(p+=e.suffix);var t=this._defaultSR;this.map&&(t=this.map.spatialReference);m={};if(e.locator){e.categories&&(m.categories=e.categories);e.locator.outSpatialReference=t;if(this.map&&(e.localSearchOptions&&e.localSearchOptions.hasOwnProperty("distance")&&e.localSearchOptions.hasOwnProperty("minScale"))&&
-(b=this._getScale(),!e.localSearchOptions.minScale||b&&b<=parseFloat(e.localSearchOptions.minScale)))m.location=this.map.extent.getCenter(),m.distance=e.localSearchOptions.distance;m.text=p;e.useMapExtent&&(this.map&&this.map.extent)&&(m.searchExtent=this.map.extent);e.searchExtent&&(m.searchExtent=e.searchExtent);m.maxSuggestions=e.maxSuggestions||this.maxSuggestions;e.sourceCountry&&(m.countryCode=e.sourceCountry);e.countryCode&&(m.countryCode=e.countryCode);e.locator.suggestLocations(m).then(h.hitch(this,
-function(a){g.resolve(a)}),h.hitch(this,function(a){a||(a=this._error("Locator suggestLocations could not be performed."));g.reject(a)}))}else e.featureLayer?this._featureLayerLoaded(e.featureLayer).then(h.hitch(this,function(){var a=this._getDisplayField(e),m=e.searchFields||[a],b=[];e.suggestionTemplate?e.suggestionTemplate.replace(/(?:\$\{([^}]+)\})/g,function(a,g){b.push(g)}):b=[a];-1===n.indexOf(b,e.featureLayer.objectIdField)&&b.push(e.featureLayer.objectIdField);var a=this._validField(e.featureLayer,
-a),c=this._validFields(e.featureLayer,b),d=this._validFields(e.featureLayer,m);if(!a||!c||!d)g.reject(this._error("Invalid FeatureLayer field"));else{a=new P;e.hasOwnProperty("suggestQueryParams")&&h.mixin(a,e.suggestQueryParams);a.outSpatialReference=t;a.returnGeometry=!1;a.num=e.maxSuggestions||this.maxSuggestions;a.outFields=b;e.useMapExtent&&(this.map&&this.map.extent)&&(a.geometry=this.map.extent);e.searchExtent&&(a.geometry=e.searchExtent);var k;if(m=this._whereClause(p,e.featureLayer,m,!1))a.where=
-m,k=!0;k?e.featureLayer.queryFeatures(a,h.hitch(this,function(a){var e;(a=a.features)&&(e=this._hydrateResults(a,f,!0));g.resolve(e)}),h.hitch(this,function(a){a||(a=this._error("FeatureLayer queryFeatures errored with suggestions"));g.reject(a)})):g.resolve()}})):g.reject(this._error("Invalid source"))}else g.resolve();return g.promise},_supportsPagination:function(a){var g;a.locator?g=!0:a.featureLayer&&a.featureLayer.advancedQueryCapabilities&&a.featureLayer.advancedQueryCapabilities.supportsPagination&&
-(g=!0);return g},_suggestQueries:function(a){var g=this.sources,f=this.activeSourceIndex,e=[],b;if(f===this._allIndex)for(f=0;f<g.length;f++)b=a,b.index=f,b=this._suggest(b),e.push(b);else a.index=f,b=this._suggest(a),e.push(b);return K(e)},_getPointFromGeometry:function(a){var g;switch(a.type){case "extent":g=a.getCenter();break;case "multipoint":g=a.getExtent().getCenter();break;case "point":g=a;break;case "polygon":g=a.getExtent().getCenter();break;case "polyline":g=a.getExtent().getCenter()}return g},
-_searchQueries:function(a){a.hasOwnProperty("index")||(a.index=this.activeSourceIndex);var g=[],f;if(a.index===this._allIndex)for(var e=this.sources,b=0;b<e.length;b++)f=a,f.index=b,f=this._search(f),g.push(f);else a=this._search(a),g.push(a);return K(g)},_searchButton:function(){this.enableButtonMode&&!this.expanded?(this.expand(),b.focus(this.inputNode)):(this._cancelSuggest(),this.search())},_search:function(a){a||(a={text:this.value,magicKey:null,geometry:null,point:null,index:this.activeSourceIndex,
-latlon:null});var g,f=new w,e=a.index,b=this.sources[e],c;a.hasOwnProperty("text")&&a.text&&(c=h.trim(a.text));if(b){var p="";b.prefix&&!a.magicKey&&(p+=b.prefix);p+=c;b.suffix&&!a.magicKey&&(p+=b.suffix);var t=this._defaultSR;this.map&&(t=this.map.spatialReference);if(b.locator)if(a.hasOwnProperty("text")&&c){var d={};b.categories&&(d.categories=b.categories);t&&(b.locator.outSpatialReference=t);if(this.map&&b.localSearchOptions&&b.localSearchOptions.hasOwnProperty("distance")&&b.localSearchOptions.hasOwnProperty("minScale")){var k=
-this._getScale();if(!b.localSearchOptions.minScale||k&&k<=parseFloat(b.localSearchOptions.minScale))d.location=this.map.extent.getCenter(),d.distance=b.localSearchOptions.distance}d.address={};d.maxLocations=b.maxResults||this.maxResults;b.useMapExtent&&(this.map&&this.map.extent)&&(d.searchExtent=this.map.extent);b.searchExtent&&(d.searchExtent=b.searchExtent);b.sourceCountry&&(d.countryCode=b.sourceCountry);b.countryCode&&(d.countryCode=b.countryCode);a.magicKey&&(d.magicKey=a.magicKey);b.singleLineFieldName?
-d.address[b.singleLineFieldName]=p:d.address["Single Line Input"]=p;b.outFields&&(d.outFields=b.outFields);b.locator.addressToLocations(d).then(h.hitch(this,function(a){a=this._hydrateResults(a,e,!1);f.resolve(a)}),h.hitch(this,function(a){a||(a=this._error("Locator addressToLocations could not be performed"));f.reject(a)}))}else a.geometry?(g=this._getPointFromGeometry(a.geometry.geometry))?this._reverseGeocodePoint(e,g).then(function(a){f.resolve(a)},function(a){f.reject(a)}):f.reject(this._error("Invalid point to reverse geocode")):
-a.point?this._reverseGeocodePoint(e,a.point).then(function(a){f.resolve(a)},function(a){f.reject(a)}):a.latlon?(d=new M(a.latlon,this._defaultSR),this._reverseGeocodePoint(e,d).then(function(a){f.resolve(a)},function(a){f.reject(a)})):a.hasOwnProperty("text")&&!c?f.resolve([]):f.reject(this._error("Invalid query type for Locator"));else b.featureLayer?this._featureLayerLoaded(b.featureLayer).then(h.hitch(this,function(){var d=this._getDisplayField(b),k=b.searchFields||[d],d=this._validField(b.featureLayer,
-d),u=this._validFields(b.featureLayer,k);if(!d||!u)f.reject(this._error("Invalid FeatureLayer field"));else{d=new P;b.hasOwnProperty("searchQueryParams")&&h.mixin(d,b.searchQueryParams);if(t&&(d.outSpatialReference=t,u=O.getUnitValueForSR(t)))d.maxAllowableOffset=u;d.returnGeometry=!0;b.outFields&&(d.outFields=b.outFields);var v;a.hasOwnProperty(this._objectIdIdentifier)||(this._supportsPagination(b)&&(d.num=b.maxResults||this.maxResults),b.useMapExtent&&(this.map&&this.map.extent)&&(d.geometry=this.map.extent),
-b.searchExtent&&(d.geometry=b.searchExtent),v=b.exactMatch);a.hasOwnProperty("text")&&c?(k=this._whereClause(p,b.featureLayer,k,v))?(d.where=k,k=!0):k=!1:a.hasOwnProperty(this._objectIdIdentifier)?(d.objectIds=[a[this._objectIdIdentifier]],k=!0):a.geometry?(d.geometry=a.geometry,k=!0):a.point?(d.geometry=a.point,k=!0):a.latlon?(g=new M(a.latlon,this._defaultSR),d.geometry=g,k=!0):(a.hasOwnProperty("text")&&!c?f.resolve([]):f.reject(this._error("Invalid query type for FeatureLayer")),k=!1);k?b.featureLayer.queryFeatures(d,
-h.hitch(this,function(a){a=a.features;var g;a&&(g=this._hydrateResults(a,e,!1));f.resolve(g)}),h.hitch(this,function(a){a||(a=this._error("FeatureLayer queryFeatures could not be performed"));f.reject(a)})):f.resolve()}})):f.reject(this._error("Invalid source"))}else f.reject(this._error("Source is undefined"));return f.promise},_clearQueryTimeout:function(){this._queryTimer&&clearTimeout(this._queryTimer)},_formatResults:function(a,g,b){b={activeSourceIndex:g,value:b,numResults:0,numErrors:0,errors:null,
-results:null};var e={},c={};if(a)if(g===this._allIndex)for(g=0;g<a.length;g++)a[g]&&(a[g]instanceof Error?(e[g]=a[g],b.numErrors++):(c[g]=a[g],b.numResults+=a[g].length));else a[0]&&(a[0]instanceof Error?(e[g]=a[0],b.numErrors++):(c[g]=a[0],b.numResults+=a[0].length));b.numErrors&&(b.errors=e);b.numResults&&(b.results=c);return b},_reverseGeocodePoint:function(a,b){var f=new w,e=this.sources[a];if(b&&e){var c=e.locationToAddressDistance||this.locationToAddressDistance;e.locator.outSpatialReference=
-this._defaultSR;this.map&&(e.locator.outSpatialReference=this.map.spatialReference);e.locator.locationToAddress(b,c,h.hitch(this,function(b){b=this._hydrateResults([b],a,!1);f.resolve(b)}),h.hitch(this,function(a){a||(a=this._error("Locator locationToAddress could not be performed"));f.reject(a)}))}else f.reject(this._error("No point or source defined for reverse geocoding"));return f.promise},_cancelDeferreds:function(){if(this._deferreds&&this._deferreds.length)for(var a=0;a<this._deferreds.length;a++)this._deferreds[a].cancel(this.declaredClass+
-" cancelling request");this._deferreds=[]},_sourceBtnKey:function(a){if(a){var g=d("li",this.sourcesNode);a.keyCode===r.UP_ARROW?(a.stopPropagation(),a.preventDefault(),this._showSourcesMenu(),(a=g.length)&&b.focus(g[a-1])):a.keyCode===r.DOWN_ARROW&&(a.stopPropagation(),a.preventDefault(),this._showSourcesMenu(),g[0]&&b.focus(g[0]))}},_inputKey:function(a){if(a){var g=d("li",this.suggestionsNode),f=this.suggestResults;if(a.keyCode===r.TAB||a.keyCode===r.ESCAPE)this._cancelSuggest(),this._hideMenus();
-else if(a.keyCode===r.UP_ARROW)a.stopPropagation(),a.preventDefault(),this._cancelSuggest(),f&&this._showSuggestionsMenu(),(a=g.length)&&b.focus(g[a-1]);else if(a.keyCode===r.DOWN_ARROW)a.stopPropagation(),a.preventDefault(),this._cancelSuggest(),f&&this._showSuggestionsMenu(),g[0]&&b.focus(g[0]);else{if(a.ctrlKey||a.metaKey||a.keyCode===r.copyKey||a.keyCode===r.LEFT_ARROW||a.keyCode===r.RIGHT_ARROW||a.keyCode===r.ENTER)return a;this._suggestDelay()}}},_cancelSuggest:function(){this._cancelDeferreds();
-this._clearQueryTimeout()},_suggestDelay:function(){this._cancelSuggest();this._changeValue();this._queryTimer=setTimeout(h.hitch(this,function(){this.suggest()}),this.suggestionDelay)},_changeValue:function(){this.set("magicKey",null);this._changeAttrValue("value",this.inputNode.value);this._checkStatus()},_inputClick:function(){this._hideSourcesMenu();this._hideNoResultsMenu()},_getSourceName:function(a){var b=this.sources[a];a=b.name;var f=b.featureLayer;if(!a&&f){a=f.name||y.widgets.Search.main.untitledSource;
-for(var b=b.searchFields||[this._getDisplayField(b)],e=0;e<b.length;e++){a=0===e?a+": ":a+", ";var c=b[e],p=f.getField(c);a+=p&&p.alias||c}}return a||y.widgets.Search.main.untitledSource},_insertSuggestions:function(a,b){if(this.enableSuggestionsMenu&&this.suggestionsNode){this._hideSourcesMenu();this._hideNoResultsMenu();var f,e=this.sources;if(a){f=z.create("div");for(var c in a)if(a[c]&&a[c].length){var p=this._getSourceName(c);1<e.length&&this.activeSourceIndex===this._allIndex&&z.create("div",
-{className:this.css.searchMenuHeader,textContent:p},f);for(var p=z.create("ul",{role:"menu"},f),d=e[c].maxSuggestions||this.maxSuggestions,t=0;t<a[c].length&&t<d;++t)for(var k=z.create("li",{"data-index":t,"data-source-index":c,role:"menuitem",tabindex:0},p),u=RegExp("("+b+")","gi"),u=this._getSuggestionName(a[c][t]).replace(u,"|$1|").split("|"),v=u.length,s=0;s<v;s++){var h=u[s];h.toLowerCase()===b.toLowerCase()?z.create("strong",{textContent:h},k):(h=document.createTextNode(h),z.place(h,k))}}}f?
-(z.place(f,this.suggestionsNode,"only"),this._showSuggestionsMenu()):(z.empty(this.suggestionsNode),this._hideSuggestionsMenu())}},_insertSources:function(a){if(this.enableSourcesMenu&&a&&1<a.length){var b,f,e=this.activeSourceIndex,c=z.create("ul",{role:"menu"});this.enableSearchingAll&&(b="",e===this._allIndex&&(b="active"),z.create("li",{"data-index":this._allIndex,role:"menuitem",className:b,tabIndex:0,textContent:y.widgets.Search.main.all},c));for(f=0;f<a.length;f++){b="";f===e&&(b=this.css.activeSource);
-var p=this._getSourceName(f);z.create("li",{"data-index":f,role:"menuitem",className:b,tabIndex:0,textContent:p},c)}k.add(this.containerNode,this.css.hasMultipleSources);z.place(c,this.sourcesNode,"only")}else k.remove(this.containerNode,this.css.hasMultipleSources),z.empty(this.sourcesNode)},_showLoading:function(){k.add(this.containerNode,this.css.searchLoading)},_hideLoading:function(){k.remove(this.containerNode,this.css.searchLoading)},_checkStatus:function(){this.value?(k.add(this.containerNode,
-this.css.hasValue),c.set(this.clearNode,"title",y.widgets.Search.main.clearButtonTitle)):this.clear()},_closePopup:function(){this.enableInfoWindow&&(this.map&&this.map.infoWindow)&&this.map.infoWindow.hide()},_noResults:function(a){var b;a&&(b=h.trim(a));var f=z.create("div",{className:this.css.searchNoResultsBody});a&&b?(z.create("div",{className:this.css.searchNoResultsHeader,textContent:y.widgets.Search.main.noResults},f),z.create("div",{className:this.css.searchNoResultsText,textContent:t.substitute({value:'"'+
-a+'"'},y.widgets.Search.main.noResultsFound)},f)):(a=z.create("div",{},f),z.create("span",{"aria-hidden":"true",className:this.css.searchNoValueIcon},a),z.create("span",{className:this.css.searchNoValueText,textContent:y.widgets.Search.main.emptyValue},a));z.place(f,this.noResultsMenuNode,"only")},_hideMenus:function(){this._hideSourcesMenu();this._hideSuggestionsMenu();this._hideNoResultsMenu()},_hideNoResultsMenu:function(){k.remove(this.containerNode,this.css.showNoResults)},_showNoResultsMenu:function(){this._hideSourcesMenu();
-this._hideSuggestionsMenu();k.add(this.containerNode,this.css.showNoResults)},_hideSourcesMenu:function(){k.remove(this.containerNode,this.css.showSources)},_hideSuggestionsMenu:function(){k.remove(this.containerNode,this.css.showSuggestions)},_showSourcesMenu:function(){this._hideSuggestionsMenu();this._hideNoResultsMenu();k.add(this.containerNode,this.css.showSources)},_showSuggestionsMenu:function(){this._hideSourcesMenu();this._hideNoResultsMenu();k.add(this.containerNode,this.css.showSuggestions)},
-_toggleSourcesMenu:function(){this._hideSuggestionsMenu();this._hideNoResultsMenu();k.toggle(this.containerNode,this.css.showSources)},_getFirstStringField:function(a){if(a&&(a=a.fields)&&a.length)for(var b=0;b<a.length;b++){var f=a[b];if("esriFieldTypeString"===f.type)return f.name}return""},_getDisplayField:function(a){return a.displayField||a.featureLayer.displayField||this._getFirstStringField(a.featureLayer)},_validExtent:function(a){return a&&a.xmin&&"NaN"!==a.xmin&&a.ymin&&"NaN"!==a.ymin&&
-a.xmax&&"NaN"!==a.xmax&&a.ymax&&"NaN"!==a.ymax?!0:!1},_hydrateResult:function(a,b,f){var e={},c=this._defaultSR,p;b=this.sources[b];this.map&&(c=this.map.spatialReference);if(a.hasOwnProperty("text")&&a.hasOwnProperty("magicKey"))return a;if(a.hasOwnProperty("geometry"))p=new C(a.toJson()),e.feature=p,(p=e.feature.geometry)&&p.setSpatialReference(c);else if(a.hasOwnProperty("location")){var d=new M(a.location.x,a.location.y,c);p={};a.hasOwnProperty("attributes")&&(p=a.attributes);a.hasOwnProperty("score")&&
-(p.score=a.score);e.feature=new C(d,null,p,null)}else e.feature=null;if(a.hasOwnProperty("extent")&&this._validExtent(a.extent))e.extent=new N(a.extent),e.extent.setSpatialReference(c);else if(e.feature&&e.feature.geometry)switch(e.feature.geometry.type){case "extent":e.extent=e.feature.geometry;break;case "multipoint":e.extent=e.feature.geometry.getExtent();break;case "polygon":e.extent=e.feature.geometry.getExtent();break;case "polyline":e.extent=e.feature.geometry.getExtent();break;case "point":this.map?
-(c=this.zoomScale,b&&b.zoomScale&&(c=b.zoomScale),this._getScale()>c?e.extent=O.getExtentForScale(this.map,c).centerAt(e.feature.geometry):e.extent=this.map.extent.centerAt(e.feature.geometry)):e.extent=new N({xmin:e.feature.geometry.x-0.25,ymin:e.feature.geometry.y-0.25,xmax:e.feature.geometry.x+0.25,ymax:e.feature.geometry.y+0.25,spatialReference:this._defaultSR})}else e.extent=null;e.name="";b.featureLayer?b.suggestionTemplate&&f?e.name=t.substitute(a.attributes,b.suggestionTemplate):b.searchTemplate?
-e.name=t.substitute(a.attributes,b.searchTemplate):(f=this._getDisplayField(b),b=b.featureLayer.getDomain(f),f&&(a.hasOwnProperty("attributes")&&a.attributes.hasOwnProperty(f))&&(a=a.attributes[f],e.name=b&&"codedValue"===b.type?this._getCodedName(b.codedValues,a):a)):a.address&&b.searchTemplate?e.name=t.substitute(a.address,b.searchTemplate):a.hasOwnProperty("name")?e.name=a.name:a.hasOwnProperty("attributes")&&"object"===typeof a.attributes&&a.attributes.Match_addr?(e.name=a.attributes.Match_addr,
-a.attributes.Addr_type&&("POI"===a.attributes.Addr_type&&a.attributes.StAddr&&a.attributes.City)&&(e.name+=" - "+a.attributes.StAddr+", "+a.attributes.City)):a.hasOwnProperty("address")&&"string"===typeof a.address?e.name=a.address:a.hasOwnProperty("address")&&"object"===typeof a.address&&a.address.hasOwnProperty("Address")?e.name=a.address.Address:e.feature&&e.feature.geometry&&(e.name=e.feature.geometry.x+","+e.feature.geometry.y);return e},_getScale:function(){var a;this.map&&"function"===typeof this.map.getScale&&
-(a=this.map.getScale());return a},_hydrateResults:function(a,b,f,e){e=[];var c=0;if(a&&a.length)for(c;c<a.length;c++){var p=this._hydrateResult(a[c],b,f);e.push(p)}return e},_containsNonLatinCharacter:function(a){for(var b=0;b<a.length;b++)if(255<a.charCodeAt(b))return!0;return!1},_setPlaceholder:function(a){var b="",f=this.sources[a];a===this._allIndex?b=this.allPlaceholder||y.widgets.Search.main.allPlaceholder:f&&f.placeholder&&(b=f.placeholder);var e=y.widgets.Search.main.all;f&&(e=this._getSourceName(a));
-c.set(this.sourceNameNode,"textContent",e);c.set(this.inputNode,"placeholder",b);c.set(this.inputNode,"title",b)},_updateActiveSource:function(){var a=this.sources,b=this.activeSourceIndex,f;a&&a[b]&&(f=a[b]);f?this.set("activeSource",f):this.set("activeSource",null)},_updateVisible:function(){this.visible?this.show():this.hide()},_updateButtonMode:function(a){a?(k.toggle(this.containerNode,this.css.searchExpanded,this.expanded),k.toggle(this.containerNode,this.css.searchCollapsed,!this.expanded),
-k.add(this.containerNode,this.css.hasButtonMode)):(k.remove(this.containerNode,this.css.searchExpanded),k.remove(this.containerNode,this.css.searchCollapsed),k.remove(this.containerNode,this.css.hasButtonMode))},_setDefaultActiveSourceIndex:function(){var a=this.sources;a&&1===a.length||!this.enableSearchingAll?this.set("activeSourceIndex",0):this.set("activeSourceIndex",this._allIndex)},_setEnableSourcesMenuAttr:function(a){this._set("enableSourcesMenu",a);this._created&&this._insertSources(this.sources)},
-_setEnableSearchingAllAttr:function(a){this._set("enableSearchingAll",a);this._created&&(this._setDefaultActiveSourceIndex(),this._hideMenus(),this._insertSources(this.sources))},_setSourcesAttr:function(a){this._set("sources",a);this._created&&(this._setDefaultActiveSourceIndex(),this._hideMenus(),this._insertSources(a))},_setAllPlaceholderAttr:function(a){this._set("allPlaceholder",a);this._created&&this._setPlaceholder(this.activeSourceIndex)},_setActiveSourceIndexAttr:function(a){this._set("activeSourceIndex",
-a);this._updateActiveSource();this._created&&(this._setPlaceholder(a),this._hideMenus(),this._insertSources(this.sources))},_setMaxLengthAttr:function(a){this._set("maxLength",a);this._created&&c.set(this.inputNode,"maxLength",a)},_setValueAttr:function(a){this.set("magicKey",null);this._set("value",a);this._created&&(c.set(this.inputNode,"value",a),this._checkStatus())},_setVisibleAttr:function(a){this._set("visible",a);this._created&&this._updateVisible()},_setEnableButtonModeAttr:function(a){this._set("enableButtonMode",
-a);this._created&&this._updateButtonMode(a)},_setThemeAttr:function(a){this._created&&(k.remove(this.domNode,this.theme),k.add(this.domNode,a));this._set("theme",a)}})})},"esri/promiseList":function(){define(["dojo/_base/array","dojo/Deferred","dojo/when"],function(x,l,h){var n=x.forEach;return function(A){function w(u,v){d[v]=u;c.progress([u,v]);0===--k&&c.resolve(d)}var r,q;A instanceof Array?q=A:A&&"object"===typeof A&&(r=A);var d,v=[];if(r){q=[];for(var s in r)Object.hasOwnProperty.call(r,s)&&
-(v.push(s),q.push(r[s]));d={}}else q&&(d=[]);if(!q||!q.length)return(new l).resolve(d);var c=new l;c.promise.always(function(){d=v=null});var k=q.length;n(q,function(c,d){r||v.push(d);h(c,function(c){w(c,v[d])},function(c){w(c,v[d])})});return c.promise}})},"esri/tasks/locator":function(){define("dojo/_base/declare dojo/_base/lang dojo/_base/array dojo/_base/Deferred dojo/_base/json dojo/has ../kernel ../request ../deferredUtils ./Task ./AddressCandidate".split(" "),function(x,l,h,n,A,w,r,q,d,v,s){return x(v,
-{declaredClass:"esri.tasks.Locator",_eventMap:{"address-to-locations-complete":["addresses"],"addresses-to-locations-complete":["addresses"],"location-to-address-complete":["address"],"suggest-locations-complete":["suggestions"]},constructor:function(c){this._geocodeHandler=l.hitch(this,this._geocodeHandler);this._geocodeAddressesHandler=l.hitch(this,this._geocodeAddressesHandler);this._reverseGeocodeHandler=l.hitch(this,this._reverseGeocodeHandler);this.registerConnectEvents()},outSpatialReference:null,
-setOutSpatialReference:function(c){this.outSpatialReference=c},_geocodeHandler:function(c,d,u,v,h){try{var l=c.candidates,n;d=[];var q,r=l.length,p=c.spatialReference,b;for(q=0;q<r;q++){n=l[q];if(b=n.location)b.spatialReference=p;d[q]=new s(n)}this._successHandler([d],"onAddressToLocationsComplete",u,h)}catch(t){this._errorHandler(t,v,h)}},_geocodeAddressesHandler:function(c,d,u,v,h){try{var q=c.locations;d=[];var l,n=q.length,r=c.spatialReference,p;for(l=0;l<n;l++){if(p=q[l].location)p.spatialReference=
-r;d[l]=new s(q[l])}this._successHandler([d],"onAddressesToLocationsComplete",u,h)}catch(b){this._errorHandler(b,v,h)}},addressToLocations:function(c,k,v,h,s){var r,w,x,B,p,b,t;c.address&&(h=v,v=k,k=c.outFields,s=c.searchExtent,t=c.countryCode,r=c.magicKey,w=c.distance,b=c.categories,c.location&&this.normalization&&(x=c.location.normalize()),B=c.maxLocations,p=c.forStorage,c=c.address);s&&(s=s.shiftCentralMeridian());var F=this.outSpatialReference;c=this._encode(l.mixin({},this._url.query,c,{f:"json",
-outSR:F&&A.toJson(F.toJson()),outFields:k&&k.join(",")||null,searchExtent:s&&A.toJson(s.toJson()),category:b&&b.join(",")||null,countryCode:t||null,magicKey:r||null,distance:w||null,location:x||null,maxLocations:B||null,forStorage:p||null}));var E=this._geocodeHandler,J=this._errorHandler,C=new n(d._dfdCanceller);C._pendingDfd=q({url:this._url.path+"/findAddressCandidates",content:c,callbackParamName:"callback",load:function(b,c){E(b,c,v,h,C)},error:function(b){J(b,h,C)}});return C},suggestLocations:function(c){var k;
-k=new n(d._dfdCanceller);c.hasOwnProperty("location")&&this.normalization&&(c.location=c.location.normalize());c.searchExtent&&(c.searchExtent=c.searchExtent.shiftCentralMeridian());c=this._encode(l.mixin({},this._url.query,{f:"json",text:c.text,maxSuggestions:c.maxSuggestions,searchExtent:c.searchExtent&&A.toJson(c.searchExtent.toJson()),category:c.categories&&c.categories.join(",")||null,countryCode:c.countryCode||null,location:c.location||null,distance:c.distance||null},{f:"json"}));c=q({url:this._url.path+
-"/suggest",content:c,callbackParamName:"callback"});k._pendingDfd=c;c.then(l.hitch(this,function(c){c=c.suggestions||[];this.onSuggestLocationsComplete(c);k.resolve(c)}),l.hitch(this,function(c){this._errorHandler(c);k.reject(c)}));return k},addressesToLocations:function(c,k,v){var s=this.outSpatialReference,y=[],r=c.categories,w=c.countryCode;h.forEach(c.addresses,function(b,c){y.push({attributes:b})});c=this._encode(l.mixin({},this._url.query,{category:r&&r.join(",")||null,sourceCountry:w||null},
-{addresses:A.toJson({records:y})},{f:"json",outSR:s&&A.toJson(s.toJson())}));var x=this._geocodeAddressesHandler,B=this._errorHandler,p=new n(d._dfdCanceller);p._pendingDfd=q({url:this._url.path+"/geocodeAddresses",content:c,callbackParamName:"callback",load:function(b,c){x(b,c,k,v,p)},error:function(b){B(b,v,p)}});return p},_reverseGeocodeHandler:function(c,d,v,h,l){try{var q=new s({address:c.address,location:c.location,score:100});this._successHandler([q],"onLocationToAddressComplete",v,l)}catch(n){this._errorHandler(n,
-h,l)}},locationToAddress:function(c,k,v,s){c&&this.normalization&&(c=c.normalize());var h=this.outSpatialReference;c=this._encode(l.mixin({},this._url.query,{outSR:h&&A.toJson(h.toJson()),location:c&&A.toJson(c.toJson()),distance:k,f:"json"}));var r=this._reverseGeocodeHandler,w=this._errorHandler,x=new n(d._dfdCanceller);x._pendingDfd=q({url:this._url.path+"/reverseGeocode",content:c,callbackParamName:"callback",load:function(c,p){r(c,p,v,s,x)},error:function(c){w(c,s,x)}});return x},onSuggestLocationsComplete:function(){},
-onAddressToLocationsComplete:function(){},onAddressesToLocationsComplete:function(){},onLocationToAddressComplete:function(){}})})},"esri/tasks/AddressCandidate":function(){define(["dojo/_base/declare","dojo/_base/lang","dojo/has","../kernel","../geometry/Point"],function(x,l,h,n,A){return x(null,{declaredClass:"esri.tasks.AddressCandidate",constructor:function(h){l.mixin(this,h);this.location=new A(this.location)}})})},"esri/styles/basic":function(){define(["dojo/_base/array","dojo/_base/lang","dojo/has",
-"../kernel","../Color"],function(x,l,h,n,A){function w(d,s){var c;if(d)switch(c={},c.color=new A(d.color),c.opacity=d.opacity||1,s){case "point":c.outline={color:new A(d.outline.color),width:d.outline.width};c.size=d.size;break;case "line":c.width=d.width;break;case "polygon":c.outline={color:new A(d.outline.color),width:d.outline.width}}return c}function r(d){"esriGeometryPoint"===d||"esriGeometryMultipoint"===d?d="point":"esriGeometryPolyline"===d?d="line":"esriGeometryPolygon"===d&&(d="polygon");
-return d}var q={"default":{name:"default",label:"Default",description:"Default theme for basic visualization of features.",basemapGroups:{light:"streets gray topo terrain national-geographic oceans osm".split(" "),dark:["satellite","hybrid","dark-gray"]},pointSchemes:{light:{primary:{color:[77,77,77,1],outline:{color:[255,255,255,1],width:1},size:8},secondary:[{color:[226,119,40,1],outline:{color:[255,255,255,1],width:1},size:8},{color:[255,255,255,1],outline:{color:[51,51,51,1],width:1},size:8}]},
-dark:{primary:{color:[255,255,255,1],outline:{color:[26,26,26,1],width:1},size:8},secondary:[{color:[226,119,40,1],outline:{color:[255,255,255,1],width:1},size:8},{color:[26,26,26,1],outline:{color:[178,178,178,1],width:1},size:8}]}},lineSchemes:{light:{primary:{color:[77,77,77,1],width:2},secondary:[{color:[226,119,40,1],width:2},{color:[255,255,255,1],width:2}]},dark:{primary:{color:[255,255,255,1],width:2},secondary:[{color:[226,119,40,1],width:2},{color:[26,26,26,1],width:2}]}},polygonSchemes:{light:{primary:{color:[227,
-139,79,1],outline:{color:[255,255,255,1],width:1},opacity:0.8},secondary:[{color:[128,128,128,1],outline:{color:[255,255,255,1],width:1},opacity:0.8},{color:[255,255,255,1],outline:{color:[128,128,128,1],width:1},opacity:0.8}]},dark:{primary:{color:[227,139,79,1],outline:{color:[51,51,51,1],width:1},opacity:0.8},secondary:[{color:[178,178,178,1],outline:{color:[51,51,51,1],width:1},opacity:0.8},{color:[26,26,26,1],outline:{color:[128,128,128,1],width:1},opacity:0.8}]}}}},d={};(function(){var h,s,
-c,k,u,l,n,r;for(h in q)for(k in s=q[h],c=s.basemapGroups,u=d[h]={basemaps:[].concat(c.light).concat(c.dark),point:{},line:{},polygon:{}},c){l=c[k];for(n=0;n<l.length;n++)r=l[n],s.pointSchemes&&(u.point[r]=s.pointSchemes[k]),s.lineSchemes&&(u.line[r]=s.lineSchemes[k]),s.polygonSchemes&&(u.polygon[r]=s.polygonSchemes[k])}})();return{getAvailableThemes:function(h){var s=[],c,k,l;for(c in q)k=q[c],l=d[c],h&&-1===x.indexOf(l.basemaps,h)||s.push({name:k.name,label:k.label,description:k.description,basemaps:l.basemaps.slice(0)});
-return s},getSchemes:function(h){var s=h.theme,c=h.basemap,k=r(h.geometryType);h=d[s];var l;(h=(h=h&&h[k])&&h[c])&&(l={primaryScheme:w(h.primary,k),secondarySchemes:x.map(h.secondary,function(c){return w(c,k)})});return l},cloneScheme:function(d){var h;d&&(h=l.mixin({},d),h.color&&(h.color=new A(h.color)),h.outline&&(h.outline={color:h.outline.color&&new A(h.outline.color),width:h.outline.width}));return h}}})},"widgets/Search/utils":function(){define("dojo/_base/lang dojo/_base/array dojo/Deferred dojo/when dojo/promise/all jimu/portalUtils esri/lang esri/request".split(" "),
-function(x,l,h,n,A,w,r,q){return{map:null,layerInfosObj:null,appConfig:null,_esriLocatorRegExp:/geocode(.){0,3}\.arcgis.com\/arcgis\/rest\/services\/World\/GeocodeServer/g,setMap:function(d){this.map=d},setLayerInfosObj:function(d){this.layerInfosObj=d},setAppConfig:function(d){this.appConfig=d},getConfigInfo:function(d){if(d&&d.sources&&0<d.sources.length){var h=null;return this.searchLayer(this.map)&&d.upgradeFromGeocoder?(h=this.map.itemInfo.itemData.applicationProperties.viewing.search,h=l.map(h.layers,
-x.hitch(this,function(d,c){c.hintText=d;return this._getQueryTypeGeocoder(c)},h.hintText)),A(h).then(x.hitch(this,function(h){d.sources=[].concat(h).concat(d.sources);return d}))):d}return n(this._getSoucesFromPortalAndWebmap()).then(x.hitch(this,function(d){return{allPlaceholder:"",showInfoWindowOnSelect:!0,sources:d}}))},_getSoucesFromPortalAndWebmap:function(){var d=[],h=null;this.searchLayer(this.map)&&(h=this.map.itemInfo.itemData.applicationProperties.viewing.search,l.forEach(h.layers,x.hitch(this,
-function(h,c){c.hintText=h;d.push(this._getQueryTypeGeocoder(c))},h.hintText)));return w.getPortalSelfInfo(this.appConfig.portalUrl).then(x.hitch(this,function(h){if((h=h.helperServices&&h.helperServices.geocode)&&0<h.length)for(var c=0,k=h.length;c<k;c++){var l=h[c];l&&d.push(this._processSingleLine(l))}return A(d).then(x.hitch(this,function(c){for(var d=[],h=0;h<c.length;h++){var k=c[h];k&&(k&&"query"===k.type||(k={name:k.name||this._getGeocodeName(k.url),url:k.url,singleLineFieldName:k.singleLineFieldName,
-placeholder:k.placeholder||k.name||this._getGeocodeName(k.url),maxResults:6,searchInCurrentMapExtent:!1,type:"locator"},k.enableLocalSearch=this._isEsriLocator(k.url),k.localSearchMinScale=3E5,k.localSearchDistance=5E4),d.push(k))}return d}))}))},_getQueryTypeGeocoder:function(d){var h=this.map.getLayer(d.id),l=null,c=null,k=null,k=r.isDefined(d.subLayer)?d.id+"_"+d.subLayer:d.id,l=this.layerInfosObj.traversal(function(d){return d.id===k?(c=d,!0):!1});return h&&l&&c?(l=r.isDefined(d.subLayer)?c.url||
-h.url+"/"+d.subLayer:c.url||h.url,{name:c.title,layerId:k,url:l,placeholder:d.hintText,searchFields:[d.field.name],displayField:d.field.name,exactMatch:d.field.exactMatch||!1,maxResults:6,searchInCurrentMapExtent:!1,type:"query"}):null},_isEsriLocator:function(d){this._esriLocatorRegExp.lastIndex=0;return this._esriLocatorRegExp.test(d)},_processSingleLine:function(d){if(d.singleLineFieldName)return d;if(this._isEsriLocator(d.url))return d.singleLineFieldName="SingleLine",d;var l=new h;q({url:d.url,
-content:{f:"json"},handleAs:"json",callbackParamName:"callback"}).then(x.hitch(this,function(h){h.singleLineAddressField&&h.singleLineAddressField.name?(d.singleLineFieldName=h.singleLineAddressField.name,l.resolve(d)):(console.warn(d.url+"has no singleLineFieldName"),l.resolve(null))}),x.hitch(this,function(d){console.error(d);l.resolve(null)}));return l.promise},_getGeocodeName:function(d){if("string"!==typeof d)return"geocoder";d=d.split("/");return d[d.length-2]||"geocoder"},getGeocoderName:function(d){return this._getGeocodeName(d)},
-hasAppSearchInfo:function(d){return d.itemInfo&&d.itemInfo.itemData&&d.itemInfo.itemData.applicationProperties&&d.itemInfo.itemData.applicationProperties.viewing&&d.itemInfo.itemData.applicationProperties.viewing.search},searchLayer:function(d){if(!this.hasAppSearchInfo(d))return!1;d=d.itemInfo.itemData.applicationProperties.viewing.search;return!d.enabled||0===d.layers.length?!1:!0}}})},"widgets/Search/_build-generate_module":function(){define(["dojo/text!./Widget.html","dojo/text!./css/style.css",
-"dojo/i18n!./nls/strings"],function(){})},"url:esri/dijit/Search/templates/Search.html":'\x3cdiv role\x3d"presentation" class\x3d"${theme}"\x3e\r\n  \x3cdiv role\x3d"presentation" class\x3d"${css.searchGroup}" data-dojo-attach-point\x3d"containerNode"\x3e\r\n    \x3cdiv data-dojo-attach-point\x3d"expandNode" class\x3d"${css.searchExpandContainer}"\x3e\r\n      \x3cdiv class\x3d"${css.searchAnimateContainer}"\x3e\r\n        \x3cdiv role\x3d"button" title\x3d"${_i18n.widgets.Search.main.searchIn}" id\x3d"${id}_menu_button" class\x3d"${css.searchBtn} ${css.searchToggle}" tabindex\x3d"0" data-dojo-attach-point\x3d"sourcesBtnNode"\x3e\r\n          \x3cspan aria-hidden\x3d"true" role\x3d"presentation" class\x3d"${css.searchToggleIcon}"\x3e\x3c/span\x3e\x3cspan class\x3d"${css.searchSourceName}" data-dojo-attach-point\x3d"sourceNameNode"\x3e\x3c/span\x3e\r\n        \x3c/div\x3e\r\n        \x3cdiv class\x3d"${css.searchInputGroup}"\x3e\r\n          \x3cform data-dojo-attach-point\x3d"formNode"\x3e\r\n            \x3cinput maxlength\x3d"${maxLength}" autocomplete\x3d"off" type\x3d"text" tabindex\x3d"0" class\x3d"${css.searchInput}" value\x3d"${value}" aria-haspopup\x3d"true" id\x3d"${id}_input" data-dojo-attach-point\x3d"inputNode" role\x3d"textbox"\x3e\r\n          \x3c/form\x3e\r\n          \x3cdiv role\x3d"button" class\x3d"${css.searchClear}" tabindex\x3d"0" data-dojo-attach-point\x3d"clearNode"\x3e\x3cspan aria-hidden\x3d"true" class\x3d"${css.searchClearIcon}"\x3e\x3c/span\x3e\x3cspan aria-hidden\x3d"true" class\x3d"${css.searchSpinner}"\x3e\x3c/span\x3e\r\n          \x3c/div\x3e\r\n          \x3cdiv data-dojo-attach-point\x3d"suggestionsNode" class\x3d"${css.searchMenu} ${css.suggestionsMenu}"\x3e\x3c/div\x3e\r\n        \x3c/div\x3e\r\n      \x3c/div\x3e\r\n    \x3c/div\x3e\r\n    \x3cdiv role\x3d"button" title\x3d"${_i18n.widgets.Search.main.searchButtonTitle}" class\x3d"${css.searchBtn} ${css.searchSubmit}" tabindex\x3d"0" data-dojo-attach-point\x3d"submitNode"\x3e\r\n      \x3cspan aria-hidden\x3d"true" role\x3d"presentation" class\x3d"${css.searchIcon}"\x3e\x3c/span\x3e\r\n      \x3cspan class\x3d"${css.searchButtonText}"\x3e${_i18n.widgets.Search.main.searchButtonTitle}\x3c/span\x3e\r\n    \x3c/div\x3e\r\n    \x3cdiv data-dojo-attach-point\x3d"sourcesNode" class\x3d"${css.searchMenu} ${css.sourcesMenu}"\x3e\x3c/div\x3e\r\n    \x3cdiv data-dojo-attach-point\x3d"noResultsMenuNode" class\x3d"${css.searchMenu} ${css.searchNoResultsMenu}"\x3e\x3c/div\x3e\r\n    \x3cdiv class\x3d"${css.searchClearFloat}"\x3e\x3c/div\x3e\r\n  \x3c/div\x3e\r\n\x3c/div\x3e',
-"url:widgets/Search/Widget.html":'\x3cdiv\x3e\r\n\t\x3cdiv data-dojo-attach-point\x3d"searchNode" class\x3d"search-node"\x3e\x3c/div\x3e\r\n\t\x3cdiv data-dojo-attach-point\x3d"searchResultsNode" class\x3d"searchResults arcgisSearch"\x3e\x3c/div\x3e\r\n\x3c/div\x3e',"url:widgets/Search/css/style.css":".jimu-widget-search{min-height: 32px;}.jimu-widget-search .search-node.default-width-for-openAtStart{width: 274px;}.jimu-widget-search .result-item-selected{background: #eee;}.jimu-widget-search .arcgisSearch .searchBtn{padding: 6px;}.jimu-widget-search .arcgisSearch .searchBtn:hover,.jimu-widget-search .arcgisSearch .searchBtn:focus {background-color: #485566; color: white;}.jimu-widget-search .arcgisSearch .searchGroup .searchInputGroup .searchInput{width: auto;}.jimu-widget-search.use-absolute .arcgisSearch .searchToggle{float: left;}.jimu-rtl .jimu-widget-search.use-absolute .arcgisSearch .searchToggle{float: right;}.jimu-widget-search.use-absolute .arcgisSearch .searchInputGroup{position: absolute; top: 0; width: auto; left: 34px; right: 34px;}.jimu-widget-search.use-absolute .arcgisSearch .searchInputGroup form{overflow: hidden; z-index: 0; position: relative;}.jimu-widget-search.use-absolute .arcgisSearch .searchInputGroup .searchClear{z-index: 0;}.jimu-widget-search.use-absolute .arcgisSearch .searchExpandContainer{float: none;}.jimu-widget-search.use-absolute .arcgisSearch .searchSubmit{float: right;}.jimu-rtl .jimu-widget-search.use-absolute .arcgisSearch .searchSubmit{float: left;}.jimu-widget-search .arcgisSearch .show-all-results{position: absolute; height: 25px; color: #686868; line-height: 25px; display: none; width: 237px; margin: auto; background-color: #fff; padding: 0 12px; cursor: pointer;}.jimu-widget-search .arcgisSearch .searchMenu{border-radius: 0; color: #686868; font-size: 12px; padding: 0; top: 33px;}.jimu-widget-search .arcgisSearch .searchMenu li.active{background-color: #d9dde0; color: #686868; font-size: 14px;}.jimu-widget-search .arcgisSearch .searchMenu li{padding: 0 12px; line-height: 25px;}.jimu-widget-search .arcgisSearch .searchMenu li:hover,.jimu-widget-search .arcgisSearch .searchMenu li:focus {background-color: #eee;}.jimu-widget-search .arcgisSearch .searchMenu .menuHeader{background-color: #d9dde0; color: #686868; font-size: 14px; min-height: 30px; padding: 0 12px; line-height: 30px;}",
-"*now":function(x){x(['dojo/i18n!*preload*widgets/Search/nls/Widget*["ar","cs","da","de","en","el","es","et","fi","fr","he","hr","it","ja","ko","lt","lv","nb","nl","pl","pt-br","pt-pt","ro","ru","sr","sv","th","tr","zh-cn","vi","zh-hk","zh-tw","ROOT"]'])}}});
-define("dojo/_base/declare dojo/_base/lang dojo/_base/array dojo/_base/html dojo/when dojo/on dojo/aspect dojo/query dojo/keys dojo/Deferred dojo/promise/all jimu/BaseWidget jimu/LayerInfos/LayerInfos jimu/utils esri/dijit/Search esri/tasks/locator esri/layers/FeatureLayer esri/InfoTemplate esri/lang ./utils dojo/NodeList-dom".split(" "),function(x,l,h,n,A,w,r,q,d,v,s,c,k,u,z,y,H,I,D,B){return x([c],{name:"Search",baseClass:"jimu-widget-search",searchDijit:null,searchResults:null,_startWidth:null,
-postCreate:function(){(this.closeable||!this.isOnScreen)&&n.addClass(this.searchNode,"default-width-for-openAtStart");this.listenWidgetIds.push("framework")},startup:function(){this.inherited(arguments);if(!this.config||!this.config.sources)this.config.sources=[];k.getInstance(this.map,this.map.itemInfo).then(l.hitch(this,function(c){this.layerInfosObj=c;this.own(this.layerInfosObj.on("layerInfosFilterChanged",l.hitch(this,this.onLayerInfosFilterChanged)));B.setMap(this.map);B.setLayerInfosObj(this.layerInfosObj);
-B.setAppConfig(this.appConfig);A(B.getConfigInfo(this.config)).then(l.hitch(this,function(b){return s(this._convertConfig(b)).then(function(b){return h.filter(b,function(b){return b})})})).then(l.hitch(this,function(b){this.domNode&&(this.searchDijit=new z({activeSourceIndex:1===b.length?0:"all",allPlaceholder:u.stripHTML(D.isDefined(this.config.allPlaceholder)?this.config.allPlaceholder:""),autoSelect:!0,enableButtonMode:!1,enableLabel:!1,enableInfoWindow:!0,enableHighlight:D.isDefined(this.config.showInfoWindowOnSelect)?
-!!this.config.showInfoWindowOnSelect:!0,showInfoWindowOnSelect:D.isDefined(this.config.showInfoWindowOnSelect)?!!this.config.showInfoWindowOnSelect:!0,map:this.map,sources:b,theme:"arcgisSearch"}),n.place(this.searchDijit.domNode,this.searchNode),this.searchDijit.startup(),this._resetSearchDijitStyle(),this.own(this.searchDijit.watch("activeSourceIndex",l.hitch(this,"_onSourceIndexChange"))),this.own(w(this.searchDijit.domNode,"click",l.hitch(this,"_onSearchDijitClick"))),this.own(w(this.searchDijit.inputNode,
-"keyup",l.hitch(this,function(b){b.keyCode!==d.ENTER&&this._onClearSearch()}))),this.own(r.before(this.searchDijit,"select",l.hitch(this,"_captureSelect"))),this.own(w(this.searchDijit,"search-results",l.hitch(this,"_onSearchResults"))),this.own(w(this.searchDijit,"suggest-results",l.hitch(this,"_onSuggestResults"))),this.own(w(this.searchDijit,"select-result",l.hitch(this,"_onSelectResult"))),this.own(w(this.searchResultsNode,"li:click",l.hitch(this,"_onSelectSearchResult"))),this.own(w(this.searchResultsNode,
-".show-all-results:click",l.hitch(this,"_showResultMenu"))),this.own(w(window.document,"click",l.hitch(this,function(b){n.isDescendant(b.target,this.searchResultsNode)||(this._hideResultMenu(),this._resetSelectorPosition(".show-all-results"))}))),this.own(w(this.searchDijit,"clear-search",l.hitch(this,"_onClearSearch"))),this.own(r.after(this.map.infoWindow,"show",l.hitch(this,function(){this.searchDijit&&this.map.infoWindow.getSelectedFeature()!==this.searchDijit.highlightGraphic&&(this.searchDijit.clearGraphics(),
-q("li",this.searchResultsNode).removeClass("result-item-selected"))}))),this.own(w(this.map.infoWindow,"show,hide",l.hitch(this,function(){this.searchDijit&&this.map.infoWindow.getSelectedFeature()===this.searchDijit.highlightGraphic&&(this.searchDijit.clearGraphics(),q("li",this.searchResultsNode).removeClass("result-item-selected"))}))),this.fetchData("framework"))}))}))},onReceiveData:function(c,b,d){"framework"===c&&("framework"===b&&d&&d.searchString)&&(this.searchDijit.set("value",d.searchString),
-this.searchDijit.search())},setPosition:function(c){this._resetSearchDijitStyle(c);this.inherited(arguments)},resize:function(){this._resetSearchDijitStyle()},onLayerInfosFilterChanged:function(c){h.some(c,l.hitch(this,function(b){this.searchDijit&&(this.searchDijit.sources&&0<this.searchDijit.sources.length)&&h.forEach(this.searchDijit.sources,function(c){c._featureLayerId===b.id&&c.featureLayer.setDefinitionExpression(b.getFilter())})}))},_resetSearchDijitStyle:function(){n.removeClass(this.domNode,
-"use-absolute");this.searchDijit&&this.searchDijit.domNode&&n.setStyle(this.searchDijit.domNode,"width","auto");setTimeout(l.hitch(this,function(){if(this.searchDijit&&this.searchDijit.domNode){var c=!window.appInfo.isRunInMobile?274:parseInt(n.getComputedStyle(this.domNode).width,10),b=n.getMarginBox(this.searchDijit.sourcesBtnNode),d=n.getMarginBox(this.searchDijit.submitNode),h=null;if(c&&(n.setStyle(this.searchDijit.domNode,"width",c+"px"),n.addClass(this.domNode,"use-absolute"),isFinite(b.w)&&
-isFinite(d.w)&&(h=window.isRTL?{left:d.w+"px",right:b.w+"px"}:{left:b.w+"px",right:d.w+"px"},c=q(".searchInputGroup",this.searchDijit.domNode)[0])))n.setStyle(c,h),h=n.getMarginBox(c),c=n.getPadBorderExtents(this.searchDijit.inputNode),n.setStyle(this.searchDijit.inputNode,"width",h.w-c.w+"px")}}),50)},_convertConfig:function(c){return h.map(c.sources,l.hitch(this,function(b){var c=new v;if(b&&b.url&&"locator"===b.type){var d={locator:new y(b.url||""),outFields:["*"],singleLineFieldName:b.singleLineFieldName||
-"",name:u.stripHTML(b.name||""),placeholder:u.stripHTML(b.placeholder||""),countryCode:b.countryCode||"",maxSuggestions:b.maxSuggestions,maxResults:b.maxResults||6,zoomScale:b.zoomScale||5E4,useMapExtent:!!b.searchInCurrentMapExtent};b.enableLocalSearch&&(d.localSearchOptions={minScale:b.localSearchMinScale,distance:b.localSearchDistance});c.resolve(d)}else b&&b.url&&"query"===b.type?(d=new H(b.url||null,{outFields:["*"]}),this.own(w(d,"load",l.hitch(this,function(d){var p=d.layer,k=this._getInfoTemplate(p,
-b,b.displayField),l=null;b.searchFields&&0<b.searchFields.length?l=b.searchFields:(l=[],h.forEach(p.fields,function(b){"esriFieldTypeOID"!==b.type&&(b.name!==p.objectIdField&&"esriFieldTypeGeometry"!==b.type)&&l.push(b.name)}));d={featureLayer:p,outFields:["*"],searchFields:l,displayField:b.displayField||"",exactMatch:!!b.exactMatch,name:u.stripHTML(b.name||""),placeholder:u.stripHTML(b.placeholder||""),maxSuggestions:b.maxSuggestions||6,maxResults:b.maxResults||6,zoomScale:b.zoomScale||5E4,infoTemplate:k,
-useMapExtent:!!b.searchInCurrentMapExtent,_featureLayerId:b.layerId};k||delete d.infoTemplate;d._featureLayerId&&(k=this.layerInfosObj.getLayerInfoById(d._featureLayerId),p.setDefinitionExpression(k.getFilter()));c.resolve(d)}))),this.own(w(d,"error",function(){c.resolve(null)}))):c.resolve(null);return c}))},_getInfoTemplate:function(c,b,d){var h=this.layerInfosObj.getLayerInfoById(b.layerId),k=h&&h.getInfoTemplate(),n=h&&k;if(h&&!n)return null;n||(k=new I,k.setTitle("\x26nbsp;"),k.setContent(l.hitch(this,
-"_formatContent",b.name,c,d)));return k},_getSourcePopupInfo:function(c){return c._featureLayerId&&(c=this.layerInfosObj.getLayerInfoById(c._featureLayerId))?c.getPopupInfo():null},_captureSelect:function(c){var b=this.searchDijit.activeSourceIndex;"all"===b&&(b=this._getSourceIndexOfResult(c));if(isFinite(b)&&D.isDefined(b)&&(b=this.searchDijit.sources[b])&&"featureLayer"in b){var d=this._getSourcePopupInfo(b),h=d&&d.showAttachments||d&&d.description&&d.description.match(/http(s)?:\/\//)||d&&d.mediaInfos&&
-0<d.mediaInfos.length;c.feature.__attributes||(c.feature.__attributes=c.feature.attributes);h||(b=this._getFormatedAttrs(l.clone(c.feature.attributes),b.featureLayer.fields,b.featureLayer.typeIdField,b.featureLayer.types,d),c.feature.attributes=b)}return[c]},_getSourceIndexOfResult:function(c){if(this.searchResults)for(var b in this.searchResults)if(-1<h.indexOf(this.searchResults[b],c))return parseInt(b,10);return null},_formatContent:function(c,b,d,k){var n="";if(k&&k.attributes&&b&&b.url){var q=
-{};h.forEach(b.fields,l.hitch(this,function(b){b.name in k.attributes&&(q[b.alias||b.name]=k.attributes[b.name])}));b=k.attributes[d];var n=n+('\x3cdiv class\x3d"esriViewPopup"\x3e\x3cdiv class\x3d"mainSection"\x3e'+(D.isDefined(b)?'\x3cdiv class\x3d"header"\x3e'+c+": "+b+"\x3c/div\x3e":"")+'\x3cdiv class\x3d"hzLine"\x3e\x3c/div\x3e\x3cdiv\x3e\x3ctable class\x3d"attrTable" cellpading\x3d"0" cellspacing\x3d"0"\x3e\x3ctbody\x3e'),u;for(u in q)q.hasOwnProperty(u)&&(n+='\x3ctr valign\x3d"top"\x3e\x3ctd class\x3d"attrName"\x3e'+
-u+'\x3c/td\x3e\x3ctd class\x3d"attrValue"\x3e'+q[u]+"\x3c/td\x3e\x3c/tr\x3e");n+='\x3c/tbody\x3e\x3c/table\x3e\x3c/div\x3e\x3cdiv class\x3d"break"\x3e\x3c/div\x3e\x3c/div\x3e'}return n},_getFormatedAttrs:function(c,b,d,k,n){function q(b){if(n&&D.isDefined(n.fieldInfos))for(var c=0,d=n.fieldInfos.length;c<d;c++){var h=n.fieldInfos[c];if(h.fieldName===b)return h.format}return null}var r={};h.forEach(b,l.hitch(this,function(h,l){if(c[h.name]){var n=!!(h.domain&&"codedValue"===h.domain.type),s="esriFieldTypeDate"===
-h.type,w=d&&h.name===d,v=h.name;if("esriFieldTypeDate"===b[l].type)r[v]=u.fieldFormatter.getFormattedDate(c[h.name],q(h.name));else if("esriFieldTypeDouble"===b[l].type||"esriFieldTypeSingle"===b[l].type||"esriFieldTypeInteger"===b[l].type||"esriFieldTypeSmallInteger"===b[l].type)r[v]=u.fieldFormatter.getFormattedNumber(c[h.name],q(h.name));n?r[v]=u.fieldFormatter.getCodedValue(h.domain,c[h.name]):w?r[v]=u.fieldFormatter.getTypeName(c[h.name],k):!n&&(!s&&!w)&&(r[v]=v in r?r[v]:c[h.name],r[v]=this.getCodeValueFromTypes(h,
-d,k,c,r))}}));return r},getCodeValueFromTypes:function(c,b,d,k,n){var q=null;b&&d&&0<d.length&&(d=(d=h.filter(d,l.hitch(this,function(c){return c.name===k[b]})))&&d[0]||null)&&(d.domains&&d.domains[c.name]&&d.domains[c.name].codedValues)&&(q=u.fieldFormatter.getCodedValue(d.domains[c.name],k[c.name]));c=c.name;return(n=null!==q?q:n[c])||isFinite(n)?n:""},_resetSelectorPosition:function(c){var b=n.getMarginBox(window.jimuConfig.layoutId);q(c,this.domNode).forEach(l.hitch(this,function(c){var d=n.position(c);
-if("none"!==n.getStyle(c,"display")){var h=n.position(this.searchDijit.domNode),k=h.y-2,p=b.h-h.y-h.h;p>d.y+d.h||k>d.h?n.setStyle(c,"top",(p>d.y+d.h?h.h:-d.h-2)+"px"):(n.setStyle(c,"height",Math.max(p,k)+"px"),n.setStyle(c,"top",(p>k?h.h:-k-2)+"px"))}}))},_onSourceIndexChange:function(){this.searchDijit.value&&this.searchDijit.search(this.searchDijit.value)},_onSearchDijitClick:function(){this._resetSelectorPosition(".searchMenu")},_onSearchResults:function(c){var b=this.searchDijit.get("sources"),
-d=this.searchDijit.get("activeSourceIndex"),h=this.searchDijit.get("value"),k="",l=c.results;if(l&&0<c.numResults){n.removeClass(this.searchDijit.containerNode,"showSuggestions");this.searchResults=l;var k=k+('\x3cdiv class\x3d"show-all-results jimu-ellipsis" title\x3d"'+this.nls.showAll+'"\x3e'+this.nls.showAllResults+"\x3cstrong \x3e"+h+"\x3c/strong\x3e\x3c/div\x3e"),k=k+'\x3cdiv class\x3d"searchMenu" role\x3d"menu"\x3e',q;for(q in l)if(l[q]&&l[q].length){var r=b[parseInt(q,10)].name;1<b.length&&
-"all"===d&&(k+='\x3cdiv title\x3d"'+r+'" class\x3d"menuHeader"\x3e'+r+"\x3c/div\x3e");for(var k=k+"\x3cul\x3e",r=RegExp("("+h+")","gi"),u=b[q].maxResults,s=0,v=l[q].length;s<v&&s<u;s++)var w=D.isDefined(l[q][s].name)?l[q][s].name:this.nls.untitled,k=k+('\x3cli title\x3d"'+w+'" data-index\x3d"'+s+'" data-source-index\x3d"'+q+'" role\x3d"menuitem" tabindex\x3d"0"\x3e'+w.toString().replace(r,"\x3cstrong \x3e$1\x3c/strong\x3e")+"\x3c/li\x3e");k+="\x3c/url\x3e"}this.searchResultsNode.innerHTML=k+"\x3c/div\x3e";
-this._showResultMenu();this._resetSelectorPosition(".searchMenu")}else this._onClearSearch();this.publishData({searchResults:c})},_onSuggestResults:function(c){this._resetSelectorPosition(".searchMenu");this._hideResultMenu();this.publishData({suggestResults:c})},_onSelectSearchResult:function(c){for(c=c.target;!n.hasAttr(c,"data-source-index")||!n.getAttr(c,"data-index");)c=c.parentNode;var b=null,b=n.getAttr(c,"data-source-index");c=parseInt(n.getAttr(c,"data-index"),10);"all"!==b&&(b=parseInt(b,
-10));this.searchResults&&(this.searchResults[b]&&this.searchResults[b][c])&&(b=this.searchResults[b][c],this.searchDijit.select(b))},_onSelectResult:function(c){var b=c.result;if(b&&b.name){for(var d=c.sourceIndex,k=this.searchResults[d],r=0,s=this,v=function(b,c){return h.filter(b.graphics,function(d){return d.attributes[b.objectIdField]===c})},x=function(b){var c=null;s.map.infoWindow.setFeatures(b);c="point"===b[0].geometry.type?b[0].geometry:b[0].geometry.getExtent().getCenter();s.map.infoWindow.show(c,
-{closetFirst:!0})},y=0,A=k.length;y<A;y++)if(u.isEqual(k[y],b)){r=y;break}q("li",this.searchResultsNode).forEach(l.hitch(this,function(c){n.removeClass(c,"result-item-selected");var h=n.getAttr(c,"title"),k=n.getAttr(c,"data-index"),l=n.getAttr(c,"data-source-index");h===b.name&&(k===r.toString()&&l===d.toString())&&n.addClass(c,"result-item-selected")}));var z=this.map.getLayer(c.source._featureLayerId);if(z)if(k=v(z,c.result.feature.__attributes[z.objectIdField]),0<k.length)x(k);else{var B=w(z,
-"update-end",l.hitch(this,function(){if(this.domNode){var b=v(z,c.result.feature.__attributes[z.objectIdField]);0<b.length&&x(b)}B&&B.remove&&B.remove()}));this.own(B)}this.publishData({selectResult:c})}},_onClearSearch:function(){n.setStyle(this.searchResultsNode,"display","none");this.searchResultsNode.innerHTML="";this.searchResults=null},_hideResultMenu:function(){q(".show-all-results",this.searchResultsNode).style("display","block");q(".searchMenu",this.searchResultsNode).style("display","none")},
-_showResultMenu:function(){n.setStyle(this.searchResultsNode,"display","block");q(".show-all-results",this.searchResultsNode).style("display","none");q(".searchMenu",this.searchResultsNode).style("display","block");var c=q(".searchInputGroup",this.searchDijit.domNode)[0];if(c){var c=n.getMarginBox(c),b={width:c.w+"px"};if(window.isRTL){var d=n.getMarginBox(this.searchDijit.domNode);b.right=d.w-c.l-c.w+"px"}else b.left=c.l+"px";q(".show-all-results",this.searchResultsNode).style(b);q(".searchMenu",
-this.searchResultsNode).style(b)}},destroy:function(){B.setMap(null);B.setLayerInfosObj(null);B.setAppConfig(null);this.searchDijit&&this.searchDijit.clear();this.inherited(arguments)}})});
+///////////////////////////////////////////////////////////////////////////
+// Copyright © 2015 Esri. All Rights Reserved.
+//
+// Licensed under the Apache License Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////
+
+define([
+    'dojo/_base/declare',
+    'dojo/_base/lang',
+    'dojo/_base/array',
+    'dojo/_base/html',
+    'dojo/when',
+    'dojo/on',
+    'dojo/aspect',
+    'dojo/query',
+    'dojo/keys',
+    'dojo/Deferred',
+    'dojo/promise/all',
+    'jimu/BaseWidget',
+    'jimu/LayerInfos/LayerInfos',
+    'jimu/utils',
+    'esri/dijit/Search',
+    'esri/tasks/locator',
+    'esri/layers/FeatureLayer',
+    'esri/InfoTemplate',
+    'esri/lang',
+    './utils',
+    'dojo/NodeList-dom'
+  ],
+  function(declare, lang, array, html, when, on, aspect, query, keys, Deferred, all,
+    BaseWidget, LayerInfos, jimuUtils, Search, Locator,
+    FeatureLayer, InfoTemplate, esriLang, utils) {
+    //To create a widget, you need to derive from BaseWidget.
+    return declare([BaseWidget], {
+      name: 'Search',
+      baseClass: 'jimu-widget-search',
+      searchDijit: null,
+      searchResults: null,
+
+      _startWidth: null,
+
+      postCreate: function() {
+        if (this.closeable || !this.isOnScreen) {
+          html.addClass(this.searchNode, 'default-width-for-openAtStart');
+        }
+
+        this.listenWidgetIds.push('framework');
+      },
+
+      startup: function() {
+        this.inherited(arguments);
+
+        if (!(this.config && this.config.sources)) {
+          this.config.sources = [];
+        }
+
+        LayerInfos.getInstance(this.map, this.map.itemInfo)
+          .then(lang.hitch(this, function(layerInfosObj) {
+            this.layerInfosObj = layerInfosObj;
+            this.own(this.layerInfosObj.on(
+            'layerInfosFilterChanged',
+            lang.hitch(this, this.onLayerInfosFilterChanged)));
+
+            utils.setMap(this.map);
+            utils.setLayerInfosObj(this.layerInfosObj);
+            utils.setAppConfig(this.appConfig);
+            when(utils.getConfigInfo(this.config)).then(lang.hitch(this, function(config) {
+              return all(this._convertConfig(config)).then(function(searchSouces) {
+                return array.filter(searchSouces, function(source) {
+                  return source;
+                });
+              });
+            })).then(lang.hitch(this, function(searchSouces) {
+              if (!this.domNode) {
+                return;
+              }
+
+              this.searchDijit = new Search({
+                activeSourceIndex: searchSouces.length === 1 ? 0 : 'all',
+                allPlaceholder: jimuUtils.stripHTML(esriLang.isDefined(this.config.allPlaceholder) ?
+                  this.config.allPlaceholder : ""),
+                autoSelect: true,
+                enableButtonMode: false,
+                enableLabel: false,
+                enableInfoWindow: true,
+                enableHighlight: esriLang.isDefined(this.config.showInfoWindowOnSelect) ?
+                  !!this.config.showInfoWindowOnSelect : true,
+                showInfoWindowOnSelect: esriLang.isDefined(this.config.showInfoWindowOnSelect) ?
+                  !!this.config.showInfoWindowOnSelect : true,
+                map: this.map,
+                sources: searchSouces,
+                theme: 'arcgisSearch'
+              });
+              html.place(this.searchDijit.domNode, this.searchNode);
+              this.searchDijit.startup();
+
+              this._resetSearchDijitStyle();
+
+              this.own(
+                this.searchDijit.watch(
+                  'activeSourceIndex',
+                  lang.hitch(this, '_onSourceIndexChange')
+                )
+              );
+
+              this.own(
+                on(this.searchDijit.domNode, 'click', lang.hitch(this, '_onSearchDijitClick'))
+              );
+              this.own(on(this.searchDijit.inputNode, "keyup", lang.hitch(this, function(e) {
+                if (e.keyCode !== keys.ENTER) {
+                  this._onClearSearch();
+                }
+              })));
+              this.own(
+                aspect.before(this.searchDijit, 'select', lang.hitch(this, '_captureSelect'))
+                );
+              this.own(
+                on(this.searchDijit, 'search-results', lang.hitch(this, '_onSearchResults'))
+              );
+              this.own(
+                on(this.searchDijit, 'suggest-results', lang.hitch(this, '_onSuggestResults'))
+              );
+              this.own(
+                on(this.searchDijit, 'select-result', lang.hitch(this, '_onSelectResult'))
+              );
+              // attatch original feature layer's id.
+              this.own(
+                aspect.before(this.map.infoWindow, 'setFeatures', lang.hitch(this, '_attatchOriLayerId'))
+              );
+              // this.map.infoWindow has two different implementations (esri/dijit/Popup and esri/dijit/PopupMobile)
+              //  after screen size changed. map switch it automatically.
+              // here make sure fun:setFeatures be binded
+              this._mapInfoWindow_ = this.map.infoWindow;
+              var _winResizeHandler = on(window, 'resize', lang.hitch(this, function() {
+                if (this._mapInfoWindow_ !== this.map.infoWindow) {
+                  this.own(
+                    aspect.before(this.map.infoWindow, 'setFeatures', lang.hitch(this, '_attatchOriLayerId'))
+                  );
+                  _winResizeHandler.remove();
+                }
+              }));
+              this.own(
+                on(this.searchResultsNode, 'li:click', lang.hitch(this, '_onSelectSearchResult'))
+              );
+              this.own(on(
+                this.searchResultsNode,
+                '.show-all-results:click',
+                lang.hitch(this, '_showResultMenu')
+              ));
+              this.own(
+                on(window.document, 'click', lang.hitch(this, function(e) {
+                  if (!html.isDescendant(e.target, this.searchResultsNode)) {
+                    this._hideResultMenu();
+                    this._resetSelectorPosition('.show-all-results');
+                  }
+                }))
+              );
+              this.own(
+                on(this.searchDijit, 'clear-search', lang.hitch(this, '_onClearSearch'))
+              );
+              this.own(
+                aspect.after(this.map.infoWindow, 'show', lang.hitch(this, function() {
+                  if (this.searchDijit &&
+                    this.map.infoWindow.getSelectedFeature() !==
+                    this.searchDijit.highlightGraphic) {
+                    //this.searchDijit.clearGraphics();
+                    query('li', this.searchResultsNode).removeClass('result-item-selected');
+                  }
+                }))
+              );
+              // this.own(
+              //   on(this.map.infoWindow, 'show,hide', lang.hitch(this, function() {
+              //     if (this.searchDijit &&
+              //       this.map.infoWindow.getSelectedFeature() ===
+              //       this.searchDijit.highlightGraphic) {
+              //       this.searchDijit.clearGraphics();
+              //       query('li', this.searchResultsNode).removeClass('result-item-selected');
+              //     }
+              //   }))
+              // );
+
+              this.fetchData('framework');
+            }));
+          }));
+      },
+
+      onReceiveData: function(name, widgetId, data) {
+        if (name === 'framework' && widgetId === 'framework' && data && data.searchString) {
+          this.searchDijit.set('value', data.searchString);
+          this.searchDijit.search();
+        }
+      },
+
+      setPosition: function(position) {
+        this._resetSearchDijitStyle(position);
+        this.inherited(arguments);
+      },
+
+      resize: function() {
+        this._resetSearchDijitStyle();
+      },
+
+      onLayerInfosFilterChanged: function(changedLayerInfos) {
+        array.some(changedLayerInfos, lang.hitch(this, function(info) {
+          if (this.searchDijit && this.searchDijit.sources && this.searchDijit.sources.length > 0) {
+            array.forEach(this.searchDijit.sources, function(s) {
+              if (s._featureLayerId === info.id) {
+                s.featureLayer.setDefinitionExpression(info.getFilter());
+              }
+            });
+          }
+        }));
+      },
+
+      _resetSearchDijitStyle: function() {
+        html.removeClass(this.domNode, 'use-absolute');
+        if (this.searchDijit && this.searchDijit.domNode) {
+          html.setStyle(this.searchDijit.domNode, 'width', 'auto');
+        }
+
+        setTimeout(lang.hitch(this, function() {
+          if (this.searchDijit && this.searchDijit.domNode) {
+            var box = {
+              w: !window.appInfo.isRunInMobile ? 274 : // original width of search dijit
+                parseInt(html.getComputedStyle(this.domNode).width, 10)
+            };
+            var sourcesBox = html.getMarginBox(this.searchDijit.sourcesBtnNode);
+            var submitBox = html.getMarginBox(this.searchDijit.submitNode);
+            var style = null;
+            if (box.w) {
+              html.setStyle(this.searchDijit.domNode, 'width', box.w + 'px');
+              html.addClass(this.domNode, 'use-absolute');
+
+              if (isFinite(sourcesBox.w) && isFinite(submitBox.w)) {
+                if (window.isRTL) {
+                  style = {
+                    left: submitBox.w + 'px',
+                    right: sourcesBox.w + 'px'
+                  };
+                } else {
+                  style = {
+                    left: sourcesBox.w + 'px',
+                    right: submitBox.w + 'px'
+                  };
+                }
+                var inputGroup = query('.searchInputGroup', this.searchDijit.domNode)[0];
+
+                if (inputGroup) {
+                  html.setStyle(inputGroup, style);
+                  var groupBox = html.getMarginBox(inputGroup);
+                  var extents = html.getPadBorderExtents(this.searchDijit.inputNode);
+                  html.setStyle(this.searchDijit.inputNode, 'width', groupBox.w - extents.w + 'px');
+                }
+              }
+            }
+          }
+        }), 50);
+      },
+
+      _convertConfig: function(config) {
+        var sourceDefs = array.map(config.sources, lang.hitch(this, function(source) {
+          var def = new Deferred();
+          if (source && source.url && source.type === 'locator') {
+            var _source = {
+              locator: new Locator(source.url || ""),
+              outFields: ["*"],
+              singleLineFieldName: source.singleLineFieldName || "",
+              name: jimuUtils.stripHTML(source.name || ""),
+              placeholder: jimuUtils.stripHTML(source.placeholder || ""),
+              countryCode: source.countryCode || "",
+              maxSuggestions: source.maxSuggestions,
+              maxResults: source.maxResults || 6,
+              zoomScale: source.zoomScale || 50000,
+              useMapExtent: !!source.searchInCurrentMapExtent
+            };
+
+            if (source.enableLocalSearch) {
+              _source.localSearchOptions = {
+                minScale: source.localSearchMinScale,
+                distance: source.localSearchDistance
+              };
+            }
+
+            def.resolve(_source);
+          } else if (source && source.url && source.type === 'query') {
+            var searchLayer = new FeatureLayer(source.url || null, {
+              outFields: ["*"]
+            });
+
+            this.own(on(searchLayer, 'load', lang.hitch(this, function(result) {
+              var flayer = result.layer;
+              var template = this._getInfoTemplate(flayer, source, source.displayField);
+              var fNames = null;
+              if (source.searchFields && source.searchFields.length > 0) {
+                fNames = source.searchFields;
+              } else {
+                fNames = [];
+                array.forEach(flayer.fields, function(field) {
+                  if (field.type !== "esriFieldTypeOID" && field.name !== flayer.objectIdField &&
+                    field.type !== "esriFieldTypeGeometry") {
+                    fNames.push(field.name);
+                  }
+                });
+              }
+              var convertedSource = {
+                featureLayer: flayer,
+                outFields: ["*"],
+                searchFields: fNames,
+                displayField: source.displayField || "",
+                exactMatch: !!source.exactMatch,
+                name: jimuUtils.stripHTML(source.name || ""),
+                placeholder: jimuUtils.stripHTML(source.placeholder || ""),
+                maxSuggestions: source.maxSuggestions || 6,
+                maxResults: source.maxResults || 6,
+                zoomScale: source.zoomScale || 50000,
+                infoTemplate: template,
+                useMapExtent: !!source.searchInCurrentMapExtent,
+                _featureLayerId: source.layerId
+              };
+              if (!template) {
+                delete convertedSource.infoTemplate;
+              }
+              if (convertedSource._featureLayerId) {
+                var layerInfo = this.layerInfosObj
+                  .getLayerInfoById(convertedSource._featureLayerId);
+                flayer.setDefinitionExpression(layerInfo.getFilter());
+              }
+              def.resolve(convertedSource);
+            })));
+
+            this.own(on(searchLayer, 'error', function() {
+              def.resolve(null);
+            }));
+          } else {
+            def.resolve(null);
+          }
+          return def;
+        }));
+
+        return sourceDefs;
+      },
+
+      _getInfoTemplate: function(fLayer, source, displayField) {
+        var layerInfo = this.layerInfosObj.getLayerInfoById(source.layerId);
+        var template = layerInfo && layerInfo.getInfoTemplate();
+        var validTemplate = layerInfo && template;
+
+        if (layerInfo && !validTemplate) { // doesn't enabled pop-up
+          return null;
+        } else if (validTemplate) {
+          // configured media or attachments
+          return template;
+        } else { // (added by user in setting) or (only configured fieldInfo)
+          template = new InfoTemplate();
+          template.setTitle('&nbsp;');
+          template.setContent(
+            lang.hitch(this, '_formatContent', source.name, fLayer, displayField)
+          );
+
+          return template;
+        }
+      },
+
+      _getSourcePopupInfo: function(source) {
+        if (source._featureLayerId) {
+          var layerInfo = this.layerInfosObj.getLayerInfoById(source._featureLayerId);
+          if (layerInfo) {
+            return layerInfo.getPopupInfo();
+          }
+        }
+        return null;
+      },
+
+      _captureSelect: function(e) {
+        var sourceIndex = this.searchDijit.activeSourceIndex;
+        if (sourceIndex === 'all') {
+          sourceIndex = this._getSourceIndexOfResult(e);
+        }
+        if (isFinite(sourceIndex) && esriLang.isDefined(sourceIndex)) {
+          // record current select source index, for FUN:_attatchOriLayerId.
+          this._currentSelectSourceIdx = sourceIndex;
+          var source = this.searchDijit.sources[sourceIndex];
+          if (source && 'featureLayer' in source) {
+            var popupInfo = this._getSourcePopupInfo(source);
+            var notFormatted = (popupInfo && popupInfo.showAttachments) ||
+              (popupInfo && popupInfo.description &&
+              popupInfo.description.match(/http(s)?:\/\//)) ||
+              (popupInfo && popupInfo.mediaInfos && popupInfo.mediaInfos.length > 0);
+
+            // set a private property for select-result to get original feature from layer.
+            if (!e.feature.__attributes) {
+              e.feature.__attributes = e.feature.attributes;
+            }
+
+            if (!notFormatted) {
+              var formatedAttrs = this._getFormatedAttrs(
+                lang.clone(e.feature.attributes),
+                source.featureLayer.fields,
+                source.featureLayer.typeIdField,
+                source.featureLayer.types,
+                popupInfo
+              );
+
+              e.feature.attributes = formatedAttrs;
+            }
+          }
+        }
+
+        return [e];
+      },
+
+      _getSourceIndexOfResult: function(e) {
+        if (this.searchResults){
+          for (var i in this.searchResults) {
+            var sourceResults = this.searchResults[i];
+            var pos = array.indexOf(sourceResults, e);
+            if (pos > -1) {
+              return parseInt(i, 10);
+            }
+          }
+        }
+
+        return null;
+      },
+
+      _formatContent: function(title, fLayer, displayField, graphic) {
+        var content = "";
+        if (graphic && graphic.attributes && fLayer && fLayer.url) {
+          var aliasAttrs = {};
+          array.forEach(fLayer.fields, lang.hitch(this, function(field) {
+            if (field.name in graphic.attributes){
+              aliasAttrs[field.alias || field.name] = graphic.attributes[field.name];
+            }
+          }));
+          var displayValue = graphic.attributes[displayField];
+          content += '<div class="esriViewPopup">' +
+            '<div class="mainSection">' +
+            (esriLang.isDefined(displayValue) ?
+              ('<div class="header">' + title + ': ' + displayValue + '</div>') : "") +
+            '<div class="hzLine"></div>' +
+            '<div>' +
+            '<table class="attrTable" cellpading="0" cellspacing="0">' +
+            '<tbody>';
+          for (var p in aliasAttrs) {
+            if (aliasAttrs.hasOwnProperty(p)) {
+              content += '<tr valign="top">' +
+                '<td class="attrName">' + p + '</td>' +
+                '<td class="attrValue">' + aliasAttrs[p] + '</td>' +
+                '</tr>';
+            }
+          }
+          content += '</tbody>' +
+            '</table>' +
+            '</div>' +
+            '<div class="break"></div>' +
+            '</div>';
+        }
+
+        return content;
+      },
+
+      _getFormatedAttrs: function(attrs, fields, typeIdField, types, popupInfo) {
+        function getFormatInfo(fieldName) {
+          if (popupInfo && esriLang.isDefined(popupInfo.fieldInfos)) {
+            for (var i = 0, len = popupInfo.fieldInfos.length; i < len; i++) {
+              var f = popupInfo.fieldInfos[i];
+              if (f.fieldName === fieldName) {
+                return f.format;
+              }
+            }
+          }
+
+          return null;
+        }
+
+        var aliasAttrs = {};
+        array.forEach(fields, lang.hitch(this, function(_field, i) {
+          if (!attrs[_field.name]) {
+            return;
+          }
+          var isCodeValue = !!(_field.domain && _field.domain.type === 'codedValue');
+          var isDate = _field.type === "esriFieldTypeDate";
+          var isTypeIdField = typeIdField && (_field.name === typeIdField);
+          var fieldAlias = _field.name;
+
+          if (fields[i].type === "esriFieldTypeDate") {
+            aliasAttrs[fieldAlias] = jimuUtils.fieldFormatter.getFormattedDate(
+              attrs[_field.name], getFormatInfo(_field.name)
+              );
+          } else if (fields[i].type === "esriFieldTypeDouble" ||
+            fields[i].type === "esriFieldTypeSingle" ||
+            fields[i].type === "esriFieldTypeInteger" ||
+            fields[i].type === "esriFieldTypeSmallInteger") {
+            aliasAttrs[fieldAlias] = jimuUtils.fieldFormatter.getFormattedNumber(
+              attrs[_field.name], getFormatInfo(_field.name)
+              );
+          }
+
+          if (isCodeValue) {
+            aliasAttrs[fieldAlias] = jimuUtils.fieldFormatter.getCodedValue(
+              _field.domain, attrs[_field.name]
+              );
+          } else if (isTypeIdField) {
+            aliasAttrs[fieldAlias] = jimuUtils.fieldFormatter.getTypeName(
+              attrs[_field.name], types
+              );
+          } else if (!isCodeValue && !isDate && !isTypeIdField) {
+            // Not A Date, Domain or Type Field
+            // Still need to check for codedType value
+            aliasAttrs[fieldAlias] = fieldAlias in aliasAttrs ?
+              aliasAttrs[fieldAlias] : attrs[_field.name];
+            aliasAttrs[fieldAlias] = this.getCodeValueFromTypes(
+              _field,
+              typeIdField,
+              types,
+              attrs,
+              aliasAttrs
+            );
+          }
+        }));
+        return aliasAttrs;
+      },
+
+      getCodeValueFromTypes: function(field, typeIdField, types, obj, aliasAttrs) {
+        var codeValue = null;
+        if (typeIdField && types && types.length > 0) {
+          var typeChecks = array.filter(types, lang.hitch(this, function(item) {
+            // value of typeIdFild has been changed above
+            return item.name === obj[typeIdField];
+          }));
+          var typeCheck = (typeChecks && typeChecks[0]) || null;
+
+          if (typeCheck && typeCheck.domains &&
+            typeCheck.domains[field.name] && typeCheck.domains[field.name].codedValues) {
+            codeValue = jimuUtils.fieldFormatter.getCodedValue(
+              typeCheck.domains[field.name],
+              obj[field.name]
+            );
+          }
+        }
+        var fieldAlias = field.name;
+        var _value = codeValue !== null ? codeValue : aliasAttrs[fieldAlias];
+        return _value || isFinite(_value) ? _value : "";
+      },
+
+      _resetSelectorPosition: function(cls) {
+        var layoutBox = html.getMarginBox(window.jimuConfig.layoutId);
+        query(cls, this.domNode).forEach(lang.hitch(this, function(menu) {
+          var menuPosition = html.position(menu);
+          if (html.getStyle(menu, 'display') === 'none') {
+            return;
+          }
+          var dijitPosition = html.position(this.searchDijit.domNode);
+          var up = dijitPosition.y - 2;
+          var down = layoutBox.h - dijitPosition.y - dijitPosition.h;
+          if ((down > menuPosition.y + menuPosition.h) || (up > menuPosition.h)) {
+            html.setStyle(
+              menu,
+              'top',
+              (
+                (down > menuPosition.y + menuPosition.h) ?
+                dijitPosition.h : -menuPosition.h - 2
+              ) + 'px'
+            );
+          } else {
+            html.setStyle(menu, 'height', Math.max(down, up) + 'px');
+            html.setStyle(menu, 'top', (down > up ? dijitPosition.h : -up - 2) + 'px');
+          }
+        }));
+      },
+
+      _onSourceIndexChange: function() {
+        if (this.searchDijit.value) {
+          this.searchDijit.search(this.searchDijit.value);
+        }
+      },
+
+      _onSearchDijitClick: function() {
+        this._resetSelectorPosition('.searchMenu');
+      },
+
+      _onSearchResults: function(evt) {
+        var sources = this.searchDijit.get('sources');
+        var activeSourceIndex = this.searchDijit.get('activeSourceIndex');
+        var value = this.searchDijit.get('value');
+        var htmlContent = "";
+        var results = evt.results;
+        var _activeSourceNumber = null;
+        if (results && evt.numResults > 0) {
+          html.removeClass(this.searchDijit.containerNode, 'showSuggestions');
+
+          this.searchResults = results;
+          htmlContent += '<div class="show-all-results jimu-ellipsis" title="' +
+            this.nls.showAll + '">' +
+            this.nls.showAllResults + '<strong >' + value + '</strong></div>';
+          htmlContent += '<div class="searchMenu" role="menu">';
+          for (var i in results) {
+            if (results[i] && results[i].length) {
+              var name = sources[parseInt(i, 10)].name;
+              if (sources.length > 1 && activeSourceIndex === 'all') {
+                htmlContent += '<div title="' + name + '" class="menuHeader">' + name + '</div>';
+              }
+              htmlContent += "<ul>";
+              var partialMatch = value;
+              var r = new RegExp("(" + partialMatch + ")", "gi");
+              var maxResults = sources[i].maxResults;
+
+              for (var j = 0, len = results[i].length; j < len && j < maxResults; j++) {
+                var text = esriLang.isDefined(results[i][j].name) ?
+                  results[i][j].name : this.nls.untitled;
+
+                htmlContent += '<li title="' + text + '" data-index="' + j +
+                  '" data-source-index="' + i + '" role="menuitem" tabindex="0">' +
+                  text.toString().replace(r, "<strong >$1</strong>") + '</li>';
+              }
+              htmlContent += '</url>';
+
+              if (evt.numResults === 1) {
+                _activeSourceNumber = i;
+              }
+            }
+          }
+          htmlContent += "</div>";
+          this.searchResultsNode.innerHTML = htmlContent;
+
+          this._showResultMenu();
+
+          this._resetSelectorPosition('.searchMenu');
+        } else {
+          this._onClearSearch();
+        }
+        // publish search results to other widgets
+        this.publishData({
+          'searchResults': evt
+        });
+      },
+
+      _onSuggestResults: function(evt) {
+        this._resetSelectorPosition('.searchMenu');
+
+        this._hideResultMenu();
+        // publish suggest results to other widgets
+        this.publishData({
+          'suggestResults': evt
+        });
+      },
+
+      _onSelectSearchResult: function(evt) {
+        var target = evt.target;
+        while(!(html.hasAttr(target, 'data-source-index') && html.getAttr(target, 'data-index'))) {
+          target = target.parentNode;
+        }
+        var result = null;
+        var dataSourceIndex = html.getAttr(target, 'data-source-index');
+        var dataIndex = parseInt(html.getAttr(target, 'data-index'), 10);
+        // var sources = this.searchDijit.get('sources');
+
+        if (dataSourceIndex !== 'all') {
+          dataSourceIndex = parseInt(dataSourceIndex, 10);
+        }
+        if (this.searchResults && this.searchResults[dataSourceIndex] &&
+          this.searchResults[dataSourceIndex][dataIndex]) {
+          result = this.searchResults[dataSourceIndex][dataIndex];
+          // clear before select.
+          this.searchDijit.clearGraphics();
+          this.searchDijit.select(result);
+        }
+      },
+
+      _onSelectResult: function(e) {
+        var result = e.result;
+        if (!(result && result.name)) {
+          return;
+        }
+        var dataSourceIndex = e.sourceIndex;
+        var sourceResults = this.searchResults[dataSourceIndex];
+        var dataIndex = 0;
+        // var that = this;
+
+        // var getGraphics = function(layer, fid) {
+        //   var graphics = layer.graphics;
+        //   var gs = array.filter(graphics, function(g) {
+        //     return g.attributes[layer.objectIdField] === fid;
+        //   });
+        //   return gs;
+        // };
+        // var showPopupByFeatures = function(features) {
+        //   var location = null;
+        //   that.map.infoWindow.setFeatures(features);
+        //   if (features[0].geometry.type === "point") {
+        //     location = features[0].geometry;
+        //   } else {
+        //     location = features[0].geometry.getExtent().getCenter();
+        //   }
+        //   that.map.infoWindow.show(location, {
+        //     closetFirst: true
+        //   });
+        // };
+
+        for (var i = 0, len = sourceResults.length; i < len; i++) {
+          if (jimuUtils.isEqual(sourceResults[i], result)) {
+            dataIndex = i;
+            break;
+          }
+        }
+        query('li', this.searchResultsNode)
+          .forEach(lang.hitch(this, function(li) {
+            html.removeClass(li, 'result-item-selected');
+            var title = html.getAttr(li, 'title');
+            var dIdx = html.getAttr(li, 'data-index');
+            var dsIndex = html.getAttr(li, 'data-source-index');
+
+            if (title === result.name &&
+              dIdx === dataIndex.toString() &&
+              dsIndex === dataSourceIndex.toString()) {
+              html.addClass(li, 'result-item-selected');
+            }
+          }));
+
+        // var layer = this.map.getLayer(e.source._featureLayerId);
+
+        // if (layer && this.config.showInfoWindowOnSelect) {
+        //   var gs = getGraphics(layer, e.result.feature.__attributes[layer.objectIdField]);
+        //   if (gs.length > 0) {
+        //     showPopupByFeatures(gs);
+        //   } else {
+        //     var handle = on(layer, 'update-end', lang.hitch(this, function() {
+        //       if (this.domNode) {
+        //         var gs = getGraphics(layer, e.result.feature.__attributes[layer.objectIdField]);
+        //         if (gs.length > 0) {
+        //           showPopupByFeatures(gs);
+        //         }
+        //       }
+
+        //       if (handle && handle.remove) {
+        //         handle.remove();
+        //       }
+        //     }));
+        //     this.own(handle);
+        //   }
+        // }
+        // publish select result to other widgets
+        this.publishData({
+          'selectResult': e
+        });
+
+        // hide the graphic in map's default graphiclayer.
+        var _searchGL = this.searchDijit.graphicsLayer || this.map.graphics;
+        _searchGL.graphics.forEach(lang.hitch(this,function(item) {
+          if (item && lang.getObject("_wabProperties.referToFeatureLayerId", false, item)) {
+            // this.searchDijit.clearGraphics();
+            _searchGL.remove(item);
+          }
+        }));
+      },
+
+      _attatchOriLayerId: function(fs) {
+        // Summary: attatchOriLayerId _attatch original featureLayer's ID.
+        // Condition:
+        //    1. Search dijit of JSAPI create new graphic and add it to map's default graphicslayer
+        //      if no graphicslayer configured, map contains two same graphic at the same time.
+        //    2. Attach original flayer's id as a property to graphic(map's default featurelayer),
+        //      WAB can create related records with .
+
+        // fs is an array, it's item could be 'esri.Graphic' or 'dojo.deferred'
+
+        if (fs && fs.length && fs[0].declaredClass === "esri.Graphic" &&
+          esriLang.isDefined(this._currentSelectSourceIdx)) {
+          // iterator every item
+          fs.forEach(lang.hitch(this, function(item) {
+            // only type 'esri.Graphic'
+            if (item.declaredClass === "esri.Graphic") {
+              // original featurelayer id
+              var _featureLayerId = this.searchDijit.sources[this._currentSelectSourceIdx]._featureLayerId;
+              // get original featurelayer if exists.
+              var layer = _featureLayerId && this.layerInfosObj.getLayerInfoById(_featureLayerId);
+              // if original featurelayer added to map
+              if (layer && this.config.showInfoWindowOnSelect) {
+                // attatch original featurelayer's ID to this feature
+                lang.setObject("_wabProperties.referToFeatureLayerId", _featureLayerId, item);
+              }
+            }
+          }));
+        }
+      },
+
+      _onClearSearch: function() {
+        html.setStyle(this.searchResultsNode, 'display', 'none');
+        this.searchResultsNode.innerHTML = "";
+        this.searchResults = null;
+      },
+
+      _hideResultMenu: function() {
+        query('.show-all-results', this.searchResultsNode).style('display', 'block');
+        query('.searchMenu', this.searchResultsNode).style('display', 'none');
+      },
+
+      _showResultMenu: function() {
+        html.setStyle(this.searchResultsNode, 'display', 'block');
+        query('.show-all-results', this.searchResultsNode).style('display', 'none');
+        query('.searchMenu', this.searchResultsNode).style('display', 'block');
+
+        var groupNode = query('.searchInputGroup', this.searchDijit.domNode)[0];
+        if (groupNode) {
+          var groupBox = html.getMarginBox(groupNode);
+          var style = {
+            width: groupBox.w + 'px'
+          };
+          if (window.isRTL) {
+            var box = html.getMarginBox(this.searchDijit.domNode);
+            style.right = (box.w - groupBox.l - groupBox.w) + 'px';
+          } else {
+            style.left = groupBox.l + 'px';
+          }
+          query('.show-all-results', this.searchResultsNode).style(style);
+          query('.searchMenu', this.searchResultsNode).style(style);
+        }
+      },
+
+      destroy: function() {
+        utils.setMap(null);
+        utils.setLayerInfosObj(null);
+        utils.setAppConfig(null);
+        if (this.searchDijit) {
+          this.searchDijit.clear();
+        }
+
+        this.inherited(arguments);
+      },
+
+      _hidePopup: function() {
+        if (this.map.infoWindow.isShowing) {
+          this.map.infoWindow.hide();
+        }
+      },
+
+      onActive: function() {
+        this._mapClickHandle = aspect.before(this.map, 'onClick', lang.hitch(this, function() {
+          this._hidePopup();
+          return arguments;
+        }));
+      },
+
+      onDeActive: function() {
+        if (this._mapClickHandle && this._mapClickHandle.remove) {
+          this._mapClickHandle.remove();
+        }
+        this._hidePopup();
+      }
+
+    });
+  });
