@@ -26,7 +26,7 @@ define([
       baseClass: "jimu-widget-url-layer-controller",
       name: "Url Layer Controller",
 
-      postCreate: function() {
+      startup: function() {
         this.inherited(arguments);
         console.log("Hello from Url Layer Controller");
         alert("Managed to add to app");
