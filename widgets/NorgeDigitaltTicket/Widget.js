@@ -24,11 +24,11 @@ define([
     query) {
     var clazz = declare([BaseWidget], {
       baseClass: "jimu-widget-norge-digitalt-ticket",
-      name: "Url Layer Controller",
+      name: "Norge Digitalt Ticket",
 
       startup: function() {
         this.inherited(arguments);
-        console.log("Hello from Url Layer Controller");
+        console.log("Hello from Norge Digitalt Ticket");
       },
 
       onClose: function() {
