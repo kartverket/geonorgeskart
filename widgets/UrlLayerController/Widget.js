@@ -29,7 +29,6 @@ define([
       startup: function() {
         this.inherited(arguments);
         console.log("Hello from Url Layer Controller");
-        alert("Managed to add to app");
       },
 
       onClose: function() {
