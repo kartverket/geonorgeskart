@@ -212,6 +212,28 @@
         "position": {
           "relativeTo": "map"
         }
+      },
+      {
+        "name": "NorgeDigitaltTicket",
+        "version": "2.6",
+        "closeable": false,
+        "openAtStart": true,
+        "uri": "widgets/NorgeDigitaltTicket/Widget",
+        "id": "widgets_NorgeDigitaltTicket_Widget_81",
+        "position": {
+          "relativeTo": "map"
+        }
+      },
+      {
+        "name": "EditDrawnFeatures",
+        "version": "2.6",
+        "closeable": false,
+        "openAtStart": true,
+        "uri": "widgets/EditDrawnFeatures/Widget",
+        "id": "widgets_EditDrawnFeatures_Widget_82",
+        "position": {
+          "relativeTo": "map"
+        }
       }
     ],
     "groups": [
@@ -464,7 +486,7 @@
         "version": "2.6",
         "uri": "widgets/Print/Widget",
         "config": "configs/Print/config_Print.json",
-        "index": 21,
+        "index": 20,
         "id": "widgets_Print_Widget_77"
       }
     ],
