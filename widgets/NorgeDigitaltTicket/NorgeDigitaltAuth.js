@@ -117,7 +117,7 @@ function (
     };
 
     return {
-        getTicketForService: getTicketForService,
+        getTicketForServices: getTicketForServices,
         urlRewriterWmsLayer: urlRewriterWmsLayer,
         urlRewriterWmtsLayer: urlRewriterWmtsLayer,
         addLayerAuthenticationIfNecessary: addLayerAuthenticationIfNecessary
