@@ -10,12 +10,23 @@ function (
     Deferred,
     request) {
 
+    var wmtsToken = null;
+    var wmsTicketIds = [];
+    var ticketByServiceIdDictionary = {};
+    var generatingTickets = false;
+
     var getTicketFor = function (serviceId) {
-        return "3231";
+        if(ticketByServiceIdDictionary[serviceId]) {
+            return ticketByServiceIdDictionary[serviceId].ticket;
+        } 
+        return null;
     };
 
-    var getTokenFor = function (serviceId) {
-        return "TEST_TOKEN";
+    var getWmtsToken = function () {
+        if(wmtsToken) {
+            return wmtsToken.token;
+        }
+        return null;
     };
 
     var getTicketForServices = function (serviceIds) {
@@ -26,10 +37,10 @@ function (
         }
 
         request("https://localhost:44303/api/auth/ticket", {
-            data: serviceIds,
-            preventCache: true,
+            data: JSON.stringify(serviceIds),
             method: "POST",
-            handleAs: "json"
+            handleAs: "json",
+            headers: { "Content-Type": "application/json" }
         })
         .then(function (tickets) {
             deferred.resolve(tickets);
@@ -41,43 +52,85 @@ function (
         return deferred.promise;
     };
 
+    var generateTickets = function () {
+        if(generatingTickets) {
+            return;
+        }
+
+        generatingTickets = true;
+
+        getTicketForServices(wmsTicketIds).then(function(tickets) {
+            if(tickets === null || ((tickets instanceof Array) === false)) {
+                // unable to reach ticket service.
+                console.warn("WMS services are run without ticket. Check setup and ticket service for error.");
+                return;
+            }
+
+            tickets.forEach(function(t) {
+                ticketByServiceIdDictionary[t.serviceId] = t;
+            });
+            generatingTickets = false;
+        });
+    };
+
     var wmsNeedsAuthenticationRewrite = function(layer) {
-        return false;
+        var domains = ["wms.geonorge.no"];
+        return urlNeedsAuthentication(layer.url, domains);
     };
 
     var wmtsNeedsAuthenticationRewrite = function(layer) {
-        return true;
+        var domains = [];
+        return urlNeedsAuthentication(layer.url, domains);
+    };
+
+    var urlNeedsAuthentication = function (url, domains) {
+        var hasAuthenticatedDomain = false;
+
+        for(var i = 0; i < domains.length; i++){
+            if(url.indexOf(domains[i]) !== -1) {
+                hasAuthenticatedDomain = true;
+                break;
+            }
+        }
+
+        return hasAuthenticatedDomain;
+    };
+
+    var getServiceIdFromUrl = function (url) {
+        var servideIdPattern = /(wms\.[\w]+(\-\w+)*)/g;
+
+        var matches = url.match(servideIdPattern);
+
+        if(matches === null) {
+            return null;
+        }
+
+        // Last match is serviceId. First match is wms.geonorge
+        var serviceId = matches[matches.length - 1];
+        return serviceId;
     };
 
     var urlRewriterWmsLayer = function(layer) {
 
         var originalGetImageUrl = layer.getImageUrl;
+        
 
         layer.getImageUrl = function(extent, width, height, callback) {
 
-            var ticket = getTicketFor("something");
-
             var result = originalGetImageUrl.call(layer, extent, width, height, function(url) {
 
-                // TODO Improve readability and stability
+                var serviceId = getServiceIdFromUrl(url);
+                var ticket = getTicketFor(serviceId);
+
+                if(ticket === null) {
+                    return callback(url);
+                }
+
                 if(typeof url !== "string") {
                     return callback(url);
                 }
 
-                var urlAndQueryString = url.split("?");
-
-                if(urlAndQueryString.length !== 2) {
-                    return callback(url);
-                }
-
-                var urlWithoutQueryString = urlAndQueryString[0];
-                var lastCharOfUrl = urlWithoutQueryString.slice(-1);
-
-                if(lastCharOfUrl !== "/" && lastCharOfUrl !== "\\") {
-                    urlWithoutQueryString += "/";
-                }
-
-                var modifiedUrl = urlWithoutQueryString + "ti_" + ticket + "?" + urlAndQueryString[1];   
+                var modifiedUrl = url + "&ticket=" + ticket;
 
                 return callback(modifiedUrl);
             });
@@ -110,16 +163,25 @@ function (
           if(typeof layer.getImageUrl === "function") {
             if(wmsNeedsAuthenticationRewrite(layer)) {
               if(layer._geodata_norgedigitalt_auth_added !== true) {
+
+                // Add id to list of ids to fetch ticket for
+                var serviceId = getServiceIdFromUrl(layer.url);
+                if(wmsTicketIds.indexOf(serviceId) === -1) {
+                    wmsTicketIds.push(serviceId);
+                }
+
                 urlRewriterWmsLayer(layer);
               }
             }
           }
     };
 
+
     return {
         getTicketForServices: getTicketForServices,
         urlRewriterWmsLayer: urlRewriterWmsLayer,
         urlRewriterWmtsLayer: urlRewriterWmtsLayer,
-        addLayerAuthenticationIfNecessary: addLayerAuthenticationIfNecessary
+        addLayerAuthenticationIfNecessary: addLayerAuthenticationIfNecessary,
+        generateTickets: generateTickets
     };
 });

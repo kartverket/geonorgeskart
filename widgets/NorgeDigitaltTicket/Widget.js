@@ -38,12 +38,15 @@ define([
           var layer = this.map.getLayer(layerId);
           NorgeDigitaltAuth.addLayerAuthenticationIfNecessary(layer);       
         }));
+
+        NorgeDigitaltAuth.generateTickets();
       },
 
       addUrlRewriterForAuthentication: function() {
         this.map.on("layer-add", function (evt) {
           var layer = evt.layer;
           NorgeDigitaltAuth.addLayerAuthenticationIfNecessary(layer);
+          NorgeDigitaltAuth.generateTickets();
         });
       },
 
