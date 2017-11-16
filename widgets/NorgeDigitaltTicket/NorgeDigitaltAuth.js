@@ -18,16 +18,25 @@ function (
         return "TEST_TOKEN";
     };
 
-    var getTicketForService = function (serviceId) {
+    var getTicketForServices = function (serviceIds) {
         var deferred = new Deferred();
 
-        request("https://localhost:44303/api/auth/ticket?serviceid=" + serviceId)
-            .then(function (ticket) {
-                deferred.resolve(ticket);
-            }, function (error) {
-                console.warn("Could not get token for service-id " + serviceId);
-                deferred.resolve(null);
-            });
+        if(!(serviceIds instanceof Array)){
+            serviceIds = [];
+        }
+
+        request("https://localhost:44303/api/auth/ticket", {
+            data: serviceIds,
+            preventCache: true,
+            method: "POST",
+            handleAs: "json"
+        })
+        .then(function (tickets) {
+            deferred.resolve(tickets);
+        }, function (error) {
+            console.warn("Could not get token for service-ids " + serviceIds.join(", "));
+            deferred.resolve(null);
+        });
 
         return deferred.promise;
     };
