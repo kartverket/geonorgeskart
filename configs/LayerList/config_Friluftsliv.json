@@ -9,40 +9,382 @@
     "DescriptionOrShowItemDetailsOrDownload": false
   },
   "layerOptions": {
-    "wms_8498": {
+    "wms_8038": {
       "display": false
     },
-    "wms_8498_Transformatorstasjoner": {
+    "wms_8038_biogeografiske_regioner_grense": {
       "display": true
     },
-    "wms_8498_Sjokabler": {
+    "wms_8038_biogeografiske_regioner_omrade": {
       "display": true
     },
-    "wms_8498_Sentralnett": {
-      "display": true
-    },
-    "wms_8498_Regionalnett": {
-      "display": true
-    },
-    "wms_8498_Omradekonsesjonaerer": {
-      "display": true
-    },
-    "wms_8498_Master og stolper": {
-      "display": true
-    },
-    "wms_9479": {
+    "wms_7889": {
       "display": false
     },
-    "wms_9479_endret_etter_2008": {
+    "wms_7889_layer_21": {
       "display": true
     },
-    "wms_9479_dyrkbarjord": {
-      "display": true
-    },
-    "wms_9609": {
+    "wms_4069": {
       "display": false
     },
-    "wms_9609_Jordkvalitet": {
+    "wms_4069_marin_vp_ikke_oppstart": {
+      "display": true
+    },
+    "wms_4069_marin_vp_oppstart": {
+      "display": true
+    },
+    "wms_6276": {
+      "display": true
+    },
+    "wms_6276_svo_barentshavet": {
+      "display": true
+    },
+    "wms_6276_svo_nordsjoen": {
+      "display": true
+    },
+    "wms_6276_svo_norskehavet": {
+      "display": true
+    },
+    "wms_3991": {
+      "display": false
+    },
+    "wms_3991_forurenset_omrade_tilstand": {
+      "display": true
+    },
+    "wms_3991_forurenset_omrade_tilstand_pkt": {
+      "display": true
+    },
+    "wms_3991_forurenset_omrade": {
+      "display": true
+    },
+    "wms_3991_forurenset_omrade_pkt": {
+      "display": true
+    },
+    "wms_9402": {
+      "display": false
+    },
+    "wms_9402_svo_grense": {
+      "display": true
+    },
+    "wms_9402_svo_omrade": {
+      "display": true
+    },
+    "wms_7507": {
+      "display": false
+    },
+    "wms_7507_petroleumsvirksomhet": {
+      "display": true
+    },
+    "wms_9027": {
+      "display": false
+    },
+    "wms_9027_bjorn_forvaltningsomrade": {
+      "display": true
+    },
+    "wms_9027_gaupe_forvaltningsomrade": {
+      "display": true
+    },
+    "wms_9027_jerv_forvaltningsomrade": {
+      "display": true
+    },
+    "wms_9027_ulv_forvaltningsomrade": {
+      "display": true
+    },
+    "wms_6424": {
+      "display": true
+    },
+    "wms_6424_friluftsliv_kartlagt_faktaark": {
+      "display": true
+    },
+    "wms_6424_friluftsliv_kartlagt_omrtype": {
+      "display": true
+    },
+    "wms_6424_friluftsliv_kartlagt_verdi": {
+      "display": true
+    },
+    "wms_1677": {
+      "display": false
+    },
+    "wms_1677_kostholdsrad_omrade": {
+      "display": true
+    },
+    "wms_1677_kostholdsrad_sted": {
+      "display": true
+    },
+    "wms_5984": {
+      "display": false
+    },
+    "wms_5984_kart": {
+      "display": true
+    },
+    "wms_5984_precipitation_1h_regional": {
+      "display": true
+    },
+    "wms_5984_surface_pressure_regional": {
+      "display": true
+    },
+    "wms_5984_temperature_2m_regional": {
+      "display": true
+    },
+    "wms_5984_wind_10m_regional": {
+      "display": true
+    },
+    "wms_5984_ec.precip_6h": {
+      "display": true
+    },
+    "wms_5984_ec.mslp": {
+      "display": true
+    },
+    "wms_5984_ec.t2m": {
+      "display": true
+    },
+    "wms_5984_ec.wind10m": {
+      "display": true
+    },
+    "wms_5984_sea_wave_height_direction_regional": {
+      "display": true
+    },
+    "wms_5984_sea_current_regional": {
+      "display": true
+    },
+    "wms_5984_sea_salinity_regional": {
+      "display": true
+    },
+    "wms_5984_sea_temperature_regional": {
+      "display": true
+    },
+    "wms_5984_sea_surface_height_regional": {
+      "display": true
+    },
+    "wms_5984_osisaf.icetype": {
+      "display": true
+    },
+    "wms_5984_osisaf.iceedge": {
+      "display": true
+    },
+    "wms_5984_osisaf.iceconcentration": {
+      "display": true
+    },
+    "wms_5984_myocean.sst": {
+      "display": true
+    },
+    "wms_5984_ice.ice_chart": {
+      "display": true
+    },
+    "wms_5984_ice.ice_analysis_skagerak": {
+      "display": true
+    },
+    "wms_5984_ice.ice_analysis_sar": {
+      "display": true
+    },
+    "wms_5984_radar_precipitation_intensity": {
+      "display": true
+    },
+    "wms_5984_ecmwf.swell": {
+      "display": true
+    },
+    "wms_5984_ecmwf.wave": {
+      "display": true
+    },
+    "wms_5984_sat.neuropa": {
+      "display": true
+    },
+    "wms_5984_sat.npolen": {
+      "display": true
+    },
+    "wms_5984_sat.natlant": {
+      "display": true
+    },
+    "wms_5984_sat.ishavet": {
+      "display": true
+    },
+    "wms_5984_wamws.windspeed.mean": {
+      "display": true
+    },
+    "wms_5984_wamws.windspeed.10mps": {
+      "display": true
+    },
+    "wms_5984_wamws.windspeed.15mps": {
+      "display": true
+    },
+    "wms_5984_wamws.windspeed.20mps": {
+      "display": true
+    },
+    "wms_5984_wamhs.hs.mean": {
+      "display": true
+    },
+    "wms_5984_wamhs.freq2m": {
+      "display": true
+    },
+    "wms_5984_wamhs.freq3m": {
+      "display": true
+    },
+    "wms_5984_wamhs.freq4m": {
+      "display": true
+    },
+    "wms_5984_wamhs.freq5m": {
+      "display": true
+    },
+    "wms_5984_wamhs.freq6m": {
+      "display": true
+    },
+    "wms_5984_wamws.windspeed.mean.year": {
+      "display": true
+    },
+    "wms_5984_wamws.windspeed.10mps.year": {
+      "display": true
+    },
+    "wms_5984_wamws.windspeed.15mps.year": {
+      "display": true
+    },
+    "wms_5984_wamws.windspeed.20mps.year": {
+      "display": true
+    },
+    "wms_5984_wamhs.hs.mean.year": {
+      "display": true
+    },
+    "wms_5984_wamhs.freq2m.year": {
+      "display": true
+    },
+    "wms_5984_wamhs.freq3m.year": {
+      "display": true
+    },
+    "wms_5984_wamhs.freq4m.year": {
+      "display": true
+    },
+    "wms_5984_wamhs.freq5m.year": {
+      "display": true
+    },
+    "wms_5984_wamhs.freq6m.year": {
+      "display": true
+    },
+    "wms_5984_iskart.konsentrasjon": {
+      "display": true
+    },
+    "wms_5984_strike_probability": {
+      "display": true
+    },
+    "wms_6148": {
+      "display": false
+    },
+    "wms_6148_Mattilsynet_Vannverk_Inntakspunkter": {
+      "display": true
+    },
+    "wms_8127": {
+      "display": false
+    },
+    "wms_8127_Mattilsynet_Dyrehold_Produksjonsdyr": {
+      "display": true
+    },
+    "wms_8178": {
+      "display": false
+    },
+    "wms_8178_layer_151": {
+      "display": true
+    },
+    "wms_8178_layer_152": {
+      "display": true
+    },
+    "wms_4495": {
+      "display": false
+    },
+    "wms_4495_layer_37": {
+      "display": true
+    },
+    "wms_4495_layer_40": {
+      "display": true
+    },
+    "wms_4495_layer_41": {
+      "display": true
+    },
+    "wms_5526": {
+      "display": false
+    },
+    "wms_5526_layer_363": {
+      "display": true
+    },
+    "wms_1052": {
+      "display": false
+    },
+    "wms_1052_layer_388": {
+      "display": true
+    },
+    "wms_6774": {
+      "display": true
+    },
+    "wms_6774_layer_264": {
+      "display": true
+    },
+    "wms_6774_layer_265": {
+      "display": true
+    },
+    "wms_5265": {
+      "display": false
+    },
+    "wms_5265_layer_353": {
+      "display": true
+    },
+    "wms_5265_layer_351": {
+      "display": true
+    },
+    "wms_1686": {
+      "display": false
+    },
+    "wms_1686_layer_202": {
+      "display": true
+    },
+    "wms_1686_layer_203": {
+      "display": true
+    },
+    "wms_1686_layer_263": {
+      "display": true
+    },
+    "wms_1686_layer_364": {
+      "display": true
+    },
+    "wms_1686_layer_262": {
+      "display": true
+    },
+    "wms_7094": {
+      "display": false
+    },
+    "wms_7094_layer_190": {
+      "display": true
+    },
+    "wms_7094_layer_185": {
+      "display": true
+    },
+    "wms_308": {
+      "display": false
+    },
+    "wms_308_layer_183": {
+      "display": true
+    },
+    "wms_308_layer_184": {
+      "display": true
+    },
+    "wms_308_layer_179": {
+      "display": true
+    },
+    "wms_1878": {
+      "display": false
+    },
+    "wms_1878_layer_186": {
+      "display": true
+    },
+    "wms_1878_layer_189": {
+      "display": true
+    },
+    "Bergrettigheter_9522": {
+      "display": false
+    },
+    "Bergrettigheter_9522_0": {
+      "display": true
+    },
+    "wms_9526": {
+      "display": false
+    },
+    "wms_9526_stoylufthavn": {
       "display": true
     },
     "wms_9807": {
@@ -193,6 +535,12 @@
       "display": false
     },
     "wms_6546_Skytefelt": {
+      "display": true
+    },
+    "wms_7435": {
+      "display": false
+    },
+    "wms_7435_stoyskytebane": {
       "display": true
     },
     "wms_1624": {
@@ -1310,15 +1658,6 @@
     },
     "wms_4783_Kommunenummer": {
       "display": true
-    },
-    "WMTS_402": {
-      "display": false
-    },
-    "WMTS_8535": {
-      "display": false
-    },
-    "WMTS_892": {
-      "display": false
     }
   }
 }
