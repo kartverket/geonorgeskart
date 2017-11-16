@@ -15,6 +15,8 @@ function (
         this.wmsTicketIds = [];
         this.ticketByServiceIdDictionary = {};
         this.generatingTickets = false;
+        this.failedTicketRequestsInRow = 0;
+        this.timeoutId = null;
     }
 
     NorgeDigitaltAuth.prototype.getTicketFor = function (serviceId) {
@@ -55,23 +57,52 @@ function (
     };
 
     NorgeDigitaltAuth.prototype.generateTickets = function () {
-        if(this.generatingTickets) {
+        if(this.generatingTickets || this.failedTicketRequestsInRow > 2) {
             return;
         }
 
         this.generatingTickets = true;
 
         this.getTicketForServices(this.wmsTicketIds).then(lang.hitch(this, function(tickets) {
+
+            this.generatingTickets = false;
+
             if(tickets === null || ((tickets instanceof Array) === false)) {
                 console.warn("WMS services are run without ticket. Check setup and ticket service for error.");
+                this.failedTicketRequestsInRow = this.failedTicketRequestsInRow + 1;
+
+                // Retry a total of three times before quitting with 5 second spacing
+                setTimeout(lang.hitch(this, this.generateTickets), 5000);
                 return;
             }
+
+            this.failedTicketRequestsInRow = 0;
 
             tickets.forEach(lang.hitch(this, function(t) {
                 this.ticketByServiceIdDictionary[t.serviceId] = t;
             }));
 
-            this.generatingTickets = false;
+            var now = new Date();
+            var expirationTimeInMinutes = tickets.map(function(t) {
+                var tokenExpires = new Date(t.expirationTimeUTC);
+
+                var diffMilliSeconds = tokenExpires - now;
+
+                var nextCallbackShouldBeIn = diffMilliSeconds - (5 * 60 * 1000);
+                return nextCallbackShouldBeIn;
+            });
+
+            var minNextCallbackTime = Math.min.apply(null, expirationTimeInMinutes);
+
+            if(this.timeoutId !== null) {
+                clearTimeout(this.timeoutId);
+            }
+
+            if(minNextCallbackTime <= 0) {
+                this.generateTickets();
+                return;
+            }
+            this.timeoutId = setTimeout(lang.hitch(this, this.generateTickets), minNextCallbackTime);
         }));
     };
 
