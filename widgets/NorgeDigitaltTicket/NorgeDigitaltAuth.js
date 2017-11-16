@@ -10,26 +10,28 @@ function (
     Deferred,
     request) {
 
-    var wmtsToken = null;
-    var wmsTicketIds = [];
-    var ticketByServiceIdDictionary = {};
-    var generatingTickets = false;
+    function NorgeDigitaltAuth() {
+        this.wmtsToken = null;
+        this.wmsTicketIds = [];
+        this.ticketByServiceIdDictionary = {};
+        this.generatingTickets = false;
+    }
 
-    var getTicketFor = function (serviceId) {
-        if(ticketByServiceIdDictionary[serviceId]) {
-            return ticketByServiceIdDictionary[serviceId].ticket;
+    NorgeDigitaltAuth.prototype.getTicketFor = function (serviceId) {
+        if(this.ticketByServiceIdDictionary[serviceId]) {
+            return this.ticketByServiceIdDictionary[serviceId].ticket;
         } 
         return null;
     };
 
-    var getWmtsToken = function () {
-        if(wmtsToken) {
-            return wmtsToken.token;
+    NorgeDigitaltAuth.prototype.getWmtsToken = function () {
+        if(this.wmtsToken) {
+            return this.wmtsToken.token;
         }
         return null;
     };
 
-    var getTicketForServices = function (serviceIds) {
+    NorgeDigitaltAuth.prototype.getTicketForServices = function (serviceIds) {
         var deferred = new Deferred();
 
         if(!(serviceIds instanceof Array)){
@@ -52,38 +54,38 @@ function (
         return deferred.promise;
     };
 
-    var generateTickets = function () {
-        if(generatingTickets) {
+    NorgeDigitaltAuth.prototype.generateTickets = function () {
+        if(this.generatingTickets) {
             return;
         }
 
-        generatingTickets = true;
+        this.generatingTickets = true;
 
-        getTicketForServices(wmsTicketIds).then(function(tickets) {
+        this.getTicketForServices(this.wmsTicketIds).then(lang.hitch(this, function(tickets) {
             if(tickets === null || ((tickets instanceof Array) === false)) {
-                // unable to reach ticket service.
                 console.warn("WMS services are run without ticket. Check setup and ticket service for error.");
                 return;
             }
 
-            tickets.forEach(function(t) {
-                ticketByServiceIdDictionary[t.serviceId] = t;
-            });
-            generatingTickets = false;
-        });
+            tickets.forEach(lang.hitch(this, function(t) {
+                this.ticketByServiceIdDictionary[t.serviceId] = t;
+            }));
+
+            this.generatingTickets = false;
+        }));
     };
 
-    var wmsNeedsAuthenticationRewrite = function(layer) {
+    NorgeDigitaltAuth.prototype.wmsNeedsAuthenticationRewrite = function(layer) {
         var domains = ["wms.geonorge.no"];
-        return urlNeedsAuthentication(layer.url, domains);
+        return this.urlNeedsAuthentication(layer.url, domains);
     };
 
-    var wmtsNeedsAuthenticationRewrite = function(layer) {
+    NorgeDigitaltAuth.prototype.wmtsNeedsAuthenticationRewrite = function(layer) {
         var domains = [];
-        return urlNeedsAuthentication(layer.url, domains);
+        return this.urlNeedsAuthentication(layer.url, domains);
     };
 
-    var urlNeedsAuthentication = function (url, domains) {
+    NorgeDigitaltAuth.prototype.urlNeedsAuthentication = function (url, domains) {
         var hasAuthenticatedDomain = false;
 
         for(var i = 0; i < domains.length; i++){
@@ -96,7 +98,7 @@ function (
         return hasAuthenticatedDomain;
     };
 
-    var getServiceIdFromUrl = function (url) {
+    NorgeDigitaltAuth.prototype.getServiceIdFromUrl = function (url) {
         var servideIdPattern = /(wms\.[\w]+(\-\w+)*)/g;
 
         var matches = url.match(servideIdPattern);
@@ -110,17 +112,17 @@ function (
         return serviceId;
     };
 
-    var urlRewriterWmsLayer = function(layer) {
+    NorgeDigitaltAuth.prototype.urlRewriterWmsLayer = function(layer) {
 
         var originalGetImageUrl = layer.getImageUrl;
-        
+        var self = this;
 
         layer.getImageUrl = function(extent, width, height, callback) {
 
             var result = originalGetImageUrl.call(layer, extent, width, height, function(url) {
 
-                var serviceId = getServiceIdFromUrl(url);
-                var ticket = getTicketFor(serviceId);
+                var serviceId = self.getServiceIdFromUrl(url);
+                var ticket = self.getTicketFor(serviceId);
 
                 if(ticket === null) {
                     return callback(url);
@@ -140,48 +142,48 @@ function (
         layer._geodata_norgedigitalt_auth_added = true;
     };
 
-    var urlRewriterWmtsLayer = function(layer) {
+    NorgeDigitaltAuth.prototype.urlRewriterWmtsLayer = function(layer) {
+        var self = this;
         aspect.after(layer, "getTileUrl", function(url, imgElement) {
-            var token = getTokenFor("something");
-            // TODO FIGURE OUT SOMETHING
+            var token = self.getWmtsToken();
+
+            if(token === null) {
+                return url;
+            }
+
             return url + "&gkt=" + token;   
         });
 
         layer._geodata_norgedigitalt_auth_added = true;
     };
 
-    var addLayerAuthenticationIfNecessary = function(layer) {
+    NorgeDigitaltAuth.prototype.addLayerAuthenticationIfNecessary = function(layer) {
 
         if(typeof layer.getTileUrl === "function") {
-            if(wmtsNeedsAuthenticationRewrite(layer)){
+            if(this.wmtsNeedsAuthenticationRewrite(layer)){
               if(layer._geodata_norgedigitalt_auth_added !== true) {
-                urlRewriterWmtsLayer(layer);
+                this.urlRewriterWmtsLayer(layer);
               }
             }
           }
 
           if(typeof layer.getImageUrl === "function") {
-            if(wmsNeedsAuthenticationRewrite(layer)) {
+            if(this.wmsNeedsAuthenticationRewrite(layer)) {
               if(layer._geodata_norgedigitalt_auth_added !== true) {
 
                 // Add id to list of ids to fetch ticket for
-                var serviceId = getServiceIdFromUrl(layer.url);
-                if(wmsTicketIds.indexOf(serviceId) === -1) {
-                    wmsTicketIds.push(serviceId);
+                var serviceId = this.getServiceIdFromUrl(layer.url);
+                if(this.wmsTicketIds.indexOf(serviceId) === -1) {
+                    this.wmsTicketIds.push(serviceId);
                 }
 
-                urlRewriterWmsLayer(layer);
+                this.urlRewriterWmsLayer(layer);
               }
             }
           }
     };
 
-
-    return {
-        getTicketForServices: getTicketForServices,
-        urlRewriterWmsLayer: urlRewriterWmsLayer,
-        urlRewriterWmtsLayer: urlRewriterWmtsLayer,
-        addLayerAuthenticationIfNecessary: addLayerAuthenticationIfNecessary,
-        generateTickets: generateTickets
-    };
+    // Create singleton
+    var norgeDigitaltAuth = new NorgeDigitaltAuth();
+    return norgeDigitaltAuth;
 });
