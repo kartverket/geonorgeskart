@@ -11,6 +11,7 @@ function (
     request) {
 
     function NorgeDigitaltAuth() {
+        this.apiBaseUrl = "https://localhost:44303/";
         this.wmtsToken = null;
         this.wmsTicketIds = [];
         this.ticketByServiceIdDictionary = {};
@@ -39,7 +40,7 @@ function (
     NorgeDigitaltAuth.prototype.getToken = function () {
         var deferred = new Deferred();
 
-        request("https://localhost:44303/api/auth/token", {
+        request(this.apiBaseUrl + "/api/auth/token", {
             method: "GET",
             handleAs: "json"
         })
@@ -60,7 +61,7 @@ function (
             serviceIds = [];
         }
 
-        request("https://localhost:44303/api/auth/ticket", {
+        request(this.apiBaseUrl + "api/auth/ticket", {
             data: JSON.stringify(serviceIds),
             method: "POST",
             handleAs: "json",
