@@ -40,6 +40,7 @@ define([
         }));
 
         NorgeDigitaltAuth.generateTickets();
+        NorgeDigitaltAuth.generateToken();
       },
 
       addUrlRewriterForAuthentication: function() {

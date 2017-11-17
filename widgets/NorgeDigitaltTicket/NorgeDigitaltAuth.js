@@ -15,8 +15,11 @@ function (
         this.wmsTicketIds = [];
         this.ticketByServiceIdDictionary = {};
         this.generatingTickets = false;
+        this.generatingToken = false;
         this.failedTicketRequestsInRow = 0;
-        this.timeoutId = null;
+        this.failedTokenRequestsInRow = 0;
+        this.ticketTimeoutId = null;
+        this.tokenTimeoutId = null;
     }
 
     NorgeDigitaltAuth.prototype.getTicketFor = function (serviceId) {
@@ -31,6 +34,23 @@ function (
             return this.wmtsToken.token;
         }
         return null;
+    };
+
+    NorgeDigitaltAuth.prototype.getToken = function () {
+        var deferred = new Deferred();
+
+        request("https://localhost:44303/api/auth/token", {
+            method: "GET",
+            handleAs: "json"
+        })
+        .then(function (token) {
+            deferred.resolve(token);
+        }, function (error) {
+            console.warn("Could not get token for WMTS services: ", error);
+            deferred.resolve(null);
+        });
+
+        return deferred.promise;
     };
 
     NorgeDigitaltAuth.prototype.getTicketForServices = function (serviceIds) {
@@ -54,6 +74,49 @@ function (
         });
 
         return deferred.promise;
+    };
+
+    NorgeDigitaltAuth.prototype.generateToken = function () {
+        if(this.generatingToken || this.failedTokenRequestsInRow > 2) {
+            return;
+        }
+
+        this.generatingToken = true;
+
+        this.getToken().then(lang.hitch(this, function(token) {
+
+            this.generatingToken = false;
+
+            if(token === null) {
+                console.warn("WMTS services are run without token. Check setup and token service for error.");
+                this.failedTokenRequestsInRow = this.failedTokenRequestsInRow + 1;
+
+                // Retry a total of three times before quitting with 5 second spacing
+                setTimeout(lang.hitch(this, this.generateToken), 5000);
+                return;
+            }
+
+            this.failedTokenRequestsInRow = 0;
+
+            var now = new Date();
+            var tokenExpires = new Date(token.expirationTimeUTC);
+
+            var diffMilliSeconds = tokenExpires - now;
+
+            var nextCallbackShouldBeIn = diffMilliSeconds - (5 * 60 * 1000);
+
+            this.wmtsToken = token;
+
+            if(this.tokenTimeoutId !== null) {
+                clearTimeout(this.tokenTimeoutId);
+            }
+
+            if(nextCallbackShouldBeIn <= 0) {
+                this.generateToken();
+                return;
+            }
+            this.tokenTimeoutId = setTimeout(lang.hitch(this, this.generateToken), nextCallbackShouldBeIn);
+        }));
     };
 
     NorgeDigitaltAuth.prototype.generateTickets = function () {
@@ -94,15 +157,15 @@ function (
 
             var minNextCallbackTime = Math.min.apply(null, expirationTimeInMinutes);
 
-            if(this.timeoutId !== null) {
-                clearTimeout(this.timeoutId);
+            if(this.ticketTimeoutId !== null) {
+                clearTimeout(this.ticketTimeoutId);
             }
 
             if(minNextCallbackTime <= 0) {
                 this.generateTickets();
                 return;
             }
-            this.timeoutId = setTimeout(lang.hitch(this, this.generateTickets), minNextCallbackTime);
+            this.ticketTimeoutId = setTimeout(lang.hitch(this, this.generateTickets), minNextCallbackTime);
         }));
     };
 
@@ -112,7 +175,7 @@ function (
     };
 
     NorgeDigitaltAuth.prototype.wmtsNeedsAuthenticationRewrite = function(layer) {
-        var domains = [];
+        var domains = ["opencache.statkart.no"];
         return this.urlNeedsAuthentication(layer.url, domains);
     };
 
