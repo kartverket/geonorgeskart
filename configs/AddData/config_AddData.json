@@ -13,9 +13,18 @@
       "allow": true,
       "label": null
     },
-    "FromUrl": {
+    "Curated": {
       "allow": true,
-      "label": null
-    }
+      "label": null,
+      "filter": null
+    },
+    "defaultScope": "MyOrganization"
+  },
+  "addFromUrl": {
+    "allow": true
+  },
+  "addFromFile": {
+    "allow": true,
+    "maxRecordCount": 1000
   }
 }

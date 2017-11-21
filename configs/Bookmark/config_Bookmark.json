@@ -14,7 +14,9 @@
         }
       },
       "thumbnail": "${appPath}/configs/Bookmark/thumbnail1510306032538.png",
-      "isInWebmap": false
+      "isInWebmap": false,
+      "isSaveExtent": true,
+      "_uID": 0
     }
   ],
   "bookmarks3D": [],

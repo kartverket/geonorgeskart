@@ -3,8 +3,8 @@
     "name": "JewelryBoxTheme",
     "styles": [
       "yellow",
-      "default",
       "black",
+      "default",
       "green",
       "cyan",
       "red",
@@ -12,19 +12,19 @@
       "blue"
     ],
     "version": "2.6",
-    "customStyles": {
-      "mainBackgroundColor": "#d07d0e"
-    },
     "sharedTheme": {
+      "isPortalSupport": true,
       "useHeader": false,
-      "useLogo": false,
-      "isPortalSupport": true
+      "useLogo": false
+    },
+    "customStyles": {
+      "mainBackgroundColor": "#ffffff"
     }
   },
   "portalUrl": "https://kartverket.maps.arcgis.com",
   "appId": "",
   "authorizedCrossOriginDomains": [],
-  "title": "Geonorgeskart",
+  "title": "<div class=\"attribute-custom-style\"><font color=\"#000001\" face=\"Arial\">GEONORGESKART</font></div>",
   "subtitle": "",
   "keepAppState": true,
   "logo": "images/logo.png",
@@ -433,7 +433,8 @@
         "id": "widgets_Legend_Widget_16",
         "name": "Legend",
         "index": 14,
-        "config": "configs/Legend/config_Legend.json"
+        "config": "configs/Legend/config_Legend.json",
+        "icon": "configs\\Legend\\icon_Legend.png"
       },
       {
         "name": "AddData",
@@ -441,7 +442,8 @@
         "uri": "widgets/AddData/Widget",
         "config": "configs/AddData/config_AddData.json",
         "index": 15,
-        "id": "widgets_AddData_Widget_68"
+        "id": "widgets_AddData_Widget_68",
+        "icon": "configs\\AddData\\icon_AddData.png"
       },
       {
         "name": "Swipe",
@@ -452,7 +454,8 @@
         "position": {
           "relativeTo": "map"
         },
-        "config": "configs/Swipe/config_Swipe.json"
+        "config": "configs/Swipe/config_Swipe.json",
+        "icon": "configs\\Swipe\\icon_Swipe.png"
       },
       {
         "name": "TimeSlider",
@@ -463,7 +466,9 @@
         "position": {
           "relativeTo": "map"
         },
-        "openAtStart": false
+        "openAtStart": false,
+        "icon": "configs\\TimeSlider\\icon_TimeSlider.png",
+        "config": "configs/TimeSlider/config_TimeSlider.json"
       },
       {
         "name": "Edit",
@@ -471,7 +476,8 @@
         "uri": "widgets/Edit/Widget",
         "config": "configs/Edit/config_Edit.json",
         "index": 18,
-        "id": "widgets_Edit_Widget_74"
+        "id": "widgets_Edit_Widget_74",
+        "icon": "configs\\Edit\\icon_Edit.png"
       },
       {
         "name": "Bookmark",
@@ -479,7 +485,8 @@
         "uri": "widgets/Bookmark/Widget",
         "config": "configs/Bookmark/config_Bookmark.json",
         "index": 19,
-        "id": "widgets_Bookmark_Widget_76"
+        "id": "widgets_Bookmark_Widget_76",
+        "icon": "configs\\Bookmark\\icon_Bookmark.png"
       },
       {
         "name": "Print",
@@ -487,7 +494,8 @@
         "uri": "widgets/Print/Widget",
         "config": "configs/Print/config_Print.json",
         "index": 20,
-        "id": "widgets_Print_Widget_77"
+        "id": "widgets_Print_Widget_77",
+        "icon": "configs\\Print\\icon_Print.png"
       }
     ],
     "groups": []
