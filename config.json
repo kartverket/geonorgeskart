@@ -38,7 +38,7 @@
           "left": 0,
           "top": 0,
           "right": 0,
-          "height": 40,
+          "height": 50,
           "relativeTo": "browser"
         },
         "version": "2.6",
@@ -238,7 +238,7 @@
           "uri": "themes/JewelryBoxTheme/panels/LDockablePanel/Panel",
           "position": {
             "left": 0,
-            "top": 40,
+            "top": 50,
             "bottom": 0,
             "width": 360,
             "relativeTo": "browser"
@@ -271,7 +271,7 @@
     "2D": true,
     "position": {
       "left": 0,
-      "top": 40,
+      "top": 50,
       "right": 0,
       "bottom": 0
     },
@@ -504,7 +504,7 @@
             "left": 0,
             "top": 0,
             "right": 0,
-            "height": 40,
+            "height": 50,
             "relativeTo": "browser"
           },
           "version": "2.2"
@@ -623,7 +623,7 @@
             "uri": "themes/JewelryBoxTheme/panels/LDockablePanel/Panel",
             "position": {
               "left": 0,
-              "top": 40,
+              "top": 50,
               "bottom": 0,
               "width": 360,
               "relativeTo": "browser"
@@ -636,7 +636,7 @@
     "map": {
       "position": {
         "left": 0,
-        "top": 40,
+        "top": 50,
         "right": 0,
         "bottom": 0
       }
