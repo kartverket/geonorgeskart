@@ -24,17 +24,12 @@
   "portalUrl": "https://kartverket.maps.arcgis.com",
   "appId": "",
   "authorizedCrossOriginDomains": [],
-  "title": "<div class=\"attribute-custom-style\"><font color=\"#000001\" face=\"Arial\">GEONORGESKART</font></div>",
+  "title": "<div class=\"attribute-custom-style\"><br /></div>",
   "subtitle": "",
   "keepAppState": true,
   "logo": "images/logo.png",
   "geometryService": "https://utility.arcgisonline.com/arcgis/rest/services/Geometry/GeometryServer",
-  "links": [
-    {
-      "label": "Lenke (3D?)",
-      "url": "http://www.geonorge.no"
-    }
-  ],
+  "links": [],
   "widgetOnScreen": {
     "widgets": [
       {
@@ -676,5 +671,6 @@
     "dataSources": {},
     "settings": {}
   },
-  "appItemId": "e00ed8449db34f4aa8c30432a5237acf"
+  "appItemId": "e00ed8449db34f4aa8c30432a5237acf",
+  "logoLink": "http://"
 }
