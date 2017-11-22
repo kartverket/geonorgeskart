@@ -23,21 +23,37 @@ define([
     "jimu/dijit/ShareLink",
     "jimu/utils",
     'jimu/dijit/LoadingShelter',
-    "jimu/dijit/Message"
+    "jimu/dijit/Message",
+    "../UrlLayerController/LayerToggleUrlHandler"
   ],
-  function(declare, lang, BaseWidget, portalUrlUtils, shareUtils, ShareLink, jimuUtils,LoadingShelter, Message) {
+  function(declare, lang, BaseWidget, portalUrlUtils, shareUtils, ShareLink, jimuUtils,LoadingShelter, Message, LayerToggleUrlHandler) {
 
     return declare([BaseWidget], {
       name: 'Share',
       baseClass: 'jimu-widget-share share-container',
       _isShowFindLocation: true,
 
+      // CUSTOM
+      _baseHrefUrlUnmodified: null,
+      // END CUSTOM
+
       onOpen: function() {
         this.widgetManager.activateWidget(this);
+
+        // CUSTOM 
+        var customUrl = this.appConfig.portalUrl;
+        var visibleLayersQueryParam = LayerToggleUrlHandler.createQueryParamsForVisibleMapLayers(this.map);
+        if(visibleLayersQueryParam !== "") {
+          this.shareLink.baseHrefUrl = this._baseHrefUrlUnmodified + "?" + visibleLayersQueryParam;
+        } else {
+          this.shareLink.baseHrefUrl = this._baseHrefUrlUnmodified;
+        }
+        // END CUSTOM
+
         shareUtils.getItemShareInfo(this.appConfig.portalUrl).then(lang.hitch(this, function(shareInfo) {
           var isSharedToPublic = shareUtils.isSharedToPublic(shareInfo);
           if (this.shareLink && this.shareLink.onShareToPublicChanged && true === this.shareLink.HAS_INIT_URL) {
-            this.shareLink.onShareToPublicChanged(isSharedToPublic);
+            this.shareLink.onShareToPublicChanged(isSharedToPublic);            
           }
         }));
       },
@@ -101,6 +117,11 @@ define([
         })).always(lang.hitch(this, function() {
           this.shelter.hide();
         }));
+
+        // CUSTOM
+        this._baseHrefUrlUnmodified = this.shareLink.baseHrefUrl;
+        // END CUSTOM
+
       },
       // _hide: function() {
       //
