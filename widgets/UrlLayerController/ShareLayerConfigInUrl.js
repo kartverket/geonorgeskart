@@ -7,13 +7,13 @@ define([
     esriUrlUtils
   ) {
     
-    function LayerToggleUrlHandler() {
+    function ShareLayerConfigInUrl() {
         this.queryParamName = "geonorge_layers";
         this.splitSublayerCharacter = ",";
         this.splitLayerCharacter = ";";
     }
 
-    LayerToggleUrlHandler.prototype.getLayerIdToNumberDictionary = function(layerIds) {
+    ShareLayerConfigInUrl.prototype.getArrayItemToIndexDict = function(layerIds) {
         if(layerIds instanceof Array === false){
             return {};
         }
@@ -25,7 +25,7 @@ define([
         }, {});
     };
 
-    LayerToggleUrlHandler.prototype.getLayerNumberToIdDictionary = function(layerIds) {
+    ShareLayerConfigInUrl.prototype.getArrayIndexToItemDict = function(layerIds) {
         if(layerIds instanceof Array === false){
             return {};
         }
@@ -37,12 +37,12 @@ define([
         }, {});
     };
 
-    LayerToggleUrlHandler.prototype.createQueryParamsForVisibleMapLayers = function (map) {
+    ShareLayerConfigInUrl.prototype.createQueryParamsForVisibleMapLayers = function (map) {
         console.log("Creating query params for share");
 
         var layerIds = map.layerIds || [];
         
-        var layerIdToNumberDict = this.getLayerIdToNumberDictionary(layerIds);
+        var layerIdToNumberDict = this.getArrayItemToIndexDict(layerIds);
 
         var visibleLayers = layerIds
             .map(function(id) { return map.getLayer(id); })
@@ -56,7 +56,7 @@ define([
                 var visibleLayers = layer.visibleLayers
                     .filter(function(l) { return l !== -1; });
 
-                var subLayerIdToNumberDict = self.getLayerIdToNumberDictionary(visibleLayers);
+                var subLayerIdToNumberDict = self.getArrayItemToIndexDict(visibleLayers);
 
                 var visibleLayersAsTextNumbers = visibleLayers.map(function(subLayerId) { return subLayerIdToNumberDict[subLayerId] });
 
@@ -73,7 +73,7 @@ define([
         return this.queryParamName + "=" + encodeURIComponent(queryParam);
     };
 
-    LayerToggleUrlHandler.prototype.parseUrlForVisibleMapLayersQueryParams = function (url) {
+    ShareLayerConfigInUrl.prototype.parseUrlForVisibleMapLayersQueryParams = function (url) {
         var urlObject = esriUrlUtils.urlToObject(url);
         
         if(urlObject.query === null) {
@@ -124,10 +124,10 @@ define([
             return layers;
     };
 
-    LayerToggleUrlHandler.prototype.enableVisibleMapLayersForQueryParams = function (map, url) {
+    ShareLayerConfigInUrl.prototype.enableVisibleMapLayersForQueryParams = function (map, url) {
         var layersToToggle = this.parseUrlForVisibleMapLayersQueryParams(url);
 
-        var layerNumbersToIdsDict = this.getLayerNumberToIdDictionary(map.layerIds);
+        var layerNumbersToIdsDict = this.getArrayIndexToItemDict(map.layerIds);
 
         var self = this;
         var layerToggleResult = layersToToggle.map(function(layer) {
@@ -145,7 +145,7 @@ define([
                 var subLayersWithIdAndNumber = mapLayer.layerInfos.map(function(li) {
                     return li.name;
                 });
-                var subLayerNumbersToIdsDict = self.getLayerNumberToIdDictionary(subLayersWithIdAndNumber);
+                var subLayerNumbersToIdsDict = self.getArrayIndexToItemDict(subLayersWithIdAndNumber);
                 var visibleLayerIds = layer.visibleLayers.map(function(number) { return subLayerNumbersToIdsDict[number]; });
                 mapLayer.setVisibleLayers(visibleLayerIds);
                 mapLayer.show();
@@ -159,5 +159,5 @@ define([
         }, this);
     };
 
-    return new LayerToggleUrlHandler();
+    return new ShareLayerConfigInUrl();
   });

@@ -24,9 +24,9 @@ define([
     "jimu/utils",
     'jimu/dijit/LoadingShelter',
     "jimu/dijit/Message",
-    "../UrlLayerController/LayerToggleUrlHandler"
+    "../UrlLayerController/ShareLayerConfigInUrl"
   ],
-  function(declare, lang, BaseWidget, portalUrlUtils, shareUtils, ShareLink, jimuUtils,LoadingShelter, Message, LayerToggleUrlHandler) {
+  function(declare, lang, BaseWidget, portalUrlUtils, shareUtils, ShareLink, jimuUtils,LoadingShelter, Message, ShareLayerConfigInUrl) {
 
     return declare([BaseWidget], {
       name: 'Share',
@@ -41,7 +41,7 @@ define([
         this.widgetManager.activateWidget(this);
 
         // CUSTOM 
-        var visibleLayersQueryParam = LayerToggleUrlHandler.createQueryParamsForVisibleMapLayers(this.map);
+        var visibleLayersQueryParam = ShareLayerConfigInUrl.createQueryParamsForVisibleMapLayers(this.map);
         if(visibleLayersQueryParam !== "") {
           this.shareLink.baseHrefUrl = this._baseHrefUrlUnmodified + "?" + visibleLayersQueryParam;
         } else {
