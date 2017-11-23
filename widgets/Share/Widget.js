@@ -41,7 +41,6 @@ define([
         this.widgetManager.activateWidget(this);
 
         // CUSTOM 
-        var customUrl = this.appConfig.portalUrl;
         var visibleLayersQueryParam = LayerToggleUrlHandler.createQueryParamsForVisibleMapLayers(this.map);
         if(visibleLayersQueryParam !== "") {
           this.shareLink.baseHrefUrl = this._baseHrefUrlUnmodified + "?" + visibleLayersQueryParam;
