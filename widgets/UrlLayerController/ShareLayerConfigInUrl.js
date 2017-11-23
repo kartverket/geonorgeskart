@@ -6,7 +6,17 @@ define([
     lang,
     esriUrlUtils
   ) {
-    
+    var debug = true;
+    function isDefined(x) {
+        return !(x == null);
+    }
+
+    function log(x) {
+        if(debug) {
+            console.log(x);
+        }
+    }
+
     function ShareLayerConfigInUrl() {
         this.queryParamName = "geonorge_layers";
         this.splitSublayerCharacter = ",";
@@ -38,7 +48,7 @@ define([
     };
 
     ShareLayerConfigInUrl.prototype.createQueryParamsForVisibleMapLayers = function (map) {
-        console.log("Creating query params for share");
+        log("Creating query params for share");
 
         var layerIds = map.layerIds || [];
         
@@ -51,13 +61,13 @@ define([
         var self = this;
         var queryParam = visibleLayers.reduce(function(queryString, layer) {
             var layerPart = layerIdToNumberDict[layer.id];
-            //wms
+
+            // WMS
             if(layer.getImageUrl) {
                 var visibleLayers = layer.visibleLayers
                     .filter(function(l) { return l !== -1; });
 
                 var subLayerIdToNumberDict = self.getArrayItemToIndexDict(visibleLayers);
-
                 var visibleLayersAsTextNumbers = visibleLayers.map(function(subLayerId) { return subLayerIdToNumberDict[subLayerId] });
 
                 layerPart = layerPart + "[" + visibleLayersAsTextNumbers.join(self.splitSublayerCharacter) + "]";
@@ -76,14 +86,14 @@ define([
     ShareLayerConfigInUrl.prototype.parseUrlForVisibleMapLayersQueryParams = function (url) {
         var urlObject = esriUrlUtils.urlToObject(url);
         
-        if(urlObject.query === null) {
+        if(!isDefined(urlObject.query)) {
             // no query params
             return [];
         }
 
         var layersQueryObject = urlObject.query[this.queryParamName];
 
-        if(typeof layersQueryObject === "undefined" || layersQueryObject === null) {
+        if(!isDefined(layersQueryObject)) {
             // query params, but not the one this component is looking for
             return [];
         } 
@@ -130,33 +140,57 @@ define([
         var layerNumbersToIdsDict = this.getArrayIndexToItemDict(map.layerIds);
 
         var self = this;
-        var layerToggleResult = layersToToggle.map(function(layer) {
-            var mapLayer = map.getLayer(layerNumbersToIdsDict[layer.id]);
+        var layerToggleResult = layersToToggle.map(function (layer) {
+            var errors = [];
 
-            if(!(mapLayer)) {
+            var mapLayerId = layerNumbersToIdsDict[layer.id];
+            
+            if(!isDefined(mapLayerId)) {
+                errors.push("Could not find layer");
                 return {
                     id: layer.id,
-                    success: false
+                    success: errors.length === 0,
+                    errors: errors
                 };
             }
 
-            // wms
+            var mapLayer = map.getLayer(mapLayerId);
+
+            // WMS
             if(mapLayer.getImageUrl) {
-                var subLayersWithIdAndNumber = mapLayer.layerInfos.map(function(li) {
+
+                var subLayerNames = mapLayer.layerInfos.map(function(li) {
                     return li.name;
                 });
-                var subLayerNumbersToIdsDict = self.getArrayIndexToItemDict(subLayersWithIdAndNumber);
-                var visibleLayerIds = layer.visibleLayers.map(function(number) { return subLayerNumbersToIdsDict[number]; });
-                mapLayer.setVisibleLayers(visibleLayerIds);
+
+                var subLayerNumbersToIdsDict = self.getArrayIndexToItemDict(subLayerNames);
+
+                var visibleSubLayerIds = layer.visibleLayers.map(function(number) { 
+                    if(isDefined(subLayerNumbersToIdsDict[number])) {
+                        return subLayerNumbersToIdsDict[number];
+                    }
+                    errors.push("Could not find sublayer with number " + number);
+                    return null; 
+                }).filter(function(id) { return id !== null; });
+
+                mapLayer.setVisibleLayers(visibleSubLayerIds);
                 mapLayer.show();
             }
 
-
             return {
-                id: layer.id,
-                success: true
+                id: mapLayerId,
+                success: errors.length === 0,
+                errors: errors
             };
-        }, this);
+        });
+
+        var failedLayers = layerToggleResult
+            .filter(function(l) { return l.success === false })
+            .forEach(function(l) {
+                log("--- Layer with Id " + l.id + " ---");
+                l.errors.forEach(log);
+                log("--- End Layer Id " + l.id + " ---");
+            });
     };
 
     return new ShareLayerConfigInUrl();
