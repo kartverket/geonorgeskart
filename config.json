@@ -432,19 +432,10 @@
         "icon": "configs\\Legend\\icon_Legend.png"
       },
       {
-        "name": "AddData",
-        "version": "2.6",
-        "uri": "widgets/AddData/Widget",
-        "config": "configs/AddData/config_AddData.json",
-        "index": 15,
-        "id": "widgets_AddData_Widget_68",
-        "icon": "configs\\AddData\\icon_AddData.png"
-      },
-      {
         "name": "Swipe",
         "version": "2.6",
         "uri": "widgets/Swipe/Widget",
-        "index": 16,
+        "index": 15,
         "id": "widgets_Swipe_Widget_36",
         "position": {
           "relativeTo": "map"
@@ -456,7 +447,7 @@
         "name": "TimeSlider",
         "version": "2.6",
         "uri": "widgets/TimeSlider/Widget",
-        "index": 17,
+        "index": 16,
         "id": "widgets_TimeSlider_Widget_37",
         "position": {
           "relativeTo": "map"
@@ -466,11 +457,29 @@
         "config": "configs/TimeSlider/config_TimeSlider.json"
       },
       {
+        "name": "Print",
+        "version": "2.6",
+        "uri": "widgets/Print/Widget",
+        "config": "configs/Print/config_Print.json",
+        "index": 17,
+        "id": "widgets_Print_Widget_77",
+        "icon": "configs\\Print\\icon_Print.png"
+      },
+      {
+        "name": "AddData",
+        "version": "2.6",
+        "uri": "widgets/AddData/Widget",
+        "config": "configs/AddData/config_AddData.json",
+        "index": 18,
+        "id": "widgets_AddData_Widget_68",
+        "icon": "configs\\AddData\\icon_AddData.png"
+      },
+      {
         "name": "Edit",
         "version": "2.6",
         "uri": "widgets/Edit/Widget",
         "config": "configs/Edit/config_Edit.json",
-        "index": 18,
+        "index": 19,
         "id": "widgets_Edit_Widget_74",
         "icon": "configs\\Edit\\icon_Edit.png"
       },
@@ -479,18 +488,9 @@
         "version": "2.6",
         "uri": "widgets/Bookmark/Widget",
         "config": "configs/Bookmark/config_Bookmark.json",
-        "index": 19,
+        "index": 20,
         "id": "widgets_Bookmark_Widget_76",
         "icon": "configs\\Bookmark\\icon_Bookmark.png"
-      },
-      {
-        "name": "Print",
-        "version": "2.6",
-        "uri": "widgets/Print/Widget",
-        "config": "configs/Print/config_Print.json",
-        "index": 20,
-        "id": "widgets_Print_Widget_77",
-        "icon": "configs\\Print\\icon_Print.png"
       }
     ],
     "groups": []
