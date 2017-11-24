@@ -50,6 +50,7 @@
 .jimu-widget-header-controller .icon-node{
   cursor: pointer;
   opacity: 0.6;
+  filter: saturate(0);
   text-align: center;
   border-right: 1px solid #323e4f;
 }
@@ -62,10 +63,12 @@
 }
 .jimu-widget-header-controller .icon-node:hover{
   opacity: 1;
+  filter: saturate(1);
 }
 .jimu-widget-header-controller .icon-node.jimu-state-selected{
   background-color: rgba(0, 0, 0, 0.3);
   opacity: 1;
+  filter: saturate(1);
   border: none;
   border-top: 2px solid #8491a1;
 }
