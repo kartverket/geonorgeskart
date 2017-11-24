@@ -3156,7 +3156,7 @@ html.hr .jimu-filter .allExpsBox > div{
   border-radius: 4px;
 }
 .jimu-on-screen-widget-panel>.jimu-panel-title{
-  color: white;
+  color: #FE5000;
   height: 35px;
   width: 100%;
   background-color: #485566;
@@ -3188,7 +3188,7 @@ html.hr .jimu-filter .allExpsBox > div{
   margin: 0 !important;
 }
 .jimu-on-screen-widget-panel>.jimu-panel-title>.close-btn{
-  background: url(images/white_close_default.png) no-repeat center center;
+  background: url(images/black_close_default.png) no-repeat center center;
 }
 .jimu-on-screen-widget-panel>.jimu-panel-title>.fold-down{
   background: url(images/fold_down.png) no-repeat center center;
