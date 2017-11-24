@@ -21,6 +21,8 @@ define([
         this.queryParamName = "geonorge_layers";
         this.splitSublayerCharacter = ",";
         this.splitLayerCharacter = ";";
+
+        this.urlCleanupEnabled = false;
     }
 
     ShareLayerConfigInUrl.prototype.getArrayItemToIndexDict = function(layerIds) {
@@ -191,6 +193,38 @@ define([
                 l.errors.forEach(log);
                 log("--- End Layer Id " + l.id + " ---");
             });
+
+        // clean up url from the browser window so its clear it does not update continously
+        if(layersToToggle.length > 0) {
+            this.removeQueryParameterFromUrl(url);
+        }
+    };
+
+    ShareLayerConfigInUrl.prototype.removeQueryParameterFromUrl = function (url) {
+        if(this.urlCleanupEnabled === false) {
+            return;
+        }
+
+        var indexOfQueryParam = url.indexOf(this.queryParamName);
+        
+        if(indexOfQueryParam === -1) {
+            // Could not find query param in url
+            return;
+        }
+
+        var indexOfFirstAmpersandAfterQueryParam = url.indexOf("&", indexOfQueryParam);
+
+        var urlWithoutQueryParam = null;
+        if(indexOfFirstAmpersandAfterQueryParam === -1) {
+            // we ran out of url before the query param ended, or the query param is the last param
+            urlWithoutQueryParam = url.slice(0, indexOfQueryParam);
+        } else {
+            urlWithoutQueryParam = url.slice(0, indexOfQueryParam) + url.slice(indexOfFirstAmpersandAfterQueryParam + 1);
+        }
+
+        if(window.history && (typeof window.history.replaceState === "function")) {
+            window.history.replaceState(null, null, urlWithoutQueryParam);
+        }
     };
 
     return new ShareLayerConfigInUrl();
