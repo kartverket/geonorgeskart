@@ -6,9 +6,1575 @@
     "EnableOrDisablePopup": true,
     "MoveupOrMovedown": true,
     "OpenAttributeTable": true,
-    "DescriptionOrShowItemDetailsOrDownload": false
+    "DescriptionOrShowItemDetailsOrDownload": true
   },
   "layerOptions": {
+    "SkredHendelser_473": {
+      "display": false
+    },
+    "SkredHendelser_473_0": {
+      "display": true
+    },
+    "SkredHendelser_473_1": {
+      "display": true
+    },
+    "SkredHendelser_473_2": {
+      "display": true
+    },
+    "SkredHendelser_473_3": {
+      "display": true
+    },
+    "SkredHendelser_473_4": {
+      "display": true
+    },
+    "SkredHendelser_473_5": {
+      "display": true
+    },
+    "SkredHendelser_473_6": {
+      "display": true
+    },
+    "SkredSnoAktR_6249": {
+      "display": false
+    },
+    "SkredSnoAktR_6249_0": {
+      "display": true
+    },
+    "SkredSnoAktR_6249_1": {
+      "display": true
+    },
+    "SkredSnoAktR_6249_2": {
+      "display": true
+    },
+    "SkredSnoSteinAkt_9580": {
+      "display": false
+    },
+    "SkredSnoSteinAkt_9580_0": {
+      "display": true
+    },
+    "SkredSnoSteinAkt_9580_1": {
+      "display": true
+    },
+    "SkredSnoSteinAkt_9580_2": {
+      "display": true
+    },
+    "SkredKvikkleire1_6024": {
+      "display": false
+    },
+    "SkredKvikkleire1_6024_0": {
+      "display": true
+    },
+    "SkredKvikkleire1_6024_1": {
+      "display": true
+    },
+    "SkredKvikkleire1_6024_2": {
+      "display": true
+    },
+    "Skredfaresoner1_2281": {
+      "display": false
+    },
+    "Skredfaresoner1_2281_0": {
+      "display": true
+    },
+    "Skredfaresoner1_2281_1": {
+      "display": true
+    },
+    "Skredfaresoner1_2281_2": {
+      "display": true
+    },
+    "Skredfaresoner1_2281_3": {
+      "display": true
+    },
+    "Fjellskred_4768": {
+      "display": false
+    },
+    "Fjellskred_4768_0": {
+      "display": true
+    },
+    "Fjellskred_4768_1": {
+      "display": true
+    },
+    "Fjellskred_4768_2": {
+      "display": true
+    },
+    "Fjellskred_4768_3": {
+      "display": true
+    },
+    "Fjellskred_4768_4": {
+      "display": true
+    },
+    "Fjellskred_4768_5": {
+      "display": true
+    },
+    "Fjellskred_4768_6": {
+      "display": true
+    },
+    "Fjellskred_4768_7": {
+      "display": true
+    },
+    "Fjellskred_4768_8": {
+      "display": true
+    },
+    "Fjellskred_4768_9": {
+      "display": true
+    },
+    "Sikringstiltak_7728": {
+      "display": false
+    },
+    "Sikringstiltak_7728_0": {
+      "display": true
+    },
+    "FlomAktR_5316": {
+      "display": false
+    },
+    "FlomAktR_5316_0": {
+      "display": true
+    },
+    "FlomAktR_5316_1": {
+      "display": true
+    },
+    "SkredJordFlomAktR1_9470": {
+      "display": false
+    },
+    "SkredJordFlomAktR1_9470_0": {
+      "display": true
+    },
+    "SkredJordFlomAktR1_9470_1": {
+      "display": true
+    },
+    "SkredSteinAktR_3146": {
+      "display": false
+    },
+    "SkredSteinAktR_3146_0": {
+      "display": true
+    },
+    "SkredSteinAktR_3146_1": {
+      "display": true
+    },
+    "SkredSteinAktR_3146_2": {
+      "display": true
+    },
+    "Flomsoner1_575": {
+      "display": false
+    },
+    "Flomsoner1_575_0": {
+      "display": true
+    },
+    "Flomsoner1_575_1": {
+      "display": true
+    },
+    "Flomsoner1_575_2": {
+      "display": true
+    },
+    "Flomsoner1_575_3": {
+      "display": true
+    },
+    "Flomsoner1_575_4": {
+      "display": true
+    },
+    "Flomsoner1_575_5": {
+      "display": true
+    },
+    "Flomsoner1_575_6": {
+      "display": true
+    },
+    "Flomsoner1_575_7": {
+      "display": true
+    },
+    "Flomsoner1_575_8": {
+      "display": true
+    },
+    "Flomsoner1_575_9": {
+      "display": true
+    },
+    "Flomsoner1_575_10": {
+      "display": true
+    },
+    "Flomsoner1_575_11": {
+      "display": true
+    },
+    "Flomsoner1_575_12": {
+      "display": true
+    },
+    "Flomsoner1_575_13": {
+      "display": true
+    },
+    "Flomsoner1_575_14": {
+      "display": true
+    },
+    "Flomsoner1_575_15": {
+      "display": true
+    },
+    "Flomsoner1_575_16": {
+      "display": true
+    },
+    "Flomsoner1_575_17": {
+      "display": true
+    },
+    "Flomsoner1_575_18": {
+      "display": true
+    },
+    "wms_8792": {
+      "display": false
+    },
+    "wms_8792_andre_linjer_uten_hoyde": {
+      "display": true
+    },
+    "wms_8792_andre_linjer_under_40m": {
+      "display": true
+    },
+    "wms_8792_andre_linjer_mellom_40m_60m": {
+      "display": true
+    },
+    "wms_8792_andre_linjer_60m_og_over": {
+      "display": true
+    },
+    "wms_8792_kraftledning_uten_hoyde": {
+      "display": true
+    },
+    "wms_8792_kraftledning_under_40m": {
+      "display": true
+    },
+    "wms_8792_kraftledning_mellom_40m_60m": {
+      "display": true
+    },
+    "wms_8792_kraftledning_60m_og_over": {
+      "display": true
+    },
+    "wms_8792_linjepunkt_uten_hoyde": {
+      "display": true
+    },
+    "wms_8792_linjepunkt_under_40m": {
+      "display": true
+    },
+    "wms_8792_linjepunkt_mellom_40m_60m": {
+      "display": true
+    },
+    "wms_8792_linjepunkt_60m_og_over": {
+      "display": true
+    },
+    "wms_8792_kraftstolpe_uten_hoyde": {
+      "display": true
+    },
+    "wms_8792_kraftstolpe_under_40m": {
+      "display": true
+    },
+    "wms_8792_kraftstolpe_mellom_40m_60m": {
+      "display": true
+    },
+    "wms_8792_kraftstolpe_60m_og_over": {
+      "display": true
+    },
+    "wms_8792_punkthindre_uten_hoyde": {
+      "display": true
+    },
+    "wms_8792_punkthindre_under_40m": {
+      "display": true
+    },
+    "wms_8792_punkthindre_mellom_40m_60m": {
+      "display": true
+    },
+    "wms_8792_Punkthindre_60m_og_over": {
+      "display": true
+    },
+    "wms_9377": {
+      "display": false
+    },
+    "wms_9377_privatveg": {
+      "display": true
+    },
+    "wms_9377_skogsbilveg": {
+      "display": true
+    },
+    "wms_9377_kommunalveg": {
+      "display": true
+    },
+    "wms_9377_fylkesveg": {
+      "display": true
+    },
+    "wms_9377_riksveg": {
+      "display": true
+    },
+    "wms_9377_europaveg": {
+      "display": true
+    },
+    "wms_9377_bilferjestrekning": {
+      "display": true
+    },
+    "wms_9377_vegnavn": {
+      "display": true
+    },
+    "wms_9157": {
+      "display": false
+    },
+    "wms_9157_gang_og_sykkelveg": {
+      "display": true
+    },
+    "wms_9157_sykkelveg": {
+      "display": true
+    },
+    "wms_9157_fortau_og_frittstaende_trapp": {
+      "display": true
+    },
+    "wms_1712": {
+      "display": false
+    },
+    "wms_1712_spr_strandsoner": {
+      "display": true
+    },
+    "wms_5639": {
+      "display": false
+    },
+    "wms_5639_friluftsomrade_01": {
+      "display": true
+    },
+    "wms_5639_parkeringsomrader_friluft_01": {
+      "display": true
+    },
+    "wms_5639_turvei_01": {
+      "display": true
+    },
+    "wms_5639_turisthytte_01": {
+      "display": true
+    },
+    "wms_5639_fiskeplass_01": {
+      "display": true
+    },
+    "wms_5639_baderampe_01": {
+      "display": true
+    },
+    "wms_5639_gapahukhytte_01": {
+      "display": true
+    },
+    "wms_5639_grillbalplass_01": {
+      "display": true
+    },
+    "wms_5639_sittegruppe_01": {
+      "display": true
+    },
+    "wms_5639_toalett_01": {
+      "display": true
+    },
+    "wms_5639_hc_parkering_friluft_01": {
+      "display": true
+    },
+    "wms_5639_friluftsomrade_02": {
+      "display": true
+    },
+    "wms_5639_parkeringsomrader_friluft_02": {
+      "display": true
+    },
+    "wms_5639_turvei_02": {
+      "display": true
+    },
+    "wms_5639_turisthytte_02": {
+      "display": true
+    },
+    "wms_5639_fiskeplass_02": {
+      "display": true
+    },
+    "wms_5639_gapahukhytte_02": {
+      "display": true
+    },
+    "wms_5639_grillbalplass_02": {
+      "display": true
+    },
+    "wms_5639_sittegruppe_02": {
+      "display": true
+    },
+    "wms_5639_toalett_02": {
+      "display": true
+    },
+    "wms_5639_hc_parkering_friluft_02": {
+      "display": true
+    },
+    "wms_5639_friluftsomrade_03": {
+      "display": true
+    },
+    "wms_5639_parkeringsomrader_friluft_03": {
+      "display": true
+    },
+    "wms_5639_turvei_03": {
+      "display": true
+    },
+    "wms_5639_turisthytte_03": {
+      "display": true
+    },
+    "wms_5639_fiskeplass_03": {
+      "display": true
+    },
+    "wms_5639_baderampe_02": {
+      "display": true
+    },
+    "wms_5639_gapahukhytte_03": {
+      "display": true
+    },
+    "wms_5639_grillbalplass_03": {
+      "display": true
+    },
+    "wms_5639_sittegruppe_03": {
+      "display": true
+    },
+    "wms_5639_toalett_03": {
+      "display": true
+    },
+    "wms_5639_hc_parkering_friluft_03": {
+      "display": true
+    },
+    "wms_6576": {
+      "display": false
+    },
+    "wms_6576_t_parkeringsomrade_r": {
+      "display": true
+    },
+    "wms_6576_t_vei_r": {
+      "display": true
+    },
+    "wms_6576_t_HC_parkering_r": {
+      "display": true
+    },
+    "wms_6576_t_inngangbygg_r_01": {
+      "display": true
+    },
+    "wms_6576_t_parkeringsomrade_el": {
+      "display": true
+    },
+    "wms_6576_t_vei_el": {
+      "display": true
+    },
+    "wms_6576_t_HC_parkering_el": {
+      "display": true
+    },
+    "wms_6576_t_inngangbygg_r_02": {
+      "display": true
+    },
+    "wms_6576_t_parkeringsomrade": {
+      "display": true
+    },
+    "wms_6576_t_vei": {
+      "display": true
+    },
+    "wms_6576_t_HC_parkering": {
+      "display": true
+    },
+    "wms_6576_t_inngangbygg": {
+      "display": true
+    },
+    "wms_3069": {
+      "display": false
+    },
+    "wms_3069_MarineLandskap": {
+      "display": true
+    },
+    "wms_9784": {
+      "display": false
+    },
+    "wms_9784_DD Presisjon": {
+      "display": true
+    },
+    "wms_9784_DD_punkt": {
+      "display": true
+    },
+    "wms_9784_NT Presisjon": {
+      "display": true
+    },
+    "wms_9784_NT_punkt": {
+      "display": true
+    },
+    "wms_9784_VU Presisjon": {
+      "display": true
+    },
+    "wms_9784_VU_punkt": {
+      "display": true
+    },
+    "wms_9784_EN Presisjon": {
+      "display": true
+    },
+    "wms_9784_EN_punkt": {
+      "display": true
+    },
+    "wms_9784_CR Presisjon": {
+      "display": true
+    },
+    "wms_9784_CR_punkt": {
+      "display": true
+    },
+    "wms_9784_RE Presisjon": {
+      "display": true
+    },
+    "wms_9784_RE_punkt": {
+      "display": true
+    },
+    "SvekketIs1_9111": {
+      "display": false
+    },
+    "SvekketIs1_9111_0": {
+      "display": true
+    },
+    "SvekketIs1_9111_1": {
+      "display": true
+    },
+    "SvekketIs1_9111_2": {
+      "display": true
+    },
+    "SvekketIs1_9111_3": {
+      "display": true
+    },
+    "SvekketIs1_9111_4": {
+      "display": true
+    },
+    "SvekketIs1_9111_5": {
+      "display": true
+    },
+    "Innsjodatabase1_2475": {
+      "display": false
+    },
+    "Innsjodatabase1_2475_0": {
+      "display": true
+    },
+    "Innsjodatabase1_2475_1": {
+      "display": true
+    },
+    "Innsjodatabase1_2475_2": {
+      "display": true
+    },
+    "wms_7328": {
+      "display": false
+    },
+    "wms_7328_Israndavsetninger": {
+      "display": true
+    },
+    "wms_7328_Skjellsand_modellert": {
+      "display": true
+    },
+    "wms_7328_Skjellsand_kartlagt": {
+      "display": true
+    },
+    "wms_7328_Skjellsand_observasjon": {
+      "display": true
+    },
+    "wms_7328_Skjellsand_datadekning": {
+      "display": true
+    },
+    "wms_7328_Biotoper_MTRL": {
+      "display": true
+    },
+    "wms_7328_Biotoper_NLVI": {
+      "display": true
+    },
+    "wms_7328_Biotoper_T2N7": {
+      "display": true
+    },
+    "wms_7328_Biotoper_Egk_TR3_FM": {
+      "display": true
+    },
+    "HydrologiskeData1_9258": {
+      "display": false
+    },
+    "HydrologiskeData1_9258_0": {
+      "display": true
+    },
+    "HydrologiskeData1_9258_1": {
+      "display": true
+    },
+    "HydrologiskeData1_9258_2": {
+      "display": true
+    },
+    "HydrologiskeData1_9258_3": {
+      "display": true
+    },
+    "HydrologiskeData1_9258_4": {
+      "display": true
+    },
+    "Elvenett1_4768": {
+      "display": false
+    },
+    "Elvenett1_4768_0": {
+      "display": true
+    },
+    "Elvenett1_4768_1": {
+      "display": true
+    },
+    "Elvenett1_4768_2": {
+      "display": true
+    },
+    "VerneplanforVassdrag_8924": {
+      "display": false
+    },
+    "VerneplanforVassdrag_8924_0": {
+      "display": true
+    },
+    "wms_779": {
+      "display": true
+    },
+    "wms_779_Jordbruksregioner": {
+      "display": true
+    },
+    "wms_779_Landskapsregioner": {
+      "display": true
+    },
+    "wms_779_Underregioner": {
+      "display": true
+    },
+    "wms_4143": {
+      "display": false
+    },
+    "wms_4143_Oversiktskart": {
+      "display": true
+    },
+    "wms_4143_Vegetasjonstypar": {
+      "display": true
+    },
+    "wms_4143_Kartsignatur": {
+      "display": true
+    },
+    "wms_4143_Hovudtypar": {
+      "display": true
+    },
+    "wms_4143_Saubeite": {
+      "display": true
+    },
+    "wms_4143_Storfebeite": {
+      "display": true
+    },
+    "wms_4143_Tilleggsinformasjon": {
+      "display": true
+    },
+    "wms_4143_Naturtypar": {
+      "display": true
+    },
+    "wms_2440": {
+      "display": false
+    },
+    "wms_2440_Satellitt_infrarod": {
+      "display": true
+    },
+    "wms_2440_Satellitt_naturlig": {
+      "display": true
+    },
+    "wms_2440_Alder": {
+      "display": true
+    },
+    "wms_2440_Dominerende_treslag": {
+      "display": true
+    },
+    "wms_2440_Volum": {
+      "display": true
+    },
+    "wms_2440_Volum_gran": {
+      "display": true
+    },
+    "wms_2440_Volum_furu": {
+      "display": true
+    },
+    "wms_2440_Volum_lauv": {
+      "display": true
+    },
+    "wms_2440_Arstall": {
+      "display": true
+    },
+    "wms_2440_Figurer": {
+      "display": true
+    },
+    "wms_2440_Status_satskog": {
+      "display": true
+    },
+    "wms_5552": {
+      "display": false
+    },
+    "wms_5552_Vernskog": {
+      "display": true
+    },
+    "wms_7531": {
+      "display": false
+    },
+    "wms_7531_Nedbygd_jordbruksareal_flate": {
+      "display": true
+    },
+    "wms_7531_Nedbygd_jordbruksareal_punkt": {
+      "display": true
+    },
+    "wms_7737": {
+      "display": false
+    },
+    "wms_7737_Jordkvalitet": {
+      "display": true
+    },
+    "wms_1582": {
+      "display": false
+    },
+    "wms_1582_Bonitet": {
+      "display": true
+    },
+    "wms_1582_Arealtyper": {
+      "display": true
+    },
+    "wms_1582_Skogbonitet": {
+      "display": true
+    },
+    "wms_1582_Myr": {
+      "display": true
+    },
+    "wms_1582_Treslag": {
+      "display": true
+    },
+    "wms_1582_Dyrkbar_jord": {
+      "display": true
+    },
+    "wms_1582_Jordbruk": {
+      "display": true
+    },
+    "wms_1582_Snaumark": {
+      "display": true
+    },
+    "wms_3754": {
+      "display": false
+    },
+    "wms_3754_Bonitet": {
+      "display": true
+    },
+    "wms_3754_Arealtyper": {
+      "display": true
+    },
+    "wms_3754_Skogbonitet": {
+      "display": true
+    },
+    "wms_3754_Myr": {
+      "display": true
+    },
+    "wms_3754_Treslag": {
+      "display": true
+    },
+    "wms_3754_Dyrkbar_jord": {
+      "display": true
+    },
+    "wms_3754_Snaumark": {
+      "display": true
+    },
+    "wms_4522": {
+      "display": false
+    },
+    "wms_4522_Mattilsynet_Bigaardsplasser": {
+      "display": true
+    },
+    "wms_4712": {
+      "display": false
+    },
+    "wms_4712_Sau_per_km2": {
+      "display": true
+    },
+    "wms_4712_Tapsprosent_storfe": {
+      "display": true
+    },
+    "wms_4712_Tapsprosent_geit": {
+      "display": true
+    },
+    "wms_4712_Tapsprosent_lam": {
+      "display": true
+    },
+    "wms_4712_Tapsprosent_sau": {
+      "display": true
+    },
+    "wms_4712_Tapsprosent_sau_lam": {
+      "display": true
+    },
+    "wms_4712_Storfe_sleppt": {
+      "display": true
+    },
+    "wms_4712_Geit_sleppt": {
+      "display": true
+    },
+    "wms_4712_Lam_sleppt": {
+      "display": true
+    },
+    "wms_4712_Sau_sleppt": {
+      "display": true
+    },
+    "wms_4712_Sau_lam_sleppt": {
+      "display": true
+    },
+    "wms_4712_Dyreslag": {
+      "display": true
+    },
+    "wms_4712_Beitelaggrenser": {
+      "display": true
+    },
+    "wms_4712_dyreslag_seter": {
+      "display": true
+    },
+    "wms_4712_Seter": {
+      "display": true
+    },
+    "wms_4712_Beitelagnamn": {
+      "display": true
+    },
+    "wms_5372": {
+      "display": false
+    },
+    "wms_5372_Losmasse_flate_N1000_web": {
+      "display": true
+    },
+    "wms_5372_Losmasse_flate_N1000": {
+      "display": true
+    },
+    "wms_5372_Losmasse_flate_label": {
+      "display": true
+    },
+    "wms_5372_Losmasse_flate": {
+      "display": true
+    },
+    "wms_5372_Losmasse_grense": {
+      "display": true
+    },
+    "wms_5372_Losmasse_formlinje_N1000": {
+      "display": true
+    },
+    "wms_5372_Saltvannsavsetning_N1000_web": {
+      "display": true
+    },
+    "wms_5372_Saltvannsavsetning_N1000": {
+      "display": true
+    },
+    "wms_5372_Saltvannsavsetning": {
+      "display": true
+    },
+    "wms_5372_Mektighet_N1000_web": {
+      "display": true
+    },
+    "wms_5372_Mektighet_N1000": {
+      "display": true
+    },
+    "wms_5372_Mektighet": {
+      "display": true
+    },
+    "wms_5372_Infiltrasjonsevne": {
+      "display": true
+    },
+    "wms_5372_Grunnvannspotensiale": {
+      "display": true
+    },
+    "wms_5372_Skredmateriale_N1000_web": {
+      "display": true
+    },
+    "wms_5372_Skredmateriale_N1000": {
+      "display": true
+    },
+    "wms_5372_Skredmateriale": {
+      "display": true
+    },
+    "wms_9243": {
+      "display": false
+    },
+    "wms_9243_Bergart_flate_oversikt": {
+      "display": true
+    },
+    "wms_9243_Bergart_flate_N250": {
+      "display": true
+    },
+    "wms_9243_Bergart_grense_N250": {
+      "display": true
+    },
+    "wms_9243_Berggrunn_raster_N250_tegnforklaring": {
+      "display": true
+    },
+    "wms_9243_Berggrunn_raster_N250_oversikt": {
+      "display": true
+    },
+    "wms_9243_Berggrunn_raster_N250_detalj": {
+      "display": true
+    },
+    "wms_9243_Lineamenter_satellittolket_N750": {
+      "display": true
+    },
+    "wms_9243_Lineamenter_N250": {
+      "display": true
+    },
+    "wms_3602": {
+      "display": false
+    },
+    "wms_3602_Bergart_N50_dekning": {
+      "display": true
+    },
+    "wms_3602_Bergart_N50_ikkekartlagt": {
+      "display": true
+    },
+    "wms_3602_Bergart_flate_N50": {
+      "display": true
+    },
+    "wms_3602_Bergart_grense_N50": {
+      "display": true
+    },
+    "wms_6505": {
+      "display": false
+    },
+    "wms_6505_Grus_Pukk_omrade_verdivurdering": {
+      "display": true
+    },
+    "wms_6505_Grus_Pukk_registrering_verdivurdering": {
+      "display": true
+    },
+    "wms_6505_Grus_Pukk_omrade": {
+      "display": true
+    },
+    "wms_6505_Grus_Pukk_registrering": {
+      "display": true
+    },
+    "wms_6505_Grus_Pukk_statistikkpunkt_nasjonal": {
+      "display": true
+    },
+    "wms_6505_Grus_Pukk_statistikkpunkt_regional": {
+      "display": true
+    },
+    "wms_6505_Grus_Pukk_provepunkt": {
+      "display": true
+    },
+    "wms_6505_Grus_Pukk_observasjon": {
+      "display": true
+    },
+    "wms_6505_Grus_Pukk_uttak": {
+      "display": true
+    },
+    "wms_6505_Steintipp": {
+      "display": true
+    },
+    "wms_8697": {
+      "display": false
+    },
+    "wms_8697_Industrimineralomrade_-_Verdivurdering": {
+      "display": true
+    },
+    "wms_8697_Forekomster": {
+      "display": true
+    },
+    "wms_8697_Feltspatmineraler": {
+      "display": true
+    },
+    "wms_8697_Pegmatitt_Feltspat": {
+      "display": true
+    },
+    "wms_8697_Anortositt": {
+      "display": true
+    },
+    "wms_8697_Feltspat_uspes": {
+      "display": true
+    },
+    "wms_8697_Amazonitt": {
+      "display": true
+    },
+    "wms_8697_Karbonatmineraler": {
+      "display": true
+    },
+    "wms_8697_Kalkstein": {
+      "display": true
+    },
+    "wms_8697_Dolomitt": {
+      "display": true
+    },
+    "wms_8697_Karbonater_uspes": {
+      "display": true
+    },
+    "wms_8697_Silika": {
+      "display": true
+    },
+    "wms_8697_Kvartsitt": {
+      "display": true
+    },
+    "wms_8697_Kvarts": {
+      "display": true
+    },
+    "wms_8697_Kvarts_uspes": {
+      "display": true
+    },
+    "wms_8697_Pegmatitt_Silika": {
+      "display": true
+    },
+    "wms_8697_Olivinmineraler": {
+      "display": true
+    },
+    "wms_8697_Ultramafitt_uspes": {
+      "display": true
+    },
+    "wms_8697_Olivin": {
+      "display": true
+    },
+    "wms_8697_Andre_mineraler": {
+      "display": true
+    },
+    "wms_8697_Apatitt": {
+      "display": true
+    },
+    "wms_8697_Flusspat": {
+      "display": true
+    },
+    "wms_8697_Kyanitt": {
+      "display": true
+    },
+    "wms_8697_Wollastonitt": {
+      "display": true
+    },
+    "wms_8697_Glimmer": {
+      "display": true
+    },
+    "wms_8697_Asbest": {
+      "display": true
+    },
+    "wms_8697_Kiselgur": {
+      "display": true
+    },
+    "wms_8697_Kaolin": {
+      "display": true
+    },
+    "wms_8697_Barytt": {
+      "display": true
+    },
+    "wms_8697_Granat": {
+      "display": true
+    },
+    "wms_8697_Grafittmineraler": {
+      "display": true
+    },
+    "wms_8697_Grafitt": {
+      "display": true
+    },
+    "wms_8697_Talkmineraler": {
+      "display": true
+    },
+    "wms_8697_Kalk_Kleberstein": {
+      "display": true
+    },
+    "wms_8697_Kalk": {
+      "display": true
+    },
+    "wms_8697_Serpentin": {
+      "display": true
+    },
+    "wms_8697_Berylliummineraler": {
+      "display": true
+    },
+    "wms_8697_Beryll": {
+      "display": true
+    },
+    "wms_8697_Fenakitt": {
+      "display": true
+    },
+    "wms_8697_Magnesiummineraler": {
+      "display": true
+    },
+    "wms_8697_Magnesitt": {
+      "display": true
+    },
+    "wms_8697_Brusitt": {
+      "display": true
+    },
+    "wms_8697_Nefelinmineraler": {
+      "display": true
+    },
+    "wms_8697_Nefelinsyenitt": {
+      "display": true
+    },
+    "wms_8697_Zirkoniummineraler": {
+      "display": true
+    },
+    "wms_8697_Zircon": {
+      "display": true
+    },
+    "wms_8697_Baddeleyitt": {
+      "display": true
+    },
+    "wms_8697_Kullmineraler": {
+      "display": true
+    },
+    "wms_8697_Kull": {
+      "display": true
+    },
+    "wms_4126": {
+      "display": false
+    },
+    "wms_4126_Forekomster": {
+      "display": true
+    },
+    "wms_4126_Basemetaller": {
+      "display": true
+    },
+    "wms_4126_Antimon": {
+      "display": true
+    },
+    "wms_4126_Arsen": {
+      "display": true
+    },
+    "wms_4126_Vismut": {
+      "display": true
+    },
+    "wms_4126_Kobber": {
+      "display": true
+    },
+    "wms_4126_Bly": {
+      "display": true
+    },
+    "wms_4126_Tinn": {
+      "display": true
+    },
+    "wms_4126_Sink": {
+      "display": true
+    },
+    "wms_4126_Jern-sulfider": {
+      "display": true
+    },
+    "wms_4126_Jernmetaller": {
+      "display": true
+    },
+    "wms_4126_Jern": {
+      "display": true
+    },
+    "wms_4126_Jern-titan": {
+      "display": true
+    },
+    "wms_4126_Mangan": {
+      "display": true
+    },
+    "wms_4126_Titan": {
+      "display": true
+    },
+    "wms_4126_Jernlegeringsmetaller": {
+      "display": true
+    },
+    "wms_4126_Krom": {
+      "display": true
+    },
+    "wms_4126_Cobolt": {
+      "display": true
+    },
+    "wms_4126_Molybden": {
+      "display": true
+    },
+    "wms_4126_Nikkel": {
+      "display": true
+    },
+    "wms_4126_Vanadium": {
+      "display": true
+    },
+    "wms_4126_Wolfram": {
+      "display": true
+    },
+    "wms_4126_Edelmetaller": {
+      "display": true
+    },
+    "wms_4126_Gull": {
+      "display": true
+    },
+    "wms_4126_PGE": {
+      "display": true
+    },
+    "wms_4126_Solv": {
+      "display": true
+    },
+    "wms_4126_Energimetaller": {
+      "display": true
+    },
+    "wms_4126_Thorium": {
+      "display": true
+    },
+    "wms_4126_Uran": {
+      "display": true
+    },
+    "wms_4126_Spesialmetaller": {
+      "display": true
+    },
+    "wms_4126_Beryll": {
+      "display": true
+    },
+    "wms_4126_Litium": {
+      "display": true
+    },
+    "wms_4126_Niob": {
+      "display": true
+    },
+    "wms_4126_REE": {
+      "display": true
+    },
+    "wms_4126_Scandium": {
+      "display": true
+    },
+    "wms_4126_Tantal": {
+      "display": true
+    },
+    "wms_8332": {
+      "display": false
+    },
+    "wms_8332_Natursteinsomrade_-_Verdivurdering": {
+      "display": true
+    },
+    "wms_8332_Forekomster": {
+      "display": true
+    },
+    "wms_8332_Skifer_og_hellestein": {
+      "display": true
+    },
+    "wms_8332_Leirskifer": {
+      "display": true
+    },
+    "wms_8332_Gronnskifer": {
+      "display": true
+    },
+    "wms_8332_Glimmerskifer_Skiferstein": {
+      "display": true
+    },
+    "wms_8332_Fyllitt": {
+      "display": true
+    },
+    "wms_8332_Kvartsittskifer": {
+      "display": true
+    },
+    "wms_8332_Skifer_Skiferstein": {
+      "display": true
+    },
+    "wms_8332_Gneis_Skiferstein": {
+      "display": true
+    },
+    "wms_8332_Amfibolitt": {
+      "display": true
+    },
+    "wms_8332_Granitt_og_andre_storkningsbergarter": {
+      "display": true
+    },
+    "wms_8332_Anortositt": {
+      "display": true
+    },
+    "wms_8332_Gabbro": {
+      "display": true
+    },
+    "wms_8332_Monsonitt": {
+      "display": true
+    },
+    "wms_8332_Syenitt": {
+      "display": true
+    },
+    "wms_8332_Larvikitt": {
+      "display": true
+    },
+    "wms_8332_Granitt": {
+      "display": true
+    },
+    "wms_8332_Trondhjemitt": {
+      "display": true
+    },
+    "wms_8332_Kleberstein_og_serpentinitt": {
+      "display": true
+    },
+    "wms_8332_Kleberstein": {
+      "display": true
+    },
+    "wms_8332_Serpentinitt": {
+      "display": true
+    },
+    "wms_8332_Marmor_og_kalkstein": {
+      "display": true
+    },
+    "wms_8332_Marmor": {
+      "display": true
+    },
+    "wms_8332_Kalkstein_Blokkstein": {
+      "display": true
+    },
+    "wms_8332_Gneis": {
+      "display": true
+    },
+    "wms_8332_Gneis_Blokkstein": {
+      "display": true
+    },
+    "wms_8332_Sandstein_og_konglomerat": {
+      "display": true
+    },
+    "wms_8332_Sandstein": {
+      "display": true
+    },
+    "wms_8332_Konglomerat": {
+      "display": true
+    },
+    "wms_8332_Kvartsitt_Blokkstein": {
+      "display": true
+    },
+    "wms_8332_Breksje": {
+      "display": true
+    },
+    "wms_8332_Brynestein": {
+      "display": true
+    },
+    "wms_8332_Skifer_Brynestein": {
+      "display": true
+    },
+    "wms_8332_Sandstein_Brynestein": {
+      "display": true
+    },
+    "wms_8332_Kvartsitt_Brynestein": {
+      "display": true
+    },
+    "wms_8332_Annen_blokkstein": {
+      "display": true
+    },
+    "wms_8332_Eklogitt": {
+      "display": true
+    },
+    "wms_8332_Kvernstein": {
+      "display": true
+    },
+    "wms_8332_Glimmerskifer_Kvernstein": {
+      "display": true
+    },
+    "wms_6192": {
+      "display": false
+    },
+    "wms_6192_Radon_aktsomhet_oversikt": {
+      "display": true
+    },
+    "wms_6192_Radon_aktsomhet": {
+      "display": true
+    },
+    "wms_3116": {
+      "display": false
+    },
+    "wms_3116_Fjellbronn_ukjent": {
+      "display": true
+    },
+    "wms_3116_Fjellbronn_vannforsyning": {
+      "display": true
+    },
+    "wms_3116_Fjellbronn_energi": {
+      "display": true
+    },
+    "wms_3116_Sonderboring": {
+      "display": true
+    },
+    "wms_3116_Losmassebronn_ukjent": {
+      "display": true
+    },
+    "wms_3116_Losmassebronn_vannforsyning": {
+      "display": true
+    },
+    "wms_3116_Losmassebronn_undersokelse": {
+      "display": true
+    },
+    "wms_3116_Fjellbronn_undersokelse": {
+      "display": true
+    },
+    "wms_3116_Losmassebronn_energi": {
+      "display": true
+    },
+    "wms_3116_LGN": {
+      "display": true
+    },
+    "wms_3116_Kilde_losmasse": {
+      "display": true
+    },
+    "wms_3116_Kilde_fjell": {
+      "display": true
+    },
+    "wms_3116_Grunnvannspunkter_nasjonal": {
+      "display": true
+    },
+    "wms_3116_Grunnvannspunkter_regional": {
+      "display": true
+    },
+    "wms_4486": {
+      "display": false
+    },
+    "wms_4486_Natursti": {
+      "display": true
+    },
+    "wms_4486_Kultursti": {
+      "display": true
+    },
+    "wms_4486_Kyststi": {
+      "display": true
+    },
+    "wms_4486_Historisk": {
+      "display": true
+    },
+    "wms_6067": {
+      "display": false
+    },
+    "wms_6067_Skiloype": {
+      "display": true
+    },
+    "wms_6067_Skiloype_gradering_ikke_angitt": {
+      "display": true
+    },
+    "wms_6067_Skiloype_ingen_gradering": {
+      "display": true
+    },
+    "wms_6067_Enkel_skiloype": {
+      "display": true
+    },
+    "wms_6067_Middels_skiloype": {
+      "display": true
+    },
+    "wms_6067_Krevende_skiloype": {
+      "display": true
+    },
+    "wms_6067_Ekspert_skiloype": {
+      "display": true
+    },
+    "wms_6016": {
+      "display": false
+    },
+    "wms_6016_Fotrute": {
+      "display": true
+    },
+    "wms_6016_Fotrutetypeikkeangitt": {
+      "display": true
+    },
+    "wms_6016_Fotrute_gradering_ikke_angitt": {
+      "display": true
+    },
+    "wms_6016_Fotrute_ingen_gradering": {
+      "display": true
+    },
+    "wms_6016_Enkel_fotrute": {
+      "display": true
+    },
+    "wms_6016_Middels_fotrute": {
+      "display": true
+    },
+    "wms_6016_Krevende_fotrute": {
+      "display": true
+    },
+    "wms_6016_Ekspert_fotrute": {
+      "display": true
+    },
+    "wms_4183": {
+      "display": false
+    },
+    "wms_4183_Sykkelrute": {
+      "display": true
+    },
+    "wms_4183_Sykkelrute_gradering_ikke_angitt": {
+      "display": true
+    },
+    "wms_4183_Sykkelrute_ingen_gradering": {
+      "display": true
+    },
+    "wms_4183_Enkel_sykkelrute": {
+      "display": true
+    },
+    "wms_4183_Middels_sykkelrute": {
+      "display": true
+    },
+    "wms_4183_Krevende_sykkelrute": {
+      "display": true
+    },
+    "wms_4183_Ekspert_sykkelrute": {
+      "display": true
+    },
+    "wms_4786": {
+      "display": false
+    },
+    "wms_4786_okartnofpoly": {
+      "display": true
+    },
+    "wms_4786_kartgrenser": {
+      "display": true
+    },
+    "wms_4786_okartnof": {
+      "display": true
+    },
+    "wms_4786_okartkriss": {
+      "display": true
+    },
+    "wms_9232": {
+      "display": false
+    },
+    "wms_9232_mareano_kjemi:BDE209": {
+      "display": true
+    },
+    "wms_9232_mareano_kjemi:antracen": {
+      "display": true
+    },
+    "wms_9232_mareano_kjemi:benzapyren": {
+      "display": true
+    },
+    "wms_9232_mareano_kjemi:fenantren": {
+      "display": true
+    },
+    "industri_2481": {
+      "display": false
+    },
+    "industri_2481_0": {
+      "display": true
+    },
+    "wms_7092": {
+      "display": false
+    },
+    "wms_7092_marineanimalscesium137": {
+      "display": true
+    },
+    "wms_7092_seawateramericium241": {
+      "display": true
+    },
+    "wms_7092_seawatercesium137": {
+      "display": true
+    },
+    "wms_7092_seawaterplutonium238": {
+      "display": true
+    },
+    "wms_7092_seawaterplutonium239": {
+      "display": true
+    },
+    "wms_7092_seawaterpolonium210": {
+      "display": true
+    },
+    "wms_7092_seawaterstrontium90": {
+      "display": true
+    },
+    "wms_7092_seawatertechnetium99": {
+      "display": true
+    },
+    "wms_7092_seaweedcesium137": {
+      "display": true
+    },
+    "wms_7092_seaweedtechnetium99": {
+      "display": true
+    },
+    "wms_7092_sedimentscesium137": {
+      "display": true
+    },
+    "Vannkraft1_8755": {
+      "display": false
+    },
+    "Vannkraft1_8755_0": {
+      "display": true
+    },
+    "Vannkraft1_8755_1": {
+      "display": true
+    },
+    "Vannkraft1_8755_8": {
+      "display": true
+    },
+    "Vannkraft1_8755_10": {
+      "display": true
+    },
+    "Vindkraft_3444": {
+      "display": false
+    },
+    "Vindkraft_3444_0": {
+      "display": true
+    },
+    "Vindkraft_3444_1": {
+      "display": true
+    },
+    "Vindkraft_3444_2": {
+      "display": true
+    },
+    "Vindkraft_3444_3": {
+      "display": true
+    },
+    "Vindkraft_3444_4": {
+      "display": true
+    },
+    "Vindkraft_3444_5": {
+      "display": true
+    },
+    "Vindkraft_3444_6": {
+      "display": true
+    },
     "wms_8038": {
       "display": false
     },
@@ -354,6 +1920,15 @@
     "wms_7094_layer_185": {
       "display": true
     },
+    "wms_1878": {
+      "display": false
+    },
+    "wms_1878_layer_186": {
+      "display": true
+    },
+    "wms_1878_layer_189": {
+      "display": true
+    },
     "wms_308": {
       "display": false
     },
@@ -364,15 +1939,6 @@
       "display": true
     },
     "wms_308_layer_179": {
-      "display": true
-    },
-    "wms_1878": {
-      "display": false
-    },
-    "wms_1878_layer_186": {
-      "display": true
-    },
-    "wms_1878_layer_189": {
       "display": true
     },
     "Bergrettigheter_9522": {
@@ -591,1035 +2157,6 @@
     "wms_5159_3": {
       "display": true
     },
-    "wms_2593": {
-      "display": false
-    },
-    "wms_2593_kart549": {
-      "display": true
-    },
-    "wms_2593_kart550": {
-      "display": true
-    },
-    "wms_2593_kart300": {
-      "display": true
-    },
-    "wms_2593_kart301": {
-      "display": true
-    },
-    "wms_2593_kart303": {
-      "display": true
-    },
-    "wms_2593_kart304": {
-      "display": true
-    },
-    "wms_2593_kart315": {
-      "display": true
-    },
-    "wms_2593_kart505": {
-      "display": true
-    },
-    "wms_2593_kart506": {
-      "display": true
-    },
-    "wms_2593_kart507": {
-      "display": true
-    },
-    "wms_2593_kart514": {
-      "display": true
-    },
-    "wms_2593_kart515": {
-      "display": true
-    },
-    "wms_2593_kart305_oslo": {
-      "display": true
-    },
-    "wms_2593_kart306": {
-      "display": true
-    },
-    "wms_2593_kart307": {
-      "display": true
-    },
-    "wms_2593_kart308": {
-      "display": true
-    },
-    "wms_2593_kart309": {
-      "display": true
-    },
-    "wms_2593_kart310": {
-      "display": true
-    },
-    "wms_2593_kart311": {
-      "display": true
-    },
-    "wms_2593_kart321": {
-      "display": true
-    },
-    "wms_2593_kart322": {
-      "display": true
-    },
-    "wms_2593_kart323": {
-      "display": true
-    },
-    "wms_2593_kart324": {
-      "display": true
-    },
-    "wms_2593_kart325": {
-      "display": true
-    },
-    "wms_2593_kart001": {
-      "display": true
-    },
-    "wms_2593_kart002": {
-      "display": true
-    },
-    "wms_2593_kart003": {
-      "display": true
-    },
-    "wms_2593_kart004_svel": {
-      "display": true
-    },
-    "wms_2593_kart005": {
-      "display": true
-    },
-    "wms_2593_kart006_krag": {
-      "display": true
-    },
-    "wms_2593_kart007": {
-      "display": true
-    },
-    "wms_2593_kart008": {
-      "display": true
-    },
-    "wms_2593_kart009_rand": {
-      "display": true
-    },
-    "wms_2593_kart010": {
-      "display": true
-    },
-    "wms_2593_kart011": {
-      "display": true
-    },
-    "wms_2593_kart012_feda": {
-      "display": true
-    },
-    "wms_2593_kart012_kvin": {
-      "display": true
-    },
-    "wms_2593_kart012_list": {
-      "display": true
-    },
-    "wms_2593_kart012_reke": {
-      "display": true
-    },
-    "wms_2593_kart013": {
-      "display": true
-    },
-    "wms_2593_kart014_risa": {
-      "display": true
-    },
-    "wms_2593_kart015_hyls": {
-      "display": true
-    },
-    "wms_2593_kart015_joes": {
-      "display": true
-    },
-    "wms_2593_kart015_saud": {
-      "display": true
-    },
-    "wms_2593_kart015_yrke": {
-      "display": true
-    },
-    "wms_2593_kart016_arda": {
-      "display": true
-    },
-    "wms_2593_kart016_botn": {
-      "display": true
-    },
-    "wms_2593_kart016_gand": {
-      "display": true
-    },
-    "wms_2593_kart017_akra": {
-      "display": true
-    },
-    "wms_2593_kart017_skjo": {
-      "display": true
-    },
-    "wms_2593_kart019_alfj": {
-      "display": true
-    },
-    "wms_2593_kart019_espe": {
-      "display": true
-    },
-    "wms_2593_kart019_kule": {
-      "display": true
-    },
-    "wms_2593_kart019_most": {
-      "display": true
-    },
-    "wms_2593_kart019_sagv": {
-      "display": true
-    },
-    "wms_2593_kart020_aakr": {
-      "display": true
-    },
-    "wms_2593_kart021": {
-      "display": true
-    },
-    "wms_2593_kart022_samn": {
-      "display": true
-    },
-    "wms_2593_kart022_lygr": {
-      "display": true
-    },
-    "wms_2593_kart022_venj": {
-      "display": true
-    },
-    "wms_2593_kart023": {
-      "display": true
-    },
-    "wms_2593_kart024_huso": {
-      "display": true
-    },
-    "wms_2593_kart024_stei": {
-      "display": true
-    },
-    "wms_2593_kart025_ston": {
-      "display": true
-    },
-    "wms_2593_kart026": {
-      "display": true
-    },
-    "wms_2593_kart027_dals": {
-      "display": true
-    },
-    "wms_2593_kart027_fofj": {
-      "display": true
-    },
-    "wms_2593_kart027_ford": {
-      "display": true
-    },
-    "wms_2593_kart028_gule": {
-      "display": true
-    },
-    "wms_2593_kart028_olde": {
-      "display": true
-    },
-    "wms_2593_kart028_rugs": {
-      "display": true
-    },
-    "wms_2593_kart028_skat": {
-      "display": true
-    },
-    "wms_2593_kart028_svel": {
-      "display": true
-    },
-    "wms_2593_kart029_sylt": {
-      "display": true
-    },
-    "wms_2593_kart029_honn": {
-      "display": true
-    },
-    "wms_2593_kart029_malo": {
-      "display": true
-    },
-    "wms_2593_kart030_egge": {
-      "display": true
-    },
-    "wms_2593_kart031_leps": {
-      "display": true
-    },
-    "wms_2593_kart031_vegs": {
-      "display": true
-    },
-    "wms_2593_kart032": {
-      "display": true
-    },
-    "wms_2593_kart033_tres": {
-      "display": true
-    },
-    "wms_2593_kart034_eids": {
-      "display": true
-    },
-    "wms_2593_kart035_lang": {
-      "display": true
-    },
-    "wms_2593_kart035_stop": {
-      "display": true
-    },
-    "wms_2593_kart035_stor": {
-      "display": true
-    },
-    "wms_2593_kart036": {
-      "display": true
-    },
-    "wms_2593_kart037": {
-      "display": true
-    },
-    "wms_2593_kart038": {
-      "display": true
-    },
-    "wms_2593_kart039_buvi": {
-      "display": true
-    },
-    "wms_2593_kart040_dyrn": {
-      "display": true
-    },
-    "wms_2593_kart040_stra": {
-      "display": true
-    },
-    "wms_2593_kart040_veid": {
-      "display": true
-    },
-    "wms_2593_kart041": {
-      "display": true
-    },
-    "wms_2593_kart042": {
-      "display": true
-    },
-    "wms_2593_kart043_aafj": {
-      "display": true
-    },
-    "wms_2593_kart044": {
-      "display": true
-    },
-    "wms_2593_kart045_ving": {
-      "display": true
-    },
-    "wms_2593_kart046": {
-      "display": true
-    },
-    "wms_2593_kart047": {
-      "display": true
-    },
-    "wms_2593_kart048_naeroe": {
-      "display": true
-    },
-    "wms_2593_kart049": {
-      "display": true
-    },
-    "wms_2593_kart050": {
-      "display": true
-    },
-    "wms_2593_kart051": {
-      "display": true
-    },
-    "wms_2593_kart052": {
-      "display": true
-    },
-    "wms_2593_kart053": {
-      "display": true
-    },
-    "wms_2593_kart054": {
-      "display": true
-    },
-    "wms_2593_kart055": {
-      "display": true
-    },
-    "wms_2593_kart056": {
-      "display": true
-    },
-    "wms_2593_kart057": {
-      "display": true
-    },
-    "wms_2593_kart058": {
-      "display": true
-    },
-    "wms_2593_kart059": {
-      "display": true
-    },
-    "wms_2593_kart060": {
-      "display": true
-    },
-    "wms_2593_kart061": {
-      "display": true
-    },
-    "wms_2593_kart062": {
-      "display": true
-    },
-    "wms_2593_kart063": {
-      "display": true
-    },
-    "wms_2593_kart064": {
-      "display": true
-    },
-    "wms_2593_kart065": {
-      "display": true
-    },
-    "wms_2593_kart066": {
-      "display": true
-    },
-    "wms_2593_kart067_grot": {
-      "display": true
-    },
-    "wms_2593_kart068_holm": {
-      "display": true
-    },
-    "wms_2593_kart069_kans": {
-      "display": true
-    },
-    "wms_2593_kart069_vest": {
-      "display": true
-    },
-    "wms_2593_kart070_rost": {
-      "display": true
-    },
-    "wms_2593_kart071_vaer": {
-      "display": true
-    },
-    "wms_2593_kart072_buks": {
-      "display": true
-    },
-    "wms_2593_kart073_stam": {
-      "display": true
-    },
-    "wms_2593_kart074": {
-      "display": true
-    },
-    "wms_2593_kart075": {
-      "display": true
-    },
-    "wms_2593_kart076_sorf": {
-      "display": true
-    },
-    "wms_2593_kart076_stok": {
-      "display": true
-    },
-    "wms_2593_kart076_sige_01": {
-      "display": true
-    },
-    "wms_2593_kart076_melb": {
-      "display": true
-    },
-    "wms_2593_kart076_sige_02": {
-      "display": true
-    },
-    "wms_2593_kart077_grat": {
-      "display": true
-    },
-    "wms_2593_kart077_rams": {
-      "display": true
-    },
-    "wms_2593_kart077_sand": {
-      "display": true
-    },
-    "wms_2593_kart078": {
-      "display": true
-    },
-    "wms_2593_kart079_aust": {
-      "display": true
-    },
-    "wms_2593_kart079_gull": {
-      "display": true
-    },
-    "wms_2593_kart079_riso": {
-      "display": true
-    },
-    "wms_2593_kart080_sagf": {
-      "display": true
-    },
-    "wms_2593_kart081_ande": {
-      "display": true
-    },
-    "wms_2593_kart081_nord": {
-      "display": true
-    },
-    "wms_2593_kart082": {
-      "display": true
-    },
-    "wms_2593_kart083_finn": {
-      "display": true
-    },
-    "wms_2593_kart084": {
-      "display": true
-    },
-    "wms_2593_kart085_hamn": {
-      "display": true
-    },
-    "wms_2593_kart086": {
-      "display": true
-    },
-    "wms_2593_kart087": {
-      "display": true
-    },
-    "wms_2593_kart088": {
-      "display": true
-    },
-    "wms_2593_kart089": {
-      "display": true
-    },
-    "wms_2593_kart090_kafj": {
-      "display": true
-    },
-    "wms_2593_kart090_sorf": {
-      "display": true
-    },
-    "wms_2593_kart090_stor": {
-      "display": true
-    },
-    "wms_2593_kart091_lang": {
-      "display": true
-    },
-    "wms_2593_kart092": {
-      "display": true
-    },
-    "wms_2593_kart093_skje": {
-      "display": true
-    },
-    "wms_2593_kart094_bunn": {
-      "display": true
-    },
-    "wms_2593_kart095": {
-      "display": true
-    },
-    "wms_2593_kart096_kafj": {
-      "display": true
-    },
-    "wms_2593_kart096_bukt": {
-      "display": true
-    },
-    "wms_2593_kart097_oksf": {
-      "display": true
-    },
-    "wms_2593_kart098": {
-      "display": true
-    },
-    "wms_2593_kart099": {
-      "display": true
-    },
-    "wms_2593_kart100": {
-      "display": true
-    },
-    "wms_2593_kart101": {
-      "display": true
-    },
-    "wms_2593_kart102_havo": {
-      "display": true
-    },
-    "wms_2593_kart103_rygg": {
-      "display": true
-    },
-    "wms_2593_kart103_honn": {
-      "display": true
-    },
-    "wms_2593_kart104": {
-      "display": true
-    },
-    "wms_2593_kart105": {
-      "display": true
-    },
-    "wms_2593_kart106": {
-      "display": true
-    },
-    "wms_2593_kart107_laks": {
-      "display": true
-    },
-    "wms_2593_kart107_pors": {
-      "display": true
-    },
-    "wms_2593_kart108_eids": {
-      "display": true
-    },
-    "wms_2593_kart109_gamv": {
-      "display": true
-    },
-    "wms_2593_kart109_meha": {
-      "display": true
-    },
-    "wms_2593_kart110_hops": {
-      "display": true
-    },
-    "wms_2593_kart110_lang": {
-      "display": true
-    },
-    "wms_2593_kart111": {
-      "display": true
-    },
-    "wms_2593_kart112": {
-      "display": true
-    },
-    "wms_2593_kart113_vard": {
-      "display": true
-    },
-    "wms_2593_kart114_kibe": {
-      "display": true
-    },
-    "wms_2593_kart115_vads": {
-      "display": true
-    },
-    "wms_2593_kart116_lang": {
-      "display": true
-    },
-    "wms_2593_kart116_neid": {
-      "display": true
-    },
-    "wms_2593_kart117": {
-      "display": true
-    },
-    "wms_2593_kart118_sorf": {
-      "display": true
-    },
-    "wms_2593_kart119_berg": {
-      "display": true
-    },
-    "wms_2593_kart119_bols": {
-      "display": true
-    },
-    "wms_2593_kart119_masf": {
-      "display": true
-    },
-    "wms_2593_kart119_tjuv": {
-      "display": true
-    },
-    "wms_2593_kart120_stur": {
-      "display": true
-    },
-    "wms_2593_kart121_bofj": {
-      "display": true
-    },
-    "wms_2593_kart121_finn": {
-      "display": true
-    },
-    "wms_2593_kart121_fugl": {
-      "display": true
-    },
-    "wms_2593_kart121_hoya": {
-      "display": true
-    },
-    "wms_2593_kart121_list": {
-      "display": true
-    },
-    "wms_2593_kart121_ortn": {
-      "display": true
-    },
-    "wms_2593_kart121_rutl": {
-      "display": true
-    },
-    "wms_2593_kart121_vadh": {
-      "display": true
-    },
-    "wms_2593_kart122_ardv": {
-      "display": true
-    },
-    "wms_2593_kart122_skjv": {
-      "display": true
-    },
-    "wms_2593_kart122_ards": {
-      "display": true
-    },
-    "wms_2593_kart122_esef": {
-      "display": true
-    },
-    "wms_2593_kart122_fimr": {
-      "display": true
-    },
-    "wms_2593_kart122_fjae": {
-      "display": true
-    },
-    "wms_2593_kart122_kaup": {
-      "display": true
-    },
-    "wms_2593_kart122_kvam": {
-      "display": true
-    },
-    "wms_2593_kart122_laer": {
-      "display": true
-    },
-    "wms_2593_kart122_skjs": {
-      "display": true
-    },
-    "wms_2593_kart122_viki": {
-      "display": true
-    },
-    "wms_2593_kart123_davi": {
-      "display": true
-    },
-    "wms_2593_kart123_hyen": {
-      "display": true
-    },
-    "wms_2593_kart123_nord": {
-      "display": true
-    },
-    "wms_2593_kart123_olde": {
-      "display": true
-    },
-    "wms_2593_kart123_sand": {
-      "display": true
-    },
-    "wms_2593_kart123_stry": {
-      "display": true
-    },
-    "wms_2593_kart124_aurl": {
-      "display": true
-    },
-    "wms_2593_kart124_bakk": {
-      "display": true
-    },
-    "wms_2593_kart125_aust": {
-      "display": true
-    },
-    "wms_2593_kart126": {
-      "display": true
-    },
-    "wms_2593_kart127_geir": {
-      "display": true
-    },
-    "wms_2593_kart128_sunn": {
-      "display": true
-    },
-    "wms_2593_kart129_vinj": {
-      "display": true
-    },
-    "wms_2593_kart130": {
-      "display": true
-    },
-    "wms_2593_kart131_verr": {
-      "display": true
-    },
-    "wms_2593_kart131_leva": {
-      "display": true
-    },
-    "wms_2593_kart131_stei": {
-      "display": true
-    },
-    "wms_2593_kart131_verd": {
-      "display": true
-    },
-    "wms_2593_kart132": {
-      "display": true
-    },
-    "wms_2593_kart133_tose": {
-      "display": true
-    },
-    "wms_2593_kart133_fold": {
-      "display": true
-    },
-    "wms_2593_kart134": {
-      "display": true
-    },
-    "wms_2593_kart135": {
-      "display": true
-    },
-    "wms_2593_kart136_sund": {
-      "display": true
-    },
-    "wms_2593_kart136_salt": {
-      "display": true
-    },
-    "wms_2593_kart137": {
-      "display": true
-    },
-    "wms_2593_kart138": {
-      "display": true
-    },
-    "wms_2593_kart139": {
-      "display": true
-    },
-    "wms_2593_kart140": {
-      "display": true
-    },
-    "wms_2593_kart141_efjo": {
-      "display": true
-    },
-    "wms_2593_kart142": {
-      "display": true
-    },
-    "wms_2593_kart143": {
-      "display": true
-    },
-    "wms_2593_kart144": {
-      "display": true
-    },
-    "wms_2593_kart501_aust": {
-      "display": true
-    },
-    "wms_2593_kart501_herw": {
-      "display": true
-    },
-    "wms_2593_kart501_soerh": {
-      "display": true
-    },
-    "wms_2593_kart501_telt": {
-      "display": true
-    },
-    "wms_2593_kart512": {
-      "display": true
-    },
-    "wms_2593_kart513_forl": {
-      "display": true
-    },
-    "wms_2593_kart513_kolk": {
-      "display": true
-    },
-    "wms_2593_kart513_loka": {
-      "display": true
-    },
-    "wms_2593_kart513_naka": {
-      "display": true
-    },
-    "wms_2593_kart513_nyal": {
-      "display": true
-    },
-    "wms_2593_kart513_svea": {
-      "display": true
-    },
-    "wms_2593_kart516": {
-      "display": true
-    },
-    "wms_2593_kart521_wood": {
-      "display": true
-    },
-    "wms_2593_kart522": {
-      "display": true
-    },
-    "wms_2593_kart523_pyra": {
-      "display": true
-    },
-    "wms_2593_kart524_eide": {
-      "display": true
-    },
-    "wms_2593_kart524_farm": {
-      "display": true
-    },
-    "wms_2593_kart524_rand": {
-      "display": true
-    },
-    "wms_2593_kart524_tord": {
-      "display": true
-    },
-    "wms_2593_kart525_akse": {
-      "display": true
-    },
-    "wms_2593_kart525_mari": {
-      "display": true
-    },
-    "wms_2593_kart526_gash": {
-      "display": true
-    },
-    "wms_2593_kart526_isbj": {
-      "display": true
-    },
-    "wms_2593_kart527": {
-      "display": true
-    },
-    "wms_2593_kart533_hele": {
-      "display": true
-    },
-    "wms_2593_kart533_ormh": {
-      "display": true
-    },
-    "wms_2593_kart534": {
-      "display": true
-    },
-    "wms_2593_kart535": {
-      "display": true
-    },
-    "wms_2593_kart536": {
-      "display": true
-    },
-    "wms_2593_kart537": {
-      "display": true
-    },
-    "wms_2593_kart539": {
-      "display": true
-    },
-    "wms_2593_kart540": {
-      "display": true
-    },
-    "wms_2593_kart541": {
-      "display": true
-    },
-    "wms_2593_kart401_bunn": {
-      "display": true
-    },
-    "wms_2593_kart401_illj": {
-      "display": true
-    },
-    "wms_2593_kart401_lysa": {
-      "display": true
-    },
-    "wms_2593_kart401_slem": {
-      "display": true
-    },
-    "wms_2593_kart401_stei": {
-      "display": true
-    },
-    "wms_2593_kart402_drob": {
-      "display": true
-    },
-    "wms_2593_kart451_grim": {
-      "display": true
-    },
-    "wms_2593_kart451_rivi": {
-      "display": true
-    },
-    "wms_2593_kart452": {
-      "display": true
-    },
-    "wms_2593_kart453_aren": {
-      "display": true
-    },
-    "wms_2593_kart453_eyde": {
-      "display": true
-    },
-    "wms_2593_kart454": {
-      "display": true
-    },
-    "wms_2593_kart455_dusa": {
-      "display": true
-    },
-    "wms_2593_kart455_stav": {
-      "display": true
-    },
-    "wms_2593_kart456_ales": {
-      "display": true
-    },
-    "wms_2593_kart457_mand": {
-      "display": true
-    },
-    "wms_2593_kart458": {
-      "display": true
-    },
-    "wms_2593_kart459": {
-      "display": true
-    },
-    "wms_2593_kart460": {
-      "display": true
-    },
-    "wms_2593_kart461": {
-      "display": true
-    },
-    "wms_2593_kart462": {
-      "display": true
-    },
-    "wms_2593_kart463": {
-      "display": true
-    },
-    "wms_2593_kart464": {
-      "display": true
-    },
-    "wms_2593_kart465": {
-      "display": true
-    },
-    "wms_2593_kart466_sand": {
-      "display": true
-    },
-    "wms_2593_kart466_trom": {
-      "display": true
-    },
-    "wms_2593_kart467_eger": {
-      "display": true
-    },
-    "wms_2593_kart467_hell": {
-      "display": true
-    },
-    "wms_2593_kart467_sire": {
-      "display": true
-    },
-    "wms_2593_kart468_tons": {
-      "display": true
-    },
-    "wms_2593_kart469_haug": {
-      "display": true
-    },
-    "wms_2593_kart470_hald": {
-      "display": true
-    },
-    "wms_2593_kart470_svin": {
-      "display": true
-    },
-    "wms_2593_kart471_kvit": {
-      "display": true
-    },
-    "wms_2593_kart471_skud": {
-      "display": true
-    },
-    "wms_2593_kart472": {
-      "display": true
-    },
-    "wms_2593_kart473": {
-      "display": true
-    },
-    "wms_2593_kart474_pors": {
-      "display": true
-    },
-    "wms_2593_kart474_skie": {
-      "display": true
-    },
-    "wms_2593_kart476": {
-      "display": true
-    },
-    "wms_2593_kart477": {
-      "display": true
-    },
-    "wms_2593_kart478_flekk": {
-      "display": true
-    },
-    "wms_2593_kart479": {
-      "display": true
-    },
-    "wms_2593_kart480_san": {
-      "display": true
-    },
-    "wms_2593_kart481": {
-      "display": true
-    },
-    "wms_2593_kart482_moss": {
-      "display": true
-    },
-    "wms_2593_kart483_base": {
-      "display": true
-    },
-    "wms_2593_kart483_raff": {
-      "display": true
-    },
-    "wms_2593_kart483_sloe": {
-      "display": true
-    },
-    "wms_2593_kart484": {
-      "display": true
-    },
-    "wms_2593_kart485_sand": {
-      "display": true
-    },
-    "wms_2593_kart486": {
-      "display": true
-    },
-    "wms_2593_kart487": {
-      "display": true
-    },
-    "wms_2593_kart488": {
-      "display": true
-    },
-    "wms_2593_kart489_melk": {
-      "display": true
-    },
-    "wms_2593_kart490": {
-      "display": true
-    },
-    "wms_2593_kart491_karm": {
-      "display": true
-    },
-    "wms_2593_kart492": {
-      "display": true
-    },
-    "wms_2593_kart493_kais": {
-      "display": true
-    },
-    "wms_2593_kart494_nyha": {
-      "display": true
-    },
-    "wms_2593_hoved_spesialer_omriss": {
-      "display": true
-    },
-    "wms_2593_svalbard_spesialer_omriss": {
-      "display": true
-    },
-    "wms_2593_havn_omriss": {
-      "display": true
-    },
-    "wms_2593_havn_spesialer_omriss": {
-      "display": true
-    },
     "wms_4889": {
       "display": false
     },
@@ -1633,12 +2170,6 @@
       "display": true
     },
     "wms_4889_Skjaer": {
-      "display": true
-    },
-    "wms_913": {
-      "display": false
-    },
-    "wms_913_Marka": {
       "display": true
     },
     "wms_4783": {
@@ -1657,6 +2188,12 @@
       "display": true
     },
     "wms_4783_Kommunenummer": {
+      "display": true
+    },
+    "wms_913": {
+      "display": false
+    },
+    "wms_913_Marka": {
       "display": true
     }
   }

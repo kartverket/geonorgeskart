@@ -1,30 +1,11 @@
 {
-  "bookmarks2D": [
-    {
-      "displayName": "test",
-      "name": "test",
-      "extent": {
-        "type": "extent",
-        "xmin": 757948.4853713326,
-        "ymin": 8227493.799654052,
-        "xmax": 1112616.2966145505,
-        "ymax": 8472092.290166616,
-        "spatialReference": {
-          "wkid": 102100
-        }
-      },
-      "thumbnail": "${appPath}/configs/Bookmark/thumbnail1510306032538.png",
-      "isInWebmap": false,
-      "isSaveExtent": true,
-      "_uID": 0
-    }
-  ],
+  "bookmarks2D": [],
   "bookmarks3D": [],
   "flyTime": 3000,
   "layout": {
     "cards": true,
-    "list": false,
-    "defaultMode": "cards"
+    "list": true,
+    "defaultMode": "list"
   },
   "editable": true,
   "syncMode": {
