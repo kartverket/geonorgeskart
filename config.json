@@ -78,7 +78,8 @@
         },
         "version": "2.6",
         "id": "widgets_Coordinate_Widget_58",
-        "name": "Coordinate"
+        "name": "Coordinate",
+        "config": "configs/Coordinate/config_Coordinate.json"
       },
       {
         "position": {
