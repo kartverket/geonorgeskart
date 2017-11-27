@@ -321,6 +321,138 @@
     "wms_1712_spr_strandsoner": {
       "display": true
     },
+    "wms_8916": {
+      "display": true
+    },
+    "wms_8916_Arealformal_01": {
+      "display": true
+    },
+    "wms_8916_Hensynsoner_bestemmelsesomrader_01": {
+      "display": true
+    },
+    "wms_8916_Grenser_og_juridiske_linjer_01": {
+      "display": true
+    },
+    "wms_8916_Planomrade_01": {
+      "display": true
+    },
+    "wms_8916_Juridiske_punkter_01": {
+      "display": true
+    },
+    "wms_8916_Paskrift_01": {
+      "display": true
+    },
+    "wms_8916_Arealformal_02": {
+      "display": true
+    },
+    "wms_8916_Hensynsoner_bestemmelsesomrader_02": {
+      "display": true
+    },
+    "wms_8916_Grenser_og_juridiske_linjer_02": {
+      "display": true
+    },
+    "wms_8916_Planomrade_02": {
+      "display": true
+    },
+    "wms_8916_Juridiske_punkter_02": {
+      "display": true
+    },
+    "wms_8916_Paskrift_02": {
+      "display": true
+    },
+    "wms_9807": {
+      "display": true
+    },
+    "wms_9807_Arealformal_01": {
+      "display": true
+    },
+    "wms_9807_Hensynsoner_bestemmelsesomrader_01": {
+      "display": true
+    },
+    "wms_9807_Grenser_og_juridiske_linjer_01": {
+      "display": true
+    },
+    "wms_9807_Planomrade_01": {
+      "display": true
+    },
+    "wms_9807_Juridiske_punkter_01": {
+      "display": true
+    },
+    "wms_9807_Paskrift_01": {
+      "display": true
+    },
+    "wms_9807_Arealformal_02": {
+      "display": true
+    },
+    "wms_9807_Hensynsoner_bestemmelsesomrader_02": {
+      "display": true
+    },
+    "wms_9807_Grenser_og_juridiske_linjer_02": {
+      "display": true
+    },
+    "wms_9807_Planomrade_02": {
+      "display": true
+    },
+    "wms_9807_Juridiske_punkter_02": {
+      "display": true
+    },
+    "wms_9807_Paskrift_02": {
+      "display": true
+    },
+    "wms_9807_Arealformal_03": {
+      "display": true
+    },
+    "wms_9807_Hensynsoner_bestemmelsesomrader_03": {
+      "display": true
+    },
+    "wms_9807_Grenser_og_juridiske_linjer_03": {
+      "display": true
+    },
+    "wms_9807_Planomrade_03": {
+      "display": true
+    },
+    "wms_9807_Juridiske_punkter_03": {
+      "display": true
+    },
+    "wms_9807_Paskrift_03": {
+      "display": true
+    },
+    "wms_9807_Arealformal_04": {
+      "display": true
+    },
+    "wms_9807_Hensynsoner_bestemmelsesomrader_04": {
+      "display": true
+    },
+    "wms_9807_Grenser_og_juridiske_linjer_04": {
+      "display": true
+    },
+    "wms_9807_Planomrade_04": {
+      "display": true
+    },
+    "wms_9807_Juridiske_punkter_04": {
+      "display": true
+    },
+    "wms_9807_Paskrift_04": {
+      "display": true
+    },
+    "wms_9807_Arealformal_05": {
+      "display": true
+    },
+    "wms_9807_Hensynsoner_bestemmelsesomrader_05": {
+      "display": true
+    },
+    "wms_9807_Grenser_og_juridiske_linjer_05": {
+      "display": true
+    },
+    "wms_9807_Planomrade_05": {
+      "display": true
+    },
+    "wms_9807_Juridiske_punkter_05": {
+      "display": true
+    },
+    "wms_9807_Paskrift_05": {
+      "display": true
+    },
     "wms_5639": {
       "display": true
     },
@@ -1947,160 +2079,28 @@
     "Bergrettigheter_9522_0": {
       "display": true
     },
-    "wms_9526": {
-      "display": false
-    },
-    "wms_9526_stoylufthavn": {
-      "display": true
-    },
-    "wms_9807": {
-      "display": true
-    },
-    "wms_9807_Arealformal_01": {
-      "display": true
-    },
-    "wms_9807_Hensynsoner_bestemmelsesomrader_01": {
-      "display": true
-    },
-    "wms_9807_Grenser_og_juridiske_linjer_01": {
-      "display": true
-    },
-    "wms_9807_Planomrade_01": {
-      "display": true
-    },
-    "wms_9807_Juridiske_punkter_01": {
-      "display": true
-    },
-    "wms_9807_Paskrift_01": {
-      "display": true
-    },
-    "wms_9807_Arealformal_02": {
-      "display": true
-    },
-    "wms_9807_Hensynsoner_bestemmelsesomrader_02": {
-      "display": true
-    },
-    "wms_9807_Grenser_og_juridiske_linjer_02": {
-      "display": true
-    },
-    "wms_9807_Planomrade_02": {
-      "display": true
-    },
-    "wms_9807_Juridiske_punkter_02": {
-      "display": true
-    },
-    "wms_9807_Paskrift_02": {
-      "display": true
-    },
-    "wms_9807_Arealformal_03": {
-      "display": true
-    },
-    "wms_9807_Hensynsoner_bestemmelsesomrader_03": {
-      "display": true
-    },
-    "wms_9807_Grenser_og_juridiske_linjer_03": {
-      "display": true
-    },
-    "wms_9807_Planomrade_03": {
-      "display": true
-    },
-    "wms_9807_Juridiske_punkter_03": {
-      "display": true
-    },
-    "wms_9807_Paskrift_03": {
-      "display": true
-    },
-    "wms_9807_Arealformal_04": {
-      "display": true
-    },
-    "wms_9807_Hensynsoner_bestemmelsesomrader_04": {
-      "display": true
-    },
-    "wms_9807_Grenser_og_juridiske_linjer_04": {
-      "display": true
-    },
-    "wms_9807_Planomrade_04": {
-      "display": true
-    },
-    "wms_9807_Juridiske_punkter_04": {
-      "display": true
-    },
-    "wms_9807_Paskrift_04": {
-      "display": true
-    },
-    "wms_9807_Arealformal_05": {
-      "display": true
-    },
-    "wms_9807_Hensynsoner_bestemmelsesomrader_05": {
-      "display": true
-    },
-    "wms_9807_Grenser_og_juridiske_linjer_05": {
-      "display": true
-    },
-    "wms_9807_Planomrade_05": {
-      "display": true
-    },
-    "wms_9807_Juridiske_punkter_05": {
-      "display": true
-    },
-    "wms_9807_Paskrift_05": {
-      "display": true
-    },
-    "wms_8916": {
-      "display": true
-    },
-    "wms_8916_Arealformal_01": {
-      "display": true
-    },
-    "wms_8916_Hensynsoner_bestemmelsesomrader_01": {
-      "display": true
-    },
-    "wms_8916_Grenser_og_juridiske_linjer_01": {
-      "display": true
-    },
-    "wms_8916_Planomrade_01": {
-      "display": true
-    },
-    "wms_8916_Juridiske_punkter_01": {
-      "display": true
-    },
-    "wms_8916_Paskrift_01": {
-      "display": true
-    },
-    "wms_8916_Arealformal_02": {
-      "display": true
-    },
-    "wms_8916_Hensynsoner_bestemmelsesomrader_02": {
-      "display": true
-    },
-    "wms_8916_Grenser_og_juridiske_linjer_02": {
-      "display": true
-    },
-    "wms_8916_Planomrade_02": {
-      "display": true
-    },
-    "wms_8916_Juridiske_punkter_02": {
-      "display": true
-    },
-    "wms_8916_Paskrift_02": {
-      "display": true
-    },
-    "wms_8963": {
-      "display": false
-    },
-    "wms_8963_dtm10_33": {
-      "display": true
-    },
-    "wms_3718": {
-      "display": false
-    },
-    "wms_3718_dom10_33": {
-      "display": true
-    },
     "wms_6546": {
       "display": false
     },
     "wms_6546_Skytefelt": {
+      "display": true
+    },
+    "wms_2850": {
+      "display": false
+    },
+    "wms_2850_Stoyvarselkart": {
+      "display": true
+    },
+    "wms_2850_Strategiskstoykart_lden": {
+      "display": true
+    },
+    "wms_2850_Strategiskstoykart_lnight": {
+      "display": true
+    },
+    "wms_9526": {
+      "display": false
+    },
+    "wms_9526_stoylufthavn": {
       "display": true
     },
     "wms_7435": {
@@ -2170,6 +2170,249 @@
       "display": true
     },
     "wms_4889_Skjaer": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104": {
+      "display": false
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_0": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_1": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_2": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_3": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_4": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_5": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_6": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_7": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_8": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_9": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_10": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_11": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_12": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_13": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_14": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_15": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_16": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_17": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_18": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_19": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_20": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_21": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_22": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_23": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_24": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_25": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_26": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_27": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_28": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_29": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_30": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_31": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_32": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_33": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_34": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_35": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_36": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_37": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_38": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_39": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_40": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_41": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_42": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_43": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_44": {
+      "display": true
+    },
+    "NP_Basiskart_Svalbard_WMS_6104_45": {
+      "display": true
+    },
+    "NP_Basiskart_JanMayen_WMS_45": {
+      "display": false
+    },
+    "NP_Basiskart_JanMayen_WMS_45_0": {
+      "display": true
+    },
+    "NP_Basiskart_JanMayen_WMS_45_1": {
+      "display": true
+    },
+    "NP_Basiskart_JanMayen_WMS_45_2": {
+      "display": true
+    },
+    "NP_Basiskart_JanMayen_WMS_45_3": {
+      "display": true
+    },
+    "NP_Basiskart_JanMayen_WMS_45_4": {
+      "display": true
+    },
+    "NP_Basiskart_JanMayen_WMS_45_5": {
+      "display": true
+    },
+    "NP_Basiskart_JanMayen_WMS_45_6": {
+      "display": true
+    },
+    "NP_Basiskart_JanMayen_WMS_45_7": {
+      "display": true
+    },
+    "NP_Basiskart_JanMayen_WMS_45_8": {
+      "display": true
+    },
+    "NP_Basiskart_JanMayen_WMS_45_9": {
+      "display": true
+    },
+    "NP_Basiskart_JanMayen_WMS_45_10": {
+      "display": true
+    },
+    "NP_Basiskart_JanMayen_WMS_45_11": {
+      "display": true
+    },
+    "NP_Basiskart_JanMayen_WMS_45_12": {
+      "display": true
+    },
+    "NP_Basiskart_JanMayen_WMS_45_13": {
+      "display": true
+    },
+    "NP_Basiskart_JanMayen_WMS_45_14": {
+      "display": true
+    },
+    "NP_Basiskart_JanMayen_WMS_45_15": {
+      "display": true
+    },
+    "NP_Basiskart_JanMayen_WMS_45_16": {
+      "display": true
+    },
+    "NP_Basiskart_JanMayen_WMS_45_17": {
+      "display": true
+    },
+    "NP_Basiskart_JanMayen_WMS_45_18": {
+      "display": true
+    },
+    "NP_Basiskart_JanMayen_WMS_45_19": {
+      "display": true
+    },
+    "NP_Basiskart_JanMayen_WMS_45_20": {
+      "display": true
+    },
+    "NP_Basiskart_JanMayen_WMS_45_21": {
+      "display": true
+    },
+    "NP_Basiskart_JanMayen_WMS_45_22": {
+      "display": true
+    },
+    "NP_Basiskart_JanMayen_WMS_45_23": {
+      "display": true
+    },
+    "NP_Basiskart_JanMayen_WMS_45_24": {
+      "display": true
+    },
+    "NP_Basiskart_JanMayen_WMS_45_25": {
+      "display": true
+    },
+    "NP_Basiskart_JanMayen_WMS_45_26": {
+      "display": true
+    },
+    "wms_2914": {
+      "display": false
+    },
+    "wms_2914_dtm1_33": {
+      "display": true
+    },
+    "wms_8963": {
+      "display": false
+    },
+    "wms_8963_dtm10_33": {
+      "display": true
+    },
+    "wms_3718": {
+      "display": false
+    },
+    "wms_3718_dom10_33": {
       "display": true
     },
     "wms_4783": {
