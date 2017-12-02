@@ -398,15 +398,16 @@ define([
 			} else {
 				Spatialutils.loadResource();
 				var WKTCurrent = Spatialutils.getCSStr(map.spatialReference.wkid);
-				function mapSpat (){
-					console.log("test");
-					if (WKTCurrent.charAt(0) == 'G'){
-						Spat = "geo";
-					} else {
-						Spat = "proj";
-					}
-				};
-				mapSpat();
+				// Commented out the function under, because it caused trouble somtimes.
+				//function mapSpat (){
+					//console.log("test");
+					//if (WKTCurrent.charAt(0) == 'G'){
+						//Spat = "geo";
+					//} else {
+						//Spat = "proj";
+					//}
+				//};
+				//mapSpat();
 			}
 		};
 	  
