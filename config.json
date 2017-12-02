@@ -475,21 +475,11 @@
         "icon": "configs\\AddData\\icon_AddData.png"
       },
       {
-        "name": "Edit",
-        "version": "2.6",
-        "uri": "widgets/Edit/Widget",
-        "config": "configs/Edit/config_Edit.json",
-        "index": 19,
-        "id": "widgets_Edit_Widget_74",
-        "icon": "configs\\Edit\\icon_Edit.png",
-        "openAtStart": false
-      },
-      {
         "name": "Bookmark",
         "version": "2.6",
         "uri": "widgets/Bookmark/Widget",
         "config": "configs/Bookmark/config_Bookmark.json",
-        "index": 20,
+        "index": 19,
         "id": "widgets_Bookmark_Widget_76",
         "icon": "configs\\Bookmark\\icon_Bookmark.png"
       }
