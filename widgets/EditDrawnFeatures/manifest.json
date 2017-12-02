@@ -3,8 +3,8 @@
   "platform": "HTML",
   "version": "2.6",
   "wabVersion": "2.6",
-  "author": "Geodata AS",
-  "description": "Widget for manipulating the url when layers are turned on/off",
+  "author": "Henrik G. Schüller",
+  "description": "Widget for editing drawn features",
   "copyright": "",
   "license": "http://www.apache.org/licenses/LICENSE-2.0",
   "properties": {

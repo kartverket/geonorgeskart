@@ -1,4 +1,6 @@
 define([
+	'esri/toolbars/edit',
+    'esri/config',
     'dojo/_base/declare',
     'dojo/_base/lang',
     'dojo/_base/html',
@@ -12,6 +14,8 @@ define([
     'dojo/NodeList-dom'
   ],
   function(
+	Edit,
+	esriConfig,
     declare,
     lang,
     html,
