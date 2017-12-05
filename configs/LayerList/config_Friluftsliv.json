@@ -9,6 +9,18 @@
     "DescriptionOrShowItemDetailsOrDownload": true
   },
   "layerOptions": {
+    "SkredSnoAktR_6249": {
+      "display": true
+    },
+    "SkredSnoAktR_6249_0": {
+      "display": true
+    },
+    "SkredSnoAktR_6249_1": {
+      "display": true
+    },
+    "SkredSnoAktR_6249_2": {
+      "display": true
+    },
     "SkredHendelser_473": {
       "display": false
     },
@@ -31,18 +43,6 @@
       "display": true
     },
     "SkredHendelser_473_6": {
-      "display": true
-    },
-    "SkredSnoAktR_6249": {
-      "display": true
-    },
-    "SkredSnoAktR_6249_0": {
-      "display": true
-    },
-    "SkredSnoAktR_6249_1": {
-      "display": true
-    },
-    "SkredSnoAktR_6249_2": {
       "display": true
     },
     "SkredSnoSteinAkt_9580": {
