@@ -58,7 +58,8 @@ define([
         url = layerUrl;
         label = this.nls.itemDownload;
       } else if (layerUrl && this._layerType === "WMSLayer") {
-        url = layerUrl + (layerUrl.indexOf("?") > -1 ? "&" : "?") + "SERVICE=WMS&REQUEST=GetCapabilities";
+        //url = layerUrl + (layerUrl.indexOf("?") > -1 ? "&" : "?") + "SERVICE=WMS&REQUEST=GetCapabilities";
+		url = layerUrl;
         label = this.nls.itemDesc;
       } else if (layerUrl && this._layerType === "WFSLayer") {
         url = layerUrl + (layerUrl.indexOf("?") > -1 ? "&" : "?") + "SERVICE=WFS&REQUEST=GetCapabilities";

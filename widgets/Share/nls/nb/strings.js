@@ -1,5 +1,5 @@
 define({
-  "_widgetLabel": "Dele",
+  "_widgetLabel": "Del",
   "selectSocialNetwork": "Velg følgende alternativer for å dele appen:",
   "email": "E-post",
   "facebook": "Facebook",
