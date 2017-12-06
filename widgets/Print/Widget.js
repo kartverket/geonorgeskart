@@ -7,12 +7,13 @@ define([
     "jimu/dijit/Message",
     'jimu/dijit/LoadingShelter',
     './Print',
+    './CustomPrint',
     "esri/request",
     'jimu/portalUrlUtils'
   ],
   function(
     declare, BaseWidget, portalUtils, lang, Deferred,
-    Message, LoadingShelter, Print, esriRequest,
+    Message, LoadingShelter, Print, CustomPrint, esriRequest,
     portalUrlUtils
   ) {
     return declare([BaseWidget], {
@@ -35,6 +36,8 @@ define([
         this.inherited(arguments);
         this.shelter.show();
         this._initPrinter();
+
+        CustomPrint.initializeLegendFor(this.map, this.domNode);
       },
 
       _initPrinter: function() {

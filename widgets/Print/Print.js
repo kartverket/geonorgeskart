@@ -29,6 +29,7 @@ define([
   'dojo/on',
   'dijit/popup',
   'dijit/form/ValidationTextBox',
+  "./CustomPrint",
   'dijit/form/Form',
   'dijit/form/Select',
   'dijit/form/NumberTextBox',
@@ -71,7 +72,8 @@ define([
   utils,
   on,
   popup,
-  ValidationTextBox) {
+  ValidationTextBox,
+  CustomPrint) {
   // Main print dijit
   var PrintDijit = declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
     widgetsInTemplate: true,
@@ -590,6 +592,14 @@ define([
         this.printparams.extraParameters = { // come from source code of jsapi
           printFlag: true
         };
+
+        // CUSTOM LEGEND PRINT
+        var legendHtml = CustomPrint.getLegendHtml();
+        if(legendHtml !== null) {
+          this.printparams.extraParameters['legendHtml'] = legendHtml;
+        }
+        // END CUSTOM LEGEND PRINT
+
         var fileHandel = this.printTask.execute(this.printparams);
 
         var result = new printResultDijit({
