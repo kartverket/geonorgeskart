@@ -37,7 +37,9 @@ define([
         this.shelter.show();
         this._initPrinter();
 
+        // CUSTOM PRINT LEGEND
         CustomPrint.initializeLegendFor(this.map, this.domNode);
+        // END CUSTOM PRINT LEGEND
       },
 
       _initPrinter: function() {
