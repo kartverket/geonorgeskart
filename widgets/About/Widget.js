@@ -50,7 +50,12 @@ define(['dojo/_base/declare',
       _resizeContentImg: function () {
         html.empty(this.customContentNode);
 
-        var aboutContent = html.toDom(this.config.about.aboutContent);
+		if (this.nls.$locale == 'nb') {
+			var aboutContent = html.toDom(this.config.about.aboutContent);
+		} else {
+			var aboutContent = html.toDom(this.config.about.aboutContent_en);
+		};
+			
         html.place(aboutContent, this.customContentNode);
         // single node only(no DocumentFragment)
         if (this.customContentNode.nodeType && this.customContentNode.nodeType === 1) {

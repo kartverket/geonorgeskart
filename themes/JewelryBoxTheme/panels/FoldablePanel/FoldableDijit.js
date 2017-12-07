@@ -49,6 +49,13 @@ define(['dojo/_base/declare',
         html.setStyle(this.titleLabelNode, {
           lineHeight: this.titleHeight + 'px'
         });
+		
+		// Vurdere denne løsningen for flerspråklighet
+		//if (this.label && this.nls.$locale == 'nb') {
+          //this.setTitleLabel(this.label);
+        //} else if (this.label == 'Energi'){
+			//this.setTitleLabel('Energy');
+		//}
         if (this.label) {
           this.setTitleLabel(this.label);
         }
