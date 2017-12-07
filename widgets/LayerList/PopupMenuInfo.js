@@ -48,7 +48,8 @@ define([
     _getATagLabel: function() {
       var url;
       var label;
-      var layerUrl = this._layerInfo.getUrl();
+	  var layerUrl = this._layerInfo.originOperLayer.metadataUrl;
+      //var layerUrl = this._layerInfo.getUrl();
       var basicItemInfo = this._layerInfo.isItemLayer();
       if (basicItemInfo) {
         url = this._getItemDetailsPageUrl(basicItemInfo) || layerUrl;
