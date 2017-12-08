@@ -48,7 +48,8 @@ define([
             var url;
             var label;
             //var layerUrl = this._layerInfo.originOperLayer.metadataUrl;
-
+			
+			// Set "Description" link to metadataUrl
             var layerUrl = null;
             for (var i = 0; i < metadata.length; i++) {
                 if (metadata[i].title == this._layerInfo.originOperLayer.title) {

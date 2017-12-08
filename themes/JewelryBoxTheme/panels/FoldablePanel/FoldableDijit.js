@@ -49,7 +49,7 @@ define(['dojo/_base/declare',
                     lineHeight: this.titleHeight + 'px'
                 });
 
-                // Vurdere
+				// Set layerList label based on language
                 if (this.label && this.nls.$locale == 'nb') {
                     this.setTitleLabel(this.label);
                 } else {
@@ -61,9 +61,7 @@ define(['dojo/_base/declare',
                         }
                     }
                 }
-                //if (this.label) {
-                //this.setTitleLabel(this.label);
-                //}
+				
                 this.foldEnable = true;
 
                 this.own(on(this.titleNode, 'click', lang.hitch(this, function() {
