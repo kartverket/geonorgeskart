@@ -596,7 +596,7 @@ define([
         // CUSTOM LEGEND PRINT
         var legendHtml = CustomPrint.getLegendHtml();
         if(legendHtml !== null) {
-          this.printparams.extraParameters['legendHtml'] = legendHtml;
+          this.printparams.extraParameters['Legend_HTML'] = legendHtml;
         }
         // END CUSTOM LEGEND PRINT
 
