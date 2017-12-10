@@ -13,90 +13,93 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 ///////////////////////////////////////////////////////////////////////////
-
 define(['dojo/_base/declare',
-    'dojo/_base/lang',
-    'dojo/_base/html',
-    'dojo/on',
-    'dijit/_WidgetBase',
-    'dijit/_TemplatedMixin',
-    'jimu/utils'
-  ],
-  function(declare, lang, html, on, _WidgetBase, _TemplatedMixin, jimuUtils) {
-    return declare([_WidgetBase, _TemplatedMixin], {
-      baseClass: 'jimu-foldable-dijit',
-      width: '100%',
-      titleHeight: 20,
-      content: null, //content is a dijit
-      folded: false,
-      templateString: '<div>' +
-        '<div class="title" data-dojo-attach-point="titleNode">' +
-        '<div class="title-label"' +
-        'data-dojo-attach-point="titleLabelNode"></div>' + '</div>' +
-        '<div class="jimu-panel-content" data-dojo-attach-point="containerNode"></div>' +
-        '</div>',
+        'dojo/_base/lang',
+        'dojo/_base/html',
+        'dojo/on',
+        'dijit/_WidgetBase',
+        'dijit/_TemplatedMixin',
+        'jimu/utils'
+    ],
+    function(declare, lang, html, on, _WidgetBase, _TemplatedMixin, jimuUtils) {
+        return declare([_WidgetBase, _TemplatedMixin], {
+            baseClass: 'jimu-foldable-dijit',
+            width: '100%',
+            titleHeight: 20,
+            content: null, //content is a dijit
+            folded: false,
+            templateString: '<div>' +
+                '<div class="title" data-dojo-attach-point="titleNode">' +
+                '<div class="title-label"' +
+                'data-dojo-attach-point="titleLabelNode"></div>' + '</div>' +
+                '<div class="jimu-panel-content" data-dojo-attach-point="containerNode"></div>' +
+                '</div>',
 
-      startup: function() {
-        this.inherited(arguments);
+            startup: function() {
+                this.inherited(arguments);
 
-        html.setStyle(this.titleNode, {
-          width: this.width,
-          height: this.titleHeight + 'px'
+                html.setStyle(this.titleNode, {
+                    width: this.width,
+                    height: this.titleHeight + 'px'
+                });
+                html.setStyle(this.containerNode, {
+                    top: this.titleHeight + 'px'
+                });
+                html.setStyle(this.titleLabelNode, {
+                    lineHeight: this.titleHeight + 'px'
+                });
+
+				// Set layerList label based on language
+                if (this.label && this.nls.$locale == 'nb') {
+                    this.setTitleLabel(this.label);
+                } else {
+                    for (var i = 0; i < multi_layerList.length; i++) {
+                        if (multi_layerList[i].label == this.label) {
+                            this.setTitleLabel(multi_layerList[i].label_en);
+                        } else {
+                            this.setTitleLabel(this.label);
+                        }
+                    }
+                }
+				
+                this.foldEnable = true;
+
+                this.own(on(this.titleNode, 'click', lang.hitch(this, function() {
+                    this.onFoldableNodeClick();
+                })));
+            },
+
+            setTitleLabel: function(label) {
+                this.label = label;
+                this.titleLabelNode.innerHTML = jimuUtils.stripHTML(label);
+                this.titleLabelNode.title = label;
+            },
+
+            createFoldableBtn: function() {
+                this.foldableNode = html.create('div', {
+                    'class': 'foldable-btn jimu-float-trailing'
+                }, this.titleNode);
+
+                this.own(on(this.foldableNode, 'click', lang.hitch(this, function(evt) {
+                    evt.stopPropagation();
+                    this.onFoldableNodeClick();
+                })));
+            },
+
+            onFoldableNodeClick: function() {
+                if (!this.foldEnable) {
+                    return;
+                }
+                if (this.folded) {
+                    this.folded = false;
+                    html.removeClass(this.foldableNode, 'folded');
+                } else {
+                    this.folded = true;
+                    html.addClass(this.foldableNode, 'folded');
+                }
+                this.onFoldStateChanged();
+            },
+
+            onFoldStateChanged: function() {}
         });
-        html.setStyle(this.containerNode, {
-          top: this.titleHeight + 'px'
-        });
-        html.setStyle(this.titleLabelNode, {
-          lineHeight: this.titleHeight + 'px'
-        });
-		
-		// Vurdere denne løsningen for flerspråklighet
-		//if (this.label && this.nls.$locale == 'nb') {
-          //this.setTitleLabel(this.label);
-        //} else if (this.label == 'Energi'){
-			//this.setTitleLabel('Energy');
-		//}
-        if (this.label) {
-          this.setTitleLabel(this.label);
-        }
-        this.foldEnable = true;
-
-        this.own(on(this.titleNode, 'click', lang.hitch(this, function(){
-          this.onFoldableNodeClick();
-        })));
-      },
-
-      setTitleLabel: function(label) {
-        this.label = label;
-        this.titleLabelNode.innerHTML = jimuUtils.stripHTML(label);
-        this.titleLabelNode.title = label;
-      },
-
-      createFoldableBtn: function() {
-        this.foldableNode = html.create('div', {
-          'class': 'foldable-btn jimu-float-trailing'
-        }, this.titleNode);
-
-        this.own(on(this.foldableNode, 'click', lang.hitch(this, function(evt){
-          evt.stopPropagation();
-          this.onFoldableNodeClick();
-        })));
-      },
-
-      onFoldableNodeClick: function(){
-        if(!this.foldEnable){
-          return;
-        }
-        if(this.folded){
-          this.folded = false;
-          html.removeClass(this.foldableNode, 'folded');
-        }else{
-          this.folded = true;
-          html.addClass(this.foldableNode, 'folded');
-        }
-        this.onFoldStateChanged();
-      },
-
-      onFoldStateChanged: function(){}
     });
-  });
