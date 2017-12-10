@@ -19,7 +19,9 @@ define([
         console.log("Hello from Url Layer Controller");
 
         var fullUrl = window.location.href;
-        ShareLayerConfigInUrl.enableVisibleMapLayersForQueryParams(this.map, fullUrl);
+        var layersToToggle = ShareLayerConfigInUrl.parseUrlForVisibleMapLayersQueryParams(fullUrl);
+        ShareLayerConfigInUrl.enableVisibleMapLayersForQueryParams(this.map, layersToToggle);
+        ShareLayerConfigInUrl.removeQueryParameterFromUrl(fullUrl);
       }
     });
 

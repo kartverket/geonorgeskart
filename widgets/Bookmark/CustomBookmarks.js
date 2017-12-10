@@ -26,12 +26,13 @@ define([
   'esri/SpatialReference',
   'jimu/BaseWidget',
   'dijit/_TemplatedMixin',
+  "../UrlLayerController/ShareLayerConfigInUrl",  
   './utils',
   './ItemNode',
   'jimu/dijit/ImageChooser'
 ],
   function (Evented, declare, lang, html, array, on, has,// query,
-    SpatialReference, BaseWidget, _TemplatedMixin, utils,
+    SpatialReference, BaseWidget, _TemplatedMixin, ShareLayerConfigInUrl, utils,
     ItemNode, ImageChooser) {
     var Sortable = window.Sortable;
     return declare([BaseWidget, _TemplatedMixin, Evented], {
@@ -135,6 +136,11 @@ define([
         if (name !== rawNewName) {
           bookmark._autoRename = true;
         }
+
+        // CUSTOM ADD VISIBLE LAYERS
+        var visibleMapLayersText = ShareLayerConfigInUrl.createParamValueForVisibleLayers(this.map);
+        bookmark.geonorgeLayers = visibleMapLayersText;
+        // END CUSTOM ADD VISIBLE LAYERS
 
         //show drawer, if hide
         //this.showDrawer();
@@ -266,11 +272,16 @@ define([
             }
             this.map.setExtent(new Extent(ext));
           }
-
           //layers
           if (true === bookmark.isSaveLayers) {
             utils.layerInfosRestoreState(bookmark.layerOptions);
           }
+          // CUSTOM TOGGLE ON BOOKMARK LAYERS
+          if(bookmark.geonorgeLayers) {
+            var layersToToggle = ShareLayerConfigInUrl.parseParamValueForVisibleLayers(bookmark.geonorgeLayers);
+            ShareLayerConfigInUrl.enableVisibleMapLayersForQueryParams(this.map, layersToToggle);
+          }
+          // END CUSTOM TOGGLE ON BOOKMARK LAYERS
         }));
       },
       _onLebelClick: function (bookmark) {

@@ -41,7 +41,7 @@ define([
         this.widgetManager.activateWidget(this);
 
         // CUSTOM 
-        var visibleLayersQueryParam = ShareLayerConfigInUrl.createQueryParamsForVisibleMapLayers(this.map);
+        var visibleLayersQueryParam = ShareLayerConfigInUrl.createQueryParamForVisibleMapLayers(this.map);
         if(visibleLayersQueryParam !== "") {
           this.shareLink.baseHrefUrl = this._baseHrefUrlUnmodified + "?" + visibleLayersQueryParam;
         } else {

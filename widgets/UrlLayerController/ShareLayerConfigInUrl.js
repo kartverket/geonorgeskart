@@ -48,14 +48,12 @@ define([
             return dict;
         }, {});
     };
-
-    ShareLayerConfigInUrl.prototype.createQueryParamsForVisibleMapLayers = function (map) {
-        log("Creating query params for share");
+  
+    ShareLayerConfigInUrl.prototype.createParamValueForVisibleLayers = function (map) {
 
         var layerIds = map.layerIds || [];
         
         var layerIdToNumberDict = this.getArrayItemToIndexDict(layerIds);
-
         var visibleLayers = layerIds
             .map(function(id) { return map.getLayer(id); })
             .filter(function(l) { return l.visible; });
@@ -82,18 +80,16 @@ define([
             return queryString + layerPart;
         }, "");
 
-        return this.queryParamName + "=" + encodeURIComponent(queryParam);
+        return queryParam;
+    }
+
+    ShareLayerConfigInUrl.prototype.createQueryParamForVisibleMapLayers = function (map) {
+        log("Creating query params for share");
+        var paramValue = this.createParamValueForVisibleLayers(map); 
+        return this.queryParamName + "=" + encodeURIComponent(paramValue);
     };
 
-    ShareLayerConfigInUrl.prototype.parseUrlForVisibleMapLayersQueryParams = function (url) {
-        var urlObject = esriUrlUtils.urlToObject(url);
-        
-        if(!isDefined(urlObject.query)) {
-            // no query params
-            return [];
-        }
-
-        var layersQueryObject = urlObject.query[this.queryParamName];
+    ShareLayerConfigInUrl.prototype.parseParamValueForVisibleLayers = function (layersQueryObject) {
 
         if(!isDefined(layersQueryObject)) {
             // query params, but not the one this component is looking for
@@ -133,12 +129,22 @@ define([
                 };
             });
 
-            return layers;
+        return layers;
     };
 
-    ShareLayerConfigInUrl.prototype.enableVisibleMapLayersForQueryParams = function (map, url) {
-        var layersToToggle = this.parseUrlForVisibleMapLayersQueryParams(url);
+    ShareLayerConfigInUrl.prototype.parseUrlForVisibleMapLayersQueryParams = function (url) {
+        var urlObject = esriUrlUtils.urlToObject(url);
+        
+        if(!isDefined(urlObject.query)) {
+            // no query params
+            return [];
+        }
 
+        var layersQueryObject = urlObject.query[this.queryParamName];
+        return this.parseParamValueForVisibleLayers(layersQueryObject);
+    };
+
+    ShareLayerConfigInUrl.prototype.enableVisibleMapLayersForQueryParams = function (map, layersToToggle) {
         var layerNumbersToIdsDict = this.getArrayIndexToItemDict(map.layerIds);
 
         var self = this;
@@ -193,11 +199,6 @@ define([
                 l.errors.forEach(log);
                 log("--- End Layer Id " + l.id + " ---");
             });
-
-        // clean up url from the browser window so its clear it does not update continously
-        if(layersToToggle.length > 0) {
-            this.removeQueryParameterFromUrl(url);
-        }
     };
 
     ShareLayerConfigInUrl.prototype.removeQueryParameterFromUrl = function (url) {
