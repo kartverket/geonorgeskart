@@ -1,5 +1,5 @@
 {
-  "serviceURL": "https://sampleserver6.arcgisonline.com/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task",
+  "serviceURL": "https://nnrite544.statkart.no:6443/arcgis/rest/services/GeonorgePrint/GeonorgePrint/GPServer/GeonorgePrint",
   "defaultTitle": "Min utskrift",
   "defaultAuthor": "Geonorge",
   "defaultCopyright": "",

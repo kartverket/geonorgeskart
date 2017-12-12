@@ -91,6 +91,8 @@ var ie = (function() {
       window.path + 'libs/caja-html-sanitizer-minified.js',
       window.path + 'libs/moment/twix.js',
       window.path + 'libs/Sortable.js',
+	  window.path + 'js/config_hgs_metadata.js',
+	  window.path + 'js/config_hgs_multilingual-layerlist.js',
       //because we have jimu/dijit/GridLayout dijit, so we import this css here
       window.path + 'libs/goldenlayout/goldenlayout-base.css',
       window.path + 'libs/goldenlayout/goldenlayout-light-theme.css'

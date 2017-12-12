@@ -252,9 +252,26 @@ define([
       createItemNode: function(i, pageNode) {
         var node, item;
         item = this.items[i];
+		// Set icon title based on language
+		var iconLabel = null;
+		if (item.label && window.nls == 'nb') {
+			iconLabel = item.label;
+		}  else {
+			for (var i = 0; i < multi_layerList.length; i++) {
+				if (item.label == multi_layerList[i].label) {
+					iconLabel = multi_layerList[i].label_en;
+					break
+				} else {
+					//console.log(iconConfig.label);
+					iconLabel = item.label;
+				}
+			}
+		}
         node = domConstruct.create('div', {
           'class': 'icon-node jimu-float-leading jimu-main-background',
-          title: item.label,
+		  ////////////////////////////////////////////////////////////////
+          title: iconLabel,
+		  ////////////////////////////////////////////////////////////////
           settingId: item.id,
           'data-widget-name': item.name
         }, pageNode);
@@ -265,7 +282,9 @@ define([
 
         domConstruct.create('div', {
           'class': 'node-label',
-          'title': item.label,
+		  ////////////////////////////////////////////////////////////////
+          'title': iconLabel,
+		  ////////////////////////////////////////////////////////////////
           'innerHTML': utils.stripHTML(item.label)
         }, node);
 

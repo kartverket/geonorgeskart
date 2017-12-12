@@ -782,18 +782,37 @@ define([
           }
         }
       },
-
+		
       _createIconNode: function(iconConfig) {
+		  
+	    // Set icon title based on language
+		var iconLabel = null;
+		if (iconConfig.label && this.nls.$locale == 'nb') {
+			window.nls = 'nb';
+			iconLabel = iconConfig.label;
+		}  else {
+			for (var i = 0; i < multi_layerList.length; i++) {
+				if (iconConfig.label == multi_layerList[i].label) {
+					iconLabel = multi_layerList[i].label_en;
+					break
+				} else {
+					//console.log(iconConfig.label);
+					iconLabel = iconConfig.label;
+				}
+			}
+		}
         var node, iconUrl;
         if (iconConfig.name === '__more') {
           iconUrl = this.folderUrl + 'images/more_icon.png';
         } else {
           iconUrl = iconConfig.icon;
         }
-
+		
         node = html.create('div', {
           'class': 'icon-node jimu-float-trailing' + ((this.openedId === iconConfig.id)? ' jimu-state-selected': ''),
-          title: iconConfig.label,
+		  //////////////////////////////////////////
+          title: iconLabel,
+		  /////////////////////////////////////////
           settingId: iconConfig.id,
           style: {
             width: this.height + 'px',
