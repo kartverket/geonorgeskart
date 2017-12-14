@@ -279,6 +279,7 @@ define([
           // CUSTOM TOGGLE ON BOOKMARK LAYERS
           if(bookmark.geonorgeLayers) {
             var layersToToggle = ShareLayerConfigInUrl.parseParamValueForVisibleLayers(bookmark.geonorgeLayers);
+            ShareLayerConfigInUrl.disableAllOperationalLayers(this.map);
             ShareLayerConfigInUrl.enableVisibleMapLayersForQueryParams(this.map, layersToToggle);
           }
           // END CUSTOM TOGGLE ON BOOKMARK LAYERS

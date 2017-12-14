@@ -201,6 +201,27 @@ define([
             });
     };
 
+    ShareLayerConfigInUrl.prototype.disableAllOperationalLayers = function (map) {
+        var layerIds = map.layerIds || [];
+
+        var operationalLayersVisibleIds = layerIds
+            .filter(function(layerId, index) {
+                if(index === 0) {
+                    return false;
+                }
+                return true;
+            })
+            .filter(function(layerId) {
+                var layer = map.getLayer(layerId);
+                return layer.visible;                
+            });
+
+            operationalLayersVisibleIds.forEach(function(layerId) {
+                var layer = map.getLayer(layerId);
+                layer.hide();
+            });
+    };
+
     ShareLayerConfigInUrl.prototype.removeQueryParameterFromUrl = function (url) {
         if(this.urlCleanupEnabled === false) {
             return;
