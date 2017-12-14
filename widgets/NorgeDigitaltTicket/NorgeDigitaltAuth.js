@@ -11,7 +11,7 @@ function (
     request) {
 
     function NorgeDigitaltAuth() {
-        this.apiBaseUrl = "https://localhost:44303/";
+        this.apiBaseUrl = "https://localhost:44303";
         this.wmtsToken = null;
         this.wmsTicketIds = [];
         this.ticketByServiceIdDictionary = {};
@@ -61,7 +61,7 @@ function (
             serviceIds = [];
         }
 
-        request(this.apiBaseUrl + "api/auth/ticket", {
+        request(this.apiBaseUrl + "/api/auth/ticket", {
             data: JSON.stringify(serviceIds),
             method: "POST",
             handleAs: "json",

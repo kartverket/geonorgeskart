@@ -21,7 +21,7 @@
       "mainBackgroundColor": "#ffffff"
     }
   },
-  "portalUrl": "https://kartverket.maps.arcgis.com",
+  "portalUrl": "http://kartverket.maps.arcgis.com",
   "appId": "",
   "authorizedCrossOriginDomains": [],
   "title": "<div class=\"attribute-custom-style\"><br /></div>",

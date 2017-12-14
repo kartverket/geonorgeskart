@@ -39,7 +39,7 @@ define([
           NorgeDigitaltAuth.addLayerAuthenticationIfNecessary(layer);       
         }));
 
-        NorgeDigitaltAuth.apiBaseUrl = "https://localhost:44303/"; 
+        NorgeDigitaltAuth.apiBaseUrl = "http://localhost:8000";
         NorgeDigitaltAuth.generateTickets();
         NorgeDigitaltAuth.generateToken();
       },
