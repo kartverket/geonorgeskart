@@ -1,39 +1,39 @@
 var multi_layerList = [
 	{
 		"label": "Basis kartdata",
-		"label_en": "Basic mapstuff"
+		"label_en": "Base maps"
 	}, {
 		"label": "Energi",
 		"label_en": "Energy"
 	}, {
 		"label": "Forurensning",
-		"label_en": "Polution"
+		"label_en": "Pollution"
 	}, {
 		"label": "Friluftsliv",
-		"label_en": "outdoorstuff"
+		"label_en": "Outdoor activities"
 	}, {
 		"label": "Geologi",
 		"label_en": "Geology"
 	}, {
 		"label": "Kulturminner",
-		"label_en": "Protected sites"
+		"label_en": "Cultural heritage"
 	}, {
 		"label": "Kyst og fiskeri",
-		"label_en": "Coast and fishstuff"
+		"label_en": "Marine activities"
 	}, {
 		"label": "Landbruk",
-		"label_en": "Landstuff"
+		"label_en": "Agriculture"
 	}, {
 		"label": "Natur",
 		"label_en": "Nature"
 	}, {
 		"label": "Plan",
-		"label_en": "Plan"
+		"label_en": "Planning"
 	}, {
 		"label": "Samferdsel",
-		"label_en": "Carstuff"
+		"label_en": "Transportation"
 	}, {
 		"label": "Samfunnssikkerhet",
-		"label_en": "Securitystuff"
+		"label_en": "Crisis management"
 	}
 ]
