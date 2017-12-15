@@ -21,11 +21,11 @@
       "mainBackgroundColor": "#ffffff"
     }
   },
-  "portalUrl": "http://kartverket.maps.arcgis.com",
+  "portalUrl": "https://kartverket.maps.arcgis.com",
   "appId": "",
   "authorizedCrossOriginDomains": [],
-  "title": "<div class=\"attribute-custom-style\"><br /></div>",
-  "subtitle": "",
+  "title": "<div class=\"attribute-custom-style\"></div>",
+  "subtitle": "<div class=\"attribute-custom-style\"></div>",
   "keepAppState": true,
   "logo": "images/logo.png",
   "geometryService": "https://utility.arcgisonline.com/arcgis/rest/services/Geometry/GeometryServer",
