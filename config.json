@@ -21,6 +21,14 @@
       "mainBackgroundColor": "#ffffff"
     }
   },
+
+  "httpProxy": {
+    "useProxy": true,
+    "alwaysUseProxy": false,
+    "url": "/proxy.ashx",
+    "rules": []
+  },
+
   "portalUrl": "https://kartverket.maps.arcgis.com",
   "appId": "",
   "authorizedCrossOriginDomains": [],
