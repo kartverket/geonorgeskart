@@ -1,0 +1,18 @@
+{
+    "identify": {
+      "LAYER=topo4&": "topo4",
+      "LAYER=topo4graatone&": "topo4graatone",
+      "LAYER=toporaster3&": "toporaster3",
+      "LAYER=sjokartraster&": "sjokartraster",
+      "LAYER=europa&": "europakart",
+  
+      "no_match": "topo4"
+    },
+    "replace": {
+      "topo4": "http://openwms.statkart.no/skwms1/wms.topo4?request=GetCapabilities&service=WMS",
+      "topo4graatone": "http://openwms.statkart.no/skwms1/wms.topo4.graatone?request=GetCapabilities&service=WMS",
+      "toporaster3": "https://openwms.statkart.no/skwms1/wms.toporaster3?request=GetCapabilities&service=WMS",
+      "sjokartraster": "https://openwms.statkart.no/skwms1/wms.sjokartraster?request=GetCapabilities&service=WMS",
+      "europakart": "http://wms.geonorge.no/skwms1/wms.europa?request=GetCapabilities&service=WMS"
+    }
+}

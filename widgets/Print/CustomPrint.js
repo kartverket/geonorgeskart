@@ -1,15 +1,19 @@
 define([
     "dojo/_base/declare",
     "dojo/_base/html",
-    "esri/dijit/Legend"
+    "esri/dijit/Legend",
+    "dojo/text!../../configs/Print/wmts_to_wms_config.json"
 ], function(
     declare,
     html,
-    Legend
+    Legend,
+    wmtsToWmsMappingConfigJsonText
 ) {
     function CustomPrint() {
         this.legend = null;
     }
+
+    CustomPrint.prototype.wmtsToWmsMappingConfig = JSON.parse(wmtsToWmsMappingConfigJsonText);
 
     CustomPrint.prototype.initializeLegendFor = function (map, domNode) {
         this.destroy();

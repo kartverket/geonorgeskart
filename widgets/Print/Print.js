@@ -598,6 +598,7 @@ define([
         if(legendHtml !== null) {
           this.printparams.extraParameters['Legend_HTML'] = legendHtml;
         }
+        this.printparams.extraParameters['WMTS_TO_WMS_MAPPING'] = JSON.stringify(CustomPrint.wmtsToWmsMappingConfig);
         // END CUSTOM LEGEND PRINT
 
         var fileHandel = this.printTask.execute(this.printparams);
