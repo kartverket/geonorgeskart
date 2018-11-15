@@ -7,7 +7,7 @@
       "name": "World",
       "singleLineFieldName": "SingleLine",
       "placeholder": "Søk",
-      "countryCode": "",
+      "countryCode": "NOR",
       "zoomScale": 50000,
       "maxSuggestions": 6,
       "maxResults": 6,

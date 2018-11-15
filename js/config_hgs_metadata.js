@@ -3,8 +3,8 @@ var metadata = [
 		"title": "Markagrensa",
 		"metadataUrl": "https://kartkatalog.geonorge.no/metadata/kartverket/markagrensa-wms/06c4bef8-cfe9-4996-870e-49e38bb61833"
 	}, {
-		"title": "Administrative grenser",
-		"metadataUrl": "https://kartkatalog.geonorge.no/metadata/uuid/e461747b-8482-4b2b-88af-cf920570de2d"
+		"title": "Administrative enheter",
+		"metadataUrl": "https://kartkatalog.geonorge.no/metadata/uuid/2277a770-56f4-4e58-913b-0ae463700bb8"
 	}, {
 		"title": "Digital overflatemodell 10m - Landsdekkende",
 		"metadataUrl": "https://kartkatalog.geonorge.no/metadata/uuid/a1ba53a1-fec5-427a-a436-097ef90a278b"
@@ -290,5 +290,8 @@ var metadata = [
 	}, {
 		"title": "Skredhendelser",
 		"metadataUrl": "https://kartkatalog.geonorge.no/metadata/norges-vassdrags-og-energidirektorat/skredhendelser-wms/491a172b-4958-4b6a-8f04-fd19ee5f0959"
+	}, {
+		"title": "Reindrift",
+		"metadataUrl": "https://kartkatalog.geonorge.no/metadata/landbruksdirektoratet/reindrift-wms/ff879537-4031-4e80-bff0-87d0e0638a7f"
 	}
 ]

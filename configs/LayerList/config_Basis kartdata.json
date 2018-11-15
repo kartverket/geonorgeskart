@@ -9,16 +9,139 @@
     "DescriptionOrShowItemDetailsOrDownload": true
   },
   "layerOptions": {
-    "SkredSnoAktR_6249": {
+    "wms_5155": {
       "display": false
     },
-    "SkredSnoAktR_6249_0": {
+    "wms_5155_Anlegg": {
       "display": true
     },
-    "SkredSnoAktR_6249_1": {
+    "wms_5155_Gjerder": {
       "display": true
     },
-    "SkredSnoAktR_6249_2": {
+    "wms_5155_PermanteSperregjerder": {
+      "display": true
+    },
+    "wms_5155_MidlertidigSperregjerder": {
+      "display": true
+    },
+    "wms_5155_Fangarmer": {
+      "display": true
+    },
+    "wms_5155_Transport": {
+      "display": true
+    },
+    "wms_5155_Beitehage": {
+      "display": true
+    },
+    "wms_5155_Trekklei": {
+      "display": true
+    },
+    "wms_5155_Flyttlei": {
+      "display": true
+    },
+    "wms_5155_Oppsamling": {
+      "display": true
+    },
+    "wms_5155_Trollheimen": {
+      "display": true
+    },
+    "wms_5155_Trollheimen_grense": {
+      "display": true
+    },
+    "wms_5155_Trollheimen_avtaleomraade": {
+      "display": true
+    },
+    "wms_5155_Trollheimen_ekspropriasjonsomraade": {
+      "display": true
+    },
+    "wms_5155_Rendal_renselskap": {
+      "display": true
+    },
+    "wms_5155_Siidagrense": {
+      "display": true
+    },
+    "wms_5155_reinkonsesjonomrade": {
+      "display": true
+    },
+    "wms_5155_reinkonvensjonomr": {
+      "display": true
+    },
+    "wms_5155_Reinbeitedistriktgrenser": {
+      "display": true
+    },
+    "wms_5155_Reinbeitedistrikt": {
+      "display": true
+    },
+    "wms_5155_Distriktnavn": {
+      "display": true
+    },
+    "wms_5155_Reinbeiteomrade": {
+      "display": true
+    },
+    "wms_5155_Reinbeiteomrade_ost_finnmark": {
+      "display": true
+    },
+    "wms_5155_Reinbeiteomrade_vest_finnmark": {
+      "display": true
+    },
+    "wms_5155_Reinbeiteomrade_troms": {
+      "display": true
+    },
+    "wms_5155_Reinbeiteomrade_nordland": {
+      "display": true
+    },
+    "wms_5155_Reinbeiteomrade_nord_trondelag": {
+      "display": true
+    },
+    "wms_5155_Reinbeiteomrade_sor_trondelag": {
+      "display": true
+    },
+    "wms_5155_Restriksjonsgrense": {
+      "display": true
+    },
+    "wms_5155_Restriksjonsomrade": {
+      "display": true
+    },
+    "wms_5155_Varbeite_kalv_tidlig": {
+      "display": true
+    },
+    "wms_5155_Varbeite_okse_simle": {
+      "display": true
+    },
+    "wms_5155_Sommerbeite_sentrhligg_lufting": {
+      "display": true
+    },
+    "wms_5155_Sommerbeite_lavreliggende": {
+      "display": true
+    },
+    "wms_5155_Hostbeite_parringsland": {
+      "display": true
+    },
+    "wms_5155_Hostbeite_tidlig": {
+      "display": true
+    },
+    "wms_5155_Hostvinterbeite_tidlig_intensiv": {
+      "display": true
+    },
+    "wms_5155_Hostvinterbeite_spredt_bruk": {
+      "display": true
+    },
+    "wms_5155_Vinterbeite_sen_intensiv": {
+      "display": true
+    },
+    "wms_5155_Vinterbeite_tidlig": {
+      "display": true
+    },
+    "wms_5155_Lom": {
+      "display": true
+    },
+    "wms_5155_Vaga": {
+      "display": true
+    },
+    "wms_5155_Fram": {
+      "display": true
+    },
+    "wms_5155_Filefjell": {
       "display": true
     },
     "SkredHendelser_473": {
@@ -43,6 +166,18 @@
       "display": true
     },
     "SkredHendelser_473_6": {
+      "display": true
+    },
+    "SkredSnoAktR_6249": {
+      "display": false
+    },
+    "SkredSnoAktR_6249_0": {
+      "display": true
+    },
+    "SkredSnoAktR_6249_1": {
+      "display": true
+    },
+    "SkredSnoAktR_6249_2": {
       "display": true
     },
     "SkredSnoSteinAkt_9580": {
@@ -1731,16 +1866,13 @@
     "wms_4069_marin_vp_oppstart": {
       "display": true
     },
-    "wms_6276": {
+    "wms_2596": {
       "display": false
     },
-    "wms_6276_svo_barentshavet": {
+    "wms_2596_forvaltningsplaner_havomrader_grense": {
       "display": true
     },
-    "wms_6276_svo_nordsjoen": {
-      "display": true
-    },
-    "wms_6276_svo_norskehavet": {
+    "wms_2596_forvaltningsplaner_havomrader_omrade": {
       "display": true
     },
     "wms_3991": {
@@ -1807,159 +1939,6 @@
       "display": true
     },
     "wms_1677_kostholdsrad_sted": {
-      "display": true
-    },
-    "wms_5984": {
-      "display": false
-    },
-    "wms_5984_kart": {
-      "display": true
-    },
-    "wms_5984_precipitation_1h_regional": {
-      "display": true
-    },
-    "wms_5984_surface_pressure_regional": {
-      "display": true
-    },
-    "wms_5984_temperature_2m_regional": {
-      "display": true
-    },
-    "wms_5984_wind_10m_regional": {
-      "display": true
-    },
-    "wms_5984_ec.precip_6h": {
-      "display": true
-    },
-    "wms_5984_ec.mslp": {
-      "display": true
-    },
-    "wms_5984_ec.t2m": {
-      "display": true
-    },
-    "wms_5984_ec.wind10m": {
-      "display": true
-    },
-    "wms_5984_sea_wave_height_direction_regional": {
-      "display": true
-    },
-    "wms_5984_sea_current_regional": {
-      "display": true
-    },
-    "wms_5984_sea_salinity_regional": {
-      "display": true
-    },
-    "wms_5984_sea_temperature_regional": {
-      "display": true
-    },
-    "wms_5984_sea_surface_height_regional": {
-      "display": true
-    },
-    "wms_5984_osisaf.icetype": {
-      "display": true
-    },
-    "wms_5984_osisaf.iceedge": {
-      "display": true
-    },
-    "wms_5984_osisaf.iceconcentration": {
-      "display": true
-    },
-    "wms_5984_myocean.sst": {
-      "display": true
-    },
-    "wms_5984_ice.ice_chart": {
-      "display": true
-    },
-    "wms_5984_ice.ice_analysis_skagerak": {
-      "display": true
-    },
-    "wms_5984_ice.ice_analysis_sar": {
-      "display": true
-    },
-    "wms_5984_radar_precipitation_intensity": {
-      "display": true
-    },
-    "wms_5984_ecmwf.swell": {
-      "display": true
-    },
-    "wms_5984_ecmwf.wave": {
-      "display": true
-    },
-    "wms_5984_sat.neuropa": {
-      "display": true
-    },
-    "wms_5984_sat.npolen": {
-      "display": true
-    },
-    "wms_5984_sat.natlant": {
-      "display": true
-    },
-    "wms_5984_sat.ishavet": {
-      "display": true
-    },
-    "wms_5984_wamws.windspeed.mean": {
-      "display": true
-    },
-    "wms_5984_wamws.windspeed.10mps": {
-      "display": true
-    },
-    "wms_5984_wamws.windspeed.15mps": {
-      "display": true
-    },
-    "wms_5984_wamws.windspeed.20mps": {
-      "display": true
-    },
-    "wms_5984_wamhs.hs.mean": {
-      "display": true
-    },
-    "wms_5984_wamhs.freq2m": {
-      "display": true
-    },
-    "wms_5984_wamhs.freq3m": {
-      "display": true
-    },
-    "wms_5984_wamhs.freq4m": {
-      "display": true
-    },
-    "wms_5984_wamhs.freq5m": {
-      "display": true
-    },
-    "wms_5984_wamhs.freq6m": {
-      "display": true
-    },
-    "wms_5984_wamws.windspeed.mean.year": {
-      "display": true
-    },
-    "wms_5984_wamws.windspeed.10mps.year": {
-      "display": true
-    },
-    "wms_5984_wamws.windspeed.15mps.year": {
-      "display": true
-    },
-    "wms_5984_wamws.windspeed.20mps.year": {
-      "display": true
-    },
-    "wms_5984_wamhs.hs.mean.year": {
-      "display": true
-    },
-    "wms_5984_wamhs.freq2m.year": {
-      "display": true
-    },
-    "wms_5984_wamhs.freq3m.year": {
-      "display": true
-    },
-    "wms_5984_wamhs.freq4m.year": {
-      "display": true
-    },
-    "wms_5984_wamhs.freq5m.year": {
-      "display": true
-    },
-    "wms_5984_wamhs.freq6m.year": {
-      "display": true
-    },
-    "wms_5984_iskart.konsentrasjon": {
-      "display": true
-    },
-    "wms_5984_strike_probability": {
       "display": true
     },
     "wms_6148": {
@@ -2098,12 +2077,6 @@
       "display": true
     },
     "NFSSistOperativ_74_17": {
-      "display": true
-    },
-    "NFSSistOperativ_74_18": {
-      "display": true
-    },
-    "NFSSistOperativ_74_19": {
       "display": true
     },
     "wms_7094": {
@@ -2478,28 +2451,34 @@
     "wms_3718_dom10_33": {
       "display": true
     },
-    "wms_4783": {
+    "wms_4252": {
       "display": true
     },
-    "wms_4783_Kommunegrenser": {
+    "wms_4252_kommuner_2017": {
       "display": true
     },
-    "wms_4783_Fylkesnavn": {
+    "wms_4252_fylker_2017": {
       "display": true
     },
-    "wms_4783_Fylkesgrenser": {
+    "wms_4252_kommuner": {
       "display": true
     },
-    "wms_4783_Kommunenavn": {
+    "wms_4252_fylker": {
       "display": true
     },
-    "wms_4783_Kommunenummer": {
+    "wms_4252_riksgrense": {
       "display": true
     },
-    "wms_913": {
+    "wms_4252_territorialgrense": {
+      "display": true
+    },
+    "wms_4252_avtaltavgrensningslinje": {
+      "display": true
+    },
+    "wms_5182": {
       "display": false
     },
-    "wms_913_Marka": {
+    "wms_5182_lovVirkeonraade": {
       "display": true
     }
   }
