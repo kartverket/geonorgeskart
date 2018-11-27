@@ -1,0 +1,15 @@
+.jimu-widget-visiblelayers {
+	z-index: 999999 !important;
+}
+
+.visibleLayersContainer {
+	display: table-row;
+}
+
+.visibleLayerCount {
+	display: table-cell;
+	position: fixed;
+	color: green;
+	font-weight: bold;
+	pointer-events: none;
+}

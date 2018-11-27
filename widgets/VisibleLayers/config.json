@@ -1,0 +1,492 @@
+{
+	"categories": [
+		{
+			"name": "basis",
+			"domTitle": "Basis kartdata",
+			"layers": [
+				{
+					"name": "Administrative enheter",
+					"id": "wms_4252"
+				},
+				{
+					"name": "Digital overflatemodell 10m - Landsdekkende",
+					"id": "wms_3718"
+				},
+				{
+					"name": "Digital terrengmodell 10m - Landsdekkende",
+					"id": "wms_8963"
+				},
+				{
+					"name": "Digital terrengmodell 1m - Deler av landet",
+					"id": "wms_2914"
+				},
+				{
+					"name": "Jan Mayen - basiskart",
+					"id": "NP_Basiskart_JanMayen_WMS_45"
+				},
+				{
+					"name": "Svalbard - basiskart",
+					"id": "NP_Basiskart_Svalbard_WMS_6104"
+				}
+			]
+		},
+		{
+			"name": "outdoors",
+			"domTitle": "Friluftsliv",
+			"layers": [
+				{
+					"name": "Markagrensa",
+					"id": "wms_5182"
+				},
+				{
+					"name": "Fiskeplasser",
+					"id": "wms_6774"
+				},
+				{
+					"name": "Kartlagt friluftsliv",
+					"id": "wms_6424"
+				},
+				{
+					"name": "Norske orienteringskart",
+					"id": "wms_4786"
+				},
+				{
+					"name": "Sykkelruter",
+					"id": "wms_4183"
+				},
+				{
+					"name": "Fotruter",
+					"id": "wms_6016"
+				},
+				{
+					"name": "Skiløyper",
+					"id": "wms_6067"
+				},
+				{
+					"name": "Kyst-, kultur- og naturstier",
+					"id": "wms_4486"
+				},
+				{
+					"name": "Tilgjengelighet - friluft",
+					"id": "wms_5639"
+				},
+				{
+					"name": "Skredfaresoner",
+					"id": "Skredfaresoner1_2281"
+				},
+				{
+					"name": "Snø- og steinskred - Aktsomhetsområder",
+					"id": "SkredSnoSteinAkt_9580"
+				},
+				{
+					"name": "Snøskred - Aktsomhetsområde",
+					"id": "SkredSnoAktR_6249"
+				}
+			]
+		},
+		{
+			"name": "marine",
+			"domTitle": "Kyst og fiskeri",
+			"layers": [
+				{
+					"name": "Felles kystkontur",
+					"id": "wms_4889"
+				},
+				{
+					"name": "Navigasjonsinstallasjoner",
+					"id": "NFSSistOperativ_74"
+				},
+				{
+					"name": "Akvakultur",
+					"id": "wms_1686"
+				},
+				{
+					"name": "Gyteområder",
+					"id": "wms_5265"
+				},
+				{
+					"name": "Fiskeplasser",
+					"id": "wms_6774"
+				},
+				{
+					"name": "Nasjonale laksefjorder",
+					"id": "wms_1052"
+				},
+				{
+					"name": "Låssettingsplasser",
+					"id": "wms_5526"
+				},
+				{
+					"name": "Petroleumsvirksomhet",
+					"id": "wms_7507"
+				},
+				{
+					"name": "Forvaltningsplanområder for havområdene",
+					"id": "wms_2596"
+				},
+				{
+					"name": "Marin verneplan",
+					"id": "wms_4069"
+				},
+				{
+					"name": "Laksekart",
+					"id": "wms_7889"
+				},
+				{
+					"name": "Havforurensning",
+					"id": "wms_9232"
+				},
+				{
+					"name": "Hydrologiske data",
+					"id": "HydrologiskeData1_9258"
+				},
+				{
+					"name": "Marine landskap",
+					"id": "wms_3069"
+				}
+			]
+		},
+		{
+			"name": "heritage",
+			"domTitle": "Kulturminner",
+			"layers": [
+				{
+					"name": "Kulturminner - Brannvern",
+					"id": "wms_5159"
+				},
+				{
+					"name": "Kulturminner - SEFRAK",
+					"id": "wms_2322"
+				},
+				{
+					"name": "Kulturminner - Askeladden",
+					"id": "wms_1624"
+				}
+			]
+		},
+		{
+			"name": "transport",
+			"domTitle": "Samferdsel",
+			"layers": [
+				{
+					"name": "Støysoner - lufthavn",
+					"id": "wms_9526"
+				},
+				{
+					"name": "Støysoner - veg",
+					"id": "wms_2850"
+				},
+				{
+					"name": "Hoved- og biled",
+					"id": "wms_4495"
+				},
+				{
+					"name": "Gang og sykkelveg",
+					"id": "wms_9157"
+				},
+				{
+					"name": "Bilveg",
+					"id": "wms_9377"
+				},
+				{
+					"name": "Luftfartshindre",
+					"id": "wms_8792"
+				}
+			]
+		},
+		{
+			"name": "security",
+			"domTitle": "Samfunnssikkerhet",
+			"layers": [
+				{
+					"name": "Skytefelt",
+					"id": "wms_6546"
+				},
+				{
+					"name": "Brannstasjoner",
+					"id": "wms_308"
+				},
+				{
+					"name": "110-Sentraler",
+					"id": "wms_1878"
+				},
+				{
+					"name": "Sivilforsvar",
+					"id": "wms_7094"
+				},
+				{
+					"name": "Flomsoner",
+					"id": "Flomsoner1_575"
+				},
+				{
+					"name": "Steinsprang - Aktsomhetsområde",
+					"id": "SkredSteinAktR_3146"
+				},
+				{
+					"name": "Jord- og flomskred - Aktsomhetsområder",
+					"id": "SkredJordFlomAktR1_9470"
+				},
+				{
+					"name": "Flom - Aktsomhetsområder",
+					"id": "FlomAktR_5316"
+				},
+				{
+					"name": "Sikringstiltak i vassdrag",
+					"id": "Sikringstiltak_7728"
+				},
+				{
+					"name": "Fjellskred",
+					"id": "Fjellskred_4768"
+				},
+				{
+					"name": "Skredfaresoner",
+					"id": "Skredfaresoner1_2281"
+				},
+				{
+					"name": "Kvikkleire",
+					"id": "SkredKvikkleire1_6024"
+				},
+				{
+					"name": "Snø- og steinskred - Aktsomhetsområder",
+					"id": "SkredSnoSteinAkt_9580"
+				},
+				{
+					"name": "Snøskred - Aktsomhetsområde",
+					"id": "SkredSnoAktR_6249"
+				},
+				{
+					"name": "Skredhendelser",
+					"id": "SkredHendelser_473"
+				}
+			]
+		},
+		{
+			"name": "geology",
+			"domTitle": "Geologi",
+			"layers": [
+				{
+					"name": "Bergrettigheter",
+					"id": "Bergrettigheter_9522"
+				},
+				{
+					"name": "Biogeografiske regioner",
+					"id": "wms_8038"
+				},
+				{
+					"name": "Radon og Alunskifer",
+					"id": "wms_6192"
+				},
+				{
+					"name": "Naturstein",
+					"id": "wms_8332"
+				},
+				{
+					"name": "Metaller",
+					"id": "wms_4126"
+				},
+				{
+					"name": "Industrimineraler",
+					"id": "wms_8697"
+				},
+				{
+					"name": "Grus og pukk",
+					"id": "wms_6505"
+				},
+				{
+					"name": "Berggrunn (1:50 000)",
+					"id": "wms_3602"
+				},
+				{
+					"name": "Berggrunn (1:250 000)",
+					"id": "wms_9243"
+				},
+				{
+					"name": "Løsmasser",
+					"id": "wms_5372"
+				},
+				{
+					"name": "Landskap",
+					"id": "wms_779"
+				},
+				{
+					"name": "Marine naturtyper",
+					"id": "wms_7328"
+				},
+				{
+					"name": "Marine landskap",
+					"id": "wms_3069"
+				}
+			]
+		},
+		{
+			"name": "agriculture",
+			"domTitle": "Landbruk",
+			"layers": [
+				{
+					"name": "Dyrehold med produksjonsdyr",
+					"id": "wms_8127"
+				},
+				{
+					"name": "Kostholdsråd",
+					"id": "wms_1677"
+				},
+				{
+					"name": "Beitedata",
+					"id": "wms_4712"
+				},
+				{
+					"name": "Bigårdsplasser",
+					"id": "wms_4522"
+				},
+				{
+					"name": "Arealressurskart - AR250",
+					"id": "wms_3754"
+				},
+				{
+					"name": "Arealressurskart - AR50",
+					"id": "wms_1582"
+				},
+				{
+					"name": "Jordkvalitet",
+					"id": "wms_7737"
+				},
+				{
+					"name": "Nedbygde jordbruksareal",
+					"id": "wms_7531"
+				},
+				{
+					"name": "Vernskog",
+					"id": "wms_5552"
+				},
+				{
+					"name": "Skogskart - satelitt (SAT-SKOG)",
+					"id": "wms_2440"
+				},
+				{
+					"name": "Vegetasjon",
+					"id": "wms_4143"
+				},
+				{
+					"name": "Reindrift",
+					"id": "wms_5155"
+				}
+			]
+		},
+		{
+			"name": "energy",
+			"domTitle": "Energi",
+			"layers": [
+				{
+					"name": "Vannverk - inntakspunkter",
+					"id": "wms_6148"
+				},
+				{
+					"name": "Vindkraft",
+					"id": "Vindkraft_3444"
+				},
+				{
+					"name": "Vannkraft",
+					"id": "Vannkraft1_8755"
+				}
+			]
+		},
+		{
+			"name": "plan",
+			"domTitle": "Plan",
+			"layers": [
+				{
+					"name": "Forvaltningsområder for rovdyr",
+					"id": "wms_9027"
+				},
+				{
+					"name": "Forvaltningsplanområder for havområdene",
+					"id": "wms_2596"
+				},
+				{
+					"name": "Marin verneplan",
+					"id": "wms_4069"
+				},
+				{
+					"name": "Tilgjengelighet - tettsted",
+					"id": "wms_6576"
+				},
+				{
+					"name": "Tilgjengelighet - friluft",
+					"id": "wms_5639"
+				},
+				{
+					"name": "Reguleringsplaner",
+					"id": "wms_9807"
+				},
+				{
+					"name": "Kommuneplaner",
+					"id": "wms_8916"
+				},
+				{
+					"name": "Planretinngslinjer for strandsoneforvaltning",
+					"id": "wms_1712"
+				}
+			]
+		},
+		{
+			"name": "nature",
+			"domTitle": "Natur",
+			"layers": [
+				{
+					"name": "Særlig verdifulle og sårbare områder",
+					"id": "wms_9402"
+				},
+				{
+					"name": "Nasjonal grunnvannsdatabase",
+					"id": "wms_3116"
+				},
+				{
+					"name": "Naturstein",
+					"id": "wms_8332"
+				},
+				{
+					"name": "Elvenett",
+					"id": "Elvenett1_4768"
+				},
+				{
+					"name": "Innsjødatabase",
+					"id": "Innsjodatabase1_2475"
+				},
+				{
+					"name": "Rødlistearter",
+					"id": "wms_9784"
+				}
+			]
+		},
+		{
+			"name": "pollution",
+			"domTitle": "Forurensning",
+			"layers": [
+				{
+					"name": "Petroleumsvirksomhet",
+					"id": "wms_7507"
+				},
+				{
+					"name": "Grunnforurensning",
+					"id": "wms_3991"
+				},
+				{
+					"name": "Radioaktivitet i marint miljø",
+					"id": "wms_7092"
+				},
+				{
+					"name": "Industri",
+					"id": "industri_2481"
+				},
+				{
+					"name": "Havforurensning",
+					"id": "wms_9232"
+				},
+				{
+					"name": "Radon og Alunskifer",
+					"id": "wms_6192"
+				}
+			]
+		}
+	]
+}

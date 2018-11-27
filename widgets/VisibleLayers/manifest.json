@@ -1,0 +1,18 @@
+{
+  "name": "VisibleLayers",
+  "platform": "HTML",
+  "version": "2.6",
+  "wabVersion": "2.6",
+  "author": "Esri R&D Center Beijing",
+  "description": "This is a very simple widget",
+  "copyright": "",
+  "license": "http://www.apache.org/licenses/LICENSE-2.0",
+  "properties": {
+    "inPanel": false,
+    "hasConfig": true,
+    "hasStyle": true,
+    "hasLocale": false,
+    "hasUIFile": true,
+    "hasSettingPage": false
+  }
+}
