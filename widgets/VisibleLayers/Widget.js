@@ -16,6 +16,9 @@ function(declare, BaseWidget) {
 					that.positionAllCounts();
 				});
 			}
+			window.addEventListener('resize', function(event){
+				that.positionAllCounts();
+			});
 		},
 
 		getCategoriesByLayerId: function(id) {
@@ -68,19 +71,20 @@ function(declare, BaseWidget) {
 			}
 		},
 
-		getPositionOfSubjectTab: function(tabName) {
+		getPositionOfSubjectTab: function(tabName, tabNameEnglish) {
 			var element = document.querySelector("div.icon-node[title='" + tabName + "']");
+			if (!element) {
+				element = document.querySelector("div.icon-node[title='" + tabNameEnglish + "']");
+			}
 
 			var rectangle = element.getBoundingClientRect();
-
-			console.log(rectangle);
 
 			return rectangle;
 		},
 
 		positionAllCounts: function() {
 			for (var i = 0; i < this.config.categories.length; i++) {
-				var domRectangle = this.getPositionOfSubjectTab(this.config.categories[i].domTitle);
+				var domRectangle = this.getPositionOfSubjectTab(this.config.categories[i].domTitle, this.config.categories[i].domTitleEnglish);
 
 				this["visibleLayers_" + this.config.categories[i].name].style.top = (domRectangle.top + 3) + "px";
 				this["visibleLayers_" + this.config.categories[i].name].style.left = (domRectangle.right - 10) + "px";

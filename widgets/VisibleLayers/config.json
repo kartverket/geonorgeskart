@@ -3,6 +3,7 @@
 		{
 			"name": "basis",
 			"domTitle": "Basis kartdata",
+			"domTitleEnglish": "Base maps",
 			"layers": [
 				{
 					"name": "Administrative enheter",
@@ -33,6 +34,7 @@
 		{
 			"name": "outdoors",
 			"domTitle": "Friluftsliv",
+			"domTitleEnglish": "Outdoor activities",
 			"layers": [
 				{
 					"name": "Markagrensa",
@@ -87,6 +89,7 @@
 		{
 			"name": "marine",
 			"domTitle": "Kyst og fiskeri",
+			"domTitleEnglish": "Marine activities",
 			"layers": [
 				{
 					"name": "Felles kystkontur",
@@ -149,6 +152,7 @@
 		{
 			"name": "heritage",
 			"domTitle": "Kulturminner",
+			"domTitleEnglish": "Cultural heritage",
 			"layers": [
 				{
 					"name": "Kulturminner - Brannvern",
@@ -167,6 +171,7 @@
 		{
 			"name": "transport",
 			"domTitle": "Samferdsel",
+			"domTitleEnglish": "Transportation",
 			"layers": [
 				{
 					"name": "Støysoner - lufthavn",
@@ -197,6 +202,7 @@
 		{
 			"name": "security",
 			"domTitle": "Samfunnssikkerhet",
+			"domTitleEnglish": "Crisis management",
 			"layers": [
 				{
 					"name": "Skytefelt",
@@ -263,6 +269,7 @@
 		{
 			"name": "geology",
 			"domTitle": "Geologi",
+			"domTitleEnglish": "Geology",
 			"layers": [
 				{
 					"name": "Bergrettigheter",
@@ -321,6 +328,7 @@
 		{
 			"name": "agriculture",
 			"domTitle": "Landbruk",
+			"domTitleEnglish": "Agriculture",
 			"layers": [
 				{
 					"name": "Dyrehold med produksjonsdyr",
@@ -375,6 +383,7 @@
 		{
 			"name": "energy",
 			"domTitle": "Energi",
+			"domTitleEnglish": "Energy",
 			"layers": [
 				{
 					"name": "Vannverk - inntakspunkter",
@@ -393,6 +402,7 @@
 		{
 			"name": "plan",
 			"domTitle": "Plan",
+			"domTitleEnglish": "Planning",
 			"layers": [
 				{
 					"name": "Forvaltningsområder for rovdyr",
@@ -431,6 +441,7 @@
 		{
 			"name": "nature",
 			"domTitle": "Natur",
+			"domTitleEnglish": "Nature",
 			"layers": [
 				{
 					"name": "Særlig verdifulle og sårbare områder",
@@ -461,6 +472,7 @@
 		{
 			"name": "pollution",
 			"domTitle": "Forurensning",
+			"domTitleEnglish": "Pollution",
 			"layers": [
 				{
 					"name": "Petroleumsvirksomhet",
