@@ -87,7 +87,7 @@ function(declare, BaseWidget) {
 				var domRectangle = this.getPositionOfSubjectTab(this.config.categories[i].domTitle, this.config.categories[i].domTitleEnglish);
 
 				this["visibleLayers_" + this.config.categories[i].name].style.top = (domRectangle.top + 3) + "px";
-				this["visibleLayers_" + this.config.categories[i].name].style.left = (domRectangle.right - 10) + "px";
+				this["visibleLayers_" + this.config.categories[i].name].style.left = (domRectangle.right - 15) + "px";
 			}
 		}
 
